@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<TITLE>Rules for the Planar Structures Simulator</TITLE>
+</HEAD>
+<BODY BACKGROUND=img/bkg03.jpg LEFTMARGIN=0 TOPMARGIN=0>
+<FONT STYLE="font: 12pt Century Gothic; color:navy"><B>
+Structure
+</B><BR><BR><FONT STYLE="font: 10pt Century Gothic; color:navy">
+This tool is to simulate frequency response of planar (microstrip, strip-line, etc) structures composed from vertical and horizontal
+ transmission lines connected to each other (See Figure 1). <BR><CENTER><IMG SRC="img/pic1.jpg"><BR>
+<FONT COLOR=magenta>Figure 1: Examples of planar structures</FONT></CENTER>
+<BR><BR>
+<FONT STYLE="font: 12pt Century Gothic; color:navy"><B>
+Type of Lines
+</B><BR><BR><FONT STYLE="font: 10pt Century Gothic; color:navy">
+Two type of lines are used here:<BR>
+1. A connection line, the "node", is a line of smaller width. It is used for input/output and interconnections.
+2. A resonator line, the "stub", is a line of larger width. It is used to create resonance effects.<BR><BR>
+
+<FONT STYLE="font: 12pt Century Gothic; color:navy"><B>
+
+Type of Boundaries
+</B><BR><BR><FONT STYLE="font: 10pt Century Gothic; color:navy">
+
+The both lines can have either open or shorted sides. Type of boundary of each side must be specified.<BR><BR>
+
+<FONT STYLE="font: 12pt Century Gothic; color:navy"><B>
+
+Interconnections
+</B><BR><BR><FONT STYLE="font: 10pt Century Gothic; color:navy">
+The structure starts from a node and ends to a node. The first and the last nodes are input and output ports.
+Each node can be only connected to a stub. The coordinate of lower position of the node must be greater than the lower coordinate of the stub, 
+i.e. y<sub>i,0</sub>=>y<sub>i+1,0</sub>   y<sub>i+2,0</sub>=>y<sub>i+1,0</sub> (See Figure 2).  
+
+The coordinate of upper position of the node must be less than the upper coordinate of the stub, 
+i.e. y<sub>i,1</sub><=y<sub>i+1,1</sub>  and y<sub>i+2,1</sub><=y<sub>i+1,1</sub>.<BR>
+
+<CENTER><IMG SRC=img/pic0.jpg><BR><FONT COLOR=magenta>Figure 2: Structure fragment.</FONT></CENTER><BR><BR>
+<FONT STYLE="font: 12pt Century Gothic; color:navy"><B>
+Layout File 
+</B><BR><BR><FONT STYLE="font: 10pt Century Gothic; color:navy">
+Each line contains three integer numbers and three rational numbers in subsequence <BR><BR>
+<B>Ind I<sub>0</sub> I<sub>1</sub> L Y<sub>0</sub> Y<sub>1</sub></B><BR><BR>
+Where<BR>
+<B>Ind</B> is optimization/synthesis number not used here.<BR>
+ <B>I<sub>0</sub></B> is left boundary index (I<sub>0</sub>=0 if open or I<sub>0</sub>=1 if shorted) <BR>
+ <B>I<sub>1</sub></B> is right boundary index (I<sub>1</sub>=0 if open or I<sub>1</sub>=1 if shorted) <BR>
+ <B>L</B> is vertical length of node/stub.<BR>
+ <B>Y<sub>0</sub></B> is coordinate of left side of node/stub<BR> 
+ <B>Y<sub>1</sub></B> is coordinate of right side of node/stub<BR> 
+</BODY>
+<script language=javascript type="text/javascript">
+<!--
+if(top.location == self.location){
+top.location.href="index.htm"
+}
+//-->
+</script>
+</HTML>
+

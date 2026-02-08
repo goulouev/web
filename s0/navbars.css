@@ -1,0 +1,98 @@
+﻿
+body{
+    background:#333;
+    padding :0 0 0 0;
+    margin :0 0 0 0;
+}
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+    font-family: Arial;
+}
+
+.navbar a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: #333;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: red;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.divdiv {
+    border: double;
+    font-family: Courier New, Courier, monospace,'Lucida Console';
+    height: 530px;
+    font-size: 11px;
+    color: navy;
+    background-color: white;
+}
+.fontos {
+    font-family: Courier New, Courier, monospace,'Lucida Console';
+    font-size: 11px;
+    color: navy;
+}
+.scriptos {
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 14px;
+    color:indigo;
+}
+.black_label {
+    font-family: Courier New, Courier, monospace,'Lucida Console';
+    font-size: 11px;
+    color: white;
+    font-weight: bold;
+    background-color: black;
+}
+.panels {
+    font-family: Courier New, Courier, monospace,'Lucida Console';
+    font-size: 11px;
+    color: navy;
+    margin: 0 auto;
+    padding :0 0 0 0;
+    border-width:1px;
+    border-radius:5px;
+}

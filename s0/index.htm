@@ -1,0 +1,619 @@
+<HTML>
+<HEAD>
+<TITLE>Planar Structure Simulator</TITLE>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META NAME="keywords" CONTENT="GHz, RF, Microwave, wave, substrate, microstrip filter,micro-strip, PCB filters,strip-line, planar, structure, filter, design tool, simulation, analysis, freeware, PCB, stub, resonator, mode-matching, VBScript">
+<META NAME="description" CONTENT="micro-strip and strip-line filters and strucrures">
+<META name="Author" content="Rousslan Goulouev">
+<META name="Generator" content="Microsoft ActiveX Pad">
+<meta http-equiv="x-ua-compatible" content="IE=10">
+    <style>
+        .textfield {
+            font: 8pt Arial Black;
+            color: navy;
+            width:320px;
+        }
+        textarea {
+            font-family:Courier New, Courier, monospace;
+            font-weight:bold;
+            font-size:8pt;
+            color: navy;
+            width: 320px;
+        }
+        body {
+            margin: 0;
+            background-image: url("img/bkg03.jpg");
+        }
+    </style>
+</HEAD>
+<BODY >
+    <BUTTON onclick="command4();" FONT STYLE="font:8pt Arial Black; color:navy">Show Layout</BUTTON>
+    <BUTTON OnClick="Example(0);" FONT STYLE="font:8pt Arial Black; color:navy">Example</BUTTON>
+    <BUTTON onclick="command1();" FONT STYLE="font:8pt Arial Black; color:navy">Run Simulation</BUTTON>
+    <BUTTON OnClick="PlotDraw(0);" FONT STYLE="font:8pt Arial Black; color:navy">Plot Data</BUTTON>
+    <BUTTON OnClick="StepUp(0);" FONT STYLE="font:8pt Arial Black; color:navy">Exit Up</BUTTON>
+    <BR><HR>
+    <TABLE>
+        <TR>
+            <TD>
+                <TABLE BORDER=1>
+
+                    <TR>
+                        <TD><FONT STYLE="font:10pt Arial Black; color:black">FREQUENCY SWEEP</FONT></TD>
+                        <TD><CENTER><FONT STYLE="font:10pt Arial Black; color:magenta"><i>Planar Structure Simulator</i></FONT></CENTER></TD>
+                    </TR>
+                    <TR>
+                        <TD>
+                            <FONT STYLE="font:8pt Arial; color:navy">
+                                <B>
+                                    Frequency Range, [F0, F1, Npoints]
+                                </B>
+                            </FONT>
+                        </TD>
+                        <TD><INPUT id="sweep" TYPE=text class="textfield"></TD>
+                    </TR>
+
+                    <TR>
+                        <TD><FONT STYLE="font:10pt Arial Black; color:black">SUBSTRATE</FONT></TD>
+                        <TD>
+                            <FONT STYLE="font:8pt Arial Black; color:blue">
+                                <CENTER>
+                                    Units:<Input type=radio name="fr" checked>GHz,
+                                    <Input type="radio" name="unit" checked>mm,<input type="radio" name="unit">inch
+                                </CENTER>
+                            </FONT>
+                        </TD>
+                    </TR>
+                    <TR>
+                        <TD>
+                            <FONT STYLE="font:8pt Arial; color:navy">
+                                <B>
+                                    Effective Dielectric Const., [<FONT Style="font:12pt Symbol">e</FONT>eff]
+                                </B>
+                            </FONT>
+                        </TD>
+                        <TD><INPUT id="env" class="textfield"></TD>
+                    </TR>
+                    <TR>
+                        <TD>
+                            <FONT STYLE="font:8pt Arial; color:navy">
+                                <B>
+                                    Magnetic wall displacement,[dx]
+                                </B>
+                            </FONT>
+                        </TD>
+                        <TD><INPUT id="subs" TYPE="text" class="textfield"></TD>
+                    </TR>
+                    <TR>
+                        <TD>
+                            <FONT STYLE="font:8pt Arial; color:navy">
+                                <B>
+                                    Dispersion Frequency,[fc]
+                                </B>
+                            </FONT>
+                        </TD>
+                        <TD><INPUT id="dispfreq" class="textfield"></TD>
+                    </TR>
+                    <TR>
+                        <TD>
+                            <FONT STYLE="font:10pt Arial Black; color:black">LAYOUT METAFILE</FONT>
+                        </TD>
+                        <TD>
+                            <TEXTAREA id="Text1" ROWS=10></TEXTAREA>
+                        </TD>
+                    </TR>
+                    <TR><TD><FONT STYLE="font:10pt Arial Black; color:black">ADD STRIP</FONT></TD><TD></TD></TR>
+                    <TR>
+                        <TD><FONT STYLE="font:8pt Arial; color:navy"><B>Length, Left and Right positions [L,Y0,Y1]</B></FONT></TD>
+                        <TD>
+                            <INPUT id="dims" TYPE=text STYLE="font:8pt Arial Black; color:navy;width:250px;" size="44">
+                            <BUTTON onclick="command3()" FONT STYLE="font:8pt Arial Black; color:navy; width:60px;">Add</BUTTON>
+                        </TD>
+                    </TR>
+                    <TR>
+                        <TD><FONT STYLE="font:8pt Arial Black; color:navy">Left Side of Strip</FONT></TD>
+                        <TD>
+                            <FONT STYLE="font:8pt Arial Black; color:navy">
+                                <INPUT TYPE=radio NAME=LNLEFT CHECKED>Open
+                                <INPUT TYPE=radio NAME=LNLEFT>Short
+                            </FONT>
+                        </TD>
+                    </TR>
+
+                    <TR>
+                        <TD><FONT STYLE="font:8pt Arial Black; color:navy">Right Side of Strip</FONT></TD>
+                        <TD><FONT STYLE="font:8pt Arial Black; color:navy"><INPUT TYPE=radio NAME=LNRIGHT CHECKED>Open <INPUT TYPE=radio NAME=LNRIGHT>Short</FONT></TD>
+                    </TR>
+                </TABLE>
+            </TD>
+            <TD WIDTH=400>
+                <IFRAME ALIGN="TOP" WIDTH="400" HEIGHT="430" FRAMEBORDER="0" id="OKNO" SRC="rules.htm"></IFRAME>
+                <BR><FONT STYLE="font:9pt Arial;color:navy"><i>&#169 R. Goulouev, 15.09.02. Updated 29.05.20.</i></FONT>
+
+            </TD>
+        </TR>
+    </TABLE><BR>
+    <HR><BR>
+    <FONT Style="font:8pt Arial; color:magenta">
+        <I>
+            <B>
+                See <A HREF=# onclick="StepUp(1);"> micro-strip parameters calculator</A>
+                by Dan McMahill.
+                See also <A HREF=http://www.circuitsage.com>Circuit Sage</A> for many other tools<BR>
+                See design examples:
+                <A HREF=# onclick="StepUp(2);">Strip-line</A>
+                or <A HREF=# onclick="StepUp(3);">Micro-strip line</A>
+            </B>
+        </I>
+    </FONT>
+
+    <SCRIPT>
+        var br, LNG, SimIndex
+        br = "\r\n";
+        var data = new bufer;
+        var txtBufer = "";
+        //###########  BUFER ##########################
+        function bufer() {
+            this.IndErr = -1;
+            this.eps = 1;
+            this.tg = 0;
+            this.dx = 0;
+            this.fc = 0;
+            this.N = -1;
+            this.c = [];
+            this.jc = [];
+            this.jw = [];
+            this.w = [];
+        }
+
+
+        function StepUp(ind) {
+
+            switch (ind) {
+                case 1:
+                    window.location.href = "http://mcalc.sourceforge.net/", "StripInfo";
+                    break;
+                case 2:
+                    window.location.href = "../structures/s00.htm", "StripInfo";
+                    break;
+                case 3:
+                    window.location.href = "../structures/ms00.htm", "StripInfo";
+                    break;
+                default:
+                    window.location.href = "../studio.htm";
+            }
+
+        }
+
+        function Info(ind) {
+            var r;
+            r = "This is a simulation tool from Planar Structures Workshop (PSW). The PSW will include functionstrate calculator, structure synthesizer, simulator and optimizer.";
+            r = r + " Only simulator is available now online. Follow the rules to simulate a planar structure.";
+            alert(r);
+        }
+
+        function TextWindowLoad() {
+            var r = document.getElementById('Text1').value, SymIndex = 0;
+            if (r) {
+            } else {
+                alert("No layout metafile created."); return [-1, []];
+            }
+
+            var ii = -1;
+            var TEXTLINES = r.split("\n");
+            var TEXTLINE = [];
+            var Nt = TEXTLINES.length - 1;
+            for (i = 0; i <= Nt; i++) {
+                if (TEXTLINES[i]) {
+                    ii = ii + 1
+                    TEXTLINE[ii] = TEXTLINES[i];
+                }
+            }
+
+            var NTEXT = ii;
+            if (NTEXT < 2) {
+                alert("Structure is incomplete. At least one horizontal stub and two vertical nodes must exist.");
+            }
+            return [NTEXT, TEXTLINE];
+        }
+
+        function StrucLoad() {
+            //N, jc, c, jw, w
+            var xv = [], NTEXT = -1, TEXTLINE = [];
+            var env = document.getElementById('env');
+            var dispfreq = document.getElementById('dispfreq');
+            var subs = document.getElementById('subs');
+            xv = TextToNums(env.value);//TextInput(env.value, Nv, xv);
+            data.eps = parseFloat(xv[0]); data.tg = parseFloat(xv[1]);
+            data.dx = parseFloat(subs.value);
+            if (dispfreq.value) { data.fc = parseFloat(dispfreq.value) } else { data.fc = 0; };
+            var Zhopa = TextWindowLoad();
+            NTEXT = Zhopa[0]; TEXTLINE = Zhopa[1];
+            if (NTEXT < 2) { data.IndErr = 1; return; }
+            data.N = (NTEXT - 2) / 2;
+            if (2 * data.N !== 2 * parseInt(data.N)) { alert("Number of nodes does not match number of stubs."); data.IndErr = 1; return; }
+            var i, j;
+            for (i = 0; i <= data.N; i++) {
+                xv = TextToNums(TEXTLINE[2 * i]);//TextInput(TEXTLINE[2 * i], Nv, xv);
+                data.jw[i] = new Array(3);
+                for (j = 0; j <= 2; j++) {
+                    data.jw[i][j] = xv[j];
+                }
+                data.w[i] = new Array(3);
+                for (j = 0; j <= 2; j++) {
+                    data.w[i][j] = xv[j + 3];
+                }
+                xv = TextToNums(TEXTLINE[2 * i + 1]);//TextInput(TEXTLINE[2 * i + 1], Nv, xv);
+                data.jc[i] = new Array(3);
+                for (j = 0; j <= 2; j++) {
+                    data.jc[i][j] = xv[j];
+                }
+                data.c[i] = new Array(3);
+                for (j = 0; j <= 2; j++) {
+                    data.c[i][j] = xv[j + 3];
+                }
+
+            }
+            xv = TextToNums(TEXTLINE[NTEXT]);//TextInput(TEXTLINE(NTEXT), Nv, xv);
+            data.jw[data.N + 1] = new Array(3);
+            for (j = 0; j <= 2; j++) {
+                data.jw[data.N + 1][j] = xv[j];
+            }
+            data.w[data.N + 1] = new Array(3);
+            for (j = 0; j <= 2; j++) {
+                data.w[data.N + 1][j] = xv[j + 3];
+            }
+        }
+
+
+        function command4() {
+            var jw = [];
+            var w = [], TEXTLINE = [], xv = [];
+            var Zhopa = TextWindowLoad();
+            NTEXT = Zhopa[0]; TEXTLINE = Zhopa[1];
+            if (NTEXT < 0) { return;}
+            var i, i0, x0 = 1000; x1 = -1000; x = 0;
+            for (i = 0; i <= NTEXT; i++) {
+                xv = TextToNums(TEXTLINE[i]);
+                jw[i] = [parseInt(xv[0]), parseInt(xv[1]), parseInt(xv[2]),];
+                w[i] = [xv[3], xv[4], xv[5]];
+            }
+            for (i = 0; i <= NTEXT; i++) {
+                x = x + w[i][0];
+                if (w[i][1] < x0) { x0 = w[i][1]; }
+                if (w[i][2] > x1) { x1 = w[i][2]; }
+            }
+            var y = x1 - x0, Ny = 40;
+            var dy = y / Ny, LN = "";
+            for (i = 0; i <= NTEXT; i++) {
+                var iw = parseInt(w[i][0] / dy / 2);
+                var iw0 = parseInt((w[i][1] - x0) / dy);
+                var iw1 = parseInt((w[i][2] - x0) / dy);
+                for (i0 = 0; i0 <= iw; i0++) {
+                    LN = LN + Strip(jw[i][1], jw[i][2], iw, iw0, iw1, Ny) + "<BR>";
+                }
+            }
+            Ending = "<BR><BR><FONT STYLE='font:8pt Arial; color:navy; background:white'" + ">Length=" + x.toFixed(4);
+            Ending = Ending + "   Max Width=" + y.toFixed(4);
+            var xWin = document.getElementById("OKNO");
+            var yWin = (xWin.contentWindow || xWin.contentDocument);
+            if (yWin.document) yWin = yWin.document;
+            yWin.close;
+            yWin.body.innerHTML = "<FONT STYLE='font:6pt Arial; color:white; background:white'><CENTER>" + LN + Ending;
+        }
+
+        function PutStr(n, chr) {
+            var i, rs = "";
+            for (i = 1; i <= n; i++) {
+                rs = rs + chr;
+            }
+            return rs;
+        }
+
+        function Strip(j0, j1, iw, iw0, iw1, Ny) {
+            short = "<FONT STYLE='color:black; background:black'>#</FONT>";
+            fg = "<FONT STYLE='font:6pt Arial; color:red; background:red'>";
+            clos = "</FONT>"
+            if (iw1 - iw0 - j0 - j1 < 1) {
+                //LN = string(iw0, "#") + dL0 + fg + "#" + clos + dL1 + string(Ny - iw1, "#");
+                LN = PutStr(iw0, "#") + dL0 + fg + "#" + clos + dL1 + PutStr(Ny - iw1, "#");
+            } else {
+                var dLN = Array(iw1 - iw0).join("#");
+                //dLN = string(iw1 - iw0, "#");
+                if (j0 === 1) { dL0 = short } else { dL0 = "" }
+                if (j1 === 1) { dL1 = short } else { dL1 = "" }
+                LN = PutStr(iw0, "#") + dL0 + fg + PutStr(iw1 - iw0 - j0 - j1, "#");
+                LN = LN + clos + dL1 + PutStr(Ny - iw1, "#");
+                //LN = string(iw0, "#") + dL0 + fg + string(iw1 - iw0 - j0 - j1, "#") + clos + dL1 + string(Ny - iw1, "#");
+            }
+            return LN;
+        }
+
+        function command1() {
+            var sweep = document.getElementById('sweep');
+            var So = [], xv = [];
+            LN = ""; LNG = "";
+            var iUnit, xv, ko, k;
+            var unit = document.getElementsByName('unit');
+            xv = TextToNums(sweep.value);
+            F0 = xv[0]; F1 = xv[1]; Np = xv[2];
+            if (Np < 50) { Np = 50; }
+            if (unit[0].checked) { iUnit = 0 }
+            if (unit[1].checked) { iUnit = 1 }
+            StrucLoad();
+            if (data.N < 0) {return;}
+            Effect();
+            var rS = ""
+            for (i = 0; i <= Np; i++) {
+                if (Np === 0) { f = F0; } else { f = F0 + (F1 - F0) * i / Np; }
+                //ko = Wave(IndUnit, f);
+                ko = kf(iUnit, f);
+                k = ko * Math.sqrt(data.eps);
+                So = Struc(k, data.N, data.jw, data.w, data.jc, data.c);
+                dLN = dB_Line(f, So)
+                LN = LN + "    " + dLN + "<BR>";
+                LNG = LNG + dLN + br;
+                rS = rS + f + " ";
+                for (ii = 0; ii <= 7; ii++) {
+                    rS = rS + So[ii] + " ";
+                    if (ii === 7) { rS = rS + So[i] + "\r\n";}
+                }
+            }
+            //alert(rS);
+            localStorage.setItem('sDatFile', rS);
+            fg = "<FONT STYLE='font:8pt Arial; color:navy'>";
+            var x = document.getElementById("OKNO");
+            var y = (x.contentWindow || x.contentDocument);
+            if (y.document) y = y.document;
+            y.close;
+            y.body.innerHTML = "<PRE>" + fg + "Freq. GHZ        S11[dB]         S12[dB]         S21[dB]         S22[dB]<BR>" + LN; 
+            SimIndex = 1;
+        }
+
+        function PlotDraw(ind) {
+            window.location.href = 'graph.htm';
+        }
+
+        function FormatNumber(x, N) {
+            return x.toFixed(N);
+        }
+
+        function command3() {
+            var Nv, xv;
+            var vars = document.document.getElementById('vars');
+            var Text1 = document.getElementById('Text1');
+            LN = vars.value
+            if (LN === null) { alert("Line is empty"); return; }
+            xv = TextToNums(LN);//TextInput(LN, Nv, xv);
+            j = 0;
+            if (LNLEFT[0].checked) { j0 = 0 }
+            if (LNLEFT[1].checked) { j0 = 1 }
+            if (LNRIGHT[0].checked) { j1 = 0 }
+            if (LNRIGHT[1].checked) { j1 = 1 }
+
+            LNPAR = j + "  " + j0 + "  " + j1 + "  " + FormatNumber(xv[0], 5) + "    " + FormatNumber(xv[1], 5) + "    " + FormatNumber(xv[2], 5);
+            if (Text1.value = "") {
+                Text1.value = LNPAR;
+            } else {
+                Text1.value = ltrim(rtrim(Text1.value)) + br + LNPAR;
+            }
+        }
+
+        function Example(ind) {
+            var TLINE = [];
+            document.getElementById('sweep').value = "4.000    20.000   300";
+            document.getElementById('env').value = "7.4000    0.0000";
+            document.getElementById('subs').value = "0.100";
+            var unit = document.getElementsByName('unit');
+            unit[0].checked = true;
+            var TLINE = [];
+            TLINE[0] = "0    0    0    0.5000   -0.0800    0.0800";
+            TLINE[1] = "4    0    0       0.5000   -0.7170    0.7170";
+            TLINE[2] = "1    0    0    1.1067   -0.0800    0.0800";
+            TLINE[3] = "4    0    0       0.5000   -1.9370    1.9370";
+            TLINE[4] = "1    0    0    0.3447   -0.0800    0.0800";
+            TLINE[5] = "4    0    0       0.5000   -2.1252    2.1252";
+            TLINE[6] = "1    0    0    0.3520   -0.0800    0.0800";
+            TLINE[7] = "4    0    0       0.5000   -1.8804    1.8804";
+            TLINE[8] = "1    0    0    1.2142   -0.0800    0.0800";
+            TLINE[9] = "4    0    0       0.5000   -0.8097    0.8097";
+            TLINE[10] = "0    0    0    1.0000   -0.0800    0.0800";
+            TLINE[11] = "2    1    0       0.5000   -2.1784    1.9373";
+            TLINE[12] = "1    0    0    1.6644   -0.0800    0.0800";
+            TLINE[13] = "2    1    0       0.5000   -1.6643    2.5817";
+            TLINE[14] = "1    0    0    1.3502   -0.0800    0.0800";
+            TLINE[15] = "2    1    0       0.5000   -1.5504    2.6924";
+            TLINE[16] = "1    0    0    1.3264   -0.0800    0.0800";
+            TLINE[17] = "2    1    0       0.5000   -1.6766    2.6064";
+            TLINE[18] = "1    0    0    1.7362   -0.0800    0.0800";
+            TLINE[19] = "2    1    0       0.5000   -2.2117    2.0291";
+            TLINE[20] = "0    0    0    0.5000   -0.0800    0.0800";
+            NT = 20; LN = "";
+            for (i = 0; i <= NT; i++) {
+                LN = LN + TLINE[i] + br;
+            }
+            Text1.value = LN;
+        }
+
+        function Effect() {
+            var w0, c0;
+            w0 = data.w; c0 = data.c;
+            var N = data.N;
+            data.w[0][0] = w0[0][0] - data.dx;
+            data.c[0][0] = c0[0][0] + 2 * data.dx;
+            var eff = SubEff(data.dx, w0[0][1], w0[0][2], data.jw[0][1], data.jw[0][2]);
+            data.w[0][1] = eff[0]; data.w[0][2] = eff[1];
+            eff = SubEff(data.dx, c0[0][1], c0[0][2], data.jc[0][1], data.jc[0][2]);
+            data.c[0][1] = eff[0]; data.c[0][2] = eff[1];
+            for (i = 1; i <= N; i++) {
+                data.w[i][0] = w0[i][0] - 2 * data.dx;
+                data.c[i][0] = c0[i][0] + 2 * data.dx;
+                eff = SubEff(data.dx, w0[i][1], w0[i][2], data.jw[i][1], data.jw[i][2]);
+                data.w[i][1] = eff[0]; data.w[i][2] = eff[1];
+                eff = SubEff(data.dx, c0[i][1], c0[i][2], data.jc[i][1], data.jc[i][2]);
+                data.c[i][1] = eff[0]; data.c[i][2] = eff[1];
+            }
+            data.w[N + 1][0] = w0[N + 1][0] - data.dx;
+            i = N + 1;
+            eff = SubEff(data.dx, w0[i][1], w0[i][2], data.jw[i][1], data.jw[i][2]);
+            data.w[i][1] = eff[0]; data.w[i][2] = eff[1];
+        }
+
+        function SubEff(dx, x0, x1, j0, j1, v0, v1) {
+            var v0 = x0;
+            var v1 = x1;
+            if (j0 === 0) { v0 = x0 - dx }
+            if (j1 === 0) { v1 = x1 + dx }
+            return [v0, v1];
+        }
+
+
+        function TextToNums(LN) {
+            var words = WordsToArray(LN);
+            var V = [];
+            var Nw = words.length - 1;
+            var i, ii = -1;
+            for (i = 0; i <= Nw; i++) {
+                if (!isNaN(words[i])) {
+                    ii = ii + 1;
+                    V[ii] = parseFloat(words[i]);
+                }
+            }
+            return V;
+        }
+
+
+        //################################ STRINGS
+
+        function trim(str) {
+            return str.replace(/^\s+|\s+$/g, '');
+        }
+
+        function WordsToArray(str) {
+            // text line to array of words
+            return ReduceWhiteSpaces(str).split(/\s/g);
+        }
+
+        function ReduceWhiteSpaces(str) {
+            return trim(str).replace(/\s+/g, ' ');
+        }
+
+
+        function GetInts(nVars, VarLine) {
+            var i;
+            var v = WordsToArray(VarLine);
+            //var v = VarLine.split(/\s/g);
+            if (v.length >= nVars) {
+                var vv = [];
+                for (i = 0; i <= nVars - 1; i++) {
+                    vv[i] = parseInt(v[i]);
+                    if (isNaN(vv[i])) {
+                        //            alert("Entered value #"+(i+1).toString()+" is not recognized as a number.");
+                        return NaN;
+                    }
+                }
+
+            } else {
+                //alert("Number of entered values is less than required (" + nVars.toString() + ").");
+                return NaN;
+            }
+            return vv;
+        }
+
+        function GetFloats(nVars, VarLine) {
+            var i;
+            var v = WordsToArray(VarLine);
+            //var v = VarLine.split(/\s/g);
+            if (v.length >= nVars) {
+                var vv = [];
+                for (i = 0; i <= nVars - 1; i++) {
+                    vv[i] = parseFloat(v[i]);
+                    if (isNaN(vv[i])) {
+                        //return NaN;
+                        return null;
+                    }
+                }
+
+            } else {
+                //alert("Number of entered values is less than required (" + nVars.toString() + ").")
+                //return NaN;
+                return null;
+            }
+            return vv;
+        }
+
+        function GetFloatFromObj(obj) {
+            var x = parseFloat(obj.value);
+            if (isNaN(x)) { return NaN; }
+            return x;
+        }
+
+        function GetIntFromObj(obj) {
+            var x = parseInt(obj.value);
+            if (isNaN(x)) { return NaN; }
+            return x;
+        }
+
+        function FormatNumberByLen(x, nSpc, nDgt) {
+            var i;
+            var g = x.toFixed(nDgt);
+            var n = g.length;
+            if (n >= nSpc) {
+                return g;
+            } else {
+                for (i = n; i <= nSpc; i++) {
+                    g = " " + g;
+                }
+            }
+            return g;
+        }
+
+        function FormatStrByLen(x, IsLeft, nSpc) {
+            var i;
+            var g = trim(x);
+            var n = g.length;
+            if (n >= nSpc) {
+                return g;
+            } else {
+                for (i = n; i <= nSpc; i++) {
+                    if (IsLeft) { g = g + " "; } else { g = " " + g; }
+                }
+            }
+            return g;
+        }
+
+
+
+        function WordLineCorrect(Median, TextLine) {
+            var i;
+            var r = "";
+            var dLine = "";
+            //TextLine=TextLine.replace(tab," ")
+            var A = "";
+            var InMark = true;
+            var rr = TextLine.split("");
+            for (i in rr) {
+                r = rr[i];
+                if (r.charCodeAt() === 32) { r = " "; }
+                dLine = r;
+                if (InMark) { r = " "; } else { dLine = ""; }
+                if (r === " ") { InMark = true; } else { InMark = false; }
+                A += dLine;
+            }
+            if (Median === " ") {
+                return trim(A);//.trim();
+            } else {
+                return trim(A).replace(" ", Median);
+            }
+        }
+
+
+    </SCRIPT>
+    <SCRIPT SRC="s0.js"></SCRIPT>
+    <SCRIPT SRC="complx.js"></SCRIPT>
+
+    <SCRIPT LANGUAGE="VBScript" SRC="xyplot.vbs"></SCRIPT>
+
+</BODY>
+
+</HTML>
