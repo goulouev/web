@@ -1,0 +1,116 @@
+<HTML>
+<HEAD>
+<TITLE>Stepped-impedance corrugated waveguide filter</TITLE>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META name="Author" content="Rousslan Goulouev">
+<META name="Generator" content="Microsoft ActiveX pad">
+<META NAME="keywords" CONTENT="RF microwave, GHz, waveguide, lowpass filter, harmonic filter, low-pass filter, corrugated filter, GHz, microwave,  E-plane, H-plane inhomogeneous, spurious, powerful, waffle-iron">
+<META NAME="description" CONTENT="A harmonic (lowpass or low-pass) waveguide filter based on E-pane corrugated waveguide sections of different width. Design example.">
+<STYLE>
+A:link{color:#DDFFFF; text-decoration:none}
+A:visited{color:#FFFFDD; text-decoration:none}
+A:active{color:#AADDAA; text-decoration:none}
+A:hover{color:#FFFFFF; text-decoration:none}
+</STYLE>
+</HEAD>
+<BODY BGCOLOR=#000000 LEFTMARGIN=0 TOPMARGIN=0>
+<CENTER>
+<FONT style="font: 14pt Arial Black;color:#FFDDFF">Broad Wall Stepped Corrugated Waveguide Filter<BR></FONT>
+<FONT style="font: 9pt Arial;color:#FFFFDD">Typical Performance for a Ku-Band Filter<BR></FONT>
+<HR>
+
+<TABLE WIDTH=900><TR>
+<TD><FONT style="font:10pt Arial; color: #AAFFFF">
+<B>Advantages over Ridged Evanescent-Mode Filter</B>
+<UL SHAPE=disc>
+<LI  >Higher power (20-40 times) 
+<LI  >More roll-off rejection 
+<LI  >No tuning (exact design) 
+<LI  >Stable for production inaccuracy 
+</UL>
+<BR>
+<BR>
+<B>Advantages over Waffle-Iron Filter</B><BR>
+<UL SHAPE=disc>
+<LI  >Higher power (5-15 times) 
+<LI  >No spurious spikes in pass-band 
+<LI  >No spurious spikes in stop-band 
+<LI  >Stable for production inaccuracy 
+</UL> <BR><BR>
+
+<B>Advantages over Conventional Corrugated Filter</B>
+<BR>
+<UL SHAPE=disc>
+<LI  >No spurious spikes in stop-band 
+</UL>
+</TD>
+
+<TD><img SRC="bicorr.gif">
+</TD>
+
+<TD WIDTH=220><FONT style="font:10pt Arial; color: #AAFFFF"><B>
+Design Tips</B>
+<UL SHAPE=disc>
+<LI  >Use <A HREF="../oncorr/sar.htm">Spurious Pass-Bands Calculator</A> 
+<LI  >Use <A HREF="../connector/index.htm">WR-Connect Design Software</A>  
+<LI  >Design two corrugated filters covering the same pass-band but having different layout of spurs. 
+<LI  >Cut the filters in the middle and connect two halves from different filters 
+<LI  >Optimize the pass-band until it meets requirements 
+</UL>
+</TD>
+
+</TR>
+</TABLE>
+<HR>
+
+<TABLE BORDER=1 WIDTH=1000><TR>
+<TD><FONT style="font:10pt Arial Black; color: #AAFFFF"><A HREF=#SPEC>SPEC</A> 
+<TD><FONT style="font:10pt Arial Black; color: #AAFFFF"><A HREF=#INS>Insertion Loss</A></TD>
+<TD><FONT style="font:10pt Arial Black; color: #AAFFFF"> <A HREF=#TE10>TE10-mode</A></TD>
+<TD><FONT style="font:10pt Arial Black; color: #AAFFFF"><A HREF=#TE20>TE20-mode</A></TD>
+<TD><FONT style="font:10pt Arial Black; color: #AAFFFF"><A HREF=#TE30>TE30-mode</A></TD>
+<TD><FONT style="font:10pt Arial Black; color: #AAFFFF"><A HREF=#TE40>TE40-mode</A></TD>
+<TD><FONT style="font:10pt Arial Black; color: #AAFFFF"><A HREF=#LNK>Related Links</A></TD>
+</TR></TABLE><BR><BR><BR>
+<FONT style="font: 10pt Arial Black;color:#DDDDFF">
+<A NAME="SPEC">
+Table 1: Summarized Performance</A>
+<TABLE BORDER=1 WIDTH=800>
+<TR><TD><FONT style="font: 9pt Arial;color:#DDDDFF"><B>PARAMETER</TD><TD><FONT style="font: 9pt Arial;color:#DDDDFF"><B>PERFORMANCE</TD><TD><FONT style="font: 9pt Arial;color:#DDDDFF"><B>NOTES</TD></TR>
+<TR><TD><FONT style="font: 9pt Arial;color:#DDDDFF">Pass-Band, GHz</TD><TD><FONT style="font: 9pt Arial;color:#DDDDFF">12.0 - 13.0</TD><TD> </TD></TR>
+
+<TR><TD><FONT style="font: 9pt Arial;color:#DDDDFF">Insertion Loss, dB</TD><TD><FONT style="font: 9pt Arial;color:#DDDDFF">0.11</TD><TD><FONT style="font: 9pt Arial;color:#DDDDFF"><B>Silver plated, Ambient, 28 dB RL</TD></TR>
+
+<TR><TD><FONT style="font: 9pt Arial;color:#DDDDFF">Return Loss, dB (VSWR)</TD><TD><FONT style="font: 9pt Arial;color:#DDDDFF">28 (1:1.08)<BR>24 (1:1.14)<BR>21 (1:1.20)</TD><TD><FONT style="font: 9pt Arial;color:#DDDDFF">EDM<BR>Milling +/-0.0005'', R0.032''<BR>Milling +/-0.001'', R 0.064''</TD></TR>
+
+
+<TR><TD><FONT style="font: 9pt Arial;color:#DDDDFF">Rejection, dB</TD><TD><FONT style="font: 9pt Arial;color:#DDDDFF">See Plots</TD><TD><FONT style="font: 9pt Arial;color:#DDDDFF">Spurious modes taken into account </TD></TR>
+
+<TR><TD><FONT style="font: 9pt Arial;color:#DDDDFF">Peak Power Handling, W<BR>In Space (multipaction)<BR>On Ground (air breakdown)</TD><TD><FONT style="font: 9pt Arial;color:#DDDDFF"><BR>10000<BR>150000</TD><TD><FONT style="font: 9pt Arial;color:#DDDDFF">By analysis<BR>(0.12'' minimum gap)</TD></TR>
+
+<TR><TD><FONT style="font: 9pt Arial;color:#DDDDFF">Size, inches</TD><TD><FONT style="font: 9pt Arial;color:#DDDDFF">1.5 x 1.5 (WR75 Flange) x 4.0 (Length)</TD><TD><FONT style="font: 9pt Arial;color:#DDDDFF">Space for flanges included </TD></TR>
+
+<TR><TD><FONT style="font: 9pt Arial;color:#DDDDFF">Mass, g</TD><TD><FONT style="font: 9pt Arial;color:#DDDDFF">90</TD><TD> <FONT style="font: 9pt Arial;color:#DDDDFF">Aluminum</TD></TR>
+
+<TR><TD><FONT style="font: 9pt Arial;color:#DDDDFF">Production method</TD><TD><FONT style="font: 9pt Arial;color:#DDDDFF">Milling or EDM preferred<BR> Die casting possible</TD><TD><FONT style="font: 9pt Arial;color:#DDDDFF">See tolerances above</TD></TR>
+</TABLE><BR><BR><BR>
+
+<A NAME="INS"> </A><IMG SRC=im01.jpg><BR>Figure 1: Insertion loss response: transmission (dB) versus frequency  (GHz)<BR><BR><BR>
+<A NAME="TE10"> </A><IMG SRC=im02.jpg><BR>Figure 2: TE10-mode response: reflection and transmission (dB) versus frequency(GHz)<BR><BR><BR>
+<A NAME="TE20"> </A><IMG SRC=im03.jpg><BR>Figure 3: TE20-mode (first spurious mode) response: reflection and transmission (dB) versus frequency (GHz)<BR><BR><BR>
+<A NAME="TE30"> </A><IMG SRC=im04.jpg><BR>Figure 4: TE30-mode (second spurious mode) response: reflection and transmission (dB) versus frequency (GHz)<BR><BR><BR>
+<A NAME="TE40"> </A><IMG SRC=im05.jpg><BR>Figure 5: TE40-mode (third spurious mode) response: reflection and transmission (dB) versus frequency (GHz)<BR><BR><BR>
+</CENTER>
+<A NAME="LNK"> Related Links</A><BR><BR>
+<A HREF=vvv.htm>Click here to see summary of problems associated with conventional harmonic (low-pass) filters</A><BR>
+<A HREF=../notes/meas_hrm.htm>Click here to find out how to measure rejection of a harmonic (low-pass) filter</A><BR>
+<A HREF=../oncorr/sar.htm>Click here to find out how to predict spurious pass-bands of corrugated waveguide filters</A><BR>
+<A HREF=../oncorr/index.htm>Click here to design a corrugated waveguide harmonic (low-pass) filter on-line and for free</A><BR>
+<A HREF=../notes/waffle.htm>Click here to learn about spurious responses of waffle-iron filters</A><BR>
+
+
+
+
+
+</BODY>
+</HTML>

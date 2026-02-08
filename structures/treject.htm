@@ -1,0 +1,222 @@
+<HTML>
+<HEAD>
+<TITLE>Transmit Reject Filter</TITLE>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META name="Author" content="Rousslan Goulouev">
+<META name="Generator" content="Microsoft ActiveX pad">
+    <style>
+        p{
+            text-align:justify;
+            font-family:Arial;
+            font-size :10pt;
+        }
+    </style>
+</HEAD>
+<BODY BGCOLOR=#000000 LEFTMARGIN=0 TOPMARGIN=0>
+    <CENTER>
+        <FONT style="font: 14pt Arial Black;color:#FFDDFF">K-band Transmit Reject Filter</FONT>
+        <HR />
+        <FONT style="font: 10pt Arial Black;color:#DDFFFF">
+            <img src=omt_tr.jpg><BR />
+                                <a href="javascript:void(0)" onclick="PrjTransReject(); window.location.href = '/WRC_2020/editor.htm';">Open Design in WR-Connect 2020 &nbsp;&nbsp;(latest version)</a><BR />
+            <BR />
+            <hr />
+            Application Description<br />
+            <p>
+                The main application of transmit-reject filters is to isolate the receiving
+                channel from the transmitting channel. Due to the fact that there are
+                different radio systems, the frequency ranges of the receiving and
+                transmitting channels (possibli including multiple carriers) can be
+                both close or significantly distant
+                from each other. Because of this, the implementation of such a filter
+                (we are considering microwave bands and only waveguide filters here)
+                can be very
+                different.
+
+                In this case (Ka-band satellite links), when the frequencies of the downlink
+                (18-21 GHz) are
+                lower than the frequencies of the uplink (29.5-30 GHz) and when
+                there is a significant distance between them, a corrugated waveguide
+                low-pass filter can be the optimal technical solution. It should also
+                be noted that in this case, rejection of the harmonics and other
+                high-frequency interference is not required by specification. As a result, this greatly
+                simplifies the design as it requires fewer corrugations.
+                However, as it can be seen from the <a href="OMT_TR.htm">characteristics</a>, the stop-band
+                is still much wider than being required.
+            </p>
+            <p>
+                This filter has been requested for a VSAT system, designed using
+                a "WR-Connect"
+                (original Windows version),
+                implemented in a single assembly with OMT and (supposedly)
+                is still in service
+                today.
+            </p>
+            <HR />
+            <BR />
+            If you use WR-Connect 2006 (runs on Internet Explorer only), follow the
+            instructions below: <BR />
+        </FONT>
+        <TABLE BORDER=1>
+            <TR>
+                <TD WIDTH=500>
+                    <FONT style="font: 9pt Arial Black;color:#FFFFDD">
+
+                        0    1    0.50000    5.33400    4.31800   -2.15900    0.00000<BR />
+                        0    1    0.00000    0.00000    0.00000    0.00000    0.00000    0.00000<BR />
+                        0    1    0.50000    4.65000    2.28280   -1.14140    0.00000<BR />
+                        0    2    2.50000    4.65000    4.77200   -2.38600    0.00000    0.00000<BR />
+                        0    1    0.50000    4.65000    2.00000   -1.00000    0.00000<BR />
+                        0    2    2.50000    4.65000    4.89760   -2.44880    0.00000    0.00000<BR />
+                        0    1    0.50000    4.65000    2.00000   -1.00000    0.00000<BR />
+                        0    2    2.50000    4.65000    6.17620   -3.08810    0.00000    0.00000<BR />
+                        0    1    0.50000    4.65000    2.00000   -1.00000    0.00000<BR />
+                        0    2    2.50000    4.65000    7.32440   -3.66220    0.00000    0.00000<BR />
+                        0    1    0.50000    4.65000    2.00000   -1.00000    0.00000<BR />
+                        0    2    2.50000    4.65000    7.80560   -3.90280    0.00000    0.00000<BR />
+                        0    1    0.50000    4.65000    2.00000   -1.00000    0.00000<BR />
+                        0    2    2.50000    4.65000    7.62040   -3.81020    0.00000    0.00000<BR />
+                        0    1    0.50000    4.65000    2.00000   -1.00000    0.00000<BR />
+                        0    2    2.50000    4.65000    7.44160   -3.72080    0.00000    0.00000<BR />
+                        0    1    0.50000    4.65000    2.00000   -1.00000    0.00000<BR />
+                        0    2    2.50000    4.65000    7.62040   -3.81020    0.00000    0.00000<BR />
+                        0    1    0.50000    4.65000    2.00000   -1.00000    0.00000<BR />
+                        0    2    2.50000    4.65000    7.80560   -3.90280    0.00000    0.00000<BR />
+                        0    1    0.50000    4.65000    2.00000   -1.00000    0.00000<BR />
+                        0    2    2.50000    4.65000    7.32440   -3.66220    0.00000    0.00000<BR />
+                        0    1    0.50000    4.65000    2.00000   -1.00000    0.00000<BR />
+                        0    2    2.50000    4.65000    6.17600   -3.08800    0.00000    0.00000<BR />
+                        0    1    0.50000    4.65000    2.00000   -1.00000    0.00000<BR />
+                        0    2    2.50000    4.65000    4.89740   -2.44870    0.00000    0.00000<BR />
+                        0    1    0.50000    4.65000    2.00000   -1.00000    0.00000<BR />
+                        0    2    2.50000    4.65000    4.77200   -2.38600    0.00000    0.00000<BR />
+                        0    1    0.50000    4.65000    2.28280   -1.14140    0.00000<BR />
+                        0    1    0.00000    0.00000    0.00000    0.00000    0.00000    0.00000<BR />
+                        0    1    0.50000    5.33400    4.31800   -2.15900    0.00000<BR />
+                    </FONT>
+                </TD>
+                <TD WIDTH=300>
+                    <FONT style="font: 9pt Arial Black;color:#FFFFDD">
+
+                        1. Open <A HREF=../connector/start.htm target="t_reject">"Waveguide Connector"</A> page in new window<BR /><BR />
+                        2. Set up initial data: <BR /><BR />
+                        Enter "Frequency Range" (for example 20 30 40)<BR />
+                        Units= GHz, mm, Y Symmetry<BR />
+                        Dielectric Const. = 1<BR />
+                        Loss Tangent = 0.<BR />
+                        Surface Conductivity = 6.1 (for silver)<BR /><BR />
+                        3. Copy structure data from left column and paste it in "SCHEMATIC FILE" window<BR /> <BR />
+                        4. Click "Run Simulation"<BR /><BR />
+                        5. Click "Plot Data"
+                    </FONT>
+                </TD>
+            </TR>
+        </TABLE>
+
+
+
+        <BR />
+        <HR />
+        <A HREF=../index.htm><IMG SRC=knob0.jpg BORDER=0></A>
+        <A HREF=../studio.htm><IMG SRC=knob1.jpg BORDER=0></A>
+        <A HREF=../index.htm><IMG SRC=knob0.jpg BORDER=0></A>
+        <HR />
+        <A HREF=filter2_3d.zip>Download 3D ASIS image (*.sat file)</A>
+    </CENTER>
+<script type="text/javascript">
+        function PrjTransReject() {
+            //Trans Reject
+
+            var rs = [];
+            rs[0] = 'SETUP_DAT';
+            rs[1] = '0 10 10';
+            rs[2] = '1 25 0 1 3 1 1.5 0';
+            rs[3] = '19.5 2.5';
+            rs[4] = '15 55 500';
+            rs[5] = '1 20 0.02 0.05 0.05';
+            rs[6] = 'DESIGN_DAT';
+            rs[7] = '-1  1  0';
+            rs[8] = '0  0  0';
+            rs[9] = '1  7  10';
+            rs[10] = '1  1';
+            rs[11] = '1  0  0';
+            rs[12] = '0    1     2.500000    -5.334000    -2.159000     5.334000     2.159000';
+            rs[13] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[14] = '0    1     0.500000    -4.650000    -1.141400     4.650000     1.141400';
+            rs[15] = '0    2     2.500000    -4.650000    -2.386000     4.650000     2.386000';
+            rs[16] = '0    1     0.500000    -4.650000    -1.000000     4.650000     1.000000';
+            rs[17] = '0    2     2.500000    -4.650000    -2.448800     4.650000     2.448800';
+            rs[18] = '0    1     0.500000    -4.650000    -1.000000     4.650000     1.000000';
+            rs[19] = '0    2     2.500000    -4.650000    -3.088100     4.650000     3.088100';
+            rs[20] = '0    1     0.500000    -4.650000    -1.000000     4.650000     1.000000';
+            rs[21] = '0    2     2.500000    -4.650000    -3.662200     4.650000     3.662200';
+            rs[22] = '0    1     0.500000    -4.650000    -1.000000     4.650000     1.000000';
+            rs[23] = '0    2     2.500000    -4.650000    -3.902800     4.650000     3.902800';
+            rs[24] = '0    1     0.500000    -4.650000    -1.000000     4.650000     1.000000';
+            rs[25] = '0    2     2.500000    -4.650000    -3.810200     4.650000     3.810200';
+            rs[26] = '0    1     0.500000    -4.650000    -1.000000     4.650000     1.000000';
+            rs[27] = '0    2     2.500000    -4.650000    -3.720800     4.650000     3.720800';
+            rs[28] = '0    1     0.500000    -4.650000    -1.000000     4.650000     1.000000';
+            rs[29] = '0    2     2.500000    -4.650000    -3.810200     4.650000     3.810200';
+            rs[30] = '0    1     0.500000    -4.650000    -1.000000     4.650000     1.000000';
+            rs[31] = '0    2     2.500000    -4.650000    -3.902800     4.650000     3.902800';
+            rs[32] = '0    1     0.500000    -4.650000    -1.000000     4.650000     1.000000';
+            rs[33] = '0    2     2.500000    -4.650000    -3.662200     4.650000     3.662200';
+            rs[34] = '0    1     0.500000    -4.650000    -1.000000     4.650000     1.000000';
+            rs[35] = '0    2     2.500000    -4.650000    -3.088000     4.650000     3.088000';
+            rs[36] = '0    1     0.500000    -4.650000    -1.000000     4.650000     1.000000';
+            rs[37] = '0    2     2.500000    -4.650000    -2.448700     4.650000     2.448700';
+            rs[38] = '0    1     0.500000    -4.650000    -1.000000     4.650000     1.000000';
+            rs[39] = '0    2     2.500000    -4.650000    -2.386000     4.650000     2.386000';
+            rs[40] = '0    1     0.500000    -4.650000    -1.141400     4.650000     1.141400';
+            rs[41] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[42] = '0    1     2.500000    -5.334000    -2.159000     5.334000     2.159000';
+            SetProject(rs);
+        }
+
+        function SetProject(LNs) {
+            //document.getElementById('FileProjectOkno').value = localStorage.getItem('ProjectDat');
+            var i, key;
+            var SetupDat = '';
+            var DesignDat = '';
+            var MemoDat = '';
+            var kod = -1;
+            var n = LNs.length - 1;
+            if (n < 0) { return; }
+            for (i = 0; i <= n; i++) {
+                var LN = trim(LNs[i]);
+                if (LN.length > 3) {
+                    key = LNs[i].substr(0, 4);
+                    //alert(key);
+                    if (key == 'SETU') { kod = 1; }
+                    if (key == 'DESI') { kod = 2; }
+                    if (key == 'BACK') { kod = 3; }
+                    if (kod == 1 && key != 'SETU') {
+                        SetupDat += LNs[i] + '\r\n';
+                    }
+                    if (kod == 2 && key != 'DESI') {
+                        DesignDat += LNs[i] + '\r\n';
+                    }
+                    if (kod == 3 && key != 'BACK') {
+                        MemoDat += LNs[i] + '\r\n';
+                    }
+
+                }
+
+            }
+            if (kod > 0) {
+                localStorage.setItem("InputDatFileText", SetupDat);
+                localStorage.setItem("DesignFileText", DesignDat);
+                localStorage.setItem("MemoDatText", MemoDat);
+
+            }
+        }
+                //############################
+        function trim(str) {
+            return str.replace(/^\s+|\s+$/g, '');
+        }
+
+
+</script>
+</BODY>
+</HTML>

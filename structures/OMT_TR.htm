@@ -1,0 +1,1166 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<meta name="description" content="Ka-band (19.7 - 20.2 GHz) transmit-reject filter">
+<meta name="keywords" content="OMT filter, Ortho mode transducer, Ka-band filter, transmit-reject filter, corrugated low-pass filter, WR-42, WR42, waveguide filter">
+<link rel=File-List href="./OMT_TR_files/filelist.xml">
+<link rel=Edit-Time-Data href="./OMT_TR_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>OMT Transmit Reject Filter</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Rousslan Goulouev</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor> Rousslan Goulouev</o:LastAuthor>
+  <o:Revision>4</o:Revision>
+  <o:TotalTime>12</o:TotalTime>
+  <o:LastPrinted>2004-03-04T12:00:00Z</o:LastPrinted>
+  <o:Created>2007-10-13T11:52:00Z</o:Created>
+  <o:LastSaved>2007-10-13T11:56:00Z</o:LastSaved>
+  <o:Pages>6</o:Pages>
+  <o:Words>1280</o:Words>
+  <o:Characters>7297</o:Characters>
+  <o:Company>Digoria Microwave</o:Company>
+  <o:Lines>60</o:Lines>
+  <o:Paragraphs>14</o:Paragraphs>
+  <o:CharactersWithSpaces>8961</o:CharactersWithSpaces>
+  <o:Version>9.3821</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Compatibility>
+   <w:UseFELayout/>
+  </w:Compatibility>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:SimSun;
+	panose-1:0 0 0 0 0 0 0 0 0 0;
+	mso-font-alt:\5B8B\4F53;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-format:other;
+	mso-font-pitch:variable;
+	mso-font-signature:1 135135232 16 0 262144 0;}
+@font-face
+	{font-family:"\@SimSun";
+	panose-1:0 0 0 0 0 0 0 0 0 0;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-format:other;
+	mso-font-pitch:variable;
+	mso-font-signature:1 135135232 16 0 262144 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:SimSun;
+	mso-ansi-language:EN-US;
+	mso-fareast-language:ZH-CN;}
+p.MsoHeader, li.MsoHeader, div.MsoHeader
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:center 242.2pt right 484.45pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:SimSun;
+	mso-ansi-language:EN-US;
+	mso-fareast-language:ZH-CN;}
+p.MsoFooter, li.MsoFooter, div.MsoFooter
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:center 242.2pt right 484.45pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:SimSun;
+	mso-ansi-language:EN-US;
+	mso-fareast-language:ZH-CN;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-header:url("./OMT_TR_files/header.htm") h1;
+	mso-footer:url("./OMT_TR_files/header.htm") f1;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="4097"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=EN-CA link=blue vlink=purple style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p class=MsoNormal><span lang=EN-US><!--[if gte vml 1]><v:shapetype id="_x0000_t75"
+ coordsize="21600,21600" o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe"
+ filled="f" stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1036" type="#_x0000_t75" style='width:225pt;
+ height:36pt'>
+ <v:imagedata src="./OMT_TR_files/image001.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=300 height=48
+src="./OMT_TR_files/image002.jpg" v:shapes="_x0000_i1036"><![endif]></span><b
+style='mso-bidi-font-weight:normal'><span lang=EN-US style='font-size:16.0pt'><o:p></o:p></span></b></p>
+<HR>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+style='font-size:16.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+style='font-size:16.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+style='font-size:16.0pt'>OMT Transmit Reject Filter<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+style='font-size:14.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+style='font-size:14.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+style='font-size:14.0pt'>1. Design Description<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+style='font-size:14.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US>1.1.
+Electrical Design<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>The OMT filter is a low-pass waveguide
+filter based on E-plane corrugated impedance structure utilizing 14 irises and
+13 cavities. Each of irises contributes a reflection zero to the reflection
+frequency response of filter and each cavity contributes a transmission zero to
+the transmission frequency response. The reflection zeros form the physical
+(3dB) pass-band of the filter, which is extended from 16.25 GHz to 24.9
+GHz.<span style="mso-spacerun: yes">  </span>The transmission zeros form the
+physical stop-band, which is extended from 28.5 GHz to 42 GHz providing more
+than 100 dB rejection of the frequency spectrum carried by the dominant
+waveguide mode of TE10. There is intermediate (roll-off) zone of negative slope
+of transmission versus frequency response, which is extended from 24.9 GHz to
+28.5 GHz. The filter structure shows lack of rejection of frequency spectrum
+from 31.5 GHz to 38.5 GHz, because of possible propagation of the spurious
+TE20-mode throughout the filter. The actual rejection of the filter in this
+frequency band is generally unpredictable, as it depends on external existence
+of the mode. The filter structure is designed and optimized in respect to
+electrical parameters required by the specification (see Table 2.1 below) and
+evaluated over different combinations of tolerances (see Table 4.1). </span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US>1.2.
+Mechanical Realization<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>The filter can be assembled from two
+symmetrical half bodies, which are symmetrical in respect to the central
+H-plane (the plane of the wider waveguide wall). The two half bodies are to be
+connected by flanges and fastened by screws. The half bodies are to be made
+from zinc alloy. Each half body can be machined using milling or EDM technology
+<span style='color:black'>(see paragraph 3).</span> Silver internal finishing
+is recommended in order to reduce the dissipation loss.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+style='font-size:14.0pt'>2. Original Performance<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US>2.1.
+Simulation Method <o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>The simulation model represents a plurality
+of E-plane cavities connected to each other by short waveguide nodes (irises)
+and connected to external interface by EH-plane steps. Propagation of 36
+waveguide modes is taken into account in cavities and the dominant mode is
+assumed to propagate in the nodes. The S-matrix is computed for each frequency
+point as cascade of sequence of cavities and steps. The computational method is
+tested on similar designs and deviation of the data simulated by the method
+from the results measured or simulated using other methods is found acceptable
+and predictable in most cases.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US>2.2.
+Original Performance<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>The simulation method is applied to the
+filter model and the obtained results are represented as usual electrical
+parameters in the Table 2.0 bellow. It is assumed that the surface is smooth
+and not deviated from ideal rectangular. </span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><i style='mso-bidi-font-style:normal'><span lang=EN-US>Table
+2.1: Original (not deviated) simulated performance<o:p></o:p></span></i></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .5pt;mso-padding-alt:0cm 5.4pt 0cm 5.4pt'>
+ <tr>
+  <td width=155 valign=top style='width:116.5pt;border:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+  style='font-size:10.0pt'>Parameter<o:p></o:p></span></b></p>
+  </td>
+  <td width=92 valign=top style='width:68.9pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+  style='font-size:10.0pt'>Spec<o:p></o:p></span></b></p>
+  </td>
+  <td width=120 valign=top style='width:90.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+  style='font-size:10.0pt'>Expected Value<o:p></o:p></span></b></p>
+  </td>
+  <td width=223 valign=top style='width:167.4pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+  style='font-size:10.0pt'>Note<o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.5pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Design
+  Pass-Band, GHz<o:p></o:p></span></p>
+  </td>
+  <td width=92 valign=top style='width:68.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>19.7 – 20.2 <o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:90.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>19.7 to 20.2<o:p></o:p></span></p>
+  </td>
+  <td width=223 valign=top style='width:167.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Design pass-band
+  is wider<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.5pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Return Loss, dB<o:p></o:p></span></p>
+  </td>
+  <td width=92 valign=top style='width:68.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>18 (1.3:1)<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:90.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>29 (1.07:1)<o:p></o:p></span></p>
+  </td>
+  <td width=223 valign=top style='width:167.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  lang=EN-US style='font-size:10.0pt'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.5pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Insertion Loss,
+  dB<o:p></o:p></span></p>
+  </td>
+  <td width=92 valign=top style='width:68.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>0.5<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:90.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>0.14<o:p></o:p></span></p>
+  </td>
+  <td width=223 valign=top style='width:167.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Uncoated zinc
+  surface<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.5pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Gain Variation,
+  dBpp<o:p></o:p></span></p>
+  </td>
+  <td width=92 valign=top style='width:68.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>N/A<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:90.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>0.01<o:p></o:p></span></p>
+  </td>
+  <td width=223 valign=top style='width:167.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  lang=EN-US style='font-size:10.0pt'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.5pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Rejection, dB<o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>29.5 – 30.0 GHz<o:p></o:p></span></p>
+  </td>
+  <td width=92 valign=top style='width:68.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>55<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:90.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>80<o:p></o:p></span></p>
+  </td>
+  <td width=223 valign=top style='width:167.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Design stop-band
+  is wider<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.5pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Group Delay, ns<o:p></o:p></span></p>
+  </td>
+  <td width=92 valign=top style='width:68.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>N/A<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:90.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>0.46<o:p></o:p></span></p>
+  </td>
+  <td width=223 valign=top style='width:167.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Group delay
+  absolute value<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.5pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Group Delay
+  Variation, ns<o:p></o:p></span></p>
+  </td>
+  <td width=92 valign=top style='width:68.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>N/A<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:90.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>0.02<o:p></o:p></span></p>
+  </td>
+  <td width=223 valign=top style='width:167.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Relative
+  variation<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.5pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Peak Power
+  Handling, W<o:p></o:p></span></p>
+  </td>
+  <td width=92 valign=top style='width:68.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>N/A<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:90.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>40 kW<o:p></o:p></span></p>
+  </td>
+  <td width=223 valign=top style='width:167.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Air breakdown at
+  1 atmosphere<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.5pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Internal
+  Dimensions, mm<o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>W x H x L<o:p></o:p></span></p>
+  </td>
+  <td width=92 valign=top style='width:68.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>N/A<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:90.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>10.7 x 15.7 x
+  39.5<o:p></o:p></span></p>
+  </td>
+  <td width=223 valign=top style='width:167.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Internal
+  dimensions<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.5pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Temperature, dgC<o:p></o:p></span></p>
+  </td>
+  <td width=92 valign=top style='width:68.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>N/A<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:90.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>-20 to +80<o:p></o:p></span></p>
+  </td>
+  <td width=223 valign=top style='width:167.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Suggested
+  operational temperature<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US>2.3
+Pass-Band and Stop-Band<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>The scattering parameters are computed over
+frequency range from 15 GHz to 40 GHz with step of 30 MHz and the results are
+represented as reflection/transmission versus frequency charts (see Figures 2.1
+– 2.4).</span></p>
+
+<p class=MsoNormal><span lang=EN-US><!--[if gte vml 1]><v:shape id="_x0000_i1025"
+ type="#_x0000_t75" style='width:427.5pt;height:242.25pt'>
+ <v:imagedata src="./OMT_TR_files/image003.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=570 height=323
+src="./OMT_TR_files/image004.jpg" v:shapes="_x0000_i1025"><![endif]></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><i style='mso-bidi-font-style:normal'><span lang=EN-US>Figure
+2.1: Original transmission and reflection versus frequency response.<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><!--[if gte vml 1]><v:shape id="_x0000_i1026"
+ type="#_x0000_t75" style='width:427.5pt;height:242.25pt'>
+ <v:imagedata src="./OMT_TR_files/image005.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=570 height=323
+src="./OMT_TR_files/image006.jpg" v:shapes="_x0000_i1026"><![endif]></span></p>
+
+<p class=MsoNormal><i style='mso-bidi-font-style:normal'><span lang=EN-US>Figure
+2.2.: Original return loss versus frequency response<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><!--[if gte vml 1]><v:shape id="_x0000_i1027"
+ type="#_x0000_t75" style='width:6in;height:228.75pt'>
+ <v:imagedata src="./OMT_TR_files/image007.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=576 height=305
+src="./OMT_TR_files/image008.jpg" v:shapes="_x0000_i1027"><![endif]></span></p>
+
+<p class=MsoNormal><i style='mso-bidi-font-style:normal'><span lang=EN-US>Figure
+2.3: Insertion loss versus frequency response simulated for zinc surface in
+ambient environmental conditions<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><!--[if gte vml 1]><v:shape id="_x0000_i1028"
+ type="#_x0000_t75" style='width:427.5pt;height:279pt'>
+ <v:imagedata src="./OMT_TR_files/image009.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=570 height=372
+src="./OMT_TR_files/image010.jpg" v:shapes="_x0000_i1028"><![endif]></span></p>
+
+<p class=MsoNormal><i style='mso-bidi-font-style:normal'><span lang=EN-US>Figure
+2.4: Plot of rejection versus frequency of original model in roll-off zone <o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+style='font-size:14.0pt'>2.4. TE20-mode propagation zone<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>TE20-mode is found to reduce rejection in
+the frequency band from 31.5 GHz to 38.5 GHz, which is outside of the specified
+rejection bands. Transmission response plot corresponding to propagation of
+frequency spectrum carried by TE20-mode is presented in Figure 2.4 in case if
+the filter is used for other applications. </span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><!--[if gte vml 1]><v:shape id="_x0000_i1029"
+ type="#_x0000_t75" style='width:427.5pt;height:242.25pt'>
+ <v:imagedata src="./OMT_TR_files/image011.png" o:title="&#30713;&#32736;$&#35454;&#30709;&#1864;&#21;&#58164;&#18;"/>
+</v:shape><![endif]--><![if !vml]><img width=570 height=323
+src="./OMT_TR_files/image012.jpg" v:shapes="_x0000_i1029"><![endif]></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><i style='mso-bidi-font-style:normal'><span lang=EN-US>Figure
+2.4: Worst case of transmission of spurious mode of TE20 versus frequency plot.<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+style='font-size:14.0pt'>2.4. Group Delay<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>Group delay response is computed and
+represented as X-Y plot below in Figure 2.6.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><!--[if gte vml 1]><v:shape id="_x0000_i1030"
+ type="#_x0000_t75" style='width:6in;height:200.25pt'>
+ <v:imagedata src="./OMT_TR_files/image013.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=576 height=267
+src="./OMT_TR_files/image014.jpg" v:shapes="_x0000_i1030"><![endif]></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><i style='mso-bidi-font-style:normal'><span lang=EN-US>Figure
+2.5: Group delay response<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+style='font-size:14.0pt'>3. Sensitivity Analysis and Evaluation of Deviation of
+Performance<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US>3.1.
+Computational Errors<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>As the solution of Maxwell equations does not
+exist in exact and closed terms for arbitrary boundary conditions, all methods
+used for prediction of electrical performance of practical wave guiding devices
+are numerical and approximate. The simulated model is already deviated from the
+physical model if even they are ideal. In accordance with correlation between
+simulation and test performed for similar filters, the numerical method used
+for simulation contributes a computational error making 0.5-0.7% shift of
+roll-off along the frequency axis with no considerable degradation of
+reflection response. </span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US>3.2.
+Random Tolerances Applied by Production Methods<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>This kind of tolerances is assumed to
+contribute a random shift of top, bottom and sides of each cavity in respect to
+their initial positions. It is found that the random tolerances mostly degrade
+the pass-band reflection response and do not generally affect roll-off unless
+the width and height of wave guiding channel are changed. The impact on the
+original frequency response (see Figure 2.1) caused by random tolerances is
+represented by charts shown on Figures 3.1 and 3.2 simulated for different
+deviations and combinations.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><!--[if gte vml 1]><v:shape id="_x0000_i1031"
+ type="#_x0000_t75" style='width:407.25pt;height:372pt'>
+ <v:imagedata src="./OMT_TR_files/image015.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=543 height=496
+src="./OMT_TR_files/image016.jpg" v:shapes="_x0000_i1031"><![endif]></span></p>
+
+<p class=MsoNormal><i style='mso-bidi-font-style:normal'><span lang=EN-US>Figure
+3.1: Deviation of original response of filter caused by different random
+combinations of +/- 0.05 mm random tolerances <o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span lang=EN-US><!--[if gte vml 1]><v:shape id="_x0000_i1032"
+ type="#_x0000_t75" style='width:398.25pt;height:372pt'>
+ <v:imagedata src="./OMT_TR_files/image017.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=531 height=496
+src="./OMT_TR_files/image018.jpg" v:shapes="_x0000_i1032"><![endif]></span></p>
+
+<p class=MsoNormal><i style='mso-bidi-font-style:normal'><span lang=EN-US>Figure
+3.2: Deviation of original response of filter caused by different random
+combinations of +/- 0.02 mm random tolerances.<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US>3.3.
+Radii Applied by Production Methods<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>In addition to the random tolerances,
+rounding of convex cavity corners is expected, if the milling technology is
+used to fabricate the half bodies. Impact of radii is evaluated and represented
+as frequency response plot on Figure 3.3. </span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><!--[if gte vml 1]><v:shape id="_x0000_i1033"
+ type="#_x0000_t75" style='width:399.75pt;height:372pt'>
+ <v:imagedata src="./OMT_TR_files/image019.jpg" o:title="24"/>
+</v:shape><![endif]--><![if !vml]><img width=533 height=496
+src="./OMT_TR_files/image019.jpg" v:shapes="_x0000_i1033"><![endif]></span></p>
+
+<p class=MsoNormal><i style='mso-bidi-font-style:normal'><span lang=EN-US>Figure
+3.3: Evaluation of deviation of frequency response caused by 1 mm radii.<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US>3.4.
+Draft angle<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>Draft angle of tapering of cavity makes
+effect of reduction of equivalent cavity dimensions causing roll-off right
+shift (see Figure 3.4). </span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><!--[if gte vml 1]><v:shape id="_x0000_i1034"
+ type="#_x0000_t75" style='width:427.5pt;height:242.25pt'>
+ <v:imagedata src="./OMT_TR_files/image020.png" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=570 height=323
+src="./OMT_TR_files/image021.jpg" v:shapes="_x0000_i1034"><![endif]></span></p>
+
+<p class=MsoNormal><i style='mso-bidi-font-style:normal'><span lang=EN-US>Figure
+3.4: Simulated shift of frequency response caused by 3 dg draft angle.<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US>3.5.
+Contact Quality<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>Deviation of frequency response caused by
+distortion of vertical currents flowing through contact areas is assumed to be
+negligible, if quality of contact between the half bodies is good. </span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+style='font-size:14.0pt'>4. Predicted Filter Performance <o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>In accordance with the results of primary
+simulation and sensitivity for computational and production errors the expected
+performance of the presented filter is summarized in the Table 4.1 below.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><i style='mso-bidi-font-style:normal'><span lang=EN-US>Table
+4.1: Expected performance of OMT filter in respect to three fabrication methods<o:p></o:p></span></i></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .5pt;mso-padding-alt:0cm 5.4pt 0cm 5.4pt'>
+ <tr>
+  <td width=155 valign=top style='width:116.5pt;border:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+  style='font-size:10.0pt'>Parameter<o:p></o:p></span></b></p>
+  </td>
+  <td width=92 valign=top style='width:68.9pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+  style='font-size:10.0pt'>Spec<o:p></o:p></span></b></p>
+  </td>
+  <td width=120 valign=top style='width:90.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+  style='font-size:10.0pt'>Expected Value<o:p></o:p></span></b></p>
+  </td>
+  <td width=223 valign=top style='width:167.4pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+  style='font-size:10.0pt'>Note<o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.5pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Design
+  Pass-Band, GHz<o:p></o:p></span></p>
+  </td>
+  <td width=92 valign=top style='width:68.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>19.7 – 20.2 <o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:90.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>19.7 to 20.2<o:p></o:p></span></p>
+  </td>
+  <td width=223 valign=top style='width:167.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  lang=EN-US style='font-size:10.0pt'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.5pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Return Loss, dB<o:p></o:p></span></p>
+  </td>
+  <td width=92 valign=top style='width:68.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>17.5 (1.3:1)<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:90.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>17.5 (1.3:1)*<o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>24 (1.14:1)<o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>29 (1.07:1)<o:p></o:p></span></p>
+  </td>
+  <td width=223 valign=top style='width:167.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Milling +/-0.05,
+  R. 1 mm, 3 dg draft<o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Milling +/-0.02
+  R. 1 mm, 3 dg draft<o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>EDM<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.5pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Insertion Loss,
+  dB<o:p></o:p></span></p>
+  </td>
+  <td width=92 valign=top style='width:68.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>0.5<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:90.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>0.22<o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>0.16<o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>0.15<o:p></o:p></span></p>
+  </td>
+  <td width=223 valign=top style='width:167.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Milling +/-0.05,
+  R. 1 mm, 3 dg draft<o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Milling +/-0.02
+  R. 1 mm, 3 dg draft<o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>EDM<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.5pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Gain Variation,
+  dBpp<o:p></o:p></span></p>
+  </td>
+  <td width=92 valign=top style='width:68.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>N/A<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:90.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>0.05<o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>0.01<o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>0.01<o:p></o:p></span></p>
+  </td>
+  <td width=223 valign=top style='width:167.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Milling +/-0.05,
+  R. 1 mm, 3 dg draft<o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Milling +/-0.02
+  R. 1 mm, 3 dg draft<o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>EDM<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.5pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Rejection, dB<o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>29.5 – 30.0 GHz<o:p></o:p></span></p>
+  </td>
+  <td width=92 valign=top style='width:68.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>55<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:90.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>88<o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>92<o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>118<o:p></o:p></span></p>
+  </td>
+  <td width=223 valign=top style='width:167.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Milling +/-0.05,
+  R. 1 mm, 3 dg draft<o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Milling +/-0.02
+  R. 1 mm, 3 dg draft<o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>EDM<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.5pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Group Delay, ns<o:p></o:p></span></p>
+  </td>
+  <td width=92 valign=top style='width:68.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>N/A<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:90.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>0.46<o:p></o:p></span></p>
+  </td>
+  <td width=223 valign=top style='width:167.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  lang=EN-US style='font-size:10.0pt'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.5pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Group Delay
+  Variation, ns<o:p></o:p></span></p>
+  </td>
+  <td width=92 valign=top style='width:68.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>N/A<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:90.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>0.02<o:p></o:p></span></p>
+  </td>
+  <td width=223 valign=top style='width:167.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  lang=EN-US style='font-size:10.0pt'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.5pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Peak Power
+  Handling, W<o:p></o:p></span></p>
+  </td>
+  <td width=92 valign=top style='width:68.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>N/A<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:90.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>40 kW<o:p></o:p></span></p>
+  </td>
+  <td width=223 valign=top style='width:167.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Air breakdown at
+  1 atmosphere<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.5pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Internal
+  Dimensions, mm<o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>W x H x L<o:p></o:p></span></p>
+  </td>
+  <td width=92 valign=top style='width:68.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>N/A<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:90.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>10.7 x 15.7 x
+  39.5<o:p></o:p></span></p>
+  </td>
+  <td width=223 valign=top style='width:167.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  lang=EN-US style='font-size:10.0pt'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.5pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>Temperature, dgC<o:p></o:p></span></p>
+  </td>
+  <td width=92 valign=top style='width:68.9pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>N/A<o:p></o:p></span></p>
+  </td>
+  <td width=120 valign=top style='width:90.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>-20 to +80<o:p></o:p></span></p>
+  </td>
+  <td width=223 valign=top style='width:167.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p class=MsoNormal><span lang=EN-US style='font-size:10.0pt'>If not specified<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span lang=EN-US>(*) There is no adequate margin, two tuning
+screws are required.<span style="mso-spacerun: yes">  </span></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US
+style='font-size:14.0pt'>5. Recommendations<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US>5.1.
+Fabrication<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>EDM or milling with tolerances smaller than
++/- 0.02 mm is recommended in order to achieve more than 24 dB return loss
+(less than 1.14 VSWR) with no tuning or adjustments. Smaller milling tool with
+radius less than 1 mm is recommended.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US>5.2.
+Tuning<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>Two tuning screws may be required in order
+to compensate degradation of performance if tolerances greater than +/- 0.03
+are accepted. </span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US>5.3.
+Finishing<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>Internal silver coating is recommended in
+order to reduce dissipation loss in pass-band of filter to 0.07 dB. </span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US>5.4.
+Contact grooves<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>Contact grooves are recommended to improve
+contact between parts.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><span style="mso-spacerun: yes"> </span></span></p>
+
+</div>
+<HR><CENTER><FONT style="font: 10pt Arial Black;color:navy"><I>
+© Digoria Microwave, 2004-03-04
+
+</body>
+
+</html>
