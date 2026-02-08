@@ -1,0 +1,57 @@
+<HTML>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<HEAD>
+<TITLE>Simple Procedure to Design a Filter with Quarter-Wave-Coupled Resonators</TITLE>
+</HEAD>
+<BODY BACKGROUND="bkg02.jpg">
+<P ALIGN=center><STRONG><BASEFONT SIZE=3><FONT SIZE=4 COLOR=H00404040><B>Simple Procedure to Design a Filter with Quarter-Wave-Coupled Resonators</B></P>
+<CENTER>
+<BR><BR><i><h5>In analogy to <A href="dirproc.htm">the procedure to design a direct-coupled filter </A>a similar approach how to design a filter using quarter-wave-coupling is presented here. The procedure is also requires a “simulator”.</i><BR><BR>
+
+<table align=top border=1 cellpadding=10 cellspacing=5>
+
+<tr><td><img src="qwpr003.gif"></td><td><FONT COLOR=H00404040><h5>
+The filter can be represented as sequence of <i> N </i> lossless reactive  resonant units separated by <i>N-1</i> straight uniform waveguide sections of length close to 1/4-wavelength in the waveguide. Each resonator # i shows symmetric scattering matrix <i>Si (<FONT FACE="Symbol">b</FONT>)</i> with reflection function <i>Ri (<FONT FACE="Symbol">b</FONT>)</i> and transmission function <i>Ti (<FONT FACE="Symbol">b</FONT>)</i> , where b is waveguide propagation constant.  
+
+</td></tr>
+
+
+<tr><td><img src="qwpr004.gif"></td><td><FONT COLOR=H00404040><h5>
+The reflection function of each resonator is smooth and monotonic over the filter pass-band and inverts into zero at the central frequency.  Then the loaded Q-factor of the i-th resonator is determined from its reflection function as
+<BR><CENTER><img src="qwpr100.jpg"></CENTER><BR>                                                                                        
+A procedure of synthesizing the filter structure is written in [1], if we assume
+<BR><CENTER><img src="qwpr101.jpg"></CENTER><BR>                                                                                        
+However, because of stability of the filter response for coupling transformer length, it can be kept the same between all resonators to be 1/4<FONT FACE="Symbol">l</FONT><FONT SIZE=1>g</FONT>, little less or more.   
+</td></tr>
+
+<tr><td><img src="qwpr005.gif"></td><td><FONT COLOR=H00404040><h5>
+Physical realization of such a filter is based on finding such elements providing reflection zero at particular central frequency with variable Q-factor. <A href="ri.htm">Resonant iris </A> and cavity of two regular H- plane irises <A href="refere.htm">[1]</A> are commonly used to compose a 1/4-wave-coupled filter. Using modern software a wide variety of such resonant elements can be found and <A href="../structures/index.htm">unusual filter structures</A> can be built from them. For example, couple of slots in an evanescent-mode ridged waveguide behaves as reflection-zero resonator. Changing d-dimension changes central frequency and changing s-dimension changes Q-factor.
+</td></tr>
+</table>
+
+<table align=top border=1 cellpadding=10 cellspacing=5>
+<tr ><td><FONT COLOR=H00404040><h5>
+The Q-values of resonators are selected in order to obtain the required response function. Those values are associated with g-values mentioned previously (see page about <A href="dirproc.htm">direct coupled filters </A> ) by the following formula from <A href="refere.htm">[1]</A><BR>
+<CENTER><img src="qwpr006.gif">
+</td></tr>
+
+<tr ><td ><FONT COLOR=H00404040><h5>
+Generally, the algorithm to synthesize the filter dimensions looks more complicated than to synthesize a direct-coupled filter. It is also based on a “simulator” giving complex s-matrix as a function of the dimensions of the resonator. Let assume that the complex reflection coefficient is function of two dimensions x and y. Let the x-dimension is mostly controls resonant frequency while y-dimension mostly effects loaded Q. Changing y and simultaneously adjusting x to keep the resonant frequency at <FONT FACE="Symbol">b</FONT><FONT SIZE=1>0 </FONT> we can obtain a table where for any y appropriate x and Q are found. For many cases such a table computed ones might be used for a big variety of filters of the same class.     
+
+</td>
+</tr>
+
+
+</table>
+
+<table align=top border=1 cellpadding=10 cellspacing=5>
+<tr><td><img src="qwpr007.gif"></td><td><FONT COLOR=H00404040><h5>
+Quarter-wave-coupled filters are found little more stable for manufacturing and computational errors than the direct-coupled ones. So a filter built following this procedure may work right a way without tuning and adjustment. For example, a <A HREF=../structures/b40.htm>quarter-wave-coupled corrugated filter</A> is built following the synthesized dimensions and it fits the spec mask. However more often the synthesized filter requires bandwidth adjustments and return loss equalizing. Bandwidth can be adjusted by correcting design bandwidth and central frequency.  Return loss equalization can require an optimizer.
+</td></tr>
+</table>
+
+<BR>
+<BR>
+
+</BODY>
+</HTML>

@@ -1,0 +1,470 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>H-plane waveguide filter design procedure</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Rousslan Goulouev</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Rousslan Goulouev</o:LastAuthor>
+  <o:Revision>3</o:Revision>
+  <o:TotalTime>251</o:TotalTime>
+  <o:Created>2000-02-28T22:53:00Z</o:Created>
+  <o:LastSaved>2000-02-28T23:25:00Z</o:LastSaved>
+  <o:Pages>2</o:Pages>
+  <o:Words>547</o:Words>
+  <o:Characters>3120</o:Characters>
+  <o:Company>private</o:Company>
+  <o:Lines>26</o:Lines>
+  <o:Paragraphs>6</o:Paragraphs>
+  <o:CharactersWithSpaces>3831</o:CharactersWithSpaces>
+  <o:Version>9.2720</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:DrawingGridHorizontalSpacing>6 pt</w:DrawingGridHorizontalSpacing>
+  <w:DrawingGridVerticalSpacing>6 pt</w:DrawingGridVerticalSpacing>
+  <w:DisplayVerticalDrawingGridEvery>0</w:DisplayVerticalDrawingGridEvery>
+  <w:UseMarginsForDrawingGridOrigin/>
+  <w:Compatibility>
+   <w:SpaceForUL/>
+   <w:BalanceSingleByteDoubleByteWidth/>
+   <w:DoNotLeaveBackslashAlone/>
+   <w:ULTrailSpace/>
+   <w:DoNotExpandShiftReturn/>
+   <w:WW6BorderRules/>
+   <w:FootnoteLayoutLikeWW8/>
+   <w:ShapeLayoutLikeWW8/>
+   <w:AlignTablesRowByRow/>
+   <w:ForgetLastTabAlignment/>
+   <w:AutoSpaceLikeWord95/>
+   <w:LayoutRawTableWidth/>
+   <w:LayoutTableRowsApart/>
+  </w:Compatibility>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:"Wide Latin";
+	panose-1:2 10 10 7 5 5 5 2 4 4;
+	mso-font-charset:0;
+	mso-generic-font-family:roman;
+	mso-font-pitch:variable;
+	mso-font-signature:3 0 0 0 1 0;}
+@font-face
+	{font-family:"Comic Sans MS";
+	panose-1:3 15 7 2 3 3 2 2 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:script;
+	mso-font-pitch:variable;
+	mso-font-signature:647 0 0 0 159 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	mso-layout-grid-align:none;
+	punctuation-wrap:simple;
+	text-autospace:none;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	mso-layout-grid-align:none;
+	punctuation-wrap:simple;
+	text-autospace:none;
+	font-size:16.0pt;
+	font-family:Arial;
+	mso-font-kerning:16.0pt;}
+h2
+	{mso-style-next:Normal;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	mso-layout-grid-align:none;
+	punctuation-wrap:simple;
+	text-autospace:none;
+	font-size:14.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Wide Latin";
+	color:#333399;
+	font-weight:normal;}
+h3
+	{mso-style-next:Normal;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:3;
+	mso-layout-grid-align:none;
+	punctuation-wrap:simple;
+	text-autospace:none;
+	font-size:10.0pt;
+	font-family:"Comic Sans MS";
+	font-style:italic;}
+h4
+	{mso-style-next:Normal;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:4;
+	mso-layout-grid-align:none;
+	punctuation-wrap:simple;
+	text-autospace:none;
+	font-size:10.0pt;
+	font-family:"Comic Sans MS";
+	font-weight:normal;
+	font-style:italic;}
+h5
+	{mso-style-next:Normal;
+	margin:0in;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:5;
+	mso-layout-grid-align:none;
+	punctuation-wrap:simple;
+	text-autospace:none;
+	font-size:16.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Wide Latin";
+	color:#333399;
+	font-weight:normal;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1034"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body bgcolor=white background="bkg01.jpg" lang=EN-US
+link=blue vlink=purple style='tab-interval:.5in'>
+<!--[if gte mso 9]><xml>
+ <v:background id="_x0000_s1032" o:bwmode="white" o:targetscreensize="800,600">
+  <v: o:title="bkground" type="frame"/>
+ </v:background></xml><![endif]-->
+
+<div class=Section1>
+<CENTER>
+<h2 align=center style='text-align:center'>H-plane Iris Filter</h2>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid #999999 4.5pt;mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr>
+  <td width=273 valign=top style='width:204.75pt;border:solid #999999 4.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><!--[if gte vml 1]><v:shapetype id="_x0000_t75"
+   coordsize="21600,21600" o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe"
+   filled="f" stroked="f">
+   <v:stroke joinstyle="miter"/>
+   <v:formulas>
+    <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+    <v:f eqn="sum @0 1 0"/>
+    <v:f eqn="sum 0 0 @1"/>
+    <v:f eqn="prod @2 1 2"/>
+    <v:f eqn="prod @3 21600 pixelWidth"/>
+    <v:f eqn="prod @3 21600 pixelHeight"/>
+    <v:f eqn="sum @0 0 1"/>
+    <v:f eqn="prod @6 1 2"/>
+    <v:f eqn="prod @7 21600 pixelWidth"/>
+    <v:f eqn="sum @8 21600 0"/>
+    <v:f eqn="prod @7 21600 pixelHeight"/>
+    <v:f eqn="sum @10 21600 0"/>
+   </v:formulas>
+   <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+   <o:lock v:ext="edit" aspectratio="t"/>
+  </v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:189.75pt;
+   height:75.75pt'>
+   <v:imagedata src="hs003.jpg" o:title="iris"/>
+  </v:shape><![endif]--><![if !vml]><img width=253 height=101
+  src="hs004.jpg" v:shapes="_x0000_i1025"><![endif]></p>
+  </td>
+  <td width=416 valign=top style='width:312.35pt;border:solid #999999 4.5pt;
+  border-left:none;mso-border-left-alt:solid #999999 4.5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-left:.25in'><i><span style='font-family:
+  Arial'><span style="mso-spacerun: yes"> </span>No software
+  required to design an iris filter. The design procedure is old, simple and
+  reliable. It is described in many engineering handbooks <u>(see, for example,
+  Collin “Foundation for Microwave Engineering”)</u>.<span style="mso-spacerun:
+  yes">  </span>I have built couple of filters using the classic approach. They
+  work fine. The procedure how to design such a filter is briefly described
+  below.<o:p></o:p></span></i></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-family:"Wide Latin";color:#333399'>Common Design Procedure<o:p></o:p></span></p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid #999999 4.5pt;mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr>
+  <td width=39 valign=top style='width:29.25pt;border:solid #999999 4.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>1.</p>
+  </td>
+  <td width=356 valign=top style='width:267.3pt;border:solid #999999 4.5pt;
+  border-left:none;mso-border-left-alt:solid #999999 4.5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'><!--[if gte vml 1]><v:shape
+   id="_x0000_i1026" type="#_x0000_t75" style='width:256.5pt;height:75pt'
+   o:ole="">
+   <v:imagedata src="hs005.gif" o:title=""/>
+  </v:shape><![endif]--><![if !vml]><img width=342 height=100
+  src="hs005.gif" v:shapes="_x0000_i1026"><![endif]><!--[if gte mso 9]><xml>
+   <o:OLEObject Type="Embed" ProgID="PBrush" ShapeID="_x0000_i1026"
+    DrawAspect="Content" ObjectID="_1013267481">
+   </o:OLEObject>
+  </xml><![endif]--></p>
+  <h4 align=center style='text-align:center'>Low-pass filter prototype ladder
+  network</h4>
+  </td>
+  <td width=293 valign=top style='width:220.05pt;border:solid #999999 4.5pt;
+  border-left:none;mso-border-left-alt:solid #999999 4.5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Initially the low-pass prototype network elements values
+  have to be found. Those values can be calculated using simple formulas from
+  the Collin’s book . They are normalized to roll-off frequency point (<span
+  style='font-family:Symbol'>w</span>) equal to unity and depends on the filter
+  order and response type (Chebychev or maximally flat).</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=39 valign=top style='width:29.25pt;border:solid #999999 4.5pt;
+  border-top:none;mso-border-top-alt:solid #999999 4.5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>2.</p>
+  </td>
+  <td width=356 valign=top style='width:267.3pt;border-top:none;border-left:
+  none;border-bottom:solid #999999 4.5pt;border-right:solid #999999 4.5pt;
+  mso-border-top-alt:solid #999999 4.5pt;mso-border-left-alt:solid #999999 4.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'><!--[if gte vml 1]><v:shape
+   id="_x0000_i1027" type="#_x0000_t75" style='width:256.5pt;height:75pt'
+   o:ole="">
+   <v:imagedata src="hs006.gif" o:title=""/>
+  </v:shape><![endif]--><![if !vml]><img width=342 height=100
+  src="hs006.gif" v:shapes="_x0000_i1027"><![endif]><!--[if gte mso 9]><xml>
+   <o:OLEObject Type="Embed" ProgID="PBrush" ShapeID="_x0000_i1027"
+    DrawAspect="Content" ObjectID="_1013267483">
+   </o:OLEObject>
+  </xml><![endif]--></p>
+  <h4 align=center style='text-align:center'>Waveguide iris filter distributed
+  prototype</h4>
+  </td>
+  <td width=293 valign=top style='width:220.05pt;border-top:none;border-left:
+  none;border-bottom:solid #999999 4.5pt;border-right:solid #999999 4.5pt;
+  mso-border-top-alt:solid #999999 4.5pt;mso-border-left-alt:solid #999999 4.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>The next step is to calculate susceptances of the
+  equivalent waveguide distributed network where the susceptances are connected
+  to each other using waveguide sections.<span style="mso-spacerun: yes"> 
+  </span>Therefore make sure the waveguide dispersion is taken into account.
+  The B-values are depended on the filter bandwidth. The length of each cavity
+  is calculated from B-values. See Collin’s book for details.</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=39 valign=top style='width:29.25pt;border:solid #999999 4.5pt;
+  border-top:none;mso-border-top-alt:solid #999999 4.5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>3.</p>
+  </td>
+  <td width=356 valign=top style='width:267.3pt;border-top:none;border-left:
+  none;border-bottom:solid #999999 4.5pt;border-right:solid #999999 4.5pt;
+  mso-border-top-alt:solid #999999 4.5pt;mso-border-left-alt:solid #999999 4.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'><!--[if gte vml 1]><v:shape
+   id="_x0000_i1028" type="#_x0000_t75" style='width:231pt;height:91.5pt'
+   o:ole="">
+   <v:imagedata src="hs007.jpg" o:title=""/>
+  </v:shape><![endif]--><![if !vml]><img width=308 height=122
+  src="hs008.jpg" v:shapes="_x0000_i1028"><![endif]><!--[if gte mso 9]><xml>
+   <o:OLEObject Type="Embed" ProgID="PBrush" ShapeID="_x0000_i1028"
+    DrawAspect="Content" ObjectID="_1013267484">
+   </o:OLEObject>
+  </xml><![endif]--></p>
+  </td>
+  <td width=293 valign=top style='width:220.05pt;border-top:none;border-left:
+  none;border-bottom:solid #999999 4.5pt;border-right:solid #999999 4.5pt;
+  mso-border-top-alt:solid #999999 4.5pt;mso-border-left-alt:solid #999999 4.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>After the B-values are found, the width of appropriate
+  waveguide H-plane irises can be calculated. Formulas for inductive iris
+  susceptance is presented in <u>Marcuvitz “Waveguide Handbook”</u> <u>or Lewin
+  “Theory of Waveguides”</u>. The last ones are simpler but not less accurate.
+  Using charts from handbooks are not recommended, because visual reading
+  errors can significantly worsen the pass-band filter performance. See <a
+  href="../shop/toleranc.htm">Tolerance Influence</a>.<span style="mso-spacerun: yes"> 
+  </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=39 valign=top style='width:29.25pt;border:solid #999999 4.5pt;
+  border-top:none;mso-border-top-alt:solid #999999 4.5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>4.</p>
+  </td>
+  <td width=356 valign=top style='width:267.3pt;border-top:none;border-left:
+  none;border-bottom:solid #999999 4.5pt;border-right:solid #999999 4.5pt;
+  mso-border-top-alt:solid #999999 4.5pt;mso-border-left-alt:solid #999999 4.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'><!--[if gte vml 1]><v:shape
+   id="_x0000_i1088" type="#_x0000_t75" style='width:228.75pt;height:159.75pt'
+   o:ole="">
+   <v:imagedata src="hs009.gif" o:title=""/>
+  </v:shape><![endif]--><![if !vml]><img border=0 width=305 height=213
+  src="hs009.gif" v:shapes="_x0000_i1088"><![endif]><!--[if gte mso 9]><xml>
+   <o:OLEObject Type="Embed" ProgID="PBrush" ShapeID="_x0000_i1088"
+    DrawAspect="Content" ObjectID="_1013267485">
+   </o:OLEObject>
+  </xml><![endif]--></p>
+  </td>
+  <td width=293 valign=top style='width:220.05pt;border-top:none;border-left:
+  none;border-bottom:solid #999999 4.5pt;border-right:solid #999999 4.5pt;
+  mso-border-top-alt:solid #999999 4.5pt;mso-border-left-alt:solid #999999 4.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Performance verification needs a programming tool. MathCAD
+  <span style="mso-spacerun: yes"> </span>is the simplest to simulate the
+  filter response. Calculating the frequency response of the filter is based on
+  cascading s-parameters of each iris N times. In terms of MathCAD that
+  procedure looks like a loop function shown on the figure. The B-values
+  presented there differ over frequency, so their values must be computed for
+  any particular frequency point. The loop can be easy realized in FORTRAN,
+  provided by an interface, compiled and used as stand-alone module forever. Real
+  surface loss may be inserted using complex <span style='font-family:Symbol'>b</span>
+  where the imaginary component is the waveguide attenuation number multiplied
+  by about 1.5 (experimentally found correction). <span style="mso-spacerun:
+  yes"> </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=39 valign=top style='width:29.25pt;border:solid #999999 4.5pt;
+  border-top:none;mso-border-top-alt:solid #999999 4.5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>5.</p>
+  </td>
+  <td width=650 colspan=2 valign=top style='width:487.35pt;border-top:none;
+  border-left:none;border-bottom:solid #999999 4.5pt;border-right:solid #999999 4.5pt;
+  mso-border-top-alt:solid #999999 4.5pt;mso-border-left-alt:solid #999999 4.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <h5>Notes</h5>
+  <p class=MsoNormal>There are sum assumptions the procedure is based on. The
+  obtained g-values are approximate, iris coupling is assumed to be constant
+  over frequency, waveguide is not an ideal transmission line and iris
+  thickness is assumed to be 0. The effect is that the built filter will be
+  shift right on frequency axis and its bandwidth is narrower than expected.
+  But this is OK, if tuning screws are considered, because the tuning margin of
+  an iris filter is quite wide.<span style="mso-spacerun: yes">  </span>Using
+  more accurate software does not help to avoid tuning screws, because common
+  production facilities do not provide adequate accuracy of machining
+  operations.<span style="mso-spacerun: yes">  </span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-family:"Wide Latin";color:#333399'>Design Software<o:p></o:p></span></p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid #999999 4.5pt;mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr>
+  <td width=687 valign=top style='width:515.25pt;border:solid #999999 4.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>The procedure can be easy realized in FORTRAN or other
+  languages supporting functions of complex variables. Here you can download a
+  simple software kit to design an iris filter from spec to hardware
+  dimensions. The package consists of three programs ‘filter50’, ‘filter51’, ‘filter52’
+  and ‘filter53’. The software output files with dimensions, frequency
+  response, s-parameters, i.e. all information needed to build hardware or <span
+  style="mso-spacerun: yes"> </span>combine it with another commercial. It is
+  free. Nevertheless, I have to notice that I have created this package for my
+  personal use, compiled using non-professional tools, so it cannot be formally
+  used to gain money by anybody including me. <span style="mso-spacerun:
+  yes"> </span>However, if there is an interest in buying newer and more
+  accurate version or another filter design tools see Software List and contact
+  me.</p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+
+
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;mso-bidi-font-size:10.0pt;
+font-family:Symbol;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";mso-char-type:symbol;mso-symbol-font-family:Symbol'><span
+style='mso-char-type:symbol;mso-symbol-font-family:Symbol'>Ó</span></span> R.
+Goulouev, 27.02.00</p>
+
+</div>
+
+</body>
+
+</html>

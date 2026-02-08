@@ -1,0 +1,601 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>Simple Procedure to Design a Filter with Direct Coupled Resonators</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Rousslan Goulouev</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Rousslan Goulouev</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>321</o:TotalTime>
+  <o:Created>2000-03-07T22:31:00Z</o:Created>
+  <o:LastSaved>2000-03-07T22:31:00Z</o:LastSaved>
+  <o:Pages>2</o:Pages>
+  <o:Words>736</o:Words>
+  <o:Characters>4200</o:Characters>
+  <o:Company>Private</o:Company>
+  <o:Lines>35</o:Lines>
+  <o:Paragraphs>8</o:Paragraphs>
+  <o:CharactersWithSpaces>5157</o:CharactersWithSpaces>
+  <o:Version>9.2720</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:DrawingGridHorizontalSpacing>6 pt</w:DrawingGridHorizontalSpacing>
+  <w:DrawingGridVerticalSpacing>6 pt</w:DrawingGridVerticalSpacing>
+  <w:DisplayVerticalDrawingGridEvery>0</w:DisplayVerticalDrawingGridEvery>
+  <w:UseMarginsForDrawingGridOrigin/>
+  <w:Compatibility>
+   <w:SpaceForUL/>
+   <w:BalanceSingleByteDoubleByteWidth/>
+   <w:DoNotLeaveBackslashAlone/>
+   <w:ULTrailSpace/>
+   <w:DoNotExpandShiftReturn/>
+   <w:WW6BorderRules/>
+   <w:FootnoteLayoutLikeWW8/>
+   <w:ShapeLayoutLikeWW8/>
+   <w:AlignTablesRowByRow/>
+   <w:ForgetLastTabAlignment/>
+   <w:AutoSpaceLikeWord95/>
+   <w:LayoutRawTableWidth/>
+   <w:LayoutTableRowsApart/>
+  </w:Compatibility>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:"Wide Latin";
+	panose-1:2 10 10 7 5 5 5 2 4 4;
+	mso-font-charset:0;
+	mso-generic-font-family:roman;
+	mso-font-pitch:variable;
+	mso-font-signature:3 0 0 0 1 0;}
+@font-face
+	{font-family:"Comic Sans MS";
+	panose-1:3 15 7 2 3 3 2 2 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:script;
+	mso-font-pitch:variable;
+	mso-font-signature:647 0 0 0 159 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	mso-layout-grid-align:none;
+	punctuation-wrap:simple;
+	text-autospace:none;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h4
+	{mso-style-next:Normal;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:4;
+	mso-layout-grid-align:none;
+	punctuation-wrap:simple;
+	text-autospace:none;
+	font-size:10.0pt;
+	font-family:"Comic Sans MS";
+	font-weight:normal;
+	font-style:italic;}
+h5
+	{mso-style-next:Normal;
+	margin:0in;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:5;
+	mso-layout-grid-align:none;
+	punctuation-wrap:simple;
+	text-autospace:none;
+	font-size:16.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Wide Latin";
+	color:#333399;
+	font-weight:normal;}
+p.MsoBodyText, li.MsoBodyText, div.MsoBodyText
+	{margin:0in;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	mso-layout-grid-align:none;
+	punctuation-wrap:simple;
+	text-autospace:none;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	font-style:italic;}
+p.MsoBodyText2, li.MsoBodyText2, div.MsoBodyText2
+	{margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	mso-layout-grid-align:none;
+	punctuation-wrap:simple;
+	text-autospace:none;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:#333399;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1035"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body bgcolor=white background="bkg03.jpg" lang=EN-US
+link=blue vlink=purple style='tab-interval:.5in'>
+<!--[if gte mso 9]><xml>
+ <v:background id="_x0000_s1033" o:bwmode="white" o:targetscreensize="800,600">
+  <v: o:title="bkfil" type="frame"/>
+ </v:background></xml><![endif]-->
+<div class=Section1>
+
+<p class=MsoBodyText2 align=center style='text-align:center'><span
+style='font-family:"Wide Latin"'>Simple Procedure to Design a Filter with
+Direct Coupled Resonators<o:p></o:p></span></p>
+
+<p class=MsoBodyText2><i><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></i></p>
+
+<p class=MsoBodyText2><i>Although computer market is full of all kind of
+sophisticated software able to “simulate” everything, the filter technology has
+not moved from 60-s at all. That time engineers designed filters of the same
+type without software and even without computers. <span style="mso-spacerun:
+yes"> </span>Let assume the software can simulate any kind of magic structures.
+But where can we get that magic structures? By other word the software is not
+provided by a design procedure. However modern software allows using a big
+variety of new type of partial elements (not only irises, posts, etc.). Here
+below an approach to design a “direct-coupled” filter using a “simulator”. <o:p></o:p></i></p>
+
+<p class=MsoBodyText2><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid #999999 4.5pt;mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr>
+  <td width=395 colspan=3 valign=top style='width:296.55pt;border:solid #999999 4.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  
+  <p class=MsoNormal align=center style='text-align:center'><!--[if gte vml 1]><v:shapetype
+   id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"
+   path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+   <v:stroke joinstyle="miter"/>
+   <v:formulas>
+    <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+    <v:f eqn="sum @0 1 0"/>
+    <v:f eqn="sum 0 0 @1"/>
+    <v:f eqn="prod @2 1 2"/>
+    <v:f eqn="prod @3 21600 pixelWidth"/>
+    <v:f eqn="prod @3 21600 pixelHeight"/>
+    <v:f eqn="sum @0 0 1"/>
+    <v:f eqn="prod @6 1 2"/>
+    <v:f eqn="prod @7 21600 pixelWidth"/>
+    <v:f eqn="sum @8 21600 0"/>
+    <v:f eqn="prod @7 21600 pixelHeight"/>
+    <v:f eqn="sum @10 21600 0"/>
+   </v:formulas>
+   <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+   <o:lock v:ext="edit" aspectratio="t"/>
+  </v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:256.5pt;
+   height:75pt' o:ole="">
+   <v:imagedata src="dirpr003.gif" o:title=""/>
+  </v:shape><![endif]--><![if !vml]><img width=342 height=100
+  src="dirpr003.gif" v:shapes="_x0000_i1025"><![endif]><!--[if gte mso 9]><xml>
+   <o:OLEObject Type="Embed" ProgID="PBrush" ShapeID="_x0000_i1025"
+    DrawAspect="Content" ObjectID="_1013955500">
+   </o:OLEObject>
+  </xml><![endif]--></p>
+  <h4 align=center style='text-align:center'>Low-pass filter prototype ladder
+  network</h4>
+  </td>
+  <td width=274 valign=top style='width:2.85in;border:solid #999999 4.5pt;
+  border-left:none;mso-border-left-alt:solid #999999 4.5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:#333399'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:#333399'>Initially the low-pass
+  prototype network elements values have to be found. They are normalized to
+  roll-off frequency point (</span><span style='font-family:Symbol;color:#333399'>w</span><span
+  style='color:#333399'>) equal to unity and depends on the filter order and
+  response type (Chebychev or maximally flat).<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=207 colspan=2 valign=top style='width:155.25pt;border:solid #999999 4.5pt;
+  border-top:none;mso-border-top-alt:solid #999999 4.5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>subroutine
+  PreFilter(index,N,Lar,G)<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>real
+  G(30),a(30),b(30),Lar<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>pi=3.141592653<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>eN=2*N<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>if(index.eq.0)then<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>do
+  i=1,N<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>e2=2*i-1<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>G(i)=2.*sin(pi*e2/eN)<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>enddo<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>endif<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>if(index.eq.1)then<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>xx=Lar/17.37<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>be=alog(cosh(xx)/sinh(xx))<o:p></o:p></span></p>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:8.0pt;mso-bidi-font-size:10.0pt'><o:p></o:p></span></p>
+  </td>
+  <td width=188 valign=top style='width:141.3pt;border-top:none;border-left:
+  none;border-bottom:solid #999999 4.5pt;border-right:solid #999999 4.5pt;
+  mso-border-top-alt:solid #999999 4.5pt;mso-border-left-alt:solid #999999 4.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>v=sinh(be/eN)<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>do
+  i=1,N<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>e2=2*i-1<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>a(i)=sin(pi*e2/eN)<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>b(i)=v*v+(sin(i*pi/N))**2<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>enddo<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>G(1)=2.*a(1)/v<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>do
+  i=2,N<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>G(i)=4.*a(i-1)*a(i)/(b(i-1)*G(i-1))<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>enddo<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>endif<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>return<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>end</span></p>
+  </td>
+  <td width=274 valign=top style='width:2.85in;border-top:none;border-left:
+  none;border-bottom:solid #999999 4.5pt;border-right:solid #999999 4.5pt;
+  mso-border-top-alt:solid #999999 4.5pt;mso-border-left-alt:solid #999999 4.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:#333399'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:#333399'>There are simple expressions
+  for g-values corresponding to Chebychev or Butterworth (maximally flat)
+  responses in many microwave engineering books, for example, [<a
+  href="refere.htm"><span style='color:#333399'>1,2</span></a>]. A fortran
+  subroutine computing array of g-values from initial filter parameters is
+  written in the left two sells of the table. The input parameters of the
+  subroutine are <b><i>index</i></b><span style="mso-spacerun: yes">  </span>(0
+  for maximally flat or 1 for Chebychev), <b><i>N</i></b> (filter order), <b><i>Lar</i></b>
+  (pass-band insertion loss ripple, dB).<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:#333399'><span style="mso-spacerun:
+  yes">   </span><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=395 colspan=3 valign=top style='width:296.55pt;border:solid #999999 4.5pt;
+  border-top:none;mso-border-top-alt:solid #999999 4.5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'><!--[if gte vml 1]><v:shape
+   id="_x0000_i1056" type="#_x0000_t75" style='width:256.5pt;height:60.75pt'
+   o:ole="">
+   <v:imagedata src="dirpr004.gif" o:title=""/>
+  </v:shape><![endif]--><![if !vml]><img border=0 width=342 height=81
+  src="dirpr004.gif" v:shapes="_x0000_i1056"><![endif]><!--[if gte mso 9]><xml>
+   <o:OLEObject Type="Embed" ProgID="PBrush" ShapeID="_x0000_i1056"
+    DrawAspect="Content" ObjectID="_1013955501">
+   </o:OLEObject>
+  </xml><![endif]--></p>
+  <p class=MsoBodyText><span style='color:#333399'>Network of s-parameters
+  corresponding to filter structure<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:#333399'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:#333399'>The next step is to calculate
+  reflection coefficients (S<sub>11</sub>) of each element of the filter at
+  central frequency (</span><span style='font-family:Symbol;color:#333399'>b</span><sub><span
+  style='color:#333399'>0</span></sub><span style='color:#333399'>)network
+  required by the prototype. <o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:#333399'><!--[if gte vml 1]><v:shape
+   id="_x0000_i1057" type="#_x0000_t75" style='width:96.75pt;height:24pt'
+   o:ole="">
+   <v:imagedata src="dirpr005.gif" o:title=""/>
+  </v:shape><![endif]--><![if !vml]><img border=0 width=129 height=32
+  src="dirpr005.gif" v:shapes="_x0000_i1057"><![endif]><!--[if gte mso 9]><xml>
+   <o:OLEObject Type="Embed" ProgID="PBrush" ShapeID="_x0000_i1057"
+    DrawAspect="Content" ObjectID="_1013955502">
+   </o:OLEObject>
+  </xml><![endif]--><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:#333399'>where <b><i>B<sub>i</sub></i></b>
+  is equivalent susceptance of <b><i>i</i></b>-th element. Those values are
+  obtained from the filter bandwidth (</span><span style='font-family:Symbol;
+  color:#333399'>b<sub>1</sub> - b<sub>2</sub></span><span style='color:#333399'>)
+  and g-values using the expressions written on right. <o:p></o:p></span></p>
+  <h4 align=center style='text-align:center'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></h4>
+  </td>
+  <td width=274 valign=top style='width:2.85in;border-top:none;border-left:
+  none;border-bottom:solid #999999 4.5pt;border-right:solid #999999 4.5pt;
+  mso-border-top-alt:solid #999999 4.5pt;mso-border-left-alt:solid #999999 4.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:#333399'><!--[if gte vml 1]><v:shape
+   id="_x0000_i1058" type="#_x0000_t75" style='width:132.75pt;height:162.75pt'
+   o:ole="">
+   <v:imagedata src="dirpr006.gif" o:title=""/>
+  </v:shape><![endif]--><![if !vml]><img border=0 width=177 height=217
+  src="dirpr006.gif" v:shapes="_x0000_i1058"><![endif]><!--[if gte mso 9]><xml>
+   <o:OLEObject Type="Embed" ProgID="PBrush" ShapeID="_x0000_i1058"
+    DrawAspect="Content" ObjectID="_1013955503">
+   </o:OLEObject>
+  </xml><![endif]--><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:#333399'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='color:#333399'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=395 colspan=3 valign=top style='width:296.55pt;border:solid #999999 4.5pt;
+  border-top:none;mso-border-top-alt:solid #999999 4.5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'><!--[if gte vml 1]><v:shape
+   id="_x0000_i1059" type="#_x0000_t75" style='width:173.25pt;height:129.75pt'
+   o:ole="">
+   <v:imagedata src="dirpr007.gif" o:title=""/>
+  </v:shape><![endif]--><![if !vml]><img border=0 width=231 height=173
+  src="dirpr007.gif" v:shapes="_x0000_i1059"><![endif]><!--[if gte mso 9]><xml>
+   <o:OLEObject Type="Embed" ProgID="PBrush" ShapeID="_x0000_i1059"
+    DrawAspect="Content" ObjectID="_1013955504">
+   </o:OLEObject>
+  </xml><![endif]--></p>
+  <p class=MsoNormal align=center style='text-align:center'><span
+  style='color:#333399'>An filter partial element (brick). In case of filter
+  based on double ridged waveguide the parameter may be the length of
+  evanescent waveguide section. <o:p></o:p></span></p>
+  </td>
+  <td width=274 valign=top style='width:2.85in;border-top:none;border-left:
+  none;border-bottom:solid #999999 4.5pt;border-right:solid #999999 4.5pt;
+  mso-border-top-alt:solid #999999 4.5pt;mso-border-left-alt:solid #999999 4.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:#333399'>After the reflection
+  coefficients of network elements are found the network elements may be
+  replaced by real elements providing the same reflection value at the filter
+  central frequency. Such an element may be any kind of reactive discontinuity
+  as iris, stub, evanescent mode section, post, etc. The reflection coefficient
+  of that element has to be depended on a dimension parameter and vary in wide
+  range if the parameter changes. For example, for an iris such a parameter may
+  be width of the iris or its thickness. For inductive post it can be diameter
+  of the post or distance to the waveguide wall.<span style="mso-spacerun:
+  yes">  </span>Actually there is no limitation what kind of discontinuities
+  can be used to built a filter. It is just desirable to select all partial
+  elements from the same family.<span style="mso-spacerun: yes">  </span><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=669 colspan=4 valign=top style='width:501.75pt;border:solid #999999 4.5pt;
+  border-top:none;mso-border-top-alt:solid #999999 4.5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:#333399'>After those partial elements
+  (filter bricks) are specified, the parameter values providing the prototype
+  reflection values are to be found. To find those dimensions commercial
+  software may be used. For many cases engineering formulas given in <span
+  style="mso-spacerun: yes">   </span><a href="refere.htm"><span
+  style='color:#333399'>[1-4]</span></a> for stubs, posts and irises may be
+  used. The dimensions of each element (parameters) then may be found from a
+  tabulated function of <b>S<sub>11</sub>(</b></span><b><span style='font-family:
+  Symbol;color:#333399'>b</span><sub><span style='color:#333399'>0</span></sub><span
+  style='color:#333399'>,t)</span></b><span style='color:#333399'><span
+  style="mso-spacerun: yes">  </span>visually or using a numerical
+  approach.<span style="mso-spacerun: yes">  </span><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=395 colspan=3 valign=top style='width:296.55pt;border:solid #999999 4.5pt;
+  border-top:none;mso-border-top-alt:solid #999999 4.5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><!--[if gte vml 1]><v:shape id="_x0000_i1060" type="#_x0000_t75"
+   style='width:255.75pt;height:129.75pt' o:ole="">
+   <v:imagedata src="dirpr008.jpg" o:title=""/>
+  </v:shape><![endif]--><![if !vml]><img border=0 width=341 height=173
+  src="dirpr009.jpg" v:shapes="_x0000_i1060"><![endif]><!--[if gte mso 9]><xml>
+   <o:OLEObject Type="Embed" ProgID="PBrush" ShapeID="_x0000_i1060"
+    DrawAspect="Content" ObjectID="_1013955506">
+   </o:OLEObject>
+  </xml><![endif]--></p>
+  </td>
+  <td width=274 valign=top style='width:2.85in;border-top:none;border-left:
+  none;border-bottom:solid #999999 4.5pt;border-right:solid #999999 4.5pt;
+  mso-border-top-alt:solid #999999 4.5pt;mso-border-left-alt:solid #999999 4.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:#333399'>After the dimension of each
+  element is found, the distances between the elements can be also found.
+  Distance between any two elements is associated with the phases of their
+  reflection coefficients, ie<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:#333399'><!--[if gte vml 1]><v:shape
+   id="_x0000_i1061" type="#_x0000_t75" style='width:184.5pt;height:21pt'
+   o:ole="">
+   <v:imagedata src="dirpr010.gif" o:title=""/>
+  </v:shape><![endif]--><![if !vml]><img border=0 width=246 height=28
+  src="dirpr010.gif" v:shapes="_x0000_i1061"><![endif]><!--[if gte mso 9]><xml>
+   <o:OLEObject Type="Embed" ProgID="PBrush" ShapeID="_x0000_i1061"
+    DrawAspect="Content" ObjectID="_1013955507">
+   </o:OLEObject>
+  </xml><![endif]--><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:#333399'>where <b><i>n</i></b> is the
+  resonance number. This length is usually called as cavity length despite for
+  many structures, for example, evanescent mode ridged filter it may look like
+  an iris or post. <o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=198 rowspan=2 valign=top style='width:148.25pt;border:solid #999999 4.5pt;
+  border-top:none;mso-border-top-alt:solid #999999 4.5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">       
+  </span>subroutine Opti(Ns,N,fun,dx,x)<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">       
+  </span>real x(30),x0(30),Fx(30)<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">       
+  </span>external fun<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">        </span>do
+  istep=0,Ns<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">       
+  </span>F0=fun(N,x)<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">       
+  </span>print*, F0<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">       
+  </span>Fn=0.<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">        </span>do
+  i=1,N<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">       
+  </span>call Variation(N,i,dx,x,x0)<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">       
+  </span>Fx(i)=(fun(N,x0)-F0)/dx<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">       
+  </span>Fn=Fn+(Fx(i))**2<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">       
+  </span>enddo<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">       
+  </span>Fn=sqrt(Fn)<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">        </span>do
+  i=1,N<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">       
+  </span>x(i)=x(i)-Fx(i)/Fn*dx<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">       
+  </span>enddo<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">       
+  </span>enddo<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">       
+  </span>return<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">        </span>end<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td width=198 colspan=2 rowspan=2 valign=top style='width:148.3pt;border-top:
+  none;border-left:none;border-bottom:solid #999999 4.5pt;border-right:solid #999999 4.5pt;
+  mso-border-top-alt:solid #999999 4.5pt;mso-border-left-alt:solid #999999 4.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">       
+  </span>subroutine Variation(N,i,dx,x0,x1)<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">       
+  </span>real x0(30),x1(30)<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">        </span>do
+  j=1,N<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">       </span><span
+  style="mso-spacerun: yes"> </span>if(j.ne.i)then<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">       
+  </span>x1(j)=x0(j)<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">       
+  </span>else<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">       
+  </span>x1(j)=x0(j)+dx<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">       
+  </span>endif<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">       
+  </span>enddo<o:p></o:p></span></p>
+  <p class=MsoNormal style='text-align:justify'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt'><span style="mso-spacerun: yes">       
+  </span>return<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'><span
+  style="mso-spacerun: yes">        </span>end<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>Ns
+  is number of optimization steps,<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt'>N
+  is number of parameters, dx is increment, x is array of initial parameters
+  and fun(N,x) is the function to be optimized</span></p>
+  </td>
+  <td width=274 valign=top style='width:2.85in;border-top:none;border-left:
+  none;border-bottom:solid #999999 4.5pt;border-right:solid #999999 4.5pt;
+  mso-border-top-alt:solid #999999 4.5pt;mso-border-left-alt:solid #999999 4.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:#333399'>As the procedure is quite
+  approximate, the obtained structure needs tuning elements or to be verified
+  by an accurate software. Software based on mode-matching or integral equation
+  numerical methods are better for this purpose than any kind of “mesh”
+  software (<a href="softout.htm"><span style='color:#333399'>see Software
+  page</span></a>).<span style="mso-spacerun: yes">  </span>It is very likely
+  that the filter response will need some corrections. The procedure can be
+  repeated again and again until the filter roll-off and bandwidth are in right
+  place. The reflection ripple (return loss) may also need adjustment.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=274 valign=top style='width:2.85in;border-top:none;border-left:
+  none;border-bottom:solid #999999 4.5pt;border-right:solid #999999 4.5pt;
+  mso-border-top-alt:solid #999999 4.5pt;mso-border-left-alt:solid #999999 4.5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:#333399'>Commercial optimizers like
+  OSA-90 may be used to improve and equalize the filter’s return loss. The most
+  popular optimization techniques are MINIMAX and L2. These gradient methods
+  may be easy realized in FORTRAN code, if a commercial optimizer is not
+  available.<span style="mso-spacerun: yes">  </span>A simple optimization subroutine
+  is shown on left two cells of this table. <o:p></o:p></span></p>
+  </td>
+ </tr>
+ <![if !supportMisalignedColumns]>
+ <tr height=0>
+  <td width=198 style='border:none'></td>
+  <td width=9 style='border:none'></td>
+  <td width=188 style='border:none'></td>
+  <td width=274 style='border:none'></td>
+ </tr>
+ <![endif]>
+</table>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+</div>
+
+</body>
+
+</html>

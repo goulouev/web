@@ -1,0 +1,765 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 10">
+<meta name=Originator content="Microsoft Word 10">
+<link rel=File-List href="waffle_files/filelist.xml">
+<link rel=Edit-Time-Data href="waffle_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>Waffle-Iron Harmonic (Low-Pass) Filters</title>
+<!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:277495386;
+	mso-list-template-ids:-596316378;}
+@list l1
+	{mso-list-id:516775661;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-2136941678 67698703 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
+@list l1:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2
+	{mso-list-id:810445364;
+	mso-list-template-ids:1270612748;}
+@list l3
+	{mso-list-id:1348556025;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1387084084 67698703 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
+@list l3:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="6146"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body bgcolor=black lang=EN-US link=blue vlink=purple style='tab-interval:.5in'>
+<div class=Section1>
+
+<p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
+normal'><span style='font-size:14.0pt;font-family:Arial;color:#99CCFF'>Waffle-Iron
+Harmonic (Low-Pass) Filters<o:p></o:p></span></b></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-family:Arial;color:#99CCFF'>Where the spurious comes from<o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-size:10.0pt;font-family:Arial;color:#99CCFF'>By
+Rousslan A. Goulouev<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+
+<p class=MsoNormal align=center style='text-align:center'>
+<table border=0 width="100%"><tr>
+<td width=260>
+<table width=234 border=1><tr><td style=" text-align:justify; padding:5px">
+<FONT style="font:9pt Arial Black;color:#CCFF99;">
+<A HREF="../index.htm">Home Page</A> | <A HREF="../bookmark.htm">Site Map</A> | 
+</td></tr></table><br><br><br>
+
+<table width=234 border=1><tr><td style=" text-align:justify; padding:5px">
+<FONT style="font:9pt Arial Black;color:#CCFF99;">Historic Place !<br><br>
+<FONT style="font:9pt Arial;color:#99CCFF; text-align:justify">
+
+It was 264x60 Google AdSense banner here from 10/10/09 to 11/01/09.
+
+</td></tr></table><br>
+
+<table width=234 border=1><tr><td style=" text-align:justify; padding:5px">
+<FONT style="10pt Arial;color:#CCFF99;">
+<b>Do you know ?</b><br><br>
+<FONT style="font:9pt Arial;color:#99CCFF; text-align:justify">
+1. Waffle-iron filters can be often replaced with corrugated waveguide filters, which perform better.<br><br>
+2. Corrugated harmonic filter can be designed online using <A HREF="../connector/index.htm"> WR-Connect</A>.<br> 
+</td></tr></table>
+
+
+</td>
+<td width="410">
+<img width=403 height=337 src="waffle_files/image002.jpg">
+</td>
+<td width=270></td>
+</tr></table>
+</p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-family:Arial;color:#99CCFF'>Figure 1: Internal
+surface of a waffle-iron filter<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:14.0pt;font-family:Arial;color:#99CCFF'>Summary<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>The
+waffle-iron filter was firstly introduced by Cohn [1] in 1962. The conventional
+structure was represented as uniform two-dimensional periodic structure of
+rectangular teeth put into a waveguide and coupled with interface by E-plane
+stepped transformers. A design method based on representing the waffle iron
+structure as uniform waveguide was presented in [2]. Limited power handling is
+considered as major disadvantage of the waffle-iron filter of Cohn’s design. In
+addition to power handling limitation spurious spikes in pass-band, roll-off
+and stop-band are reported [3]. Those spikes are caused by excitation of
+waveguide modes of higher order, which are not taken into account in known
+design methods. Later modifications applied by Levy [4] and Sharp [5] do not
+considerably overcome those disadvantages.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:14.0pt;font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:14.0pt;font-family:Arial;color:#99CCFF'>Principles of
+Operation<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-family:Arial;color:#99CCFF'><!--[if gte vml 1]><v:shape id="_x0000_i1026"
+ type="#_x0000_t75" style='width:329.25pt;height:222pt'>
+ <v:imagedata src="waffle_files/image003.jpg" o:title="wav_n1"/>
+</v:shape><![endif]--><![if !vml]><img width=439 height=296
+src="waffle_files/image003.jpg" v:shapes="_x0000_i1026"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-family:Arial;color:#99CCFF'>Figure 2: Top and side
+view of classic waffle-iron structure<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>The
+waffle-iron filter is based on two-dimensional slow-wave delay structure of
+rectangular teeth mounted on wide walls of rectangular waveguide and matched
+with external waveguide line by quarter-wave stepped transformers. Propagation
+in “waffle-iron” section can be described by two orthogonal wave numbers </span><i
+style='mso-bidi-font-style:normal'><span style='font-family:Arial;color:#FFFF99'>k<sub>x</sub></span></i><span
+style='font-family:Arial;color:#99CCFF'> (transverse) and </span><i
+style='mso-bidi-font-style:normal'><span style='font-family:Arial;color:#FFFF99'>k<sub>y</sub></span></i><span
+style='font-family:Arial;color:#99CCFF'> (longitudinal) as functions of wave
+number in space (</span><i style='mso-bidi-font-style:normal'><span
+style='font-family:Arial;color:#FFFF99'>k</span></i><span style='font-family:
+Arial;color:#99CCFF'>). Then cut-off frequency of quasi-TE<sub>nm</sub> mode
+corresponding to “waffle-iron” waveguide (waveguide of cross-section shown on
+Figure 2 (left)) can be expressed<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><i style='mso-bidi-font-style:normal'><span
+style='font-family:Arial;color:#FFFF99'>kc<sub>TEnm</sub> = m-th root(k<sub>x</sub>(k)-n&#960;/Ax).</span></i><span
+style='font-family:Arial;color:#99CCFF'><span
+style='mso-spacerun:yes'>                  </span>(1)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>Here </span><i
+style='mso-bidi-font-style:normal'><span style='font-family:Arial;color:#FFFF99'>k<sub>x</sub></span></i><span
+style='font-family:Arial;color:#99CCFF'> is propagation number corresponding to
+one-dimensional periodic corrugated structure (vane-type, or corrugated plane)
+forming waffle-iron on x-direction. It is known that transmission through the
+corrugated plane structure turns to zero and “the first cutoff occurs
+approximately when the stub becomes resonant, i.e. </span><i style='mso-bidi-font-style:
+normal'><span style='font-family:Arial;color:#FFFF99'>k(B-b)=&#960;/2</span></i><span
+style='font-family:Arial;color:#99CCFF'>” [6].<span style='mso-spacerun:yes'> 
+</span>Simple analysis shows that quasi-TE<sub>no</sub>-mode with </span><i
+style='mso-bidi-font-style:normal'><span style='font-family:Arial;color:#FFFF99'>n
+&lt; ½ Ax/(B-b)</span></i><span style='font-family:Arial;color:#99CCFF'> has
+lower cut-off frequency than prototype TE<sub>no</sub>-mode of rectangular
+waveguide and quasi-TE<sub>no</sub>-mode with </span><i style='mso-bidi-font-style:
+normal'><span style='font-family:Arial;color:#FFFF99'>n &gt; ½ A<sub>x</sub>/(B-b)</span></i><span
+style='font-family:Arial;color:#99CCFF'> has higher cut-off frequency than
+prototype TE<sub>no</sub>-mode of rectangular waveguide. This is basic idea of
+operation of waffle-iron filter is based on moving the spurious pass-bands of
+equivalent corrugated filter (same filter without longitudinal slots) up or down
+from the design stop-band. If the spurious moves higher than stop-band
+(condition </span><i style='mso-bidi-font-style:normal'><span style='font-family:
+Arial;color:#FFFF99'>n &gt; ½ A<sub>x</sub>/(B-b)</span></i><span
+style='font-family:Arial;color:#99CCFF'>), it is OK. If the spurious moves
+lower than stop-band (condition </span><i style='mso-bidi-font-style:normal'><span
+style='font-family:Arial;color:#FFFF99'>n &lt; ½ Ax/(B-b)</span></i><span
+style='font-family:Arial;color:#99CCFF'>), it seams to be also OK because the
+spurious modes cannot be theoretically excited (prototype TEno-mode is
+evanescent in transformers and interface waveguides [1,2,5]). <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:14.0pt;font-family:Arial;color:#99CCFF'>Closed Modes<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>Assuming the
+spurious modes TE<sub>no</sub> (</span><i style='mso-bidi-font-style:normal'><span
+style='font-family:Arial;color:#FFFF99'>n&gt;1</span></i><span
+style='font-family:Arial;color:#99CCFF'>) being shorted at transformer apertures
+we can apply similar approach for evaluation of spectrum of their resonances and
+obtain the following expression<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><i style='mso-bidi-font-style:normal'><span
+style='font-family:Arial;color:#FFFF99'>k<sub>xynm</sub> = (k<sub>xn</sub><sup>2</sup>+k<sub>ym</sub><sup>2</sup>)
+<sup>½</sup> ,</span></i><span style='font-family:Arial;color:#99CCFF'><span
+style='mso-spacerun:yes'>                                     </span>(2)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>Where </span><i
+style='mso-bidi-font-style:normal'><span style='font-family:Arial;color:#FFFF99'>k<sub>xynm</sub>
+</span></i><span style='font-family:Arial;color:#99CCFF'>is plurality of wave
+numbers corresponding to modes with transverse and longitudinal resonant
+numbers n and m, and<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><i style='mso-bidi-font-style:normal'><span
+style='font-family:Arial;color:#FFFF99'>k<sub>xn</sub> = roots(k<sub>x</sub>(k)-n&#960;/Ax),</span></i><span
+style='font-family:Arial;color:#99CCFF'><span
+style='mso-spacerun:yes'>                                </span>(3)<o:p></o:p></span></p>
+
+<p class=MsoNormal><i style='mso-bidi-font-style:normal'><span
+style='font-family:Arial;color:#FFFF99'>k<sub>ym</sub>= roots(k<sub>y</sub>(k)-m&#960;/Ay).<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>The resonances
+can be computed for two-dimensional periodic waffle-iron structure using simple
+mode-matching procedure presented in [8]. <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:14.0pt;font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:14.0pt;font-family:Arial;color:#99CCFF'>Corrugated Filter<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>In case of
+periodic corrugated structure, when </span><i style='mso-bidi-font-style:normal'><span
+style='font-family:Arial;color:#FFFF99'>k<sub>xn</sub> = n&#960;/Ax</span></i><span
+style='font-family:Arial;color:#99CCFF'>, spurious resonances are grouped into
+separate frequency bands representing TE<sub>no</sub>-modes (</span><span
+style='font-family:Arial;color:#FFFF99'>n=2,3,4,..</span><span
+style='font-family:Arial;color:#99CCFF'>) (see Figure 3) well known as
+“spurious responses” [4] (see more in [7]).<span style='mso-spacerun:yes'> 
+</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-family:Arial;color:#99CCFF'><!--[if gte vml 1]><v:shape id="_x0000_i1027"
+ type="#_x0000_t75" style='width:311.25pt;height:135pt'>
+ <v:imagedata src="waffle_files/image004.jpg" o:title="spur_cn"/>
+</v:shape><![endif]--><![if !vml]><img width=415 height=180
+src="waffle_files/image004.jpg" v:shapes="_x0000_i1027"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-family:Arial;color:#99CCFF'>Figure 3: Layout of
+spurious resonances on frequency axis for a Ku-band corrugated filter<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:14.0pt;font-family:Arial;color:#99CCFF'>Waffle-Iron Filter<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>In case of
+two-dimensional periodic waffle-iron structure, spurious resonances are grouped
+into two frequency bands representing lower quasi-TE<sub>no</sub>-modes (</span><i
+style='mso-bidi-font-style:normal'><span style='font-family:Arial;color:#FFFF99'>n=2,3,4,..,Nc</span></i><span
+style='font-family:Arial;color:#99CCFF'>) and higher quasi-TE<sub>no</sub>-modes
+(</span><i style='mso-bidi-font-style:normal'><span style='font-family:Arial;
+color:#FFFF99'>n=Nc, Nc+1,…</span></i><span style='font-family:Arial;
+color:#99CCFF'>) ( </span><i style='mso-bidi-font-style:normal'><span
+style='font-family:Arial;color:#FFFF99'>Nc=int{½ Ax/(B-b)}</span></i><span
+style='font-family:Arial;color:#99CCFF'> ) separated by blank zone with no
+resonances (see Figure 4).<span style='mso-spacerun:yes'>  </span>It can be
+noted that longitudinal slots have not removed the spurious shown on Figure 3
+but moved it left or right. It can be also noted that the lower spurious
+resonances have moved to the pass-band and roll-off zones of the filter.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-family:Arial;color:#99CCFF'><!--[if gte vml 1]><v:shape id="_x0000_i1028"
+ type="#_x0000_t75" style='width:307.5pt;height:129.75pt'>
+ <v:imagedata src="waffle_files/image005.jpg" o:title="spur_wn"/>
+</v:shape><![endif]--><![if !vml]><img width=410 height=173
+src="waffle_files/image005.jpg" v:shapes="_x0000_i1028"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-family:Arial;color:#99CCFF'>Figure 4: Layout of
+spurious resonances on frequency axis for a Ku-band waffle-iron filter (the
+same corrugated structure longitudinally slotted)<o:p></o:p></span></i></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:14.0pt;font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:14.0pt;font-family:Arial;color:#99CCFF'>Spikes in Pass-Band<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>In accordance
+with basic theory of waffle-iron filters [1,2,6] the resonances should not be
+excited because of two reasons;<o:p></o:p></span></p>
+
+<ol style='margin-top:0in' start=1 type=1>
+ <li class=MsoNormal style='color:#99CCFF;mso-list:l3 level1 lfo3;tab-stops:
+     list .5in'><span style='font-family:Arial'>A spurious mode TE<sub>no</sub>
+     capable to generate any of lower resonances (Figure 4) is evanescent in
+     transformers and input/output rectangular waveguides. <o:p></o:p></span></li>
+ <li class=MsoNormal style='color:#99CCFF;mso-list:l3 level1 lfo3;tab-stops:
+     list .5in'><span style='font-family:Arial'>The dominant mode TE<sub>10</sub>
+     cannot couple with any of lower resonances because its symmetry order is
+     different. <o:p></o:p></span></li>
+</ol>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>Practically
+any of the spurious resonances can be easy excited by coupling with the
+dominant mode (TE<sub>10</sub>) caused by practical asymmetry (tolerances,
+offset, shift, etc.). The resonances having odd n-index greater than 1 (</span><i
+style='mso-bidi-font-style:normal'><span style='font-family:Arial;color:#FFFF99'>3,5,…</span></i><span
+style='font-family:Arial;color:#99CCFF'>) can be directly coupled with TE<sub>10</sub>-mode
+and excited if even the filter is built ideally. If excited, the spurious
+resonances can cause spikes in frequency response similar to shown on Figure
+5.<span style='mso-spacerun:yes'>   </span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-family:Arial;color:#99CCFF'><!--[if gte vml 1]><v:shape id="_x0000_i1029"
+ type="#_x0000_t75" style='width:342pt;height:378pt'>
+ <v:imagedata src="waffle_files/image006.jpg" o:title="wn2"/>
+</v:shape><![endif]--><![if !vml]><img width=456 height=504
+src="waffle_files/image007.jpg" v:shapes="_x0000_i1029"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-family:Arial;color:#99CCFF'>Figure 5: Spike of
+spurious quasi-TE<sub>40</sub>-mode in pass-band of a Ku-band waffle-iron
+filter caused by tolerances<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:14.0pt;font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:14.0pt;font-family:Arial;color:#99CCFF'>Spikes in Stop-Band<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>Spurious
+responses can appear in design stop-band, if cut-off frequency of at least one
+spurious mode (1) resides there. The amplitude and bandwidth of such spurious
+will depend on asymmetry of structure or existence of the prototype mode in the
+interface waveguides. The nature of the spurious is similar to spurious
+pass-bands of a corrugated filter, which are images of the pass-band of the
+dominant mode (see [7] for more information). Therefore it is theoretically
+impossible to design a spurious-less waffle-iron filter. However it might be
+possible to move the spurious out of spec bands. <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-family:Arial;color:#99CCFF'><!--[if gte vml 1]><v:shape id="_x0000_i1030"
+ type="#_x0000_t75" style='width:398.25pt;height:283.5pt'>
+ <v:imagedata src="waffle_files/image008.jpg" o:title="wn3"/>
+</v:shape><![endif]--><![if !vml]><img width=531 height=378
+src="waffle_files/image009.jpg" v:shapes="_x0000_i1030"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-family:Arial;color:#99CCFF'>Figure 6: Spike of
+spurious mode (likely quasi-TE<sub>20</sub>) in pass-band of a C-band
+waffle-iron filter [3]<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:14.0pt;font-family:Arial;color:#99CCFF'>Peak Power Handling<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>As the
+stop-bandwidth (see Figure 4) directly depends on “slowness” of waffle-iron
+structure in two directions, the gap (</span><i style='mso-bidi-font-style:
+normal'><span style='font-family:Arial;color:#FFFF99'>b</span></i><span
+style='font-family:Arial;color:#99CCFF'> for asymmetric filters and </span><i
+style='mso-bidi-font-style:normal'><span style='font-family:Arial;color:#FFFF99'>2b</span></i><span
+style='font-family:Arial;color:#99CCFF'> for vertically symmetric filters) must
+be very small in order to move the spectrum of spurious resonances (see Figure
+4) below the design stop-band and/or reduce margin between pass-band and
+stop-band. For example for the Ku-band waffle-iron filter (see Figure 4)
+designed for pass-band 13.5 – 14.5 GHz and stop-band 17 – 33 GHz, the gap
+dimension cannot be chosen greater than 0.03’’ (</span><i style='mso-bidi-font-style:
+normal'><span style='font-family:Arial;color:#FFFF99'>b&lt;0.018&#955;</span></i><span
+style='font-family:Arial;color:#99CCFF'> or </span><i style='mso-bidi-font-style:
+normal'><span style='font-family:Arial;color:#FFFF99'>2b&lt;0.036&#955;</span></i><span
+style='font-family:Arial;color:#99CCFF'>). Besides to small “voltage gap”,
+smallness and sharpness of teeth also increase the maximum value of strength of
+electrical field in several times relatively to equivalent plane waveguide
+having the same gap dimension. Therefore the waffle-iron filter cannot be used
+in multi-carrier space applications, because of very low peak power handling
+capacity.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:14.0pt;font-family:Arial;color:#99CCFF'>Production Sensitivity<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>As the gap
+dimension is small, it can be practically very difficult to keep its uniformity
+over the waffle-iron structure. Even small tolerance +/-0.001’’ randomly
+applied to teeth can significantly worsen VSWR (return loss) for Ku-band and
+Ka-band filters, as it is large relatively to tiny dimensions. In addition to
+degrading pass-band so usual for all type of filters, the random tolerances can
+cause spurious spikes in pass-band (see Figure 5) by exciting “high Q”
+resonances of closed odd modes (see Figure 4). The resonances can be also
+caused by other nature of asymmetry (for example twisting, offsetting,
+deformation, temperature expansion, mechanical tension, etc.)<span
+style='mso-spacerun:yes'>    </span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:14.0pt;font-family:Arial;color:#99CCFF'>Design Methods<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>The known
+design methods based on synthesis of equivalent periodic waveguide [2] or
+distributed circuit [4] taking into account only the dominant mode.
+Nevertheless, analysis of spurious modes is much more sophisticated than in
+case of corrugated filters. The analysis must include:<o:p></o:p></span></p>
+
+<ol style='margin-top:0in' start=1 type=1>
+ <li class=MsoNormal style='color:#99CCFF;mso-list:l1 level1 lfo6;tab-stops:
+     list .5in'><span style='font-family:Arial'>Solving problem of eigen modes
+     of waffle-iron waveguide in order to make sure no spurious mode has
+     cut-off frequency in spec bands.<o:p></o:p></span></li>
+ <li class=MsoNormal style='color:#99CCFF;mso-list:l1 level1 lfo6;tab-stops:
+     list .5in'><span style='font-family:Arial'>Computing and analyzing
+     frequency responses corresponding to other TE<sub>no</sub>-modes. <o:p></o:p></span></li>
+ <li class=MsoNormal style='color:#99CCFF;mso-list:l1 level1 lfo6;tab-stops:
+     list .5in'><span style='font-family:Arial'>Performing detailed sensitivity
+     analysis simulating effect of random and worst case (+/-) tolerances
+     applied to heights and positions of teeth of waffle-iron structure. <o:p></o:p></span></li>
+ <li class=MsoNormal style='color:#99CCFF;mso-list:l1 level1 lfo6;tab-stops:
+     list .5in'><span style='font-family:Arial'>Testing for spurious modes [ 9
+     ].<span style='mso-spacerun:yes'>   </span><o:p></o:p></span></li>
+</ol>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:14.0pt;font-family:Arial;color:#99CCFF'>Fixing Spurious
+Problems<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>It is
+theoretically impossible to fix spurious spikes and responses (Figure 6) in
+stop-band of waffle-iron filter without significant modifications of basic
+structure of the filter. However, the spurious can be reduced or even
+eliminated by changing the system outside the filter and reducing presence of
+the spurious modes. For example, removing “asymmetric” components (H-plane
+bends, twists, etc.) and making the system symmetric eliminates excitation of
+odd waveguide modes causing the spurious spikes. However, the spikes of
+pass-band (Figure 5) might be reduced by using more accurate manufacturing
+methods. Sometimes, the spurious caused by quasi-TE20-mode can be fixed by two
+offset tuning screws. Although the fixing methods listed above do not seem to
+be much useful - there is no a good way to fix a bad thing, except creating
+a good thing.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:14.0pt;font-family:Arial;color:#99CCFF'>Possible Design Replacement<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>
+
+A bi-corrugated [10,12] or inhomogeneous stepped-Impedance corrugated filter [11] can be a better
+ design solution because of not having the in-band spurious problems
+ and being more predictable for the out-of-band spurs. The design process is also straight forward
+  and simple, if using right software (see <A HREF="../connector/index.htm">WR-Connect page</A>) 
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:14.0pt;font-family:Arial;color:#99CCFF;mso-bidi-font-weight:
+bold'>References</span><span style='font-size:14.0pt;font-family:Arial;
+color:#99CCFF'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>[1] S.B. Cohn,
+US Patent 3,046,503, July 1962<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>[2] C.G.
+Matthaei, L. Young, and E. M. T. Jones, “Microwave Filters, Impedance Matching
+Networks, and Coupling Structures”, New York, McGraw-Hill, 1964. <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>[3] J.
+Rodgers, Y. Carmel, P. O’Shea “Electromagnetic Effects on Integrated Circuits
+and Systems at Microwave Frequencies”, Institute for Research in Electronics
+and Applied Physics, University of Maryland, 2001<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>[4] Ralph
+Levy, “Aperiodic Tapered Corrugated Waveguide Filter”, US Patent 3,597,710,
+Nov. 28, 1969.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>[5] E.D. Sharp
+“A High-Power Wide-Band Waffle-Iron Filter”, IEEE, Trans. Microwave Theory and
+Tech., March, 1963, pp. &nbsp;[2] R. Levy “Tapered Corrugated Waveguide
+Low-Pass Filter”, IEEE Trans. Microwave Theory Tech., MTT-21, August 1973, pp.
+526-532.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>[6] R.E.
+Collin “Foundation for microwave engineering”, McGRAW-Hill, 1966<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>[7] R. A.
+Goulouev “<a href="../oncorr/index.htm">Corrugated Low-Pass Filter Design
+Workshop</a>”, Online Resources, www.goulouev.com,
+2002.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>[8] R. A.
+Goulouev “<a href="new_w6.htm">Waffle-iron Filter. Analysis of Spurious.</a>”,
+Online Resources, www.goulouev.com, 2004.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>[9] R. A.
+Goulouev “<a href="meas_hrm.htm">Harmonic Rejection Test Procedure</a>”, Online
+Resources, www.goulouev.com, 2001<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>[10] W. Hauth, R. Keller, U. Rosenberg,
+ "The Corrugated-Waveguide Band-Pass Filter - A New Type of Waveguide Filter", 18th EUMC Proc., Stockholm, 1988, pp. 945-949.
+ <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>[11] R. Levy, "Inhomogeneous Stepped-Impedance Corrugated
+ Waveguide Low-Pass Filters", Microwave Symposium Digest, 2005 IEEE MTT-S International Volume,
+ Issue , 12-17 June 2005 Page(s): 4 pp.
+ <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>[12] R. A.
+Goulouev “<a href="../structures/newfil.htm">Broad Wall Stepped Corrugated Filters. Typical Performance.</a>”,
+Online Resources, www.goulouev.com, 2006.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;color:#99CCFF'>&nbsp;<o:p></o:p></span></p>
+
+</div>
+
+</body>
+
+
+</html>

@@ -1,0 +1,112 @@
+<HTML>
+<HEAD>
+  <meta http-equiv="x-ua-compatible" content="IE=5"></meta>
+<TITLE>RF Mismatch Ripple and Spurious Spikes Calculator</TITLE>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META NAME="keywords" CONTENT="spurious response, spurious spike, RF microwave filters, stop-band, standing wave, calculator, mismatch, ripple, rejection, evaluate, calculate">
+<META NAME="description" CONTENT="The spurious response calculator helps to evaluate stop-band spurious effects when two RF/microwave filters are connected.">
+<META name="Author" content="Rousslan Goulouev">
+<META name="Generator" content="Microsoft ActiveX Pad">
+</HEAD>
+<BODY BACKGROUND=bkg03.jpg LEFTMARGIN=0 TOPMARGIN=0><CENTER>
+<BUTTON NAME=command1 FONT STYLE="font:8pt Arial Black; color:navy"> Calculate</BUTTON>
+<BUTTON Name=Exam0 FONT STYLE="font:8pt Arial Black; color:navy">Example #1</BUTTON>
+<BUTTON Name=Exam1 FONT STYLE="font:8pt Arial Black; color:navy">Example #2</BUTTON>
+<BUTTON OnClick=StepUp(0) FONT STYLE="font:8pt Arial Black; color:navy">Exit Up</BUTTON>
+<BR><HR>
+<FONT STYLE="font:10pt Arial Black; color:magenta"><i>RF Mismatch Ripple and Spurious Spikes Calculator
+
+
+<TABLE BORDER=1>
+
+<TR>
+<TD><CENTER><FONT STYLE="font:8pt Arial; color:navy"><B>
+Enter Transmission of 1st Device [dB]
+<TD><INPUT NAME=tr0 TYPE=text STYLE="font:8pt Arial Black; color:navy" size=33></TD>
+</TR>
+<TD><CENTER><FONT STYLE="font:8pt Arial; color:navy"><B>
+Enter Transmission of 2nd Device [dB]
+<TD><INPUT NAME=tr1 TYPE=text STYLE="font:8pt Arial Black; color:navy" size=33></TD>
+</TR>
+<TD><CENTER><FONT STYLE="font:8pt Arial; color:navy"><B>
+Enter Quality Factor of Connection
+<TD><INPUT NAME=qfactor TYPE=text STYLE="font:8pt Arial Black; color:navy" size=33></TD>
+</TR>
+
+<TR>
+<TD><CENTER><FONT STYLE="font:8pt Arial; color:navy"><B>
+Minimum/Maximum Transmission [dB]</TD>
+<TD><INPUT NAME=reso TYPE=text STYLE="font:8pt Arial Black; color:navy" size=33 READONLY></TD>
+</TR>
+</TABLE>
+
+
+<FONT STYLE="font:9pt Arial;color:navy"><i>&#169 R. Goulouev, 20.10.2007</I></FONT>
+<BR>
+<HR><BR><TABLE BORDER=0><TR><TD WIDTH=800>
+<FONT STYLE="font:12pt Arial Black;color:#404000"><CENTER>
+What is that?</FONT><BR><BR></CENTER>
+<FONT STYLE="font:10pt Arial Black;color:#400040">
+
+Mismatch spikes are typical spurious responses, which often occur in filter assemblies. This kind of spurious is usually caused by standing wave in transmission lines connecting reflective devices (usually rejective filters). The amplitude of the spikes over the frequency scale depends of reflection properties of the devices and electrical length between them. This simple tool helps to evaluate the "best" and "worse" cases of the spurious.<BR><BR></FONT>
+
+<CENTER><FONT STYLE="font:12pt Arial Black;color:#404000">Example</FONT><BR><BR>
+</FONT><FONT STYLE="font:10pt Arial Black;color:#400040">
+<IMG SRC=pic_02.jpg><BR>
+Filter #1: Transmission & Reflection (dB) versus Frequency (GHz) Characteristics<BR>
+<IMG SRC=pic_03.jpg><BR>
+Filter #2: Transmission & Reflection (dB) versus Frequency (GHz) Characteristics<BR>
+<IMG SRC=pic_01.jpg><BR>
+Filter #1 connected to Filter #2: Transmission & Reflection (dB) versus Frequency (GHz) Characteristics<BR>
+</TD></TR></TABLE>
+
+</BODY>
+
+<SCRIPT LANGUAGE=VBScript>
+
+Sub StepUp(ind)
+window.navigate "../studio.htm"
+End Sub
+
+Private Sub Exam0_OnClick()
+tr0.value="-52.0"
+tr1.value="-21.0"
+qfactor.value="5000"
+end sub
+
+Private Sub Exam1_OnClick()
+tr0.value="-42.0"
+tr1.value="-3.0"
+qfactor.value="5000"
+end sub
+
+Private Sub Command1_OnClick()
+if isnumeric(tr0.value) then
+ T0=-abs(tr0.value)
+ else
+msgbox "the data entered for 1s device transmission"&chr(13)&chr(10)&" IS NOT NUMERIC !"&chr(13)&chr(10)&chr(13)&chr(10)&" Please check the number."
+exit sub
+end if
+
+if isnumeric(tr1.value) then
+ T1=-abs(tr1.value)
+ else
+msgbox "the data entered for 2nd device transmission"&chr(13)&chr(10)&" IS NOT NUMERIC !"&chr(13)&chr(10)&chr(13)&chr(10)&" Please check the number."
+exit sub
+end if
+
+if isnumeric(qfactor.value) then
+ Q=abs(qfactor.value) 
+else 
+Q=1.0e10
+qfactor.value=Q 
+end if
+TspMin=SpikeMin(T0,T1,Q)
+TspMax=SpikeMax(T0,T1,Q)
+reso.value= formatnumber(TspMin,4)& "  /  " & formatnumber(TspMax,4)
+End Sub
+
+</SCRIPT>
+
+<SCRIPT LANGUAGE=VBScript SRC=connect.vbs>
+</SCRIPT>

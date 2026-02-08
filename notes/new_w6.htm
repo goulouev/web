@@ -1,0 +1,590 @@
+<html xmlns:mcd="urn:schemas-mathsoft-com:mathcad">
+<head>
+<meta http-equiv="Content-Type" content="text/html"></meta>
+<meta name=Generator content="Mathcad Professional"></meta>
+<meta name=ProgID content="Mathcad"></meta>
+<META NAME="keywords" CONTENT="waveguide, harmonic, low-pass, corrugated, filter, millimeter, wave, GHz, microwave,  E-plane, spurious, powerful, design, noval, invention, waffle-iron">
+<META NAME="description" CONTENT="R. Goulouev: MathCAD article with analysis of in-band spurious responses in filters based on waffle-iron structures. ">
+<title>Waffle Iron Harmonic Waveguide Filter, Analysis of Spurious</title>
+<style type="text/css">
+body { background : #ffffff }
+.Normal { font-family:Arial,sans-serif; font-size:10pt }
+.Heading_1 { font-family:Arial,sans-serif; font-size:14pt
+; font-weight:bold }
+.Heading_2 { font-family:Arial,sans-serif; font-size:12pt
+; font-weight:bold; font-style:italic }
+.Heading_3 { font-family:Arial,sans-serif; font-size:12pt }
+.Paragraph { font-family:Arial,sans-serif; font-size:10pt
+; text-indent:28px }
+.List { font-family:Arial,sans-serif; font-size:10pt; margin-left:19px
+; text-indent:-19px }
+.Indent { font-family:Arial,sans-serif; font-size:10pt; margin-left:
+144px }
+.Title { font-family:Times New Roman,sans-serif; font-size:24pt
+; font-weight:bold; text-align:center }
+.Subtitle { font-family:Times New Roman,sans-serif; font-size:18pt
+; text-align:center }
+</style>
+<script id="clientEventHandlersJS" language="javascript">
+<!--
+//-->
+</script>
+</head>
+<body 
+mcd:mathfonts="id:0;name:Variables;face:Times New Roman;size:10;bold:0;ital:0;ul:0;cid:-1
+id:1;name:Constants;face:Times New Roman;size:10;bold:0;ital:0;ul:0;cid:-1
+id:2;name:Text;face:Arial;size:10;bold:0;ital:0;ul:0;cid:-1
+id:4;name:User 1;face:Arial;size:10;bold:0;ital:0;ul:0;cid:-1
+id:5;name:User 2;face:Courier New;size:10;bold:0;ital:0;ul:0;cid:-1
+id:6;name:User 3;face:Arial;size:10;bold:1;ital:0;ul:0;cid:-1
+id:7;name:User 4;face:Times New Roman;size:10;bold:0;ital:1;ul:0;cid:-1
+id:8;name:User 5;face:Times New Roman;size:10;bold:0;ital:0;ul:0;cid:-1
+id:9;name:User 6;face:Arial;size:10;bold:0;ital:0;ul:0;cid:-1
+id:10;name:User 7;face:Times New Roman;size:10;bold:0;ital:0;ul:0;cid:-1"
+mcd:numberformat=""
+mcd:displayoptions=""
+mcd:unitformat="format:true;simplify:true"
+mcd:tolerance=""
+mcd:builtinvars="origin:0"
+mcd:calcoptions="auto:true;optimize:false;strict:true"
+mcd:mathdisplay="mult:7;deriv:deriv;litsub:small;define:colon;globeq:triple;local:arrow;equal:bold"
+mcd:unitsystem="default:4"
+mcd:dimnames="display:false;mass:mass;length:length;time:time;current:charge;temp:temperature;lum:luminosity;subst:substance"
+mcd:docprops="lrtag:273;lhbtag:273;status:8201;delorig:1;deluser:1;cp:1;cc:1;cs:1"
+mcd:ruler="visible:0;units:0"
+mcd:derivopts="ip:0;sc:0;dv:1;os:1"
+mcd:doccolors="eq:#000000;bg:#ffffff;rg:#ffff80"
+mcd:grfxy="0 1 1 21 15 0 0 3 0 "
+mcd:xaxisxy="0 0 1 1 1 0 0 1 1 "
+mcd:yaxisxy="0 0 1 1 1 0 0 1 1 "
+mcd:tracesxy="0 1 0 0 1 1 
+0 2 1 0 1 1 
+0 3 2 0 1 1 
+0 4 3 0 1 1 
+0 1 4 0 1 1 
+0 2 5 0 1 1 
+0 3 6 0 1 1 
+0 4 0 0 1 1 
+0 1 1 0 1 1 
+0 2 2 0 1 1 
+0 3 3 0 1 1 
+0 4 4 0 1 1 
+0 1 5 0 1 1 
+0 2 6 0 1 1 
+0 3 0 0 1 1 
+0 4 1 0 1 1 "
+>
+<div mcd:region="TXT" 
+mcd:properties=""
+mcd:textproperties=""
+mcd:alignx="217" mcd:aligny="16" 
+ style ="position:absolute;top:-1;left:200;width:232">
+<layer width=232>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+<comment mcd:chrprop="size:14;color:#000080"></comment><font size="4"color="#000080">Waffle-iron Waveguide Filter <comment mcd:chrprop="size:10;color:"></comment></font></font>
+</layer>
+</div>
+<div mcd:region="TXT" 
+mcd:properties=""
+mcd:textproperties=""
+mcd:alignx="287" mcd:aligny="40" 
+ style ="position:absolute;top:27;left:264;width:119">
+<layer width=119>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+<comment mcd:chrprop="color:#000080;ital:1"></comment><font color="#000080"><i>Analysis of Spurious<comment mcd:chrprop="color:;ital:0"></comment></i></font></font>
+</layer>
+</div>
+<div mcd:region="TXT" 
+mcd:properties=""
+mcd:textproperties=""
+mcd:alignx="261" mcd:aligny="64" 
+ style ="position:absolute;top:51;left:256;width:158">
+<layer width=158>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+<a href="http://www.goulouev.com">
+<comment mcd:chrprop="bold:1;undr:1"></comment><b><u>by Rousslan A. Goulouev<comment mcd:chrprop="bold:0;undr:0"></comment></u></b></a>
+</font>
+</layer>
+</div>
+<div mcd:region="TXT" 
+mcd:properties=""
+mcd:textproperties=""
+mcd:alignx="109" mcd:aligny="104" 
+ style ="position:absolute;top:89;left:96;width:427">
+<layer width=427>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+<comment mcd:chrprop="size:12;color:#008000;bold:1"></comment><font size="3"color="#008000"><b>To compute you need to <comment mcd:chrprop="size:10;color:;bold:0"></comment></b></font><a href="new_w6.zip" onmouseover="window.status='download MathCAD document from here';return true;" onmouseout="window.status='';return true">
+<comment mcd:chrprop="bold:1;undr:1"></comment><b><u>download<comment mcd:chrprop="bold:0;undr:0"></comment></u></b></a>
+<comment mcd:chrprop="size:12;color:#008000;bold:1"></comment><font size="3"color="#008000"><b> MathCAD spreadsheet<comment mcd:chrprop="size:10;color:;bold:0"></comment></b></font></font>
+</layer>
+</div>
+<div mcd:region="TXT" 
+mcd:properties=""
+mcd:textproperties=""
+mcd:alignx="67" mcd:aligny="144" 
+ style ="position:absolute;top:131;left:56;width:518">
+<layer width=518>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+This spreadsheet is to evaluate spectrum of spurious resonances, which can possibly occur in waffle-iron harmonic filter and cause parasitic transmission in pass-band or roll-off<br></font>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+of the filter. (See notes on bottom)</font>
+</layer>
+</div>
+<div mcd:region="TXT" 
+mcd:properties=""
+mcd:textproperties=""
+mcd:alignx="10" mcd:aligny="200" 
+ style ="position:absolute;top:187;left:8;width:560">
+<layer width=560>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+<comment mcd:chrprop="color:#000080"></comment><font color="#000080">################################################################################<comment mcd:chrprop="color:"></comment></font></font>
+</layer>
+</div>
+<div mcd:region="OLEREGION" mcd:properties=""
+ style ="position:absolute;top:216;left:64">
+<layer >
+<img src="./new_w6_images/IMG0313.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="TXT" 
+mcd:properties=""
+mcd:textproperties=""
+mcd:alignx="8" mcd:aligny="536" 
+ style ="position:absolute;top:523;left:8;width:560">
+<layer width=560>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+<comment mcd:chrprop="color:#000080"></comment><font color="#000080">################################################################################<comment mcd:chrprop="color:"></comment></font></font>
+</layer>
+</div>
+<div mcd:region="TXT" 
+mcd:properties=""
+mcd:textproperties=""
+mcd:alignx="38" mcd:aligny="560" 
+ style ="position:absolute;top:547;left:24;width:372">
+<layer width=372>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+<comment mcd:chrprop="color:#000080;bold:1"></comment><font color="#000080"><b>Enter dimensions and parameters of &quot;waffle-iron&quot; structure<comment mcd:chrprop="color:;bold:0"></comment></b></font></font>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:587;left:16">
+<layer >
+<img src="./new_w6_images/IMG0136.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:587;left:128">
+<layer >
+<img src="./new_w6_images/IMG0137.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:588;left:256">
+<layer >
+<img src="./new_w6_images/IMG0314.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="TXT" 
+mcd:properties=""
+mcd:textproperties=""
+mcd:alignx="344" mcd:aligny="600" 
+ style ="position:absolute;top:587;left:336;width:194">
+<layer width=194>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+(Enter 0 for mm and 1 for inches) </font>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:628;left:16">
+<layer >
+<img src="./new_w6_images/IMG0138.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:628;left:80">
+<layer >
+<img src="./new_w6_images/IMG0315.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:628;left:232">
+<layer >
+<img src="./new_w6_images/IMG0139.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:628;left:328">
+<layer >
+<img src="./new_w6_images/IMG0140.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:628;left:424">
+<layer >
+<img src="./new_w6_images/IMG0141.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:659;left:16">
+<layer >
+<img src="./new_w6_images/IMG0316.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:659;left:136">
+<layer >
+<img src="./new_w6_images/IMG0317.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:660;left:304">
+<layer >
+<img src="./new_w6_images/IMG0318.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:660;left:400">
+<layer >
+<img src="./new_w6_images/IMG0319.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="TXT" 
+mcd:properties=""
+mcd:textproperties=""
+mcd:alignx="8" mcd:aligny="712" 
+ style ="position:absolute;top:699;left:8;width:560">
+<layer width=560>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+<comment mcd:chrprop="color:#000080"></comment><font color="#000080">################################################################################<comment mcd:chrprop="color:"></comment></font></font>
+</layer>
+</div>
+<div mcd:region="TXT" 
+mcd:properties=""
+mcd:textproperties=""
+mcd:alignx="133" mcd:aligny="736" 
+ style ="position:absolute;top:723;left:112;width:171">
+<layer width=171>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+<comment mcd:chrprop="color:#000080;bold:1"></comment><font color="#000080"><b>Program Body (<comment mcd:chrprop="color:;bold:0"></comment></b></font><comment mcd:chrprop="color:#ff0000;bold:1"></comment><font color="#ff0000"><b>do not edit<comment mcd:chrprop="color:;bold:0"></comment></b></font><comment mcd:chrprop="color:#000080;bold:1"></comment><font color="#000080"><b>)<comment mcd:chrprop="color:;bold:0"></comment></b></font></font>
+</layer>
+</div>
+<div mcd:region="TXT" 
+mcd:properties=""
+mcd:textproperties=""
+mcd:alignx="358" mcd:aligny="736" 
+ style ="position:absolute;top:723;left:336;width:213">
+<layer width=213>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+<comment mcd:chrprop="color:#008000;bold:1"></comment><font color="#008000"><b>SCROLL DOWN TO SEE RESULTS<comment mcd:chrprop="color:;bold:0"></comment></b></font></font>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:770;left:24">
+<layer >
+<img src="./new_w6_images/IMG0320.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:780;left:168">
+<layer >
+<img src="./new_w6_images/IMG0321.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:769;left:440">
+<layer >
+<img src="./new_w6_images/IMG0322.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:867;left:360">
+<layer >
+<img src="./new_w6_images/IMG0142.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:866;left:24">
+<layer >
+<img src="./new_w6_images/IMG0143.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:865;left:144">
+<layer >
+<img src="./new_w6_images/IMG0144.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:913;left:32">
+<layer >
+<img src="./new_w6_images/IMG0323.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:913;left:264">
+<layer >
+<img src="./new_w6_images/IMG0324.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:995;left:32">
+<layer >
+<img src="./new_w6_images/IMG0325.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:983;left:272">
+<layer >
+<img src="./new_w6_images/IMG0326.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:1196;left:24">
+<layer >
+<img src="./new_w6_images/IMG0327.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="TXT" 
+mcd:properties=""
+mcd:textproperties=""
+mcd:alignx="358" mcd:aligny="1232" 
+ style ="position:absolute;top:1219;left:336;width:213">
+<layer width=213>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+<comment mcd:chrprop="color:#008000;bold:1"></comment><font color="#008000"><b>SCROLL DOWN TO SEE RESULTS<comment mcd:chrprop="color:;bold:0"></comment></b></font></font>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:1483;left:24">
+<layer >
+<img src="./new_w6_images/IMG0328.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:1571;left:24">
+<layer >
+<img src="./new_w6_images/IMG0329.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:1683;left:32">
+<layer >
+<img src="./new_w6_images/IMG0032.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:1723;left:400">
+<layer >
+<img src="./new_w6_images/IMG0330.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:1892;left:16">
+<layer >
+<img src="./new_w6_images/IMG0331.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="TXT" 
+mcd:properties=""
+mcd:textproperties=""
+mcd:alignx="382" mcd:aligny="2064" 
+ style ="position:absolute;top:2051;left:360;width:213">
+<layer width=213>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+<comment mcd:chrprop="color:#008000;bold:1"></comment><font color="#008000"><b>SCROLL DOWN TO SEE RESULTS<comment mcd:chrprop="color:;bold:0"></comment></b></font></font>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:2507;left:16">
+<layer >
+<img src="./new_w6_images/IMG0332.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="TXT" 
+mcd:properties=""
+mcd:textproperties=""
+mcd:alignx="328" mcd:aligny="2520" 
+ style ="position:absolute;top:2507;left:328;width:213">
+<layer width=213>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+<comment mcd:chrprop="color:#008000;bold:1"></comment><font color="#008000"><b>SCROLL DOWN TO SEE RESULTS<comment mcd:chrprop="color:;bold:0"></comment></b></font></font>
+</layer>
+</div>
+<div mcd:region="TXT" 
+mcd:properties=""
+mcd:textproperties=""
+mcd:alignx="328" mcd:aligny="2568" 
+ style ="position:absolute;top:2555;left:328;width:179">
+<layer width=179>
+<comment mcd:parprop="style:Normal;just:2"></comment>
+<font face="Arial,sans-serif" size="2">
+<comment mcd:chrprop="color:#ff0000;bold:1"></comment><font color="#ff0000"><b>WAIT UNTIL EIGEN VALUES <br><comment mcd:chrprop="color:;bold:0"></comment></b></font></font>
+<comment mcd:parprop="style:Normal;just:2"></comment>
+<font face="Arial,sans-serif" size="2">
+<comment mcd:chrprop="color:#ff0000;bold:1"></comment><font color="#ff0000"><b>ARE COMPUTED !!!<comment mcd:chrprop="color:;bold:0"></comment></b></font></font>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:2972;left:24">
+<layer >
+<img src="./new_w6_images/IMG0333.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="TXT" 
+mcd:properties=""
+mcd:textproperties=""
+mcd:alignx="8" mcd:aligny="3336" 
+ style ="position:absolute;top:3323;left:8;width:560">
+<layer width=560>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+<comment mcd:chrprop="color:#000080"></comment><font color="#000080">################################################################################<comment mcd:chrprop="color:"></comment></font></font>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:3388;left:16">
+<layer >
+<img src="./new_w6_images/IMG0334.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="TXT" 
+mcd:properties=""
+mcd:textproperties=""
+mcd:alignx="92" mcd:aligny="3400" 
+ style ="position:absolute;top:3387;left:88;width:409">
+<layer width=409>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+Q- value of resonances (to be adjusted to see spectrum of resonances)</font>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:3420;left:8">
+<layer >
+<img src="./new_w6_images/IMG0335.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:3420;left:112">
+<layer >
+<img src="./new_w6_images/IMG0336.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="TXT" 
+mcd:properties=""
+mcd:textproperties=""
+mcd:alignx="209" mcd:aligny="3432" 
+ style ="position:absolute;top:3419;left:192;width:361">
+<layer width=361>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+Frequency range in GHz (starting and ending points of sweep) </font>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:3451;left:16">
+<layer >
+<img src="./new_w6_images/IMG0337.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:3499;left:240">
+<layer >
+<img src="./new_w6_images/IMG0338.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="EQN" mcd:properties=""
+mcd:eqproperties=""
+ style ="position:absolute;top:3544;left:8">
+<layer >
+<img src="./new_w6_images/IMG0339.JPG" border=0>
+</layer>
+</div>
+<div mcd:region="TXT" 
+mcd:properties=""
+mcd:textproperties=""
+mcd:alignx="27" mcd:aligny="3752" 
+ style ="position:absolute;top:3737;left:16;width:557">
+<layer width=557>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+<comment mcd:chrprop="size:12;color:#000080;bold:1"></comment><font size="3"color="#000080"><b>Important Design Rules<comment mcd:chrprop="size:10;color:;bold:0"></comment></b></font><comment mcd:chrprop="color:#000080;bold:1"></comment><font color="#000080"><b><br><comment mcd:chrprop="color:;bold:0"></comment></b></font></font>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+<comment mcd:chrprop="color:#000080;bold:1"></comment><font color="#000080"><b><br><comment mcd:chrprop="color:;bold:0"></comment></b></font></font>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+<comment mcd:chrprop="color:#000080;bold:1"></comment><font color="#000080"><b>1. Design pass-band must be clean of spurious spectrum<br><comment mcd:chrprop="color:;bold:0"></comment></b></font></font>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+<comment mcd:chrprop="color:#000080;bold:1"></comment><font color="#000080"><b>2. Design stop-band must be clean of spurious spectrum<br><comment mcd:chrprop="color:;bold:0"></comment></b></font></font>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+<comment mcd:chrprop="color:#000080;bold:1"></comment><font color="#000080"><b>3. When designing waffle-iron filter always check frequency responses corresponding to modes of higher order (TE20, TE30, etc.)<br><comment mcd:chrprop="color:;bold:0"></comment></b></font></font>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+<comment mcd:chrprop="color:#000080;bold:1"></comment><font color="#000080"><b><br><comment mcd:chrprop="color:;bold:0"></comment></b></font></font>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+<comment mcd:chrprop="size:12;color:#000080;bold:1"></comment><font size="3"color="#000080"><b>Notes<comment mcd:chrprop="size:10;color:;bold:0"></comment></b></font><comment mcd:chrprop="color:#000080;bold:1"></comment><font color="#000080"><b><br><comment mcd:chrprop="color:;bold:0"></comment></b></font></font>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+<comment mcd:chrprop="color:#000080;bold:1"></comment><font color="#000080"><b><br><comment mcd:chrprop="color:;bold:0"></comment></b></font></font>
+<comment mcd:parprop="style:Normal"></comment>
+<font face="Arial,sans-serif" size="2">
+<comment mcd:chrprop="color:#000080;bold:1"></comment><font color="#000080"><b>This spreadsheet is to evaluate the spurious spectrum. It shows layout of potential spurious resonances on frequency axis, but it does not mean all those resonances will present in reality. Theoretically only resonances having particular symmetry order can occur. However, practically, any of those resonances might be excited because of asymmetry caused by production inaccuracy. <comment mcd:chrprop="color:;bold:0"></comment></b></font></font>
+</layer>
+</div>
+</body>
+</html>

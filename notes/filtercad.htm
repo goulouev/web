@@ -1,0 +1,536 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:st1="urn:schemas-microsoft-com:office:smarttags"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 10">
+<meta name=Originator content="Microsoft Word 10">
+<link rel=File-List href="filtercad_files/filelist.xml">
+<link rel=Edit-Time-Data href="filtercad_files/editdata.mso">
+<link rel=OLE-Object-Data href="filtercad_files/oledata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>Composite Filter CAD Procedure based on Variational Approximations</title>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="State"/>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="place"/>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Rousslan Goulouev</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Rousslan Goulouev</o:LastAuthor>
+  <o:Revision>3</o:Revision>
+  <o:TotalTime>498</o:TotalTime>
+  <o:LastPrinted>2003-03-11T14:09:00Z</o:LastPrinted>
+  <o:Created>2003-04-30T01:00:00Z</o:Created>
+  <o:LastSaved>2003-04-30T01:01:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>1005</o:Words>
+  <o:Characters>5729</o:Characters>
+  <o:Company> private</o:Company>
+  <o:Lines>47</o:Lines>
+  <o:Paragraphs>13</o:Paragraphs>
+  <o:CharactersWithSpaces>6721</o:CharactersWithSpaces>
+  <o:Version>10.2625</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:Compatibility>
+   <w:BreakWrappedTables/>
+   <w:SnapToGridInCell/>
+   <w:WrapTextWithPunct/>
+   <w:UseAsianBreakRules/>
+   <w:UseFELayout/>
+  </w:Compatibility>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if !mso]><object
+ classid="clsid:38481807-CA0E-42D2-BF39-B33AF135CC4D" id=ieooui></object>
+<style>
+st1\:*{behavior:url(#ieooui) }
+</style>
+<![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;
+	mso-font-charset:2;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:0 268435456 0 0 -2147483648 0;}
+@font-face
+	{font-family:SimSun;
+	panose-1:2 1 6 0 3 1 1 1 1 1;
+	mso-font-alt:\5B8B\4F53;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:3 135135232 16 0 262145 0;}
+@font-face
+	{font-family:"\@SimSun";
+	panose-1:2 1 6 0 3 1 1 1 1 1;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:3 135135232 16 0 262145 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:SimSun;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:2086757522;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1503029532 1259739544 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l0:level1
+	{mso-level-start-at:0;
+	mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.25in;
+	mso-level-number-position:left;
+	margin-left:.25in;
+	text-indent:-.25in;
+	font-family:Symbol;
+	mso-fareast-font-family:SimSun;
+	mso-bidi-font-family:Arial;}
+@list l0:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:"Courier New";}
+@list l0:level3
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+@list l0:level4
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Symbol;}
+@list l0:level5
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:"Courier New";}
+@list l0:level6
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:Wingdings;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+table.MsoTableGrid
+	{mso-style-name:"Table Grid";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	border:solid windowtext 1.0pt;
+	mso-border-alt:solid windowtext .5pt;
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-border-insideh:.5pt solid windowtext;
+	mso-border-insidev:.5pt solid windowtext;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="2050"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=EN-US link=blue vlink=purple style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
+normal'>Composite Filter CAD Procedure based on Variational Approximations<o:p></o:p></b></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span class=SpellE><span
+style='font-size:10.0pt'>Rousslan</span></span><span style='font-size:10.0pt'>
+A. <span class=SpellE>Goulouev</span>, E-mail: gouloue@ieee.org<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
+normal'><span style='font-size:10.0pt'>Abstract<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>Multi-modal variational
+approximations for scattering parameters of general triple-discontinuity
+non-ideal cavity are expressed in terms of aperture integrals. Solution is
+derived for different types of cavity junctions as convergent two-dimensional
+sums of elementary functions. The filter or diplexer is considered as number of
+such cavities connected by <span class=SpellE>uniaxial</span> waveguide
+sections with dominant mode taken into account and linked with interface by
+uniform waveguides, probes, loops or apertures. Design approach is based on
+direct optimization of composite structures compiled from pre-synthesized
+filters. The approach is used to create a fast running CAD tool successfully
+used for design of variety of filters for SATCOM and wireless applications. <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
+normal'><span style='font-size:10.0pt'>Introduction<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>Modern technical requirements
+to filters and multiplexers are usually based on hard-hitting goals for pass-band
+performance, roll-off, harmonics rejection, high power handling and
+manufacturability, which often cannot be matched by conventional filters.
+Therefore, filter design engineers are often looking for composite design
+solutions using different type of scattering elements or parts of different
+filters integrated into a complex filter structures. However, the popular “full
+wave” software based on rigorous and universal numerical methods is practically
+not suitable for design synthesis, optimization, proposals and sensitivity
+analysis, requiring frequentative computations, because of slowness and
+awkwardness. Therefore, popular engineering design procedures are based on common
+equivalent circuits for discontinuities [1] connected by “long transmission
+lines” loaded with irises or stubs convenient for fast analysis, design
+proposing and design of conventional tunable hardware. However, lack of accurate
+equivalent circuits for waveguide discontinuities quite limit variety of applications
+and accuracy of cascading the discontinuities by ideal transmission lines is
+not adequate for cavity filters. In paper [2] a multimodal variational
+formulation is used for characterization of propagation in cavities of ridged
+evanescent-mode filters and approximations are derived for 2x2 Y-matrix expressed
+in terms of sums of integrals corresponding to junction apertures. Here double
+discontinuity model formulated in [2] is corrected by taking propagation loss into
+account and extended to triple discontinuity by inserting single or double
+E-/H-plane posts or probes. Closed form solutions are derived for Y-matrix in
+terms of aperture integrals corresponding to internal junctions and interface
+connections. Thus filter or diplexer is represented by a number of pre-calculated
+aperture integrals and distances between discontinuities. As the obtained
+expressions are based on summation of elementary functions, they can be
+compiled into fast running computer code, an effective design tool. <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
+normal'><span style='font-size:10.0pt'>Cavity Model<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt'><!--[if gte vml 1]><v:shapetype id="_x0000_t75"
+ coordsize="21600,21600" o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe"
+ filled="f" stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:433.5pt;
+ height:130.5pt'>
+ <v:imagedata src="filtercad_files/image001.jpg" o:title="cav"/>
+</v:shape><![endif]--><![if !vml]><img width=578 height=174
+src="filtercad_files/image002.jpg" v:shapes="_x0000_i1025"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
+normal'><i style='mso-bidi-font-style:normal'><span style='font-size:10.0pt'>Figure
+1:</span></i></b><i style='mso-bidi-font-style:normal'><span style='font-size:
+10.0pt'> A triple discontinuity as a cavity with post or probe.<o:p></o:p></span></i></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-size:10.0pt'><o:p>&nbsp;</o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>Here double discontinuity
+model used in [2] is generalized for case of propagation loss and extended to
+triple discontinuity by inserting single or double E-/H-plane posts or probes
+(see Figure 1). The current distribution on posts and probes is represented in
+terms of monopole and dipole current lines, <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'><sub><!--[if gte vml 1]><v:shape
+ id="_x0000_i1026" type="#_x0000_t75" style='width:212.25pt;height:18.75pt'
+ o:ole="">
+ <v:imagedata src="filtercad_files/image003.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=283 height=25
+src="filtercad_files/image004.gif" v:shapes="_x0000_i1026"><![endif]></sub><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1026"
+  DrawAspect="Content" ObjectID="_1113155253">
+ </o:OLEObject>
+</xml><![endif]--><span style='mso-spacerun:yes'> </span>. <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>Thus additional terms <span
+class=SpellE><i style='mso-bidi-font-style:normal'>A<sub>nm</sub></i></span>
+representing scattering on posts,<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'><sub><!--[if gte vml 1]><v:shape
+ id="_x0000_i1027" type="#_x0000_t75" style='width:306.75pt;height:35.25pt'
+ o:ole="">
+ <v:imagedata src="filtercad_files/image005.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=409 height=47
+src="filtercad_files/image006.gif" v:shapes="_x0000_i1027"><![endif]></sub><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1027"
+  DrawAspect="Content" ObjectID="_1113155254">
+ </o:OLEObject>
+</xml><![endif]-->,<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'><span
+style='mso-spacerun:yes'> </span><span class=GramE>are</span> added into basic
+formulation for cavity E-field used in [2] . Analogically matching continuity
+of magnetic and electric fields on apertures and boundary conditions on planes
+of junctions,<sub><!--[if gte vml 1]><v:shape id="_x0000_i1028" type="#_x0000_t75"
+ style='width:77.25pt;height:18.75pt' o:ole="">
+ <v:imagedata src="filtercad_files/image007.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=103 height=25
+src="filtercad_files/image008.gif" v:shapes="_x0000_i1028"><![endif]></sub><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1028"
+  DrawAspect="Content" ObjectID="_1113155255">
+ </o:OLEObject>
+</xml><![endif]--><span class=GramE>,</span> posts or probe<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'><sub><!--[if gte vml 1]><v:shape
+ id="_x0000_i1029" type="#_x0000_t75" style='width:183pt;height:32.25pt' o:ole="">
+ <v:imagedata src="filtercad_files/image009.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=244 height=43
+src="filtercad_files/image010.gif" v:shapes="_x0000_i1029"><![endif]></sub><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1029"
+  DrawAspect="Content" ObjectID="_1113155256">
+ </o:OLEObject>
+</xml><![endif]-->, <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>can obtain expressions for
+elements of Y-matrix,<sub><!--[if gte vml 1]><v:shape id="_x0000_i1030" type="#_x0000_t75"
+ style='width:137.25pt;height:18pt' o:ole="">
+ <v:imagedata src="filtercad_files/image011.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img width=183 height=24
+src="filtercad_files/image012.gif" v:shapes="_x0000_i1030"><![endif]></sub><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1030"
+  DrawAspect="Content" ObjectID="_1113155258">
+ </o:OLEObject>
+</xml><![endif]-->, in terms of vectors of field integrals associated with the
+both apertures, where Y<sub>0</sub> is 2x2 Y-matrix of cavity [2] without post
+or probe with surface loss corrections and &#916;Y is an addition inserted by
+post (2x2 matrix) or probe (3x3 matrix). Additional mathematical manipulations
+are applied for probe models to extract irregularity associated with voltage
+gap [3]. <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
+normal'><span style='font-size:10.0pt'>Results and Comparison<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>The obtained expressions have
+been compiled into computer algorithms synthesizing initial dimensions,
+simulating and optimizing frequency response. Design procedure for composite
+filters and diplexers based on synthesis of primary filters, putting them
+together and optimizing over spec constrains has been developed. Although the
+computational approach takes only dominant mode into account between cavities,
+the simulation results for long filter structures with narrow gaps [4] can be
+even more accurate than obtained by rigorous FEM based simulators (see Figure
+2). The design procedure has been applied to variety of waveguide filters, such
+as tapered corrugated [5], quarter-wave-coupled corrugated [4], composite asymmetric
+corrugated [6] (see Figure 4), H-plane iris, resonant iris and evanescent-mode
+ridged. It has also applied to closed surface ceramic filters (see Figure 3)
+and diplexers (see Figure 5) representing circular resonators as equivalent short
+sections of ridged or asymmetric double ridged waveguides. Accuracy of simulation
+is found practically acceptable in respect to production tolerances and tuning
+margins for majority of designs. However, the simulation time over discreet
+sweep of two hundred frequency points performed not longer than a second, which
+is about 30000 times faster than time required by HFSS, a universal FEM based
+simulator, installed on the same UNIX platform. <o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt'><!--[if gte vml 1]><v:shape id="_x0000_i1031" type="#_x0000_t75"
+ style='width:380.25pt;height:204.75pt'>
+ <v:imagedata src="filtercad_files/image013.jpg" o:title="or_comp"/>
+</v:shape><![endif]--><![if !vml]><img width=507 height=273
+src="filtercad_files/image013.jpg" v:shapes="_x0000_i1031"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
+normal'><i style='mso-bidi-font-style:normal'><span style='font-size:10.0pt'>Figure
+2:</span></i></b><i style='mso-bidi-font-style:normal'><span style='font-size:
+10.0pt'> Comparison between data measured (1), computed using FEM (HFSS<span
+class=GramE>)(</span>2) and presented approach (3) for a Ku-band corrugated
+harmonic filter.<o:p></o:p></span></i></p>
+
+<i style='mso-bidi-font-style:normal'><span style='font-size:10.0pt;font-family:
+"Times New Roman";mso-fareast-font-family:SimSun;mso-ansi-language:EN-US;
+mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA'><br clear=all
+style='page-break-before:always'>
+</span></i>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt'><!--[if gte vml 1]><v:shape id="_x0000_i1032" type="#_x0000_t75"
+ style='width:6in;height:126.75pt'>
+ <v:imagedata src="filtercad_files/image014.jpg" o:title="plot0"/>
+</v:shape><![endif]--><![if !vml]><img width=576 height=169
+src="filtercad_files/image015.jpg" v:shapes="_x0000_i1032"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
+normal'><i style='mso-bidi-font-style:normal'><span style='font-size:10.0pt'>Figure
+3:</span></i></b><i style='mso-bidi-font-style:normal'><span style='font-size:
+10.0pt'> Response of ceramic filter obtained by presented method and FEM
+(HFSS).<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt'><!--[if gte vml 1]><v:shape id="_x0000_i1033" type="#_x0000_t75"
+ style='width:6in;height:176.25pt'>
+ <v:imagedata src="filtercad_files/image016.jpg" o:title="xfilter5"/>
+</v:shape><![endif]--><![if !vml]><img width=576 height=235
+src="filtercad_files/image017.jpg" v:shapes="_x0000_i1033"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
+normal'><i style='mso-bidi-font-style:normal'><span style='font-size:10.0pt'>Figure
+4:</span></i></b><i style='mso-bidi-font-style:normal'><span style='font-size:
+10.0pt'> Appearance and measured response of a composite corrugated filter
+designed using this method</span></i><span style='font-size:10.0pt'>.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt'><!--[if gte vml 1]><v:shape id="_x0000_i1034" type="#_x0000_t75"
+ style='width:6in;height:130.5pt'>
+ <v:imagedata src="filtercad_files/image018.jpg" o:title="plot"/>
+</v:shape><![endif]--><![if !vml]><img width=576 height=174
+src="filtercad_files/image019.jpg" v:shapes="_x0000_i1034"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
+normal'><i style='mso-bidi-font-style:normal'><span style='font-size:10.0pt'>Figure
+5:</span></i></b><i style='mso-bidi-font-style:normal'><span style='font-size:
+10.0pt'> Measured frequency response of a closed surface ceramic PCS diplexer
+designed using presented method.<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
+normal'><span style='font-size:10.0pt'>References<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span class=GramE><span style='font-size:10.0pt'>[1] N. <span
+class=SpellE>Marcuvitz</span>, “Waveguide Handbook”, </span></span><st1:State><st1:place><span
+  class=GramE><span style='font-size:10.0pt'>New York</span></span></st1:place></st1:State><span
+class=GramE><span style='font-size:10.0pt'>, McGraw-Hill, 1951.</span></span><span
+style='font-size:10.0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span class=GramE><span style='font-size:10.0pt'>[2] J.C. <span
+class=SpellE>Nanan</span>, Jun-Wu Tao, H. <span class=SpellE>Baudrand</span>, et
+al, “A Two-Step Synthesis of Broadband Ridged Waveguide <span class=SpellE>Bandpass</span>
+Filters with Improved Performances,” IEEE, MTT-39, Dec. 1991, pp. 2192-2197.</span></span><span
+style='font-size:10.0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span class=GramE><span style='font-size:10.0pt'>[3] L. <span
+class=SpellE>Lewin</span>, “Theory of Waveguides”, <span class=SpellE>Newnes-Buterworth</span>,
+1975.</span></span><span style='font-size:10.0pt'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>[4] R. <span class=SpellE>Goulouev</span>
+“Corrugated Waveguide Filter having Coupled Resonator Cavities”, US Patent 6,169,446<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>[5] R. Levy, “Tapered
+Corrugated Waveguide Low-Pass Filters”, IEEE, MTT-21, Aug. 1973, pp. 526-532.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'>[6] R. <span class=SpellE>Goulouev</span>
+“Waveguide Filter Having Asymmetrically Corrugated resonators”, US Patent
+6,232,853.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt'><o:p>&nbsp;</o:p></span></p>
+
+</div>
+
+</body>
+
+</html>
