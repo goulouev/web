@@ -1,0 +1,467 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <META NAME="keywords" CONTENT="blog, RF, microwave, design, online, CAD, design tools, LPF, BPF, band-pass filter, low-pass filter, harmonic, iris filter, corrugated filter, waveguide, passive components,СВЧ, Волноводы, фильтры, ППФ,ФНЧ, проектирование, расчет">
+    <META NAME="description" CONTENT="Digoria microwave is RF engineering blog with RF online software, RF design tools and technical information on filters and passive components.">
+    <META name="Author" content="Rousslan Goulouev">
+    <link rel="stylesheet" href="navbars.css" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0px;
+            padding: 0px
+        }
+
+        .container {
+            height: 100%;
+            background-image: url(pic0.png);
+            margin: 0px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        p {
+            text-align: justify;
+        }
+
+        hr.new1 {
+            border-top: 1px solid red;
+        }
+
+        /* Dashed red border */
+        hr.new2 {
+            border-top: 1px dashed red;
+        }
+
+        /* Dotted red border */
+        hr.new3 {
+            border-top: 1px dotted red;
+        }
+
+        /* Thick red border */
+        hr.new4 {
+            border: 3px solid navy;
+        }
+
+        /* Large rounded green border */
+        hr.new5 {
+            border: 10px solid green;
+            border-radius: 5px;
+        }
+
+        .maindiv {
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            height: 100%;
+            font-size: 11px;
+            color: navy;
+            background-image: url("pic1.gif");
+            z-index: auto;
+        }
+
+        #note0 {
+            border: dotted;
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            height: auto;
+            width: 400px;
+            font-size: 11px;
+            color: navy;
+            background-color: #ccffff;
+            text-align: center;
+            z-index: 0;
+            position: absolute;
+            left: 10px;
+            top: 50px;
+            padding: 10px 10px 10px 10px;
+        }
+
+        #note1 {
+            border: dotted;
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            height: auto;
+            width: 530px;
+            font-size: 12px;
+            color: navy;
+            text-align: left;
+            z-index: 0;
+            position: absolute;
+            left: 450px;
+            top: 50px;
+            padding: 10px 10px 10px 10px;
+        }
+        #note2 {
+            border: dotted;
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            height: auto;
+            width: 400px;
+            font-size: 12px;
+            color: navy;
+            text-align: center;
+            z-index: 0;
+            position: absolute;
+            left: 10px;
+            top: 260px;
+            padding: 10px 10px 10px 10px;
+        }
+        #note3 {
+            border: dotted;
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            height: auto;
+            width: 250px;
+            font-size: 12px;
+            color: navy;
+            text-align: left;
+            z-index: 0;
+            position: absolute;
+            left: 1020px;
+            top: 50px;
+            padding: 10px 10px 10px 10px;
+        }
+        #note4 {
+            border: dotted;
+            font-family:'Times New Roman', Times, serif;
+            height: 70px;
+            width: 400px;
+            font-size: 12px;
+            font-weight:bold;
+            color:black;
+            text-align: center;
+            z-index: 0;
+            position: absolute;
+            left: 10px;
+            top: 150px;
+            padding: 10px 10px 10px 10px;
+        }
+        #note5 {
+            border: dotted;
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            height: auto;
+            width: 400px;
+            font-size: 12px;
+            color: navy;
+            text-align: center;
+            z-index: 0;
+            position: absolute;
+            left: 450px;
+            top: 260px;
+            padding: 10px 10px 10px 10px;
+        }
+        #note6 {
+            border: dotted;
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            height: auto;
+            width: 400px;
+            font-size: 12px;
+            color: navy;
+            text-align: center;
+            z-index: 0;
+            position: absolute;
+            left: 890px;
+            top: 260px;
+            padding: 10px 10px 10px 10px;
+        }
+        #note7 {
+            border: dotted;
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            height: auto;
+            width: 250px;
+            font-size: 12px;
+            color: navy;
+            text-align:justify;
+            z-index: 0;
+            position: absolute;
+            left: 1020px;
+            top: 150px;
+            padding: 10px 10px 10px 10px;
+        }
+        .leftdiv {
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            height: 100%;
+            font-size: 15px;
+            color: navy;
+            background-color: #ccffff;
+        }
+        .comlink{
+            
+        }
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            display: block; /* remove extra space below image */
+            border:none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="javascript:void(0)">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="javascript:void(0)">
+                Design Studio
+            </button>
+            <div class="dropdown-content">
+                <a href="oncorr/index.htm">Corrugated Waveguide Filter</a>
+                <a href="connector/index.htm">WR-Connect Old Version</a>
+                <a href="WRC_2020/editor.htm">WR-Connect New Version</a>
+                <a href="s0/index.htm">A Planar Structure Simulator</a>
+            </div>
+        </div>
+        <a href="notes/index.htm">Old Pages</a>
+        <a href="bookmark.htm">Site Map</a>
+        <a href="news.htm">About/Updates</a>
+    </div>
+    <div class="maindiv">
+        <div id="note0">
+            <font style="font-family:'Segoe Script';font-size:30px;color:navy;justify-content:center">
+                Digoria Microwave
+            </font><br />
+            <font style="font-family:'Segoe Script';font-size:12px;color:navy;justify-content:center">
+                a web blog on RF/microwave engineering
+            </font>
+        </div>
+        <div id="note1">
+            <img src="corrfilter_0.gif" />
+        </div>
+        <div id="note2">
+            <a  href="javascript:void(0)" onclick="PrjFile0(); window.location.href = '/WRC_2020/editor.htm';">
+               <img src="corrfilter_10.jpg" />
+            </a>
+            <font style="font-family:Arial, Helvetica, sans-serif;font-weight:bold;font-size:12px;color:navy;justify-content:center">
+                Reflection and transmission magnetudes (dB) vs frequency (GHz)<br />
+                <font style="color:darkgreen;font-style:italic;">Click picture to try</font>
+            </font>
+        </div>
+        <div id="note5">
+            <a href="javascript:void(0)" onclick="PrjFile1(); window.location.href = '/WRC_2020/editor.htm';">
+                <img src="corrfilter_20.jpg" />
+            </a>
+            <font style="font-family:Arial, Helvetica, sans-serif;font-weight:bold;font-size:12px;color:navy;justify-content:center">
+                TE20-mode transmission magnetude (dB) vs frequency (GHz)<br />
+                <font style="color:darkgreen;font-style:italic;">Click picture to try</font>
+            </font>
+        </div>
+        <div id="note6">
+            <a href="javascript:void(0)" onclick="PrjFile2(); window.location.href = '/WRC_2020/editor.htm';">
+                <img src="corrfilter_01.jpg" />
+            </a>
+            <font style="font-family:Arial, Helvetica, sans-serif;font-weight:bold;font-size:12px;color:navy;justify-content:center">
+                TE01-mode transmission magnetude (dB) vs frequency (GHz)<br />
+                <font style="color:darkgreen;font-style:italic;">Click picture to try</font>
+            </font>
+        </div>
+        <div id="note3">
+        </div>
+        <div id="note4">
+            <font style="font-size:22px; font-weight:bold;color:black;">WR-CONNECT 02: NEW SOFTWARE</font><br />
+            <font style="font-size:16px; font-weight:bold;color:darkmagenta">Free Online CAD. Useful and Efficient. No "Big Data"!</font><br />
+            <font style="font-size:16px; font-weight:bold;color:midnightblue">
+                Try it today. Design a waveguide filter online.
+            </font>
+        </div>
+        <div id="note7">
+            <img src="arr.gif"/><br />
+            <font style="color:darkgreen;font-weight:bold;font-size:14px;">WR-51 corrugated low-pass filter designed in 20 minutes</font>
+        </div>
+    </div>
+    <script language="javascript">
+        document.getElementById('note3').innerHTML += '<p><b>Webhost: Rousslan Goulouev<br />Contact: rousslan' + '@goulouev' + '.com</b></p>';
+        //############################
+        //INSERT TEXT FROM WINDOW AND SetProject(LNs)
+        function PrjFile0() {
+            var rs = [];
+            rs[0] = 'SETUP_DAT';
+            rs[1] = ' 1 10 10';
+            rs[2] = ' 1 0.050 1.000  1.000  3.000  1.000  1.500';
+            rs[3] = '  20.10000   5.70000';
+            rs[4] = '  13.00000  53.00000 1000';
+            rs[5] = ' 1   30  0.02000  0.02000  0.00200';
+            rs[6] = '   1  1 17.4000 22.5000  20.00   30';
+            rs[7] = 'DESIGN_DAT';
+            rs[8] = '-1  1  0';
+            rs[9] = '0  0  0';
+            rs[10] = '1  10  10';
+            rs[11] = '1  1';
+            rs[12] = '1  0  6.1';
+            rs[13] = '0    1     0.200000    -0.255000    -0.127500     0.255000     0.127500';
+            rs[14] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[15] = '5    1     0.020000    -0.215000    -0.069692     0.215000     0.069692';
+            rs[16] = '5    2     0.090000    -0.215000    -0.140110     0.215000     0.140110';
+            rs[17] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[18] = '5    2     0.093795    -0.185000    -0.124910     0.185000     0.124910';
+            rs[19] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[20] = '5    2     0.100733    -0.185000    -0.129700     0.185000     0.129700';
+            rs[21] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[22] = '5    2     0.109267    -0.185000    -0.151576     0.185000     0.151576';
+            rs[23] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[24] = '5    2     0.116205    -0.185000    -0.157523     0.185000     0.157523';
+            rs[25] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[26] = '5    2     0.120000    -0.185000    -0.157007     0.185000     0.157007';
+            rs[27] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[28] = '5    2     0.120000    -0.185000    -0.157007     0.185000     0.157007';
+            rs[29] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[30] = '5    2     0.116205    -0.185000    -0.157523     0.185000     0.157523';
+            rs[31] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[32] = '5    2     0.109267    -0.185000    -0.151576     0.185000     0.151576';
+            rs[33] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[34] = '5    2     0.100733    -0.185000    -0.129700     0.185000     0.129700';
+            rs[35] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[36] = '5    2     0.093795    -0.185000    -0.124910     0.185000     0.124910';
+            rs[37] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[38] = '5    2     0.090000    -0.215000    -0.140110     0.215000     0.140110';
+            rs[39] = '5    1     0.020000    -0.215000    -0.069692     0.215000     0.069692';
+            rs[40] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[41] = '0    1     0.200000    -0.255000    -0.127500     0.255000     0.127500';
+            rs[42] = '';
+            SetProject(rs);
+        }
+
+        function PrjFile1() {
+            var rs = [];
+            rs[0] = 'SETUP_DAT';
+            rs[1] = ' 1 10 10';
+            rs[2] = ' 1 0.050 1.000  1.000  3.000  1.000  1.500';
+            rs[3] = '  20.10000   5.70000';
+            rs[4] = '  13.00000  53.00000 1000';
+            rs[5] = ' 1   30  0.02000  0.02000  0.00200';
+            rs[6] = '   1  1 17.4000 22.5000  20.00   30';
+            rs[7] = 'DESIGN_DAT';
+            rs[8] = '1  1  0';
+            rs[9] = '0  1  0';
+            rs[10] = '1  10  10';
+            rs[11] = '1  1';
+            rs[12] = '1  0  6.1';
+            rs[13] = '0    1     0.200000    -0.255000    -0.127500     0.255000     0.127500';
+            rs[14] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[15] = '5    1     0.020000    -0.215000    -0.069692     0.215000     0.069692';
+            rs[16] = '5    2     0.090000    -0.215000    -0.140110     0.215000     0.140110';
+            rs[17] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[18] = '5    2     0.093795    -0.185000    -0.124910     0.185000     0.124910';
+            rs[19] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[20] = '5    2     0.100733    -0.185000    -0.129700     0.185000     0.129700';
+            rs[21] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[22] = '5    2     0.109267    -0.185000    -0.151576     0.185000     0.151576';
+            rs[23] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[24] = '5    2     0.116205    -0.185000    -0.157523     0.185000     0.157523';
+            rs[25] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[26] = '5    2     0.120000    -0.185000    -0.157007     0.185000     0.157007';
+            rs[27] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[28] = '5    2     0.120000    -0.185000    -0.157007     0.185000     0.157007';
+            rs[29] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[30] = '5    2     0.116205    -0.185000    -0.157523     0.185000     0.157523';
+            rs[31] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[32] = '5    2     0.109267    -0.185000    -0.151576     0.185000     0.151576';
+            rs[33] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[34] = '5    2     0.100733    -0.185000    -0.129700     0.185000     0.129700';
+            rs[35] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[36] = '5    2     0.093795    -0.185000    -0.124910     0.185000     0.124910';
+            rs[37] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[38] = '5    2     0.090000    -0.215000    -0.140110     0.215000     0.140110';
+            rs[39] = '5    1     0.020000    -0.215000    -0.069692     0.215000     0.069692';
+            rs[40] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[41] = '0    1     0.200000    -0.255000    -0.127500     0.255000     0.127500';
+            rs[42] = '';
+            SetProject(rs);
+        }
+
+        function PrjFile2() {
+            var rs = [];
+            rs[0] = 'SETUP_DAT';
+            rs[1] = ' 1 10 10';
+            rs[2] = ' 1 0.050 1.000  1.000  3.000  1.000  1.500';
+            rs[3] = '  20.10000   5.70000';
+            rs[4] = '  13.00000  53.00000 1000';
+            rs[5] = ' 1   30  0.02000  0.02000  0.00200';
+            rs[6] = '   1  1 17.4000 22.5000  20.00   30';
+            rs[7] = 'DESIGN_DAT';
+            rs[8] = '1 -1  0';
+            rs[9] = '0  0  0';
+            rs[10] = '1  10  10';
+            rs[11] = '1  1';
+            rs[12] = '1  0  6.1';
+            rs[13] = '0    1     0.200000    -0.255000    -0.127500     0.255000     0.127500';
+            rs[14] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[15] = '5    1     0.020000    -0.215000    -0.069692     0.215000     0.069692';
+            rs[16] = '5    2     0.090000    -0.215000    -0.140110     0.215000     0.140110';
+            rs[17] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[18] = '5    2     0.093795    -0.185000    -0.124910     0.185000     0.124910';
+            rs[19] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[20] = '5    2     0.100733    -0.185000    -0.129700     0.185000     0.129700';
+            rs[21] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[22] = '5    2     0.109267    -0.185000    -0.151576     0.185000     0.151576';
+            rs[23] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[24] = '5    2     0.116205    -0.185000    -0.157523     0.185000     0.157523';
+            rs[25] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[26] = '5    2     0.120000    -0.185000    -0.157007     0.185000     0.157007';
+            rs[27] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[28] = '5    2     0.120000    -0.185000    -0.157007     0.185000     0.157007';
+            rs[29] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[30] = '5    2     0.116205    -0.185000    -0.157523     0.185000     0.157523';
+            rs[31] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[32] = '5    2     0.109267    -0.185000    -0.151576     0.185000     0.151576';
+            rs[33] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[34] = '5    2     0.100733    -0.185000    -0.129700     0.185000     0.129700';
+            rs[35] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[36] = '5    2     0.093795    -0.185000    -0.124910     0.185000     0.124910';
+            rs[37] = '0    1     0.020000    -0.185000    -0.035000     0.185000     0.035000';
+            rs[38] = '5    2     0.090000    -0.215000    -0.140110     0.215000     0.140110';
+            rs[39] = '5    1     0.020000    -0.215000    -0.069692     0.215000     0.069692';
+            rs[40] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[41] = '0    1     0.200000    -0.255000    -0.127500     0.255000     0.127500';
+            rs[42] = '';
+            SetProject(rs);
+        }
+
+        function SetProject(LNs) {
+            //document.getElementById('FileProjectOkno').value = localStorage.getItem('ProjectDat');
+            var i, key;
+            var SetupDat = '';
+            var DesignDat = '';
+            var MemoDat = '';
+            var kod = -1;
+            var n = LNs.length - 1;
+            if (n < 0) { return; }
+            for (i = 0; i <= n; i++) {
+                var LN = LNs[i].trim();
+                if (LN.length > 3) {
+                    key = LNs[i].substr(0, 4);
+                    //alert(key);
+                    if (key == 'SETU') { kod = 1; }
+                    if (key == 'DESI') { kod = 2; }
+                    if (key == 'BACK') { kod = 3; }
+                    if (kod == 1 && key != 'SETU') {
+                        SetupDat += LNs[i] + '\r\n';
+                    }
+                    if (kod == 2 && key != 'DESI') {
+                        DesignDat += LNs[i] + '\r\n';
+                    }
+                    if (kod == 3 && key != 'BACK') {
+                        MemoDat += LNs[i] + '\r\n';
+                    }
+
+                }
+
+            }
+            if (kod > 0) {
+                localStorage.setItem("InputDatFileText", SetupDat);
+                localStorage.setItem("DesignFileText", DesignDat);
+                localStorage.setItem("MemoDatText", MemoDat);
+
+            }
+        }
+            //############################
+    </script>
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        try {
+            var pageTracker = _gat._getTracker("UA-11066966-1");
+            pageTracker._trackPageview();
+        } catch (err) { }
+    </script>
+
+</body>
+</html>
