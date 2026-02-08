@@ -1,1 +1,792 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
 
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=us-ascii">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 10">
+<meta name=Originator content="Microsoft Word 10">
+<link rel=File-List href="help_files/filelist.xml">
+<link rel=Edit-Time-Data href="help_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>Corrugated Waveguide Low-Pass Filter Design Guidelines</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Rousslan Goulouev</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Rousslan Goulouev</o:LastAuthor>
+  <o:Revision>19</o:Revision>
+  <o:TotalTime>584</o:TotalTime>
+  <o:Created>2003-05-04T10:07:00Z</o:Created>
+  <o:LastSaved>2003-05-06T20:18:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>2598</o:Words>
+  <o:Characters>14812</o:Characters>
+  <o:Company> private</o:Company>
+  <o:Lines>123</o:Lines>
+  <o:Paragraphs>34</o:Paragraphs>
+  <o:CharactersWithSpaces>17376</o:CharactersWithSpaces>
+  <o:Version>10.2625</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Compatibility>
+   <w:UseFELayout/>
+  </w:Compatibility>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:SimSun;
+	panose-1:2 1 6 0 3 1 1 1 1 1;
+	mso-font-alt:SimSun;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:3 135135232 16 0 262145 0;}
+@font-face
+	{font-family:"Wide Latin";
+	panose-1:2 10 10 7 5 5 5 2 4 4;
+	mso-font-charset:0;
+	mso-generic-font-family:roman;
+	mso-font-pitch:variable;
+	mso-font-signature:3 0 0 0 1 0;}
+@font-face
+	{font-family:"\@SimSun";
+	panose-1:2 1 6 0 3 1 1 1 1 1;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:3 135135232 16 0 262145 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:SimSun;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:56.7pt 42.5pt 56.7pt 85.05pt;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="9218"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body bgcolor=black lang=EN-US link=blue vlink=purple style='tab-interval:.5in'>
+<title>Corrugated Waveguide Filter: Design Guidelines</title>
+<HR><BR>
+
+<div class=Section1>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-family:"Wide Latin";color:white'>Spurious Pass-Bands of Corrugated
+Filter<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:"Wide Latin";color:white'><br>
+<br>
+</span><span style='font-size:10.0pt;font-family:Arial;color:white'>As
+corrugated filters are based on two-dimensional structure, the frequency response
+of any waveguide mode propagating in E-plane structure is of same first index
+is a function of only </span><b><span style='font-size:10.0pt;font-family:Symbol;
+mso-bidi-font-family:Arial;color:white'>b</span></b><span style='font-size:
+10.0pt;font-family:Arial;color:white'> (propagation number). Therefore
+frequency responses of TE<sub>N0</sub>-mode show similarity to the frequency
+response of the dominant TE<sub>10</sub>-mode including its stop-bands as well
+as its pass-bands. Generally existence of the pass-bands of high order modes
+does not necessary mean the filter cannot reject the frequency spectrum
+corresponding to those spurious pass-bands. Actual filter performance depends
+on what kinds of modes are carrying the spectrum. For example, measured between
+two waveguide-to-coaxial transitions, the filter may demonstrate solid
+rejection up to second harmonic and even higher because the spurious modes are
+not excited by setup components (See Fig 1). However, the &quot;bad&quot; modes
+might be excited in the real system where the corrugated is intended to be used
+(see Fig 2).<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;font-family:Arial;color:white'><!--[if gte vml 1]><v:shapetype
+ id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"
+ path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:411.75pt;
+ height:187.5pt'>
+ <v:imagedata src="help_files/image003.jpg" o:title="p142"/>
+</v:shape><![endif]--><![if !vml]><img width=549 height=250
+src="help_files/image003.jpg" v:shapes="_x0000_i1025"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-size:10.0pt;font-family:Arial;color:#FF99CC'>Figure
+1: Transmission response measured using &#8220;regular&#8221; (symmetric)
+calibration. TE-mode level is low because measurement components and filter are
+symmetric. TE20-mode level is higher because it is excited by transformer steps
+of filter.<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;font-family:Arial;color:white'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1026" type="#_x0000_t75" style='width:413.25pt;height:189pt'>
+ <v:imagedata src="help_files/image004.jpg" o:title="p143"/>
+</v:shape><![endif]--><![if !vml]><img width=551 height=252
+src="help_files/image004.jpg" v:shapes="_x0000_i1026"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-size:10.0pt;font-family:Arial;color:#FF99CC'>Figure
+2: Transmission response measured using &#8220;exciters&#8221; of higher order
+modes (regular setup components do not excite them much). The both TE20- and
+TE30-modes popped up, because not rejected by filter.<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'>As
+the modes composition of the macro system is unknown, it is better to assume
+the worst case of existence of all the bad modes. Generally there is no way
+eliminate the spurious pass-bands for a corrugated filter except moving them
+out of the important frequency bands. The positions of pass-bands of spurious
+modes depend on pass-band of the dominant mode and the width of corrugated
+waveguide. Therefore it is a good idea to locate bands with potential lack of
+rejection in respect to rejection requirements. The picture shown on Fig 3
+tells how to predict pass-bands of spurious modes using the first design step
+page.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;font-family:Arial;color:white'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1027" type="#_x0000_t75" style='width:541.5pt;height:310.5pt'>
+ <v:imagedata src="help_files/image002.jpg" o:title="hlp00"/>
+</v:shape><![endif]--><![if !vml]><img width=722 height=414
+src="help_files/image002.jpg" v:shapes="_x0000_i1027"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-size:10.0pt;font-family:Arial;color:#FF99CC'>Figure
+3: Example of selection width of corrugated waveguide and cut-off point.<o:p></o:p></span></i></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<div>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-family:"Wide Latin";mso-bidi-font-family:Arial;color:white'>Synthesis
+of Initial Dimensions<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'>If
+the &#8220;spurious&#8221; width is determined, other dimensions of corrugated
+filter can be obtained by following simple procedure. The design procedure
+presented here differs from conventional design procedures based on direct
+synthesis of filter dimensions using equivalent circuit networks and special
+functions or polynomials. The conventional procedures are found to be
+practically ineffective because they make accent on pass-band performance
+rather than higher stop-band where the prototype networks do not model
+electromagnetic propagation in waveguide structures. Therefore the design
+procedure used here is based on selection of prototypes of good upper stop-band
+rejection and bad pass-band performance and further optimization of pass-band.
+There are two types of prototypes used here. Prototype <b style='mso-bidi-font-weight:
+normal'>[option 1]</b> is preferable if end frequency point of upper stop-band
+is less than 2.5-3 times central frequency of the filter pass-band. The option
+#1 provides better initial pass-band performance and therefore is easier to
+design. The prototype <b style='mso-bidi-font-weight:normal'>[option 2] </b>is
+preferable to reject frequency spectrum up to 3-4 times of central frequency of
+the pass-band. Since you have entered roll-off and width of corrugations in the
+first design page, the synthesizer will try to find optimal values for <b
+style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:normal'>Bmin</i></b>
+and <b style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:normal'>Bmax</i></b>
+values, the network parameters of prototype. <o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;font-family:Arial;color:white'><br>
+<!--[if gte vml 1]><v:shape id="_x0000_i1028" type="#_x0000_t75" style='width:508.5pt;
+ height:189pt'>
+ <v:imagedata src="help_files/image005.jpg" o:title="hlp01"/>
+</v:shape><![endif]--><![if !vml]><img width=678 height=252
+src="help_files/image005.jpg" v:shapes="_x0000_i1028"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-size:10.0pt;font-family:Arial;color:#FF99CC'></BR>Figure
+4: Key dimensions of corrugated structure to be specified in order to generate
+initial (draft) design. <o:p></o:p></span></i></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'>Therefore
+click button [Generate Dimensions] and go to next design page by clicking
+button [Simulate Response] in order to simulate frequency response there (see
+Fig 5). <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><br>
+<!--[if gte vml 1]><v:shape id="_x0000_i1029" type="#_x0000_t75" style='width:669pt;
+ height:63pt'>
+ <v:imagedata src="help_files/image006.jpg" o:title="hlp02"/>
+</v:shape><![endif]--><![if !vml]><img width=892 height=84
+src="help_files/image006.jpg" v:shapes="_x0000_i1029"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-size:10.0pt;font-family:Arial;color:#FF99CC'>Figure
+5: Control panel.<o:p></o:p></span></i></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-size:10.0pt;font-family:Arial;color:#FF99CC'><o:p>&nbsp;</o:p></span></i></p>
+
+<div>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-family:"Wide Latin";mso-bidi-font-family:Arial;color:white'>Corrugated
+Filter Simulator<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:"Wide Latin";mso-bidi-font-family:
+Arial;color:white'><br>
+</span><span style='font-size:10.0pt;font-family:Arial;color:white'><br>
+This is a stand-alone verification tool. If you have already obtained initial
+dimensions in previous design page, those dimensions will be automatically
+transferred to the simulator. You may correct them or replace them with other
+design, as the program module is independent from other design steps. In order
+to simulate filter performance click button [Simulate] (see Fig 6). <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1030" type="#_x0000_t75" style='width:689.25pt;height:313.5pt'>
+ <v:imagedata src="help_files/image007.jpg" o:title="hlp03"/>
+</v:shape><![endif]--><![if !vml]><img width=919 height=418
+src="help_files/image007.jpg" v:shapes="_x0000_i1030"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-size:10.0pt;font-family:Arial;color:#FF99CC'>Figure
+6: Appearance of interface of the Simulator.<o:p></o:p></span></i></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-size:10.0pt;font-family:Arial;color:#FF99CC'><o:p>&nbsp;</o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'>The
+process of simulation can take not more than 1-2 seconds for Pentium 4
+computer. </span><span style='font-size:10.0pt;font-family:Arial;color:red'>For
+slower computers a warning note shown on Fig 7 can appear during simulation.
+The message means IE is unresponsive during computation, i.e. does not respond
+on other events like mouse clicking or resizing windows. The Simulator and some
+other design tools of my Design Studio are based on &#8220;client side&#8221;
+VBScripts, but scripts usually take full control over browser while running.
+The browser (Internet Explorer) is not designed as a computational tool, so its
+computational efficiency and operational memory are very low. Therefore it is
+recommended to cancel all other windows jobs and wait until computation
+completed and [Simulate] button is released.</span><span style='font-size:10.0pt;
+font-family:Arial;color:white'><span style='mso-spacerun:yes'>&nbsp;
+</span>After simulation is completed and browser became responsive, you can see
+plot of simulated frequency response of filter by pressing the next button <b
+style='mso-bidi-font-weight:normal'>[Plot Data].</b> <o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-size:10.0pt;font-family:Arial;color:#FF99CC'><o:p>&nbsp;</o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;font-family:Arial;color:white'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1031" type="#_x0000_t75" style='width:468pt;height:111pt'>
+ <v:imagedata src="help_files/image001.jpg" o:title="warn"/>
+</v:shape><![endif]--><![if !vml]><img width=624 height=148
+src="help_files/image001.jpg" v:shapes="_x0000_i1031"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-size:10.0pt;font-family:Arial;color:#FF99CC'>Figure
+7: A warning note may appear. The note warns that during simulation time [if it
+is more than couple of seconds] Internet Explorer may become unresponsive [will
+not act other events like mouse clicking, windows switching, resizing, etc.].
+Click [Yes], if you want cancel simulations. Click [No] if you want to continue
+simulation. If you run simulations, please do not try to execute other commands
+or events until all computations are completed.<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-family:"Wide Latin";mso-bidi-font-family:Arial;color:white'><br>
+Response Plotter<o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-family:"Wide Latin";mso-bidi-font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'>If
+you press [Plot] button, you can see plot of reflection and transmission in dB vs.
+frequency. Please do not expect performance of initial design to be great. The
+picture below (see Fig 8) shows how it usually looks like. <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;font-family:Arial;color:white'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1032" type="#_x0000_t75" style='width:415.5pt;height:279.75pt'>
+ <v:imagedata src="help_files/image008.jpg" o:title="hlp04"/>
+</v:shape><![endif]--><![if !vml]><img width=554 height=373
+src="help_files/image008.jpg" v:shapes="_x0000_i1032"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;font-family:Arial;color:white'>Figure 8: Typical
+reflection and transmission performance of &#8220;draft&#8221; design.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><br>
+Check position of bandwidth and cut-off (roll-off) in accordance with your
+spec. If your spec do not contain requirements for lower (roll-off) rejection
+(only harmonics), you have to specify the filter roll-off anyway as design
+reference point because it effects bandwidth of spurious modes (see Fig 1). You
+can correct bandwidth by repeating the second design step, i.e. slightly
+changing Bmin and Bmax values of prototype and re-synthesizing the dimensions.
+Simultaneously it is recommended to check rejection of higher frequency
+spectrum (harmonics). If rejection is not adequate, more corrugations are
+needed. Actually all initial parameters effect on potential performance of the
+filter and there is no single recommendation how to design the best filter.
+That is not like designing waveguide iris filter when filter bandwidth and
+order are only parameters. This procedure is not unambiguously determined, i.e.
+they might be different types of corrugated filters matching the same spec.
+Therefore, you may try different initial parameters and subsequently compute
+frequency response until you are satisfied with dimensions and rejection (not
+pass-band) performance of the draft design. <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-family:"Wide Latin";mso-bidi-font-family:Arial;color:white'>Response
+Optimizer</span><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'>No
+customer indeed will be happy with a harmonic filter having such an ugly
+pass-band performance shown on Fig 8. Therefore the design is not completed
+until the reflection ripples of the filter pass-band are not reasonably small.
+Therefore we need an optimizing tool in order to improve the performance of
+filter pass-band. Although pass-band performance of &#8220;draft&#8221; design
+is so low, it might need some slight adjustment of corrugations and transformer
+steps in order to make it much better. Optimizer is a tool, which runs various
+combinations of dimensions and computes the path of improvement (gradient) of a
+function of performance (functional). Therefore it is important to specify
+optimization goals and limits (constrains) effectively in order to achieve the
+best performance. Example of selection of optimization constrains is shown on
+Fig 9.<span style='mso-spacerun:yes'>&nbsp; </span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;font-family:Arial;color:white'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1033" type="#_x0000_t75" style='width:402pt;height:300pt'>
+ <v:imagedata src="help_files/image009.jpg" o:title="hlp05"/>
+</v:shape><![endif]--><![if !vml]><img width=536 height=400
+src="help_files/image009.jpg" v:shapes="_x0000_i1033"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-size:10.0pt;font-family:Arial;color:#FF99CC'>Figure
+9: Selection of optimization constrains.<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'>The
+optimization constrains have to be reasonable. For example, do not try to make
+filter wider than you really need or optimize rejection of harmonics. The
+optimizer is based on gradient method, which is good only for finding
+&#8220;local&#8221; minimums, i.e. slight improvement. While optimizer is
+running, the filter dimensions are changing. Over optimization may worsen other
+parameters of filter as length and rejection of higher frequencies. Therefore,
+periodically check transmission response over wide frequency sweep. The
+optimization increment <b style='mso-bidi-font-weight:normal'><i
+style='mso-bidi-font-style:normal'>dX</i></b> is the change of any of
+dimensions (thickness of irises, depth of cavities, transformer length and
+width) during one step of optimization. Initially the value of dX may be
+selected as 0.002-0.004 times of the interface waveguide width. While the
+reflection ripple is reducing, the increment has to be reduced up to ten times
+(0.0002-0.0004 times interface width). Sometimes some of the dimensions (irises
+between corrugations) might tend to unrealistic and even negative values. Therefore
+you might need to specify the minimum thickness of irises, for example
+0.018&#8217;&#8217;-0.022&#8217;&#8217;. While optimizing, the bandwidth of
+filter can move along the frequency axis. You can slightly move the bandwidth
+using appropriate button (see Fig 10). If the button [Adjust Band] is clicked,
+a window with input line will appear. Enter a value slightly less than 1 in
+order to reduce frequency plan and a value slightly greater than 1 in order to
+move the frequency plan forward the frequency axis (increase).<span
+style='mso-spacerun:yes'>&nbsp; </span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;font-family:Arial;color:white'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1034" type="#_x0000_t75" style='width:585pt;height:66.75pt'>
+ <v:imagedata src="help_files/image010.jpg" o:title="hlp06"/>
+</v:shape><![endif]--><![if !vml]><img width=780 height=89
+src="help_files/image010.jpg" v:shapes="_x0000_i1034"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;font-family:Arial;color:white'>Figure 10: Control panel
+of the Response Optimizer.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:red'>The
+same precautions have to be taken into account while using the optimizing tool.
+The optimizer is based on the same type of VBScript code and is not responsive
+while running. Please read warning notes marked red and written above and below
+the Fig 7.<span style='mso-spacerun:yes'>&nbsp; </span></span><span
+style='font-size:10.0pt;font-family:Arial;color:white'>Optimization process may
+require from 40 to 100 optimization steps and from 15 to 45 minutes for an
+experienced designer. At the end of optimization the pass-band frequency
+response of filter should be much better (see Fig 11).<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;font-family:Arial;color:white'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1035" type="#_x0000_t75" style='width:417pt;height:280.5pt'>
+ <v:imagedata src="help_files/image011.jpg" o:title="hlp07"/>
+</v:shape><![endif]--><![if !vml]><img width=556 height=374
+src="help_files/image011.jpg" v:shapes="_x0000_i1035"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-size:10.0pt;font-family:Arial;color:#FF99CC'>Figure
+11: Frequency response of optimized filter.<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'>Frequency
+response of &#8220;optimized&#8221; filters might not be so &#8220;esthetically
+beautiful&#8221; as Chebychev, Zolotarev and other polynomials look like, but
+it can be really &#8220;optimal&#8221; in respect to formal specs. For example,
+size, manufacturability, power handling and harmonics rejection are not
+involved into conventional synthesis methods, but they are the most valuable
+features of harmonic filters. The main advantage of optimization design methods
+over the direct synthesis ones is flexibility and trade offs. <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-family:"Wide Latin";mso-bidi-font-family:Arial;color:white'>Final
+Revision<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'>During
+and after optimization the filter has to be virtually tested over wide
+frequency sweep for spikes and zones of lack of rejection. The Fig 12 shows
+wide sweep frequency transmission response for the optimized design.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;font-family:Arial;color:white'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1036" type="#_x0000_t75" style='width:417.75pt;height:282pt'>
+ <v:imagedata src="help_files/image012.jpg" o:title="hlp08"/>
+</v:shape><![endif]--><![if !vml]><img width=557 height=376
+src="help_files/image012.jpg" v:shapes="_x0000_i1036"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;font-family:Arial;color:white'>Figure 12: Response over
+wide frequency sweep.<o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'>It
+should be noticed that the response obtained by simulation over high frequency
+spectrum corresponds to TE10-mode transmission and reflection only. It is
+recommended to check the responses of spurious modes also. In order to do so,
+simply replace internal width of corrugations (see Fig 6) by <b
+style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:normal'>Ac/2</i></b>
+value for TE</span><span style='font-size:8.0pt;font-family:Arial;color:white'>20</span><span
+style='font-size:10.0pt;font-family:Arial;color:white'>-mode, <b
+style='mso-bidi-font-weight:normal'>Ac/3</b> for TE</span><span
+style='font-size:8.0pt;font-family:Arial;color:white'>30</span><span
+style='font-size:10.0pt;font-family:Arial;color:white'>-mode, <b
+style='mso-bidi-font-weight:normal'><i style='mso-bidi-font-style:normal'>Ac/4</i></b>
+for TE</span><span style='font-size:8.0pt;font-family:Arial;color:white'>40</span><span
+style='font-size:10.0pt;font-family:Arial;color:white'>-mode, etc and compute
+frequency response. For our example, values 0.34 (0.68/2) and 0.2267 (0.68/3)
+are entered for modes of TE20 and TE30 respectively and plots shown on Fig 13
+and Fig 14 are obtained.<span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;font-family:Arial;color:white'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1037" type="#_x0000_t75" style='width:417.75pt;height:281.25pt'>
+ <v:imagedata src="help_files/image013.jpg" o:title="hlp10"/>
+</v:shape><![endif]--><![if !vml]><img width=557 height=375
+src="help_files/image013.jpg" v:shapes="_x0000_i1037"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-size:10.0pt;font-family:Arial;color:#FF99CC'>Figure
+13: Plot of TE20-mode frequency response.<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;font-family:Arial;color:white'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1038" type="#_x0000_t75" style='width:417.75pt;height:281.25pt'>
+ <v:imagedata src="help_files/image014.jpg" o:title="hlp11"/>
+</v:shape><![endif]--><![if !vml]><img width=557 height=375
+src="help_files/image014.jpg" v:shapes="_x0000_i1038"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-size:10.0pt;font-family:Arial;color:#FF99CC'>Figure 14:
+Plot of TE30-mode frequency response.<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'>As
+it is mentioned above, the plots correspond to the worst case of propagation of
+the spurious modes, if they are excited for 100%. Practically they might be
+hardly noticed (as showed on Fig 1) and be reason of mysterious and unsolvable
+&#8220;quality&#8221; problems further. Therefore is better to double check the
+spurious positions during design process by such a simple trick. <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;font-family:Arial;color:white'><span
+style='mso-spacerun:yes'>&nbsp; </span></span><span style='font-family:"Wide Latin";
+mso-bidi-font-family:Arial;color:white'>Sensitivity Analysis<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'>As
+it is practically impossible to produce hardware with dimensions identically
+equal to the dimensions assumed to be optimal (designed) because of inaccuracy
+of real production methods, it is at least useful to know what kind of
+performance the reality hardware would demonstrate. Different production
+methods such as EDM, milling, casting, galvanic forming, water jets, and others
+have their characteristic tolerances. In conformity with corrugated filters the
+most popular production methods can be specified by rounding of straight
+corners and deviation of positions of vertexes of cavities. The both effects
+may be evaluated by Sensitivity Analyzer linked to the Simulator by [Tolerance]
+button. Four types of manufacturing tolerances are specified there. H-plane
+milling tool radius is radius of milling cutter applied to corrugation on
+H-plane, i.e. if the filter is composed from two half bodies to be connected on
+central H-plane by flanges. H-plane assembling is easier to produce by milling,
+but it is less reliable than E-plane assembling because potential flange
+contact problems. Although E-plane assembling has a big advantage such as
+insensitivity for flange contact quality, it is seldom used because it is
+larger than H-plane one, more sensitive for cavity rounding and it requires
+deeper penetration of cutter (larger cutter is required). EDM is very accurate,
+so tolerances and radii are negligible small. However it is expensive and
+therefore production people do not like to use it for mass production. Galvanic
+forming has advantage over &#8220;machine&#8221; methods, as it can build
+filter as monolithic unit with no contact flanges. However galvanic methods are
+less accurate and have environmental problems. It is direct responsibility of
+design engineer to provide sensitivity analysis over possible production
+methods in order to eliminate potential quality assurance problems. For example
+the frequency response shown on Fig 11 may degrade to the response shown on Fig
+15, if reasonable production errors are applied (radius of milling tool is
+0.064&#8217;&#8217; and random tolerances are +/- 0.0005&#8217;&#8217;).
+Nevertheless, the &#8220;example&#8221; filter (press [Example] option of
+Simulator) shows much less degradation of frequency response caused by the same
+production tolerances.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;font-family:Arial;color:white'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1039" type="#_x0000_t75" style='width:400.5pt;height:243.75pt'>
+ <v:imagedata src="help_files/image015.jpg" o:title="%231"/>
+</v:shape><![endif]--><![if !vml]><img width=534 height=325
+src="help_files/image015.jpg" v:shapes="_x0000_i1039"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-size:10.0pt;font-family:Arial;color:#FF99CC'>Figure
+15: Degradation of frequency response shown on Fig 11 caused by milling
+tolerances.<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;font-family:Arial;color:white'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1040" type="#_x0000_t75" style='width:399.75pt;height:244.5pt'>
+ <v:imagedata src="help_files/image016.jpg" o:title="%232"/>
+</v:shape><![endif]--><![if !vml]><img width=533 height=326
+src="help_files/image016.jpg" v:shapes="_x0000_i1040"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-size:10.0pt;font-family:Arial;color:#FF99CC'>Figure
+16: Degradation of frequency response of &#8220;example&#8221; filter caused by
+same milling tolerances.<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'>Nevertheless
+in accordance with sensitivity analysis the bad filter may be produced using
+EDM method because EDM tolerances impact is more or less acceptable (see Fig
+17). <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;font-family:Arial;color:white'><!--[if gte vml 1]><v:shape
+ id="_x0000_i1041" type="#_x0000_t75" style='width:401.25pt;height:244.5pt'>
+ <v:imagedata src="help_files/image017.jpg" o:title="%233"/>
+</v:shape><![endif]--><![if !vml]><img width=535 height=326
+src="help_files/image017.jpg" v:shapes="_x0000_i1041"><![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><i style='mso-bidi-font-style:
+normal'><span style='font-size:10.0pt;font-family:Arial;color:#FF99CC'>Figure
+17: Degradation of frequency response shown on Fig 11 caused by EDM tolerances.<o:p></o:p></span></i></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'>The
+analysis shows that the &#8220;example&#8221; filter is stable for production
+errors and can be produced by &#8220;cheap&#8221; production methods. The other
+filter should be produced by only accurate production methods and might be
+expensive. Stability for production tolerances depends on many design factors
+such as equivalent values and distribution of discontinuities along the filter
+structure. Usually filters having wider design pass-band are more stable. I
+have found some types of corrugated structures, <a href="../oncorr/quarter.htm">for
+example quarter-wave-coupled</a>, being also more forgiving the production
+errors.<span style='mso-spacerun:yes'>&nbsp; </span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-family:"Wide Latin";mso-bidi-font-family:Arial;color:white'>Accuracy</span><span
+style='font-size:10.0pt;font-family:Arial;color:white'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'>There
+is very strong and very wrong believe among engineers that &#8220;accurate EM
+based&#8221; software, for example HFSS, is more accurate because licenses are
+expensive. Contradictory, they think my Design Studio must be very inaccurate
+only because it is a free online toy. I can claim that my Design Studio is more
+accurate and hundreds of times faster than, for example, HFSS because it is
+based on analytically pre-solved problems of scattering and propagation in real
+(non-discrete) space. Practically the software accuracy is more sophisticated.
+None of existing EM simulation tools can be called as &#8220;accurate&#8221;
+because no exact solutions of corresponding Maxwell equations within
+appropriate &#8220;practical&#8221; boundary conditions have been found. All
+numerical methods ever been developed are approximate. The accuracy problem is
+based on convergence problem, which is based on idea that &#8220;for any &#949;
+&gt;0 there always exist N, so for any n&gt;N |An-A| &lt; &#949;&#8221;. None
+of existing EM numerical methods is approved over the convergence criterion by
+mathematicians. Therefore &#8220;to converge or not to converge&#8221; is still
+the question. So no trust to any simulation results should be given. Some of
+simulation tools providers can argue this my point of view, but I am quite sure
+no one would take my engineering responsibility for failure of &#8220;well
+pre-simulated&#8221; designs. Therefore, I cannot also guarantee my Design
+Studio is an &#8220;exact&#8221; design tool. However, I assume my Simulator
+provides &#8220;practical&#8221; accuracy, i.e. slight shift of bandwidth and
+return loss deviation for &#8220;design stable for errors&#8221; (see rubric
+above) in respect to &#8220;reality&#8221;. Stability for errors is something
+associated with design itself rather than with software. As computational
+errors make similar effects for filter simulation results as production errors,
+the designs stable for tolerances should be more
+&#8220;simulatable&#8221;.<span
+style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp; </span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial;color:white'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;font-family:"Wide Latin";mso-bidi-font-family:Arial;
+color:red'>TO BE CONTINUED<o:p></o:p></span></p>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
