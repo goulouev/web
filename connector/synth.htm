@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <meta http-equiv="x-ua-compatible" content="IE=5" />
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta name="robots" content="noindex" />
+    <style type="text/css">
+        <!--
+        div {
+            background: #b0b0b0
+        }
+
+        h1 {
+            font: 14pt Arial;
+            color: navy
+        }
+
+        h2 {
+            font: 8pt Arial Black;
+            color: #003030
+        }
+
+        h3 {
+            font: 8pt Arial;
+            color: black
+        }
+
+        td {
+            font: 10pt Lucida Console;
+            color: #003030;
+            padding-left: 20
+        }
+        -->
+    </style>
+</HEAD>
+<!--marked-->
+<BODY LEFTMARGIN="0" TOPMARGIN="20" BGCOLOR="#909090" onload="vbscript:SynthOnLoad()">
+    <CENTER>
+        <FONT STYLE="font:14pt Arial; color:navy">
+            <DIV>
+                Select Filter Prototype<BR /><HR />
+                <FONT STYLE="font:8pt Arial Black; color:#300030">
+                    <INPUT TYPE="radio" NAME="Proto" ONCLICK="ProtoType()" />Butterworth
+                    <INPUT TYPE="radio" NAME="Proto" ONCLICK="ProtoType()" />Chebychev
+                    <INPUT TYPE="radio" NAME="Proto" ONCLICK="ProtoType()" />Impedance Taper
+                    <INPUT TYPE="radio" NAME="Proto" ONCLICK="ProtoType()" />Impedance Transformer<HR />
+                    <INPUT NAME="VarName0" TYPE="text" STYLE="font:8pt Arial Black; color:navy" size="35" DISABLED="" />
+                    <INPUT NAME="Var0" TYPE="text" STYLE="font:8pt Arial Black; color:navy" size="25" /><BR />
+                    <INPUT NAME="VarName1" TYPE="text" STYLE="font:8pt Arial Black; color:navy" size="35" DISABLED="" />
+                    <INPUT NAME="Var1" TYPE="text" STYLE="font:8pt Arial Black; color:navy" size="25" /><BR />
+                    <INPUT NAME="VarName2" TYPE="text" STYLE="font:8pt Arial Black; color:navy" size="35" DISABLED="" />
+                    <INPUT NAME="Var2" TYPE="text" STYLE="font:8pt Arial Black; color:navy" size="25" /><BR />
+                    <INPUT NAME="VarName3" TYPE="text" STYLE="font:8pt Arial Black; color:navy" size="35" DISABLED="" />
+                    <INPUT NAME="Var3" TYPE="text" STYLE="font:8pt Arial Black; color:navy" size="25" /><BR />
+                    <BR /><HR />
+                </FONT>
+            </DIV>
+            <INPUT TYPE="button" NAME="KnobClear" STYLE="font:8pt Arial Black; color:navy" Value="Clear" />
+            <INPUT TYPE="button" NAME="KnobCancel" STYLE="font:8pt Arial Black; color:navy" Value="Cancel" />
+            <INPUT TYPE="button" NAME="KnobApply" STYLE="font:8pt Arial Black; color:navy" Value="Apply" />
+            <INPUT TYPE="button" NAME="KnobExample" STYLE="font:8pt Arial Black; color:magenta" Value="Example" />
+        </FONT>
+    </CENTER>
+    <DIV>
+
+    </DIV>
+
+    <SCRIPT LANGUAGE="VBScript">
+<!--
+        Sub SynthOnLoad()
+        Call ShowSpecs()
+        End Sub
+
+        Sub ProtoType()
+        if Proto(0).Checked then
+        VarName0.Value = "Resonance Order"
+        VarName1.Value = "Central Frequency, GHz"
+        VarName2.Value = "Bandwidth, GHz"
+        VarName3.Value = ""
+        end if
+if  Proto(1).Checked then
+        VarName0.Value = "Resonance Order"
+        VarName1.Value = "Central Frequency, GHz"
+        VarName2.Value = "Bandwidth, GHz"
+        VarName3.Value = "In-Band Ripple, dB"
+        end if
+if Proto(2).Checked then
+        VarName0.Value = "Resonance Order"
+        VarName1.Value = "Reference Frequency, GHz"
+        VarName2.Value = "Relative Susceptance Min & Max"
+        VarName3.Value = "Profile Parameter"
+        end if
+if Proto(3).Checked then
+        VarName0.Value = ""
+        VarName1.Value = "Reference Frequency, GHz"
+        VarName2.Value = ""
+        VarName3.Value = ""
+        end if
+End Sub
+
+        Sub KnobExample_OnClick()
+        if not(Proto(0).Checked or Proto(0).Checked or Proto(0).Checked) then
+        Proto(1).checked = true
+        call ProtoType()
+        end if
+if Proto(0).Checked then  Var0.Value = "0": Var1.Value = "12.2": Var2.Value = "0.50"   : end if
+if Proto(1).Checked then  Var0.Value = "0": Var1.Value = "12.2": Var2.Value = "0.50" : Var3.Value = "0.05"  : end if
+if Proto(2).Checked then Var3.Value = "0": Var1.Value = "12.2": Var2.Value = "2.0 3.5" : Var3.Value = "1.5" :  : end if
+End Sub
+
+        Sub KnobClear_OnClick()
+        Var0.Value = "": Var1.Value = "": Var2.Value = "": Var3.Value = ""
+        End Sub
+
+        Sub KnobApply_OnClick()
+        Dim Av(4)
+        if Proto(0).Checked = true then Av(0) = "0"
+        if Proto(1).Checked = true then Av(0) = "1"
+        if Proto(2).Checked = true then Av(0) = "2"
+        if Proto(3).Checked = true then Av(0) = "3"
+        Av(1) = Var0.Value: Av(2) = Var1.Value: Av(3) = Var2.Value: Av(4) = Var3.Value
+        Top.ProtoDat.Value = join(Av, "|")
+        Window.Navigate "editor.htm"
+        End Sub
+
+        Sub ShowSpecs()
+        Pars = Top.ProtoDat.Value
+        Av = Split(Pars, "|")
+        Npars = Ubound(Av)
+        if Npars < 4 then exit sub
+        if Av(0) = "0" then Proto(0).Checked = true
+        if Av(0) = "1" then Proto(1).Checked = true
+        if Av(0) = "2" then Proto(2).Checked = true
+        if Av(0) = "3" then Proto(3).Checked = true
+        Var0.Value = Av(1): Var1.Value = Av(2): Var2.Value = Av(3): Var3.Value = Av(4)
+        call  ProtoType()
+        End Sub
+
+        '<INPUT TYPE="button" NAME=KnobClear STYLE="font:8pt Arial Black; color:navy" Value="Clear">
+        '<INPUT TYPE="button" NAME=KnobCancel STYLE="font:8pt Arial Black; color:navy" Value="Cancel">
+        '<INPUT TYPE="button" NAME=KnobApply STYLE="font:8pt Arial Black; color:navy" Value="Apply">
+        '<INPUT TYPE="button" NAME=KnobExample STYLE="font:8pt Arial Black; color:magenta" Value="Example">
+//-->
+    </SCRIPT>
+</BODY>
+
+</HTML>
+

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <meta http-equiv="x-ua-compatible" content="IE=5" />
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <style type="text/css">
+        h1 {
+            font: 9pt Lucida Console;
+            color: navy
+        }
+
+        h2 {
+            font: 8pt Arial Black;
+            color: "#006000"
+        }
+
+        h3 {
+            font: 10pt Arial Black;
+            color: black
+        }
+
+        div {
+            background: #b0b0b0
+        }
+
+        table {
+            font-family: Lucida Console;
+            font-size: 12px;
+            color: navy
+        }
+    </style>
+</HEAD>
+<!--marked-->
+<BODY LEFTMARGIN="0" TOPMARGIN="20" BGCOLOR="#909090">
+    <DIV>
+        <CENTER>
+            <h3>
+                SETUP OF OPTIMIZATION PARAMETERS
+            </h3>
+            <HR />
+            <h2>
+                OPTIMIZATION CONSTRAINS
+            </h2>
+            <TABLE BORDER="2" ALIGN="TOP" WIDTH="500">
+                <TR>
+                    <TD ALIGN="TOP">
+                        <FONT COLOR="blue">Channel</FONT>
+                    </TD>
+                    <TD>
+                        <FONT COLOR="blue">Frequency Range, GHz</FONT>
+                    </TD>
+                    <TD>
+                        <FONT COLOR="blue">Path</FONT>
+                    </TD>
+                    <TD>
+                        <FONT COLOR="blue">Target, dB</FONT>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD>
+                        1
+                    </TD>
+                    <TD>
+                        <INPUT NAME="InputRange" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="35" />
+                    </TD>
+                    <TD>
+                        |S<INPUT NAME="InputPATH" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="2" />| &#60;
+                    </TD>
+                    <TD>
+                        <INPUT NAME="InputMag" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="10" />
+                    </TD>
+                </TR>
+                <TR>
+                    <TD>
+                        2
+                    </TD>
+                    <TD>
+                        <INPUT NAME="InputRange" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="35" />
+                    </TD>
+                    <TD>
+                        |S<INPUT NAME="InputPATH" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="2" />| &#60;
+                    </TD>
+                    <TD>
+                        <INPUT NAME="InputMag" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="10" />
+                    </TD>
+                </TR>
+                <TR>
+                    <TD>
+                        3
+                    </TD>
+                    <TD>
+                        <INPUT NAME="InputRange" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="35" />
+                    </TD>
+                    <TD>
+                        |S<INPUT NAME="InputPATH" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="2" />| &#60;
+                    </TD>
+                    <TD>
+                        <INPUT NAME="InputMag" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="10" />
+                    </TD>
+                </TR>
+                <TR>
+                    <TD>
+                        4
+                    </TD>
+                    <TD>
+                        <INPUT NAME="InputRange" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="35" />
+                    </TD>
+                    <TD>
+                        |S<INPUT NAME="InputPATH" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="2" />| &#60;
+                    </TD>
+                    <TD>
+                        <INPUT NAME="InputMag" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="10" />
+                    </TD>
+                </TR>
+                <TR>
+                    <TD>
+                        5
+                    </TD>
+                    <TD>
+                        <INPUT NAME="InputRange" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="35" />
+                    </TD>
+                    <TD>
+                        |S<INPUT NAME="InputPATH" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="2" />| &#60;
+                    </TD>
+                    <TD>
+                        <INPUT NAME="InputMag" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="10" />
+                    </TD>
+                </TR>
+            </TABLE>
+            <h2>
+                OPTIMIZATION STEPS
+            </h2>
+            <TABLE BORDER="1" WIDTH="500">
+                <TR>
+                    <TD>
+                        <FONT COLOR="blue">
+                            Single Step Deviation (%):
+                        </FONT>
+                    </TD>
+                    <TD>
+                        <INPUT TYPE="TEXT" Name="OptDX" STYLE="font:8pt Lucida Console; color:navy" size="8" />
+                    </TD>
+                    <TD>
+                        <FONT COLOR="blue">Number of Steps:
+
+                    </TD>
+                    <TD>
+                        <INPUT TYPE="TEXT" Name="OptN" STYLE="font:8pt Lucida Console; color:navy" size="8">
+                    </TD>
+                </TR>
+                <TR>
+                    <TD>
+                        <FONT COLOR="blue">
+                            Min Dimension in Nodes:
+                        </FONT>
+                    </TD>
+                    <TD>
+                        <INPUT TYPE="TEXT" Name="OptWmin" STYLE="font:8pt Lucida Console; color:navy" size="8" />
+                    </TD>
+                    <TD>
+                        <FONT COLOR="blue">Min Dimension in Junctions </FONT>
+                    </TD>
+                    <TD>
+                        <INPUT TYPE="TEXT" Name="OptCmin" STYLE="font:8pt Lucida Console; color:navy" size="8" />
+                    </TD>
+                </TR>
+            </TABLE>
+            <h2>
+                OPTIMIZATION METHOD
+            </h2>
+
+            <TABLE BORDER="1" WIDTH="500">
+                <TR>
+                    <TD>
+                        <FONT COLOR="blue">
+                            <INPUT TYPE="RADIO" Name="OptType" Checked="" />Pattern Search
+                        </FONT>
+                    </TD>
+                    <TD>
+                        <FONT COLOR="blue">
+                            <INPUT TYPE="RADIO" Name="OptType" DISABLED="" />Gradient
+                        </FONT>
+                    </TD>
+                </TR>
+            </TABLE>
+            <h2>
+                TYPE OF FUNCTIONAL:
+            </h2>
+
+            <TABLE BORDER="1" WIDTH="500">
+                <TR>
+                    <TD>
+                        <INPUT TYPE="RADIO" Name="FunType" Checked="" />
+                    </TD>
+                    <TD>
+                        <FONT COLOR="blue">
+                            <B>
+                                L<sub>2</sub>
+                            </B> (Minimization by Euclidean Norm of functional of constrains)
+                        </FONT>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD>
+                        <INPUT TYPE="RADIO" Name="FunType" />
+                    </TD>
+                    <TD>
+                        <FONT COLOR="blue">
+                            <B>MiniMax </B>(Minimization by EXTREMUMS of functional of constrains)
+                        </FONT>
+                    </TD>
+                </TR>
+            </TABLE><br />
+            <HR />
+            <INPUT NAME="Command1" TYPE="BUTTON" STYLE="font:8pt Lucida Console; color:navy; font-weight: bold" VALUE="  Apply  " />
+            <INPUT NAME="Command2" TYPE="BUTTON" STYLE="font:8pt Lucida Console; color:navy; font-weight: bold" VALUE="  Cancel " />
+            <INPUT NAME="Command3" TYPE="BUTTON" STYLE="font:8pt Lucida Console; color:blue" VALUE=" Example " /><br />
+        </CENTER>
+    </DIV>
+
+    <SCRIPT LANGUAGE="VBScript">
+        Sub Window_OnLoad()
+        if top.location = self.location then top.location = "start.htm"
+        if trim(Top.OptDat.value) = "" then exit sub
+        V = split(Top.OptDat.value, "|")
+        if CInt(V(0)) = 1 then Funtype(0).checked = true else Funtype(1).checked = true
+        OptN.value = V(1)
+        OptWmin.value = V(2): OptCmin.value = V(3): OptDX.value = V(4)
+        Nsp = CInt(V(5))
+
+        for iCount = 0 to Nsp
+VV = split(V(iCount + 6), " ")
+        InputPath(iCount).value = VV(0) & VV(1)
+        InputRange(iCount).value = VV(3) & " " & VV(4) & " " & VV(5)
+        InputMag(iCount).value = VV(2)
+        next
+        End Sub
+
+        Sub Command3_OnClick()
+        FunType(0).checked = true
+        OptN.value = "5"
+        OptDX.value = "1.0"
+        OptWmin.value = "0.020"
+        OptCmin.value = "0.050"
+        InputRange(0).value = "12.08   12.33    25" : InputPath(0).value = "11" : InputMag(0).value = "-22.0"
+        InputRange(1).value = "11.80   11.80     1" : InputPath(1).value = "12" : InputMag(1).value = "-50.0"
+        InputRange(2).value = "12.70   12.70     1" : InputPath(2).value = "12" : InputMag(2).value = "-50.0"
+        End Sub
+
+        Sub Command1_OnClick()
+        dim V(10)
+        if FunType(0).checked then V(0) = 1 else V(0) = 0
+        if IsNumeric(trim(OptN.value)) then
+        V(1) = trim(OptN.value)
+else
+        LN = "Field for parameter is either empty or non-numeric."
+        iCode = msgbox(LN, 0, "WRONG ENTRY FOR NUMBER OF OPTIMIZATION STEPS!")
+        exit sub
+        end if
+
+if IsNumeric(trim(OptWmin.value)) and IsNumeric(trim(OptCmin.value)) then
+        V(2) = trim(OptWmin.value): V(3) = trim(OptCmin.value)
+else
+        V(2) = 0: V(3) = 0
+        OptWmin.value = V(2): OptCmin.value = V(3)
+        end if
+
+if IsNumeric(trim(OptDX.value)) then
+        V(4) = trim(OptDX.value)
+else
+        LN = "Field for parameter is either empty or non-numeric."
+        iCode = msgbox(LN, 0, "WRONG ENTRY FOR STEP DEVIATION!")
+        exit sub
+        end if
+iSpec = -1: nSpec = -1
+        for iCount = 0 to 4
+LN = SpecLine(iCount + 1, InputRange(iCount).value, InputPath(iCount).value, InputMag(iCount).value)
+        If LN = "ERROR" then exit sub
+        if LN <> "" then
+        iSpec = iSpec + 1
+        V(6 + iSpec) = LN
+        end if
+next
+if iSpec = -1 then
+        LN = "It must be at least one target constrain specified in order to start optimization."
+        iCode = msgbox(LN, 0, "OPTIMIZATION CONSTRAIN NOT SPECIFIED!")
+        exit sub
+        end if
+V(5) = iSpec
+nCount = 6 + iSpec
+        OptSpec = ""
+        for iCount = 0 to nCount
+OptSpec = OptSpec & V(iCount) & "|"
+        next
+        Top.OptDat.value = trim(OptSpec)
+        window.navigate "editor.htm"
+        End Sub
+
+        function SpecLine(iElement, Range, Path, Mag)
+        Dim V(10)
+        path = trim(path): range = trim(range): mag = trim(mag)
+        Vpath = Array(left(path, 1), right(path, 1))
+        if path = "" and range = "" and mag = "" then SpecLine = "": exit function
+            Tit="WRONG ENTRY IN CHANNEL " & iElement & " !"
+        if IsNumeric(Vpath(0)) and IsNumeric(Vpath(1)) then
+        if CInt(Vpath(0)) > 2 or CInt(Vpath(0)) < 1 or CInt(Vpath(1)) > 2 or CInt(Vpath(1)) < 1 then
+        LN = "S" & Vpath(0) & Vpath(1) & " does not exists in a two-port waveguide device. Valid path is S11, S12, S21, or S22."
+        iCode = msgbox(LN, 0, Tit)
+        SpecLine = "ERROR": exit function
+            end if
+else
+            LN = "A non-numeric character is read from path input field. The path for S-parameter can be 11,12,21 or 11."
+        iCode = msgbox(LN, 0, Tit)
+        SpecLine = "ERROR": exit function
+            end if
+
+if IsNumeric(mag) then
+        Vmag = -abs(CDbl(mag))
+else
+        iCode = msgbox("The non-numeric character entered in the target field cannot be accepted.", 0, Tit)
+        SpecLine = "ERROR"
+        exit function
+            end if
+Vrange = Split(WordLineCorrect(" ", range), " ")
+if ubound(Vrange) < 2 then
+        LN = "Frequency range is not correctly specified. Please enter starting frequency point,"
+        LN = LN & "ending frequency point and number of points in the range. All three numbers must be separated by spaces."
+        iCode = msgbox(LN, 0, Tit)
+        SpecLine = "ERROR"
+        exit function
+            elseif IsNumeric(Vrange(0)) and IsNumeric(Vrange(1)) and IsNumeric(Vrange(2)) then
+        SpecArray = Array(Vpath(0), Vpath(1), Vmag, Vrange(0), Vrange(1), Vrange(2))
+        SpecLine = join(SpecArray, " ")
+else
+        LN = "The non-numeric character entered in the range field cannot be accepted as value."
+        iCode = msgbox(LN, 0, Tit)
+        SpecLine = "ERROR"
+        end if
+end function
+
+                Function WordLineCorrect(Median, TextLine)
+        dim VV, Nvv, iv, icount, N, InMark, i, r, dLine, A
+        N = len(TextLine)
+        InMark = True
+        for i = 1 to N
+r = mid(TextLine, i, 1)
+        if r = chr(9) then r = " "
+        dLine = r
+        if InMark and r = " " then dLine = "" end if
+if r = " " then InMark = True else InMark = False end if
+A = A & dLine
+next
+        if Median = " " then
+        WordLineCorrect = trim(A)
+else
+        WordLineCorrect = replace(trim(A), " ", Median)
+        end if
+end function
+
+
+
+
+    </SCRIPT>
+</BODY>
+
+</HTML>

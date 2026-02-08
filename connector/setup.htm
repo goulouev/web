@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <meta http-equiv="x-ua-compatible" content="IE=5" />
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <META name="Author" content="Rousslan Goulouev" />
+    <style type="text/css">
+        <!--
+        div {
+            background: #b0b0b0
+        }
+        -->
+    </style>
+</HEAD>
+<!--marked-->
+<BODY LEFTMARGIN="0" TOPMARGIN="20" BGCOLOR="#909090" onload="vbscript:SetupOnLoad()">
+    <TABLE WIDTH="100%" cellpadding="5" BORDER="5" bordercolordark="#a0a0a0" bordercolorlight="#c0c0c0">
+        <TR>
+            <TD bgcolor="#a0a0a0">
+                <DIV>
+                    <CENTER>
+                        <TABLE WIDTH="530" cellpadding="6">
+                            <TR>
+                                <TD colspan="2">
+                                    <CENTER>
+                                        <FONT STYLE="font:10pt Arial Black; color:black">SPAN AND DIMENSION</FONT>
+                                    </CENTER>
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD bgcolor="#c0c0c0">
+                                    <FONT STYLE="font:8pt Arial; color:navy">
+                                        <B>
+                                            Computed TM<SUB>nm</SUB>/TE<SUB>nm</SUB> -modes
+                                        </B>
+                                    </FONT>
+                                </TD>
+                                <TD bgcolor="#c0c0c0">
+                                    <FONT STYLE="font:8pt Arial; color:blue">
+                                        <B>max (n,m): </B>
+                                        <INPUT NAME="Modes" TYPE="text" STYLE="font:8pt Arial Black; color:navy" size="10" />
+                                        <B>
+                                            Y Symmetry:
+                                        </B>
+                                        <Input type="radio" name="Symo" />
+                                        Yes<input type="radio" name="Symo" Checked="" />No
+                                    </FONT>
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD bgcolor="#c0c0c0">
+                                    <FONT STYLE="font:8pt Arial; color:navy">
+                                        <B>Active Mode Index</B>
+                                    </FONT>
+                                </TD>
+                                <TD bgcolor="#c0c0c0">
+                                    <INPUT NAME="ActiveMode" TYPE="text" STYLE="font:8pt Arial Black; color:navy" size="50" />
+
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD bgcolor="#c0c0c0">
+                                    <FONT STYLE="font:8pt Arial; color:navy">
+                                        <B>Units</B>
+                                    </FONT>
+                                </TD>
+                                <TD bgcolor="#c0c0c0">
+                                    <FONT STYLE="font:8pt Arial; color:blue">
+                                        <B>
+                                            <CENTER>Units:</CENTER>
+                                        </B><Input type="radio" name="fr" checked="" />GHz <Input type="radio" name="unit" checked="" />mm
+                                        <input type="radio" name="unit" />inch
+                                    </FONT>
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD colspan="2">
+                                    <CENTER>
+                                        <FONT STYLE="font:10pt Arial Black; color:black">FILLING AND SURFACE</FONT>
+                                    </CENTER>
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD bgcolor="#c0c0c0">
+                                    <FONT STYLE="font:8pt Arial; color:navy">
+                                        <B>
+                                            Dielectric Const., [ <FONT Style="font:12pt Symbol">e</FONT> ]
+                                        </B>
+                                    </FONT>
+                                </TD>
+                                <TD bgcolor="#c0c0c0">
+                                    <INPUT NAME="epso" TYPE="text" STYLE="font:8pt Arial Black; color:navy" size="50" />
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD bgcolor="#c0c0c0">
+                                    <FONT STYLE="font:8pt Arial; color:navy">
+                                        <B>
+                                            Loss Tangent,
+                                        </B>
+                                        [ <FONT Style="font:12pt Symbol">d</FONT> ]
+                                    </FONT>
+                                </TD>
+                                <TD bgcolor="#c0c0c0">
+                                    <INPUT NAME="tango" TYPE="text" STYLE="font:8pt Arial Black; color:navy" size="50" />
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD bgcolor="#c0c0c0">
+                                    <FONT STYLE="font:8pt Arial; color:navy">
+                                        <B>
+                                            Surface Conductivity, [ <FONT Style="font:12pt Symbol">s&#180;</FONT>
+                                        </B>10<sup>7</sup>S/m <B>]</B>
+                                    </FONT>
+                                </TD>
+                                <TD bgcolor="#c0c0c0">
+                                    <INPUT NAME="condo" TYPE="text" STYLE="font:8pt Arial Black; color:navy" size="50" />
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD colspan="2">
+                                    <CENTER>
+                                        <FONT STYLE="font:10pt Arial Black; color:black">FREQUENCY SWEEP, GHz</FONT>
+                                    </CENTER>
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD bgcolor="#c0c0c0">
+                                    <FONT STYLE="font:8pt Arial; color:navy">
+                                        <B>
+                                            First Frequency Point, [ f<sub>min</sub> ]
+                                        </B>
+                                    </FONT>
+                                </TD>
+                                <TD bgcolor="#c0c0c0">
+                                    <INPUT NAME="freq0" TYPE="text" STYLE="font:8pt Arial Black; color:navy" size="50" />
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD bgcolor="#c0c0c0">
+                                    <FONT STYLE="font:8pt Arial; color:navy">
+                                        <B>
+                                            Last Frequency Point, [ f<sub>max</sub> ]
+                                        </B>
+                                    </FONT>
+                                </TD>
+                                <TD bgcolor="#c0c0c0">
+                                    <INPUT NAME="freq1" TYPE="text" STYLE="font:8pt Arial Black; color:navy" size="50" />
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD bgcolor="#c0c0c0">
+                                    <FONT STYLE="font:8pt Arial; color:navy">
+                                        <B>
+                                            Number of Points in Range [ N<sub>p</sub> ]
+                                        </B>
+                                    </FONT>
+                                </TD>
+                                <TD bgcolor="#c0c0c0">
+                                    <INPUT NAME="freqN" TYPE="text" STYLE="font:8pt Arial Black; color:navy" size="50" />
+                                </TD>
+                            </TR>
+
+                        </TABLE>
+                    </CENTER>
+                </DIV>
+                <br />
+                <CENTER>
+                    <BUTTON NAME="SetBasic" STYLE="font:8pt Arial Black; color:navy">Example</BUTTON>
+                    <BUTTON NAME="GoNext" STYLE="font:8pt Arial Black; color:navy"> Apply Changes</BUTTON>
+                </CENTER>
+            </TD>
+        </TR>
+    </TABLE>
+
+    <SCRIPT LANGUAGE="VBScript">
+  <!--
+
+        '==================================== WINDOW EVENTS
+        Sub SetupOnLoad()
+        if top.location = self.location then top.location = "start.htm"
+        InputDatText = top.InputDat.value
+        if top.InputDat.value = Empty then exit sub
+        SetInputDat(InputDatText)
+        End Sub
+
+        sub SetBasic_OnClick()
+        call SetInputDat("1 0 7 10 1.0 0.0 6.1 11.5 13.0 300 1")
+        End Sub
+
+
+        sub GoNext_OnClick()
+        Call LetInputDat(InputDatText, ErrCode)
+        if ErrCode then exit sub
+        top.InputDat.value = InputDatText
+        Window.Navigate "editor.htm"
+        end sub
+
+
+        '==================================== DATA EXCHANGE
+
+        sub SetInputDat(InputDatText)
+        dim V
+        if InputDatText = Empty then exit sub
+        V = split(InputDatText, " ")
+        iUnit = V(0)
+        iSym = V(1)
+        Nx = V(2)
+        Ny = V(3)
+        eps = V(4)
+        tg = V(5)
+        sigm = V(6)
+        f0 = v(7)
+        f1 = v(8)
+        Np = v(9)
+        Mode = v(10)
+        modes.value = Nx & " " & Ny
+        if iUnit = 0 then unit(0).checked = true else unit(1).checked = true end if
+if iSym = 1  then symo(0).checked = true else symo(1).checked = true end if
+epso.value = eps: tango.value = tg: condo.value = sigm
+        freq0.value = f0: freq1.value = f1: freqN.value = Np
+        ActiveMode.Value = Mode
+        end Sub
+
+        sub LetInputDat(InputDatText, ErrCode)
+        'On Error resume next
+        dim V, Nv
+        ErrCode = false
+        md = trim(modes.value)
+        if md = "" then
+        Nx = 10: Ny = 10
+else
+        V = split(WordLineCorrect(" ", md), " ")
+        if ubound(v) < 1 then
+        Nx = 10: Ny = 10
+       else
+        if IsNumeric(V(0)) then Nx = CDbl(V(0)) else Nx = 10
+        if IsNumeric(V(1)) then Ny = CDbl(V(1)) else Ny = 10
+        if Nx > 10 then Nx = 10
+        if Ny > 10 then Ny = 10
+        end if
+end if
+                   if unit(0).checked = true then  iUnit = 0  end if
+                   if unit(1).checked = true then  iUnit = 1  end if
+                   if symo(0).checked = true then  iSym = 1  end if
+                   if symo(1).checked = true then  iSym = 0   end if
+if trim(epso.value) = "" then
+        eps = 1
+        elseif IsNumeric(trim(epso.value)) then
+        eps = CDbl(Trim(epso.value))
+else
+        ErrCode = True
+        msgbox "The value entered for dielectric constant is non-numeric. Please correct it", 0, "Entry Error"
+        end if
+
+if trim(tango.value) = "" then
+        tg = 0.0
+        elseif IsNumeric(tango.value) then
+        tg = CDbl(tango.value)
+else
+        ErrCode = True
+        msgbox "The value entered for loss tangent is non-numeric. Please correct it", 0, "Entry Error"
+        exit sub
+        end if
+
+if trim(condo.value) = "" then
+        sigm = 0
+        elseif IsNumeric(condo.value) then
+        sigm = CDbl(condo.value)
+else
+        ErrCode = True
+        msgbox "The value entered for surface conductivity is non-numeric. Please correct it", 0, "Entry Error"
+        exit sub
+        end if
+
+if not IsNumeric(freq0.value) then
+        ErrCode = True
+        msgbox "The value entered for start frequency point in sweep range is non-numeric. Please correct it", 0, "Entry Error"
+        exit sub
+else
+        f0 = CDbl(freq0.value)
+        end if
+
+if not IsNumeric(freq1.value) then
+        ErrCode = True
+        msgbox "The value entered for end frequency point in sweep range is non-numeric. Please correct it", 0, "Entry Error"
+        exit sub
+else
+        f1 = CDbl(freq1.value)
+        end if
+
+if trim(freqN.value) = "" then
+        Np = 0
+        elseif IsNumeric(freqN.value) then
+        Np = CInt(freqN.value)
+else
+        ErrCode = True
+        msgbox "The value entered for number of points is non-numeric. Please correct it", 0, "Entry Error"
+        exit sub
+        end if
+
+if IsNumeric(Trim(ActiveMode.value))then mode = Cint(Trim(ActiveMode.value)) else mode = 1
+        InputDatText = iUnit & " " & iSym & " " & Nx & " " & Ny & " " & eps & " " & tg & " " & sigm & " " & f0 & " " & f1 & " " & Np & " " & mode
+        'top.InputDat.value = InputDatText
+        'msgbox InputDatText
+        end Sub
+
+        '==================================== Text Functions
+
+        Function WordLineCorrect(Median, TextLine)
+        dim VV, Nvv, iv, icount, N, InMark, i, r, dLine, A
+        N = len(TextLine)
+        InMark = True
+        for i = 1 to N
+r = mid(TextLine, i, 1)
+        if r = chr(9) then r = " "
+        dLine = r
+        if InMark and r = " " then dLine = "" end if
+if r = " " then InMark = True else InMark = False end if
+A = A & dLine
+next
+        if Median = " " then
+        WordLineCorrect = trim(A)
+else
+        WordLineCorrect = replace(trim(A), " ", Median)
+        end if
+end function
+//-->
+
+    </SCRIPT>
+</BODY>
+
+</HTML>
+

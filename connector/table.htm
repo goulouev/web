@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <meta http-equiv="x-ua-compatible" content="IE=5" />
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta name="robots" content="noindex" />
+    <style type="text/css">
+        h1 {
+            font: 8pt Arial Black;
+            color: navy
+        }
+
+        h2 {
+            font: 10pt Arial Black;
+            color: maroon
+        }
+    </style>
+
+</HEAD>
+<!--marked-->
+<BODY LEFTMARGIN="0" TOPMARGIN="20" BGCOLOR="#909090">
+    <CENTER>
+        <TABLE WIDTH="100%" HEIGHT="520" BORDER="5" bordercolordark="#a0a0a0" bordercolorlight="#c0c0c0">
+            <TR VALIGN="TOP">
+                <TD WIDTH="150" BGCOLOR="#DDDDDD">
+                    <CENTER>
+                        <FONT STYLE="font:8pt Arial Black; color:maroon">S-Data Format:</FONT>
+                    </CENTER>
+                    <FONT STYLE="font:8pt Arial; color:navy">
+                        <INPUT TYPE="RADIO" NAME="DataType" VALUE="1" CHECKED="" />Re / Im<BR />
+                        <INPUT TYPE="RADIO" NAME="DataType" VALUE="2" />Mag/Phase<BR />
+                        <INPUT TYPE="RADIO" NAME="DataType" VALUE="3" />s2p<BR />
+                    </FONT>
+                    <CENTER>
+                        <FONT STYLE="font:8pt Arial Black; color:maroon">Delimiter</FONT>
+                    </CENTER>
+                    <FONT STYLE="font:8pt Arial; color:navy">
+                        <INPUT TYPE="RADIO" NAME="DelimType" VALUE="1" CHECKED="" />Space<BR />
+                        <INPUT TYPE="RADIO" NAME="DelimType" VALUE="2" />Tab<BR /><BR />
+                    </FONT>
+                    <CENTER>
+                        <FONT STYLE="font:8pt Arial Black; color:maroon">S-Data Import</FONT>
+                    </CENTER>
+                    <FONT STYLE="font:8pt Arial; color:navy">
+                        1. Copy your s-data from a text editor (NotePad, WordPad, etc.) into clipboard (Right Mouse Click, Select All, Copy).<BR />
+                        2. Paste the s-data into the text window (Right Mouse Click, Paste).<BR />
+                        3. Select appropriate data format<BR />
+                        4. Click the "Import" button<BR />
+                    </FONT>
+                    <INPUT TYPE="button" NAME="command1" STYLE="font:8pt Arial Black; color:navy" Value="       Import      " />
+                    <BR />
+                    <BR />
+                    <CENTER>
+                        <FONT STYLE="font:8pt Arial Black; color:maroon">S-Data Export</FONT>
+                    </CENTER>
+                    <FONT STYLE="font:8pt Arial; color:navy">
+                        1. Click the "Export" button.<BR />
+                        2. Paste the s-data into a text editor (Right Mouse Click, Paste).<BR />
+                        3. Save the table as a text file.<BR />
+                    </FONT>
+                    <INPUT TYPE="button" NAME="command2" STYLE="font:8pt Arial Black; color:navy" Value="       Export      " />
+                </TD>
+                <TD BGCOLOR="#DDDDDD">
+                    <TEXTAREA NAME="Okno" COLS="115" ROWS="44" STYLE="font:8pt Lucida Console; color:navy; background-color:#DDDDDD"></TEXTAREA>
+                </TD>
+            </TR>
+        </TABLE>
+    </CENTER>
+    <SCRIPT LANGUAGE="VBScript">
+  <!--
+
+        dgRad = 0.017453292519943295769236907684886
+
+        sub Window_OnLoad()
+
+        End sub
+
+        Sub Command1_OnClick()
+        dim LN, SLines, SLine, LM
+        LN = WordLineCorrect(" ", Trim(Okno.value))
+        LN = replace(LN, chr(13), "")
+        LM = ""
+        if DataType(0).Checked then sKey = Array("#", "GHz", "S", "RI", "R", "50")
+        if DataType(1).Checked then sKey = Array("#", "GHz", "S", "dB", "R", "50")
+        SLines = split(LN, chr(10))
+        Np = ubound(SLines) - 1
+        for iCount = 0 to  Np
+SLine = split(Trim(SLines(iCount)), " ")
+        Nsp = Ubound(SLine)
+        if Nsp >= 4 then
+        if SLine(0) = "#" then sKey = SLine
+        if NumericCheck(SLine) then
+        dLM = TouchFileKey(sKey, sLine)
+        if dLM = "" then exit sub
+        LM = LM & dLM & vbCrLf
+        end if
+end if
+next
+Top.SDat.value = LM
+        Window.Navigate "graph.htm"
+        End Sub
+
+        Sub Command2_OnClick()
+        dim LN, SLines, SLine, LM
+
+        if DataType(0).Checked then
+        if DelimType(0).Checked then
+        Okno.value = Top.SDat.Value
+      else
+        Okno.Value = replace(Top.SDat.Value, " ", vbTab)
+        end if
+end if
+
+if DataType(1).Checked then
+        'sKey=Array("#","GHz","S","RI","R","50")
+        sKey = Array("#", "GHz", "S", "dB", "R", "50")
+        SLines = split(Top.SDat.Value, vbCrLf)
+        Np = ubound(SLines) - 1: LM = ""
+        for iCount = 0 to Np
+'SLine=split(Trim(SLines(iCount))," ")
+        LM = LM & ReIm_MagArg(SLines(iCount)) & vbCrLf
+        next
+        if DelimType(0).Checked then
+        Okno.value = LM
+      else
+        Okno.Value = replace(LM, " ", vbTab)
+        end if
+end if
+
+if DataType(2).Checked then
+        if DelimType(0).Checked then
+        LM = Top.SDat.Value
+      else
+        LM = replace(Top.SDat.Value, " ", vbTab)
+        end if
+LN = "! WR_Connect version 01" & vbCrLf
+LN = LN & "!"
+        LN = LN & date & " " & time & vbCrLf
+        LN = LN & "! Frequency(GHz)   Re(S11)   Im(S11)   Re(S21)   Im(S21)   Re(S12)   Im(S12)   Re(S22)   Im(S22)" & vbCrLf
+        LN = LN & "# GHz  S  RI R 50" & vbCrLf
+        Okno.Value = LN & LM
+        end if
+End Sub
+
+        function TouchFileKey(sKey, sLine)
+        'Determines type of sKey- s2p # line
+        TouchFileKey = ""
+        select case ucase(sKey(1))
+case "GHZ"
+        cF = 1.0
+case "MHZ"
+        cF = 1.0e-3
+case "KHZ"
+        cF = 1.0e-6
+case "HZ"
+        cF = 1.0e-9
+case else
+        exit function
+            end select
+
+        if ucase(sKey(2)) <> "S" then exit function
+            LN=cF * CDbl(sLine(0))
+
+        select case ucase(sKey(3))
+case "DB"
+        for iCount = 0 to 3
+       w = CDbl(sLine(2 * iCount + 1)) / 20.0: R = 10.0 ^ (w): ph = dgRad * CDbl(sLine(2 * iCount + 2))
+        xRe = R * cos(ph): xIm = R * sin(ph)
+        LN = LN & " " & xRe & " " & xIm
+        next
+case "MA"
+        for iCount = 0 to 3
+       R = CDbl(sLine(2 * iCount + 1)): ph = dgRad * CDbl(sLine(2 * iCount + 2))
+        xRe = R * cos(ph): xIm = R * sin(ph)
+        LN = LN & " " & xRe & " " & xIm
+        next
+case "RI"
+        for iCount = 0 to 3
+       xRe = CDbl(sLine(2 * iCount + 1)): xIm = CDbl(sLine(2 * iCount + 2))
+        LN = LN & " " & xRe & " " & xIm
+        next
+case else
+        exit function
+            end select
+        TouchFileKey = LN
+        end function
+
+
+function MagArg_ReIm(LN)
+        'Converts line Mag/Arg to Re/Im
+        x = split(LN, " ")
+        MagArg_ReIm = x(0)
+        for iCount = 0 to 3
+ph = dgRad * CDbl(x(2 * iCount + 1)): w = CDbl(x(2 * iCount + 2)) / 20.0: R = 10.0 ^ (w)
+        xRe = R * cos(ph): xIm = R * sin(ph)
+        MagArg_ReIm = MagArg_ReIm & " " & xRe & " " & xIm
+        next
+        End Function
+
+        function ReIm_MagArg(LN)
+        'Converts line Mag/Arg to Re/Im
+        x = split(LN, " ")
+        ReIm_MagArg = x(0)
+        for iCount = 0 to 3
+R = Array(CDbl(x(2 * iCount + 1)), CDbl(x(2 * iCount + 2)))
+        w = dB(R): ph = arg(R) / dgRad
+        ReIm_MagArg = ReIm_MagArg & " " & w & " " & ph
+        next
+        End Function
+
+        Function NumericCheck(V)
+        NumericCheck = True
+        for each X in V
+if Not IsNumeric(X) then
+        NumericCheck = False
+        exit function
+            end if
+next
+End Function
+
+        Function WordLineCorrect(Median, TextLine)
+        dim VV, Nvv, iv, icount, N, InMark, i, r, dLine, A
+        N = len(TextLine)
+        InMark = True
+        for i = 1 to N
+r = mid(TextLine, i, 1)
+        if r = chr(9) then r = " "
+        dLine = r
+        if InMark and r = " " then dLine = "" end if
+if r = " " then InMark = True else InMark = False end if
+A = A & dLine
+next
+        if Median = " " then
+        WordLineCorrect = trim(A)
+else
+        WordLineCorrect = replace(trim(A), " ", Median)
+        end if
+end function
+
+                Function dB(x)
+        dim R
+        R = cabs(x)
+        If R > 1E-20 Then
+        dB = 20. * Log(R) / Log(10.)
+        Else
+        dB = -400
+        End If
+        End Function
+
+        Function cabs(x)
+        cabs = Sqr(x(0) * x(0) + x(1) * x(1))
+        End Function
+
+        Function arg(x)
+        Dim up, um, pi, pi2
+        pi = 3.141592653589793238
+        pi2 = 1.570796326794896619
+        up = x(1) + x(0): um = x(1) - x(0)
+        If up > 0 And um > 0 Then
+        arg = pi2 - Atn(x(0) / x(1))
+        End If
+        If up >= 0 And um <= 0 Then
+        arg = Atn(x(1) / x(0))
+        End If
+        If up < 0 And um < 0 Then
+        arg = -pi2 - Atn(x(0) / x(1))
+        End If
+        If up <= 0 And um >= 0 Then
+        If x(1) >= 0 Then arg = pi + Atn(x(1) / x(0)) Else arg = -pi + Atn(x(1) / x(0))
+        End If
+        End Function
+
+
+        Function clog(x)
+        clog = Array(Log(cabs(x)), arg(x))
+        End Function
+//-->
+    </SCRIPT>
+</BODY>
+
+</HTML>

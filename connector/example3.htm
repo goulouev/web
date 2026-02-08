@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+  <meta http-equiv="x-ua-compatible" content="IE=5"/>
+  <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+</head>
+<!--marked-->
+<BODY onload="vbscript:ExOnLoad3()">
+
+    <script language="javascript" type="text/javascript">
+
+<!--
+        if (top.location == self.location) {
+            top.name = "example_3"
+            top.location.href = "start.htm"
+        }
+        //-->
+    </script>
+
+
+    <SCRIPT LANGUAGE="VBSCRIPT">
+        Sub ExOnLoad3()
+        Dim V, VV
+        VV = TL()
+        V = split(VV, "][")
+        Top.InputDat.Value = V(1)
+        Top.StrucDat.value = V(2)
+        Top.ProtoDat.Value = V(3)
+        Top.OptDat.Value = V(4)
+        Top.TemplateDat.value = V(5)
+        Window.Navigate "editor.htm"
+        End Sub
+        Function TL()
+        TL = TL & "Notes:" & vbCrLf
+        TL = TL & "WR-75 to WR-62 Transition" & vbCrLf
+        TL = TL & "" & vbCrLf
+        TL = TL & "][1 1 7 10 1.0 0.0 6.1 10 15 250 1][0   1     0.30000     0.37500     0.37500     -0.18750     0.00000" & vbCrLf
+        TL = TL & "0   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000" & vbCrLf
+        TL = TL & "0   1     0.30213     0.35204     0.35204     -0.17602     0.00000" & vbCrLf
+        TL = TL & "0   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000" & vbCrLf
+        TL = TL & "0   1     0.39862     0.32748     0.32748     -0.16374     0.00000" & vbCrLf
+        TL = TL & "0   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000" & vbCrLf
+        TL = TL & "0   1     0.46014     0.31429     0.31429     -0.15715     0.00000" & vbCrLf
+        TL = TL & "0   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000" & vbCrLf
+        TL = TL & "0   1     0.30000     0.31100     0.31100     -0.15550     0.00000" & vbCrLf
+        TL = TL & "][1|0|11.2|0.50|0.05][][4" & vbCrLf
+        End Function
+    </SCRIPT>
+
+</BODY>
+</HTML>

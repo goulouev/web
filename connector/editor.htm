@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <meta http-equiv="x-ua-compatible" content="IE=5" />
+    <style type="text/css">
+        <!--
+        div {
+            background: #b0b0b0
+        }
+        -->
+    </style>
+</HEAD>
+<!--marked-->
+<BODY LEFTMARGIN="0" TOPMARGIN="20" BGCOLOR="#909090" onload="vbscript:EditOnLoad()" onunload="vbscript:EditUnLoad()">
+
+    <TABLE WIDTH="100%" BORDER="5" bordercolordark="#a0a0a0" bordercolorlight="#c0c0c0">
+
+        <TR>
+            <TD bgcolor="#c0c0c0">
+                <CENTER>
+                    <FONT STYLE="font:10pt Arial Black; color:#003030">
+                        SCHEMATIC EDITOR
+                    </FONT>
+                    <BR />
+                    <BR />
+                    <HR />
+                    <FONT STYLE="font:8pt Arial; color:navy">
+                        <B>Available Templates</B>
+                    </FONT>
+                    <BR />
+
+                    <select name="template" size="4" STYLE="font:9pt Arial; color:navy">
+                        <option value="1"> H-Iris Band-Pass Filter</option>
+                        <option value="2"> E-Stub Band-Pass Filter </option>
+                        <option value="3"> Corrugated Low-Pass Filter </option>
+                        <option value="4"> Waveguide Transformer </option>
+                        <option value="5"> Cut-off High-Pass Filter </option>
+                    </select>
+                    <BR />
+                    <INPUT TYPE="button" NAME="command2" STYLE="font:8pt Lucida Console; color:navy" Value=" Create Template " />
+                    <HR />
+                    <FONT STYLE="font:8pt Arial; color:navy">
+                        <B>Edit Structure</B>
+                        <BR />
+                        <BR />
+                        <INPUT TYPE="button" NAME="command11" STYLE="font:8pt Lucida Console; color:navy" Value=" Frequency Scale " />
+                        <BR />
+                        <INPUT TYPE="button" NAME="command12" STYLE="font:8pt Lucida Console; color:navy" Value=" Make Adjustment " />
+                        <BR />
+                        <INPUT TYPE="button" NAME="command1" STYLE="font:8pt Lucida Console; color:navy" Value=" Y-Split / Mirror" />
+                        <BR />
+                        <INPUT TYPE="button" NAME="command13" STYLE="font:8pt Lucida Console; color:navy" Value="      Z-Flip     " />
+                        <BR />
+                        <INPUT TYPE="button" NAME="command0" STYLE="font:8pt Lucida Console; color:navy" Value=" Extract  Irises " />
+                        <BR />
+                        <INPUT TYPE="button" NAME="command9" STYLE="font:8pt Lucida Console; color:navy" Value=" Extract Cavities" />
+                        <BR />
+                        <INPUT TYPE="button" NAME="command10" STYLE="font:8pt Lucida Console; color:magenta" Value="    mm / inch    " />
+                        <BR />
+                        <INPUT TYPE="button" NAME="command4" STYLE="font:8pt Lucida Console; color:navy" Value=" Show  Schematic " />
+                        <BR />
+                    </FONT>
+                </CENTER>
+            </TD>
+            <TD bgcolor="#c0c0c0">
+                <CENTER>
+                    <TEXTAREA NAME="Text1" STYLE="font:8pt Arial; color:navy; background=#c0c0c0" cols="100" ROWS="22"></TEXTAREA>
+                </CENTER>
+            </TD>
+        </TR>
+        <TR>
+            <TD COLSPAN="2" bgcolor="#c0c0c0">
+                <CENTER>
+                    <FONT STYLE="font:8pt Arial Black; color:navy">
+                        Delay for IE events
+                    </FONT>
+                    <FONT STYLE="font:8pt Arial; color:green">
+                        <INPUT NAME="TimerOption" TYPE="radio" Value="0" />Off
+                        <INPUT NAME="TimerOption" TYPE="radio" Value="30" CHECKED="" />30ms
+                        <INPUT NAME="TimerOption" TYPE="radio" Value="50" />50ms
+                        <INPUT NAME="TimerOption" TYPE="radio" Value="100" />100ms
+                        <INPUT NAME="TimerOption" TYPE="radio" Value="200" />200ms
+                    </FONT>
+                </CENTER>
+            </TD>
+        </TR>
+        <TR>
+            <TD COLSPAN="2" bgcolor="#c0c0c0">
+                <CENTER>
+                    <INPUT TYPE="button" NAME="command20" STYLE="font:8pt Arial Black; color:navy" Value=" GNU Public License " />
+                    <INPUT TYPE="button" NAME="command5" STYLE="font:8pt Arial Black; color:navy" Value=" Synthesize " />
+                    <INPUT TYPE="button" NAME="command6" STYLE="font:8pt Arial Black; color:navy" Value=" Analyze " />
+                    <INPUT TYPE="button" NAME="command7" STYLE="font:8pt Arial Black; color:navy" Value=" Optimize " />
+                    <INPUT TYPE="button" NAME="command8" STYLE="font:8pt Arial Black; color:green" Value="   Ready    " />
+                    <INPUT Name="Tester" TYPE="TEXT" Value="" SIZE="15" STYLE="font:8pt Arial Black; color:navy" DISABLED="" />
+                </CENTER>
+            </TD>
+        </TR>
+        <TR>
+            <TD COLSPAN="2">
+                <IFRAME ALIGN="TOP" WIDTH="100%" HEIGHT="70" FRAMEBORDER="0" NAME="OKNO" SRC="okno.htm"></IFRAME>
+            </TD>
+        </TR>
+    </TABLE>
+    <BR />
+    <SCRIPT LANGUAGE="VBScript" type="text/vbscript">
+        <!--
+        Option Explicit
+
+        Dim TimerID, iSimCount, LineRv, iPointCount,  SimTimerDelay
+        Dim FreqRange0, FreqRange1, OptStatus
+        Dim Studio, DominantMode
+        Dim br, LNG, brok
+        br=chr(13)&chr(10)
+        brok="<BR/>"
+
+        '#########CONTROLS##################
+
+        Sub EditOnLoad()
+        if top.location = self.location then top.location = "start.htm"
+        Set Studio= New Optimizer
+        Set Studio.Engine = New Solver
+        dim V
+        Dim i
+        OptStatus=0
+        Set Studio= New Optimizer
+        Set Studio.Engine = New Solver
+        V=split(Top.InputDat.Value," ")
+        if ubound(V)<9 then exit sub
+        Studio.Engine.iUnit = CInt(V(0))
+        Studio.Engine.ModesX = CInt(V(2))
+        Studio.Engine.ModesY = CInt(V(3))
+        DominantMode=CInt(V(10))
+        Set Studio.Engine.Guides = New Structure
+        Studio.Engine.Guides.iSym=CInt(V(1)): Studio.Engine.Guides.Eps=CDbl(V(4))
+        Studio.Engine.Guides.Tg=CDbl(V(5)): Studio.Engine.Guides.Sigm=CDbl(V(6))
+        Studio.Engine.Guides.Sigm=CDbl(V(6))
+        FreqRange0=CDbl(V(7)):FreqRange1=CDbl(V(8)):iPointCount=CInt(V(9))
+        Text1.value=top.StrucDat.value
+        if IsNumeric(Top.TemplateDat.value) then
+        Template(CInt(Top.TemplateDat.value)-1).Selected=true
+        else
+        Template(0).selected=true
+        end if
+        end sub
+
+        Sub EditUnload()
+        Dim rv
+        Set Studio = Nothing
+        rv=trim(Text1.Value)
+        if rv="" then exit sub
+        top.StrucDat.value=rv  'WordLineCorrect(" ",rv)
+        End Sub
+
+        Private Sub Command0_OnClick()
+        'extract irises
+        if StrucDatEmpty(1,Text1.value) then exit sub
+        Studio.Engine.Guides.StrucDat=Text1.value
+        call Studio.Engine.Guides.CollectIrises()
+        Text1.value=Studio.Engine.Guides.StrucDat
+        Top.StrucDat.Value=Text1.value
+        End Sub
+
+        Private Sub Command20_OnClick()
+        window.open "http://www.gnu.org/licenses/gpl.html" ,"GnuPubLicense", "toolbar=yes, menubar=no, status=no, width=830, height=660 titlebar=no, scrollbars=yes, resizable=yes, top=5, left=5 "
+
+        End Sub
+
+        Private Sub Command1_OnClick()
+        Dim V
+        'extract irises
+        if StrucDatEmpty(1,Text1.value) then exit sub
+        V=split(Top.InputDat.Value," ")
+        Studio.Engine.Guides.StrucDat=Text1.value
+        Studio.Engine.Guides.iSym=CInt(V(1))
+        call Studio.Engine.Guides.ChangeSym()
+        V(1)=Studio.Engine.Guides.iSym
+        Top.InputDat.Value=join(V," ")
+        Text1.value=Studio.Engine.Guides.StrucDat
+        Top.StrucDat.Value=Text1.value
+        End Sub
+
+        Private Sub Command2_OnClick()
+        'TEMPLATES
+        Dim TextBox,V,Nv,iSelect,N,A,B,T,prmt,tit
+        iSelect=template.value
+        Top.TemplateDat.value=iSelect
+
+        SELECT CASE iSelect
+
+        case "1"
+        prmt="Enter four numbers separated by spaces"&br&br&"{N} Filter Order"&br&"{A} I/O Width"&br&"{B} I/O Height"&br&"{T} Iris Thickness"
+        tit="Waveguide H-plane Iris Filter Template"
+        TextBox=InputBox(prmt,tit,"5 0.75 0.375 0.02",0,0)
+        if Trim(TextBox)="" then exit sub
+        V=Split(WordLineCorrect(" ",Trim(TextBox))," ")
+        Call Studio.Engine.Guides.CreateTemplate(1,V)
+        Text1.Value=Studio.Engine.Guides.StrucDat
+        case "2"
+        prmt="Enter four numbers separated by spaces"&br&br&"{N} Filter Order"&br&"{A} I/O Width"&br&"{B} I/O Height"&br&"{T} Stub Length"
+        tit="E-plane Stab Filter Template"
+        TextBox=InputBox(prmt,tit,"5 0.75 0.375 0.10",0,0)
+        if Trim(TextBox)="" then exit sub
+        V=Split(WordLineCorrect(" ",Trim(TextBox))," ")
+        Call Studio.Engine.Guides.CreateTemplate(2,V)
+        Text1.Value=Studio.Engine.Guides.StrucDat
+        case "3"
+        if Studio.Engine.Guides.iSym=0 then
+        window.navigate "syn_cor0.htm"
+        else
+        window.navigate "syn_cor1.htm"
+        end if
+        case "4"
+        prmt="Enter five numbers separated by spaces"&br&br&"{A0} Input Waveguide Width"&vbCrLf&vbCrLf
+        prmt=prmt&"{N} Number of Steps"&vbCrLf
+        prmt=prmt&"{A0} Input Waveguide Width"&vbCrLf
+        prmt=prmt&"{B0} Input Waveguide Height"&vbCrLf
+        prmt=prmt&"{A1} Output Waveguide Width"&vbCrLf
+        prmt=prmt&"{B1} Output Waveguide Height"
+        tit="Waveguide Transformer"
+        TextBox=InputBox(prmt,tit,"3 0.75 0.375 0.622 0.311",0,0)
+        if Trim(TextBox)="" then exit sub
+        V=Split(WordLineCorrect(" ",Trim(TextBox))," ")
+        Call Studio.Engine.Guides.CreateTemplate(4,V)
+
+        Text1.Value=Studio.Engine.Guides.StrucDat
+        END SELECT
+
+        End Sub
+
+        Private Sub Command3_OnClick()
+        'ADD ELEMENT
+        On Error resume next
+        dim xv
+        LN=dims.value
+        if LN=Empty then msgbox "Line is empty": exit sub
+        xv = Split(WordLineCorrect(" ",Trim(LN))," ")
+        j=0
+        if Elemo(0).checked=true then
+        j0=1
+        LNPAR=j&" "&j0&" "&FormatNumber(xv(0),5)&"  "&FormatNumber(xv(1),5)&"  "&FormatNumber(xv(2),5)
+        LNPAR=LNPAR&"  "&FormatNumber(xv(3),5)&"  "&FormatNumber(xv(4),5)
+        else
+        if Elemo(1).checked=true then j0=1
+        if Elemo(2).checked=true then j0=2
+        if Elemo(3).checked=true then j0=3
+        LNPAR=j&" "&j0&" "&FormatNumber(xv(0),5)&"  "&FormatNumber(xv(1),5)&"  "&FormatNumber(xv(2),5)
+        LNPAR=LNPAR&"  "&FormatNumber(xv(3),5)&"  "&FormatNumber(xv(4),5)&"  "&FormatNumber(xv(5),5)
+
+        end if
+        if Text1.value="" then
+        Text1.value=LNPAR
+        else
+        Text1.value=trim(Text1.value)&br&LNPAR
+        end if
+        End Sub
+
+
+        Sub Command5_OnClick()
+        Dim iSelect
+        'call CopyToBufer()
+        if StrucDatEmpty(1,Text1.value) then exit sub
+        iSelect=template.value
+        Top.TemplateDat.value=iSelect
+        Studio.Engine.Guides.StrucDat=Text1.value
+        Select Case template.value
+        case "3"
+           if Studio.Engine.Guides.IsTaper then
+           call SynthesisCorr()
+           else
+           msgbox "The synthesis method cannot be applied to the waveguide structure specified", 0, "Wrong Template"
+           exit sub
+           end if
+        case "4"
+        Call SynthesisTrans( )
+        case "5"
+        msgbox "This option is being integrated. It will be soon.",0,"Under Construction"
+        case else
+          if Studio.Engine.Guides.IsFilter then
+          call SynthesisMain( )
+          else
+          msgbox "The structure entered does not match the filter prototype selected. Reffer to the manual.",0,"Synthesis Failed."
+          end if
+        end select
+        End Sub
+
+        Sub Command6_OnClick()
+        'SIMULATION
+        if StrucDatEmpty(1,Text1.value) then exit sub
+        Call SimulationMain()
+        End Sub
+
+
+        Sub Command7_OnClick()
+        Dim V,Nspecs,i,xV,iTm
+        if StrucDatEmpty(1,Text1.value) then exit sub
+        if Trim(Top.OptDat)="" then msgbox "Optimization targets are not specified.",0,"Optimization": exit sub
+        V=split(Top.OptDat.value,"|")
+        Studio.Engine.Guides.StrucDat = Text1.Value
+        Studio.Engine.ActiveMode=1
+        Studio.OptMethod=CInt(V(0))
+        Studio.OptSteps =CInt(V(1))
+        Studio.Engine.Guides.Cmin=CDbl(V(2))
+        Studio.Engine.Guides.Wmin=CDbl(V(3))
+        Studio.OptDelta = CDbl(V(4))/100.0
+        Nspecs=CInt(V(5))
+        for i=0 to Nspecs
+        xV=Split(V(6+i)," ")
+        Call Studio.AddSpec(CInt(xV(0)),CInt(xV(1)),CDbl(xV(2)),CDbl(xV(3)),CDbl(xV(4)),CInt(xV(5)))
+        next
+        Studio.SetVarMap
+        'Studio.Engine.Guides.StrucDat =Text1.value
+        'OPTIMIZATION GOES HERE
+        for iTm=0 to 4
+        if TimerOption(iTm).checked then SimTimerDelay=TimerOption(iTm).value
+        next
+        command8.value="   Abort    "
+        TimerID = window.setInterval("OptStepDelay()",SimTimerDelay)
+        'for i=0 to 500
+        'call OptStepDelay
+        'next
+
+        End Sub
+
+        sub command9_OnClick
+        'Extract Cavities
+        if StrucDatEmpty(1,Text1.value) then exit sub
+        Studio.Engine.Guides.StrucDat=Text1.value
+        call Studio.Engine.Guides.CollectCavities()
+        Text1.value=Studio.Engine.Guides.StrucDat
+        Top.StrucDat.Value=Text1.value
+        end sub
+
+        sub command10_OnClick()
+        Dim cf,VV
+        cf=1./25.4
+        'call CopyFromBufer()
+        if StrucDatEmpty(1,Text1.value) then exit sub
+        Studio.Engine.Guides.StrucDat=Text1.value
+        if Studio.Engine.iUnit = 0 then
+        Studio.Engine.iUnit = 1
+        call Studio.Engine.Guides.StrucScale(cf)
+        else
+        Studio.Engine.iUnit = 0
+        call Studio.Engine.Guides.StrucScale(25.4)
+        end if
+        Text1.value=Studio.Engine.Guides.StrucDat
+        Top.StrucDat.Value=Text1.value
+        VV=Split(Top.InputDat.Value," ")
+        VV(0)=Studio.Engine.iUnit
+        Top.InputDat.Value=join(VV," ")
+        'OptType[0,1] | OptNsteps | Wmin | Cmin | Dx | Nspecs | Specs(port&port MagSpec F0 F1 Np) | Specs(port&port MagSpec F0 F1 Np)
+        VV=Split(Top.OptDat.Value,"|")
+        if ubound(VV)<3 then exit sub
+        if Studio.Engine.iUnit=0 then
+        VV(2)=25.4*CDbl(VV(2))
+        VV(3)=25.4*CDbl(VV(3))
+        else
+        VV(2)=CDbl(VV(2))/25.4
+        VV(3)=CDbl(VV(3))/25.4
+        end if
+        Top.OptDat.Value=Join(VV,"|")
+        End sub
+
+
+
+        sub command8_OnClick()
+        dim OptCommand
+        window.ClearInterval(TimerID)
+        command8.value="   Ready    "
+        if OptStatus=1 then
+        OptCommand = MsgBox("Process of optimization has been  interrupted. However the optimizer still contains dimensions optimized so far."&vbCrLf&vbCrLf&"Would you like to update original dimensions with the new ones?",vbYesNo,"Optimization")
+           if OptCommand=6 then
+           Studio.OptUpdate
+           Text1.value = Studio.Engine.Guides.StrucDat
+           top.StrucDat.value=Text1.value
+           end if
+        end if
+           OptStatus=0
+        end sub
+
+        sub command11_OnClick()
+        dim xI,xx,cf
+        if StrucDatEmpty(1,Text1.value) then exit sub
+        xI = Trim(InputBox("Enter the coefficient of scaling [single value] or frequency proportion [f/fo]. All the dimensions will be multiplied by that value or ratio.","Multiply by",""))
+        if xI="" then exit sub
+        xx=split(xI,"/")
+        if ubound(xx)>0 then
+           if IsNumeric(xx(0)) and IsNumeric(xx(1)) then
+           cf=CDbl(xx(1))/CDbl(xx(0))
+           else
+           msgbox "Non numeric expresion entered",0,"Wrong Entry"
+           end if
+        else
+           if IsNumeric(xI) then
+           cf=CDbl(xI)
+           else
+           msgbox "Non numeric expression entered",0,"Wrong Entry"
+           end if
+        end if
+        Studio.Engine.Guides.StrucDat=Text1.value
+        call Studio.Engine.Guides.StrucScale(cf)
+        Text1.value=Studio.Engine.Guides.StrucDat
+        End Sub
+
+        sub command12_OnClick()
+        dim xI
+        if StrucDatEmpty(1,Text1.value) then exit sub
+        xI = Trim(InputBox("Enter the coefficient of correction","Dimensions Correction.",""))
+        if xI="" then exit sub
+        if IsNumeric(xI) then
+        Studio.Engine.Guides.StrucDat=Text1.value
+        call Studio.Engine.Guides.StrucCorrect(CDbl(xI))
+        Text1.value=Studio.Engine.Guides.StrucDat
+        end if
+        End Sub
+
+        sub SetStrucDat()
+        Text1.value=top.StrucDat.value
+        end Sub
+
+        sub command13_OnClick()
+        if StrucDatEmpty(1,Text1.value) then exit sub
+        Studio.Engine.Guides.StrucDat=Text1.value
+        call Studio.Engine.Guides.StrucFlip()
+        Text1.value=Studio.Engine.Guides.StrucDat
+        End Sub
+
+        sub SetStrucDat()
+        Text1.value=top.StrucDat.value
+        end Sub
+
+        Sub CopyToBufer()
+        dim rv
+        rv=trim(Text1.Value)
+        if rv=Empty then exit sub
+        'top.SavedStrucDat.value=WordLineCorrect(" ",rv)
+        top.SavedStrucDat.value=Studio.Engine.Guides.SpaceRemover(rv)
+        End Sub
+
+        Sub CopyFromBufer()
+        if Trim(top.SavedStrucDat.value)=Empty then exit sub
+        Text1.value=top.SavedStrucDat.value
+        End Sub
+
+        Sub OptStepDelay()
+        OptStatus=1
+        Studio.OptStep
+        Tester.Value=Studio.CurrentStep&" "&formatnumber(Studio.uValue,2)&" "&formatnumber(Studio.uValue0,2)&" "&formatnumber(Studio.OptDelta,3)
+        if Studio.CurrentStep > Studio.OptSteps then
+        window.ClearInterval(TimerID)
+        Studio.OptUpdate
+        Text1.value = Studio.Engine.Guides.StrucDat
+        top.StrucDat.value=Text1.value
+        OptStatus=0
+        command8.value="   Ready    "
+        end if
+        End Sub
+
+        sub SimulationMain()
+        Dim iTm,rv
+        Studio.Engine.Guides.StrucDat= Text1.value
+        Studio.Engine.ActiveMode=DominantMode
+        for iTm=0 to 4
+        if TimerOption(iTm).checked then SimTimerDelay=TimerOption(iTm).value
+        next
+        rv=""
+        iSimCount=0
+        Top.SDat.value=""
+        if SimTimerDelay="0" then
+        for iSimCount=0 to iPointCount
+        Call StrucSimNoDelay
+        next
+        iSimCount=0
+        else
+        command8.value="   Abort    "
+        TimerID = window.setInterval("StrucSimDelay()",SimTimerDelay)
+        end if
+        end sub
+
+        Sub StrucSimDelay()
+        Dim Sfo,FreqRv
+        FreqRv=FreqRange0+(FreqRange1-FreqRange0)*CDbl(iSimCount)/CDbl(iPointCount)
+        iSimCount=iSimCount+1
+        Studio.Engine.Freq = FreqRv
+        if Studio.Engine.ActiveMode > 0 then
+        Call Studio.Engine.Struc(Sfo)
+        else
+        Call Studio.Engine.CrossStruc(Sfo)
+        end if
+        Tester.value= FormatNumber(FreqRv,5)
+        Top.SDat.value=Top.SDat.value&FreqRv&" "&join(Sfo," ")&br
+        if iSimCount >= CInt(iPointCount) then
+        window.ClearInterval(TimerID)
+        command8.value="   Ready    "
+        end if
+        iSimCount=CInt(iSimCount)+1
+        End Sub
+
+        Public Sub StrucSimNoDelay()
+        Dim Sfo,FreqRv
+        FreqRv=FreqRange0+(FreqRange1-FreqRange0)*CDbl(iSimCount)/CDbl(iPointCount)
+        Studio.Engine.Freq = FreqRv
+        if Studio.Engine.ActiveMode > 0 then
+        Call Studio.Engine.Struc(Sfo)
+        else
+        Call Studio.Engine.CrossStruc(Sfo)
+        end if
+        Top.SDat.value=Top.SDat.value&FreqRv&" "&join(Sfo," ")&br
+        End Sub
+
+        sub SynthesisMain( )
+        Dim ProtoPars,ProtoArray
+        Dim iFilter,iOrder,Fc,dF,Att,Npars
+        ProtoPars=split(Top.ProtoDat.Value,"|")
+        Npars=ubound(ProtoPars)
+        if Npars < 4 then msgbox "Filter prototype data is not complete. Please specify setup parameters in 'Synthesis' section.": exit sub
+        iFilter=CInt(ProtoPars(0)): iOrder=CInt(ProtoPars(1)): Fc=CDbl(ProtoPars(2))
+
+        Select Case iFilter
+        Case 0
+        dF=CDbl(ProtoPars(3))
+        ProtoArray=Array(iFilter,iOrder,0.0,Fc/dF,0.0,0.0)
+        Case 1
+        dF=CDbl(ProtoPars(3)): Att=CDbl(ProtoPars(4))
+        ProtoArray=Array(iFilter,iOrder,0.0,Fc/dF,0.0,Att)
+        Case 2,3
+        dF=split(WordLineCorrect(" ",trim(ProtoPars(3)))," ")
+        Att=CDbl(ProtoPars(4))
+        ProtoArray=Array(iFilter,iOrder,CDbl(dF(0)),CDbl(dF(1)),CDbl(dF(0)),Att)
+        End Select
+        Studio.Engine.Guides.StrucDat= Text1.value
+        Studio.Engine.Prototype = ProtoArray
+        Studio.Engine.Freq = Fc
+        Call Studio.Engine.SynthesisMain
+        Text1.Value=Studio.Engine.Guides.StrucDat
+        top.StrucDat.value=Text1.value
+        end sub
+
+        sub SynthesisCorr( )
+        Dim ProtoPars,aFc
+        Dim iFilter,iOrder,Fc,dF,Att,Npars
+        ProtoPars=split(Top.ProtoDat.Value,"|")
+        Npars=ubound(ProtoPars)
+        if Npars < 4 then
+          aFc=trim(inputbox ("Filter prototype data is not complete. Please enter a reference frequency for pass-band in GHz.","Enter Fc",""))
+          if not IsNumeric(aFc) then exit sub: else Fc=CDbl(aFc)
+        else
+        Fc=CDbl(ProtoPars(2))
+        end if
+        Studio.Engine.Freq = Fc
+        call Studio.Engine.SynthesisTaper()
+        Text1.Value=Studio.Engine.Guides.StrucDat
+        end sub
+
+        sub SynthesisTrans( )
+        Dim ProtoPars,aFc
+        Dim iFilter,iOrder,Fc,dF,Att,Npars
+        ProtoPars=split(Top.ProtoDat.Value,"|")
+        Npars=ubound(ProtoPars)
+        if Npars < 2 then
+          aFc=trim(inputbox ("Filter prototype data is not complete. Please enter a reference frequency for pass-band in GHz.","Enter Fc",""))
+          if not IsNumeric(aFc) then exit sub: else Fc=CDbl(aFc): iOrder=1
+        else
+        if trim(ProtoPars(1))="" or trim(ProtoPars(1))="0"then
+        iOrder=1
+        else
+        iOrder=CInt(ProtoPars(1))
+        end if
+        Fc=CDbl(ProtoPars(2))
+        end if
+        Studio.Engine.Freq = Fc
+        call Studio.Engine.TransMain()
+        call Studio.Engine.DoPhaseMatch(iOrder)
+        Text1.Value=Studio.Engine.Guides.StrucDat
+        end sub
+
+
+
+
+        '################ SCHEMATIC ###################################
+
+        Sub Command4_OnClick()
+        dim V,Nv,iDir,rv,i,Circuit,LN,Ns
+        dim U0,U,U1, uNote, iCouple,iType
+        if Trim(Text1.value)="" then exit sub
+        rv=Studio.Engine.Guides.SpaceRemover(Text1.value)
+        rv=replace(rv,chr(13),"")
+        V=split(rv,chr(10))
+        Nv= ubound(V)-1
+        Circuit="<HTML><BODY BACKGROUND=wg0.bmp LEFTMARGIN=0 TOPMARGIN=0><CENTER><TABLE><TR>"
+        for i =0 to Nv
+        U=split(v(i)," ")
+        iCouple=i-2*int(0.5*i): iType=CInt(U(1))
+        uNote="<TD WIDTH=30><CENTER><B><font size=1 face=arial color=navy>"&WGRecord(-1)&"<BR/>"&i&"</TD>"
+
+        if iCouple=0 then
+           if iType=1 then
+           uNote="<TD WIDTH=30><CENTER><B><font size=1 face=arial color=navy>"&WGRecord(1)&"<BR/>"&i&"</TD>"
+           end if
+        else
+          if i=0 or i=Nv then
+          else
+              U1=split(v(i+1)," "): U0=split(v(i-1)," ")
+              select case iType
+              case 1
+              if IsSmaller(CDbl(U0(3)),CDbl(U0(4)),CDbl(U0(5)),CDbl(U1(3)),CDbl(U1(4)),CDbl(U1(5))) then
+              uNote="<TD WIDTH=30><CENTER><B><font size=1 face=arial color=navy>"&WGRecord(11)&"<BR/>"&i&"</TD>"
+              end if
+              if IsSmaller(CDbl(U1(3)),CDbl(U1(4)),CDbl(U1(5)),CDbl(U0(3)),CDbl(U0(4)),CDbl(U0(5))) then
+              uNote="<TD WIDTH=30><CENTER><B><font size=1 face=arial color=navy>"&WGRecord(12)&"<BR/>"&i&"</TD>"
+              end if
+              if IsSame(CDbl(U0(3)),CDbl(U0(4)),CDbl(U0(5)),CDbl(U1(3)),CDbl(U1(4)),CDbl(U1(5))) then
+              uNote="<TD WIDTH=30><CENTER><B><font size=1 face=arial color=navy>"&WGRecord(10)&"<BR/>"&i&"</TD>"
+              end if
+              case 5
+              if IsSmaller(CDbl(U(3)),CDbl(U(4)),CDbl(U(5)),CDbl(U0(3)),CDbl(U0(4)),CDbl(U0(5))) and IsSmaller(CDbl(U(3)),CDbl(U(4)),CDbl(U(5)),CDbl(U1(3)),CDbl(U1(4)),CDbl(U1(5))) then
+              uNote="<TD WIDTH=30><CENTER><B><font size=1 face=arial color=navy>"&WGRecord(51)&"<BR/>"&i&"</TD>"
+              end if
+              if IsSame(CDbl(U(3)),CDbl(U(4)),CDbl(U(5)),CDbl(U0(3)),CDbl(U0(4)),CDbl(U0(5))) and IsSmaller(CDbl(U(3)),CDbl(U(4)),CDbl(U(5)),CDbl(U1(3)),CDbl(U1(4)),CDbl(U1(5))) then
+              uNote="<TD WIDTH=30><CENTER><B><font size=1 face=arial color=navy>"&WGRecord(50)&"<BR/>"&i&"</TD>"
+              end if
+              case 2
+              if IsSmaller(CDbl(U0(3)),CDbl(U0(4)),CDbl(U0(5)),CDbl(U(3)),CDbl(U(4)),CDbl(U(5))) and IsSmaller(CDbl(U1(3)),CDbl(U1(4)),CDbl(U(5)),CDbl(U(3)),CDbl(U(4)),CDbl(U(5))) then
+              uNote="<TD WIDTH=30><CENTER><B><font size=1 face=arial color=navy>"&WGRecord(21)&"<BR/>"&i&"</TD>"
+              end if
+              if IsSame(CDbl(U0(3)),CDbl(U0(4)),CDbl(U0(5)),CDbl(U(3)),CDbl(U(4)),CDbl(U(5))) and IsSmaller(CDbl(U1(3)),CDbl(U1(4)),CDbl(U1(5)),CDbl(U(3)),CDbl(U(4)),CDbl(U(5))) then
+              uNote="<TD WIDTH=30><CENTER><B><font size=1 face=arial color=navy>"&WGRecord(20)&"<BR/>"&i&"</TD>"
+              end if
+              end select
+          end if
+        end if
+        Circuit=Circuit&uNote
+        next
+        Circuit=Circuit&"</TR></TABLE><BODY><HTML>"
+        Okno.Document.close
+        okno.document.write Circuit
+        end sub
+
+        Function DimCompare(LN0,LN1)
+        dim v0,v1,Nv, Com0,Com1
+        V0=split(WordLineCorrect(" ",Trim(LN0))," ")
+        V1=split(WordLineCorrect(" ",Trim(LN1))," ")
+        'Call TextInput(LN0, Nv, v0)
+        'Call TextInput(LN1, Nv, v1)
+        DimCompare=100
+        Com0=IsSmaller(CDbl(v0(3)),CDbl(v0(4)),CDbl(v0(5)),CDbl(v1(3)),CDbl(v1(4)),CDbl(v1(5)))
+        Com1=IsSmaller(CDbl(v1(3)),CDbl(v1(4)),CDbl(v1(5)),CDbl(v0(3)),CDbl(v0(4)),CDbl(v0(5)))
+        msgbox CDbl(v0(3))&" "&CDbl(v0(4))&" "&CDbl(v0(5))&" "&v1(3)&" "&CDbl(v1(4))&" "&CDbl(v1(5))
+        if Com0 then DimCompare= 1
+        if Com1 then DimCompare= -1
+        if Com0 and Com1 then DimCompare=0
+        'if v0(2)*v0(3) > v1(2)*v1(3) then DimCompare=-1
+        'if v0(2)*v0(3) < v1(2)*v1(3) then DimCompare= 1
+        End Function
+
+        function WGRecord(index)
+        dim tr,tit
+        Select Case index
+        case 1
+        WGRecord="<img src=wg1.bmp title=node >"
+        case 10
+        WGRecord="<img src=jg11.bmp title=same >"
+        case 11
+        WGRecord="<img src=jg01.bmp title=step >"
+        case 12
+        WGRecord="<img src=jg10.bmp title=step >"
+        case 20
+        WGRecord="<img src=wg1.bmp title=same >"
+        case 21
+        WGRecord="<img src=jg2.bmp title=cavity >"
+        case 50
+        WGRecord="<img src=wg1.bmp title=same >"
+        case 51
+        WGRecord="<img src=jg5.bmp title="&tit&">"
+        case else
+        WGRecord="<img src=jg99.bmp title=wrong >"
+        end select
+        end function
+
+        Sub SchemCheck(iErr,Nw,jow,jw,w,joc,jc,c)
+        'On Error resume next
+        Dim TEXTLINE(200), xv(10)
+        iErr=false
+        call TextWindowLoad(NTEXT,TEXTLINE)
+        if NTEXT<2 then IndErr=1: exit sub: end if
+        Nw=(NTEXT-2)/2
+        if 2*Nw<>2*int(Nw) then msgbox "Number of nodes does not match number of junctions.": iErr=true:exit sub
+        For i = 0 To Nw
+        Call TextInput(TEXTLINE(2*i), Nv, xv)
+        jow(i)=xv(0): jw(i)=xv(1): For j = 1 To 5: w(i, j) = xv(j+1): Next
+        Call TextInput(TEXTLINE(2*i+1), Nv, xv)
+        joc(i)=xv(0): jc(i) = xv(1): For j = 1 To 6: c(i, j) = xv(j+1): Next
+        NEXT
+        Call TextInput(TEXTLINE(NTEXT), Nv, xv)
+        jow(Nw+1)=xv(0): jw(Nw+1) = xv(1):  For j = 1 To 5: w(Nw+1, j) = xv(j+1): Next
+        Nw=Nw+1
+        End Sub
+
+        Function StrucDatEmpty(iMsg,StrucDatText)
+        Dim ShrtDat,StrLines
+        StrucDatEmpty=False
+        ShrtDat=trim(StrucDatText)
+        if ShrtDat="" then
+        if iMsg then msgbox "The waveguide structure is not defined. Please define schematic of structure in the text window.",0,"Entry Error"
+        StrucDatEmpty=true
+        exit function
+        end if
+        StrucDatText=replace(StrucDatText,chr(13),"")
+        StrLines=split(StrucDatText,chr(10))
+        if ubound(StrLines)<2 then
+        if iMsg then msgbox "The waveguide structure is not completely defined. It should be at least two nodes and one junction specified. Refer to manual for details.",0,"Entry Error"
+        StrucDatEmpty=true
+        end if
+        End Function
+
+        '************************* CONTROLS **********************************************
+
+
+        //-->
+    </SCRIPT>
+
+    <SCRIPT LANGUAGE="VBScript" type="text/vbscript" SRC="wg_class.vbs">
+    </SCRIPT>
+
+</BODY>
+
+</HTML>

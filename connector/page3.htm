@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <meta http-equiv="x-ua-compatible" content="IE=5" />
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>Software Accuracy and Applicability</title>
+    <link href="class_0.css" rel="stylesheet" type="text/css" />
+    <STYLE type="text/css">
+        <!--
+        table.data {
+            background: #ffffff;
+            color: #004040
+        }
+
+        td.data {
+            font: 9pt sans-serif;
+            padding: 1px;
+            text-align: center
+        }
+
+        table.spec {
+            font: 12pt sans-serif;
+            background: #ffffff;
+            color: #004040
+        }
+
+        td.spec {
+            width: 200px;
+            padding: 10px
+        }
+
+        table.warning {
+            width: 600;
+            text-align: justify;
+            padding: 10px;
+            font: 12pt sans-serif;
+            color: #004040;
+            background: #ffffff
+        }
+
+        caption.warning {
+            background: #ffffff;
+            font: 12pt sans-serif;
+            color: red;
+            font-weight: bold
+        }
+        -->
+    </STYLE>
+</HEAD>
+<BODY BGCOLOR="#c0c0c0" LEFTMARGIN="0" TOPMARGIN="20">
+    <CENTER>
+        <DIV class="external">
+            <P class="shapka">
+                WR-Connect
+                <FONT class="note0">
+                    <BR />a cool waveguide structure design tool
+                </FONT>
+            </P>
+            <FONT style="font:  8pt 'Arial Black'; color: black">
+                <A HREF="../index.htm" class="main">Up</A>
+                <A HREF="index.htm" class="main">Home</A>
+                <A HREF="about.htm" class="main">About WR-Connect</A>
+                <A HREF="menus.htm" class="main">Menus &#38; Controls</A>
+                <A HREF="examples.htm" class="main">Demos &#38; Examples</A>
+                <A HREF="tutorial.htm" class="current">Tutorials</A>
+                <A HREF="start.htm" target="WR-Connect" class="main">Open WR-Connect Project</A>
+            </FONT>
+            <DIV class="internal" style="height:290">
+                <p class="message">
+                    The first approximation of <font style="font:10pt Symbol">p</font> was practically derived in Egypt more than 4500 years ago as 3<sup>1</sup>/<small>7</small>, and it was about 0.04% accurate. Archimedes, who lived in 3<sup>rd</sup> BC, was the first, who had applied a numerical algorithm to <font style="font:10pt Symbol">p</font>. His value of <font style="font:10pt Symbol">p</font> was 0.008% accurate. Today we can learn 50 decimals of <font style="font:10pt Symbol">p</font> from handbooks and compute it until trillion digits, but it is never exact. The modern RF/microwave CAD tools, as they are also based on  space-truncated numerical algorithms, are not exact either - usually even less accurate than <font style="font:10pt Symbol">p</font> value 4500 years ago.
+                    Use WR-Connect wisely and design great waveguide filters.<hr />
+                </p>
+                <div class="SecondMenu">
+                    <a href="tutorial.htm" class="InsideMenuPassive">Old Version Manual</a>
+                    <a href="page0.htm" class="InsideMenuPassive">Entering Design Parameters and Dimensions</a>
+                    <a href="page1.htm" class="InsideMenuPassive">Using Optimization to Improve Performance</a>
+                    <a href="page3.htm" class="InsideMenuActive">Accuracy and Applicability Report</a>
+                    <a href="closed.htm" rel="nofollow" class="InsideMenuPassive">This Section is Coming Soon</a>
+                </div>
+                <IMG SRC="e_plane_filter.jpg" style="float:right" />
+            </DIV>
+            <DIV class="maintext">
+                <font style="font: 9pt Lucida Console; color:green; background: white; padding:5px">
+                    <b>
+                        <i>A4 / Landscape printable</i>
+                    </b>
+                </font>
+
+
+                <h1>
+                    WR-Connect:<BR />Software Accuracy and Applicability
+                </h1>
+
+                <h2>The Computational Method Accuracy</h2>
+
+                WR-Connect is based on three presolved EM problems: scattering by a uniaxial junction of two rectangular waveguides, a cavity formed by a larger waveguide section between smaller I/O waveguides, and a diaphragm of smaller waveguide section between two larger waveguides. The mode-matching technique has been used for the analysis of those three problems. As we know the problem is solved in terms of equations of matrices of infinite rank, the matrices are truncated to maximum 200 modes in the junctions and cavities, and only dominant mode in the input/output waveguide nodes is counted. Since the s-parameters of each single scattering element are represented by 2x2 matrix of a two-port network, the s-parameters corresponding to whole structure are computed by sequential cascading of all s-matrices. The accuracy of such approach cannot be expressed as a single number or simple formula, because it depends on the waveguide structure it is applied to. Nonetheless, a general idea about accuracy of simulation results expected for particular class of waveguide structures can be summarized.
+
+                <h2>Waveguide Structures</h2>
+
+                It is found that WR-Connect can be effectively applied to wide-band high-low impedance structures and connections: small-gap corrugated waveguides, stepped transformers, and wide-band iris filters (see Table 1 for details). The software can be also used to simulate the narrow-band resonant structures, if proper correction factors are applied to the simulation results and tuning elements are provided for the designed hardware.
+                <BR /><BR />
+                <table align="center" border="1" class="spec" width="700">
+                    <caption> Table 1: Summarized applicability of WR-Connect to conventional types of waveguide filters in respect to popular fabrication methods</caption>
+                    <tr>
+                        <td class="data">
+                            <b>Hardware Type</b>
+                        </td>
+                        <td class="data">
+                            <b>EDM</b>
+                        </td>
+                        <td class="data">
+                            <b>Fine Milling</b>
+                        </td>
+                        <td class="data">
+                            <b>
+                                Soldering,<BR /> die-casting
+                            </b>
+                        </td>
+                        <td class="data">
+                            <b>
+                                Quoting/Proposing <BR />(performance evaluation)
+                            </b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="data">Corrugated filters with small gaps</td>
+                        <td class="data">+++</td>
+                        <td class="data">++</td>
+                        <td class="data">-</td>
+                        <td class="data">+++</td>
+                    </tr>
+                    <tr>
+                        <td class="data">Corrugated filters with large gaps</td>
+                        <td class="data">++</td>
+                        <td class="data">++</td>
+                        <td class="data">-</td>
+                        <td class="data">+++</td>
+                    </tr>
+                    <tr>
+                        <td class="data">Transformers and high-pass filters based on stepped impedance structures</td>
+                        <td class="data">+++</td>
+                        <td class="data">++</td>
+                        <td class="data">+</td>
+                        <td class="data">+++</td>
+                    </tr>
+                    <tr>
+                        <td class="data">Wide-band iris filters</td>
+                        <td class="data">++</td>
+                        <td class="data">++</td>
+                        <td class="data">+</td>
+                        <td class="data">+++</td>
+                    </tr>
+                    <tr>
+                        <td class="data">Narrow-band iris filters</td>
+                        <td class="data">+</td>
+                        <td class="data">+</td>
+                        <td class="data">+</td>
+                        <td class="data">+++</td>
+                    </tr>
+                    <tr>
+                        <td class="data">
+                            Cascaded assemblies of wide-band and narrow-band filters
+                        </td>
+                        <td class="data">
+                            +
+                        </td>
+                        <td class="data">
+                            +
+                        </td>
+                        <td class="data">
+                            -
+                        </td>
+                        <td class="data">
+                            +++
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" style="font: 10pt sans-serif; background:#ffffff; color:#004040">
+                            Exact designing (+++)<BR />
+                            Designing with correction factors taken into account (++)<BR />
+                            Designing with tuning elements (+)<BR />
+                            Cannot be designed (-)<BR />
+                        </td>
+                    </tr>
+                </table>
+
+                <h2>Design Examples</h2>
+
+                <h4>Example #1: Small-Size-Gap Corrugated Filter</h4>
+                WR-Connect is practically accurate, if applied to corrugated waveguide filters of Cohn's [1], Levy's [2] and Goulouev's [3] types - periodic, aperioudic or coupled corrugated waveguide structures with small gaps and shallow corrugations. Here the words "practically accurate" mean that the computational accuracy of WR-Connect is greater than the accuracy of conventional fabrication methods and accuracy of measurement equipment applied to the prototype. For example, rounding the corners of corrugations when milling can deviate the performance of the fabricated hardware from its ideal simulated performance more than natural inaccuracy of simulation.
+                <h3>
+                    <img src="ex_sur_00.gif" /><BR />Figure 1a: Ka-band corrugated waveguide filter - 3D surface view
+                    <BR />
+                    <img src="ex_plot_00.gif" /><BR />Figure 1a: Reflection and transmission (dB) versus frequency (GHz) computed using different software
+                </h3>
+                For corrugated filters with larger gaps and cavities, WR-Connects's simulation also well correlates with measurement and other type of software rated as "full-wave" or "EM-based". However insignificant correction factors can be applied in order to precisely adjust the roll-off.
+                <BR />
+                <h4>Example #2: Middle-Size-Gap Corrugated Filter</h4>
+                <BR />
+                <h3>
+                    <img src="ex_sur_5.gif" /><BR />Figure 2a: WR-112 corrugated waveguide filter - 3D surface view
+                    <BR />
+                    <img src="ex_plot_5.gif" /><BR />Figure 2a: Reflection and transmission (dB) versus frequency (GHz) computed using different software
+                </h3>
+
+                <h4>Wide-Band Iris Filters</h4>
+                The WR-137 Receive-Reject Filter (Figure 3a) is a wide band H-plane iris filter based on thick and wide H-plane irises. Three filters of this type have been designed using WR-Connect, the obtained simulation results have been compared with the simulation results obtained by other full-wave software, and the results have matched each other with insignificant tolerance (see Figure 3b for example).
+                <h3>
+                    <img src="ex_sur_2.gif" /><BR />Figure 3a: A C-band high-pass filter using thick H-plane irises - 3D surface view
+                    <BR />
+                    <img src="ex_plot_2.gif" /><BR />Figure 3b: Reflection and transmission (dB) versus frequency (GHz) computed using different software
+                </h3>
+                <h4>Example #2: Middle-Band and Narrow-Band H-plane Iris Filters</h4>
+                For conventional H-plane iris filters (see Figure 4a) with bandwidth about 10% or less, the WR-Connect's simulated performance still shows similarity with the performance tested or simulated by a full-wave software, however the real bandwidth has a tendency to be wider and lower, than WR-Connect simulates (see Figure 4b). In order to compensate such bandwidth distortion, a proportional reduction of the width of each iris and the length of each cavity is recommended prior to fabrication. Tuning screws are also recommended to put in the middle of irises and cavities in order to achieve a low reflection ripple. As the fabrication tolerances can also much degrade performance of narrow-band filters, the sensitivity analysis has to be performed, the derived tolerance factors have to be added to the WR-Connect inaccuracy factors, and the net uncertainties caused by software and fabrication inacuracy have to be evaluated over the hardware tunability. If all those recommendations are followed, WR-Connect can be used to design high performance mid-band and narrow-band iris filters.
+                <BR />
+                <BR />
+                <h3>
+                    <img src="ex_sur_0.gif" /><BR />Figure 4a: WR-62 Receive-Reject Filter - 3D surface view
+                    <BR />
+                    <img src="ex_plot_0.gif" /><BR />Figure 4a: Reflection and transmission (dB) versus frequency (GHz) computed using different software
+                </h3>
+
+                <h4>Stepped Waveguide Transformers and High-Pass Filters</h4>
+
+                WR-Connect is a simple and efficient tool for designing stepped waveguide transformers and high-pass filters based on stepped transforming from the input/output interface waveguide to an evanescent-mode waveguide in the middle (see Figure 5a). Usually WR-Connect applied to such waveguide structures is as accurate as other waveguide simulation software based on so-called full-wave analysis (see Figure 5b) in respect to accuracy of fine fabrication and measurement.
+                <BR />
+                <h3>
+                    <img src="ex_sur_4.gif" /><BR />Figure 4a: WR-75 high-pass filter based on transforming steps - 3D surface view
+                    <BR />
+                    <img src="ex_plot_4.gif" /><BR />Figure 4a: Reflection and transmission (dB) versus frequency (GHz) computed using different software
+                </h3>
+                <h2>Comments About Insertion Loss Simulation</h2>
+                Insertion loss (including dissipation loss) computed by WR-Connect is usually about the value simulated by other software (see figures 5,6) or mesured in the lab in the range +/-20% for silver-plated conventional iris and corrugated waveguide filters. Nevertheless, it is difficult to tell, which factor - software inaccuracy, quality of silver plating, surface roughness, quality of contacts or test inacuracy - practically contributes the most to the insertion loss uncertainty.
+                <BR />
+                <h3>
+                    <img src="ex_plot_IL_2.gif" /><BR />Figure 5: WR-Connect vs HFSS insertion loss correlation for the WR-137 high-pass filter
+                    <BR />
+                    <img src="ex_plot_IL_5.gif" /><BR />Figure 6: WR-Connect vs HFSS insertion loss correlation for the WR-112 low-pass filter
+                </h3>
+                <h2>Comments About the Modes and Harmonics</h2>
+                When designing a waveguide low-pass filter, it is often required to check how the filter performs for the frequency spectrum (let us call it "harmonics" here) extended far away from the only dominant waveguide mode (TE<sub>10</sub>) propagation bandwidth. WR-Connect can be still a very efficient tool to simulate the harmonics carried by TE<sub>N0</sub>-modes. Nonetheless, the following notes should be taken into account:
+                <ul>
+                    <li>
+                        The WR-Connect's simulation results can be only used for evaluation of transmission of the TE<sub>NO</sub> spurious through the filter with no mode-to-mode conversions taken into account. For example, When computing TE<sub>20</sub> spurious, WR-Connect does not take TE<sub>20</sub> - TE<sub>40</sub> conversion into account. Therefore, in this case, we need to change the mode index from 2 to 4 in order to evaluate the TE<sub>40</sub> spurious. That is different from the popular full-wave waveguide software presenting the whole matrix.
+                    </li>
+                    <li>The simulation results, obtained from WR-Connect or any other software, do not actually represent the expected test results. That is because the software assumes the waveguide ports being perfectly matched (the reflected wave reflects and never returns back), but it is practically imposible to match the ports of measuring device to the ports of device under test (DUT) for all presented waveguide modes, or take the complex multi-moded interference into account.</li>
+                    <li>The simulation should always demonstrate much more rejection for harmonics than formally required by specs - to compensate very low accuracy of testing by tons of margin.  </li>
+                </ul>
+
+                <h2>References:</h2>
+                <ol>
+                    <li>S.B. Conh "A theoretical and experimental study of a waveguide filter structure", Office Naval Res., Cruft Lab., Harvard Univ., Cambridge, Mass., Rep. 39, Apr. 25, 1948.</li>
+                    <li>Levy, R., "Aperiodic Tapered Corrugated Waveguide Filter", US Patent 3,597,710, Nov. 28, 1969.</li>
+                    <li>
+                        Goulouev, R., "Corrugated Waveguide Filter Having coupled Resonator Cavities", US Patent 6,169,466, Jan. 2, 2001 (see <a href="../structures/b40.htm"> example</a>).
+                    </li>
+                </ol>
+
+
+
+                <BR /><BR /><center>
+                    <small>R. Goulouev, 8 November 2009</small>
+                </center>
+
+            </DIV>
+        </DIV>
+    </CENTER>
+    <SCRIPT language="VBScript">
+<!--
+        sub window_onload()
+        window.name = "IndexPage"
+        end sub
+        -->
+    </SCRIPT>
+</BODY>
+</HTML>

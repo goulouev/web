@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+  <meta http-equiv="x-ua-compatible" content="IE=5"/>
+  <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+</head>
+<!--marked-->
+<BODY onload="vbscript:ExOnLoad8()">
+
+    <script language="javascript" type="text/javascript">
+
+<!--
+        if (top.location == self.location) {
+            top.name = "example_8"
+            top.location.href = "start.htm"
+        }
+        //-->
+    </script>
+
+
+    <SCRIPT LANGUAGE="VBSCRIPT">
+        Sub ExOnLoad8()
+        Dim V, VV
+        VV = TL()
+        V = split(VV, "][")
+        Top.InputDat.Value = V(1)
+        Top.StrucDat.value = V(2)
+        Top.ProtoDat.Value = V(3)
+        Top.OptDat.Value = V(4)
+        Top.TemplateDat.value = V(5)
+        Window.Navigate "editor.htm"
+        End Sub
+        Function TL()
+        TL = TL & "Notes:" & vbCrLf
+        TL = TL & "WR-75 Sprurious Modes Rejection Filter" & vbCrLf
+        TL = TL & "Rejects TE20 and TE01 modes @ 15-17 GHz" & vbCrLf
+        TL = TL & "Designed by R.Goulouev" & vbCrLf
+        TL = TL & "" & vbCrLf
+        TL = TL & "][1 1 7 10 1 0 6.1 10 20 200 2][0   1     0.37500     0.37500     0.37500     -0.18750     0.00000" & vbCrLf
+        TL = TL & "0   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000" & vbCrLf
+        TL = TL & "0   1     0.20630     0.34676     0.34676     -0.17338     0.00000" & vbCrLf
+        TL = TL & "0   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000" & vbCrLf
+        TL = TL & "0   1     0.23981     0.31905     0.31905     -0.15953     0.00000" & vbCrLf
+        TL = TL & "0   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000" & vbCrLf
+        TL = TL & "0   1     0.35000     0.31100     0.31100     -0.15550     0.00000" & vbCrLf
+        TL = TL & "0   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000" & vbCrLf
+        TL = TL & "0   1     0.23981     0.31905     0.31905     -0.15953     0.00000" & vbCrLf
+        TL = TL & "0   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000" & vbCrLf
+        TL = TL & "0   1     0.20630     0.34676     0.34676     -0.17338     0.00000" & vbCrLf
+        TL = TL & "0   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000" & vbCrLf
+        TL = TL & "0   1     0.37500     0.37500     0.37500     -0.18750     0.00000" & vbCrLf
+        TL = TL & "][3|0|12.2|0.50|0.05][][4" & vbCrLf
+        End Function
+    </SCRIPT>
+</BODY>
+</HTML>

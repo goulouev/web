@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <meta http-equiv="x-ua-compatible" content="IE=5" />
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta name="description" content="This page is part of WR-Connect waveguide structure simulator. It imports s-parameters in real/imaginary, phase/magnitude or s2p format and draws parameters versus frequency plots (graphs)" />
+    <meta name="keywords" content="frequency domain plots, s2p data plot, plot s2p, plot real imaginary complex s-parameter data, plot phase magnitude complex s-parameter data, insertion loss plot, return loss plot, group delay plot, insertion loss slope plot, group delay slope plot" />
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <TITLE>S-parameter vs frequency plotter online</TITLE>
+    <LINK href="FunctionGrapher_files/newwalterzorn.css" type="text/css" rel="stylesheet" />
+    <STYLE type="text/css">
+        table.a1 {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        tr.r1 {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        td.t1 {
+            margin: 0px;
+            padding-left: 2px;
+            padding-right: 1px;
+            padding-top: 1px;
+            padding-bottom: 1px;
+            background-color: #fffffa;
+            color: navy;
+            font-family: Arial Black;
+            font-size: 8pt;
+        }
+    </STYLE>
+    <script type="text/javascript" src="wz_jsgraphics.js"></script>
+</HEAD>
+
+<BODY LEFTMARGIN="0" TOPMARGIN="20" BGCOLOR="#909090" OnLoad="javascript:PageStart()">
+    <TABLE BORDER="5" HEIGHT="600" bordercolordark="#a0a0a0" bordercolorlight="#c0c0c0">
+        <TR VALIGN="top">
+            <TD CLASS="t1" WIDTH="200" ALIGN="LEFT" BGCOLOR="WHITE">
+                <TABLE CLASS="a1" WIDTH="195">
+                    <TR CLASS="r1">
+                        <TD CLASS="t1" COLSPAN="2">
+                            <FONT STYLE="font:10pt Arial Black; color:magenta">S-Parameter</FONT>
+                        </TD>
+                    </TR>
+                    <TR CLASS="r1">
+                        <TD CLASS="t1">
+                            <INPUT TYPE="CHECKBOX" NAME="Path" VALUE="1" CHECKED="" />
+                        </TD>
+                        <TD CLASS="t1">
+                            <FONT STYLE="font:8pt Arial Black; color:#000080">S11</FONT>
+                        </TD>
+                    </TR>
+
+                    <TR CLASS="r1">
+                        <TD CLASS="t1">
+                            <INPUT TYPE="CHECKBOX" NAME="Path" VALUE="2" CHECKED="" />
+                        </TD>
+                        <TD CLASS="t1">
+                            <FONT STYLE="font:8pt Arial Black; color:#800000">S21</FONT>
+                        </TD>
+                    </TR>
+
+                    <TR CLASS="r1">
+                        <TD CLASS="t1">
+                            <INPUT TYPE="CHECKBOX" NAME="Path" VALUE="3" />
+                        </TD>
+                        <TD CLASS="t1">
+                            <FONT STYLE="font:8pt Arial Black; color:#007000">S12</FONT>
+                            <br />
+                        </TD>
+                    </TR>
+
+                    <TR CLASS="r1">
+                        <TD CLASS="t1">
+                            <INPUT TYPE="CHECKBOX" NAME="Path" VALUE="4" />
+                        </TD>
+                        <TD CLASS="t1">
+                            <FONT STYLE="font:8pt Arial Black; color:#404040">S22</FONT>
+                        </TD>
+                    </TR>
+                </TABLE>
+
+
+                <TABLE CLASS="a1" WIDTH="195">
+                    <TR CLASS="r1">
+                        <TD CLASS="t1" COLSPAN="2">
+                            <FONT STYLE="font:10pt Arial Black; color:magenta">Function</FONT>
+                        </TD>
+                    </TR>
+                    <TR CLASS="r1">
+                        <TD CLASS="t1">
+                            <INPUT TYPE="RADIO" NAME="ReportFun" VALUE="1" CHECKED="" />
+                        </TD>
+                        <TD CLASS="t1">
+                            Magnitude          [dB]
+                        </TD>
+                    </TR>
+                    <TR CLASS="r1">
+                        <TD CLASS="t1">
+                            <INPUT TYPE="RADIO" NAME="ReportFun" VALUE="2" />
+                        </TD>
+                        <TD CLASS="t1">
+                            Mag. Slope  [dB/MHz]
+                        </TD>
+                    </TR>
+                    <TR CLASS="r1">
+                        <TD CLASS="t1">
+                            <INPUT TYPE="RADIO" NAME="ReportFun" VALUE="3" />
+                        </TD>
+                        <TD CLASS="t1">
+                            Phase                [dg]
+                        </TD>
+                    </TR>
+                    <TR CLASS="r1">
+                        <TD CLASS="t1">
+                            <INPUT TYPE="RADIO" NAME="ReportFun" VALUE="4" />
+                        </TD>
+                        <TD CLASS="t1">
+                            Delay                 [ns]
+                        </TD>
+                    </TR>
+                    <TR CLASS="r1">
+                        <TD CLASS="t1">
+                            <INPUT TYPE="RADIO" NAME="ReportFun" VALUE="5" />
+                        </TD>
+                        <TD CLASS="t1">
+                            Delay Slope [ns/MHz]
+                        </TD>
+                    </TR>
+
+
+
+                </TABLE>
+
+                <TABLE CLASS="a1" WIDTH="195">
+                    <TR CLASS="r1">
+                        <TD CLASS="t1" COLSPAN="2">
+                            <FONT STYLE="font:10pt Arial Black; color:magenta">X Scale</FONT>
+                        </TD>
+                    </TR>
+                    <TR CLASS="r1">
+                        <TD CLASS="t1">
+                            Xmin
+                        </TD>
+                        <TD CLASS="t1">
+                            <INPUT NAME="Xscale0" TYPE="TEXT" SIZE="14" STYLE="font:8pt Arial Black; color:navy" />
+                        </TD>
+                    </TR>
+                    <TR CLASS="r1">
+                        <TD CLASS="t1">
+                            Xmax
+                        </TD>
+                        <TD CLASS="t1">
+                            <INPUT NAME="Xscale1" TYPE="TEXT" SIZE="14" STYLE="font:8pt Arial Black; color:navy" />
+                        </TD>
+                    </TR>
+                    <TR CLASS="r1">
+                        <TD CLASS="t1">
+                            GridX
+                        </TD>
+                        <TD CLASS="t1">
+                            <INPUT NAME="Xscale2" TYPE="TEXT" SIZE="14" STYLE="font:8pt Arial Black; color:navy" />
+                        </TD>
+                    </TR>
+                    <TR CLASS="r1">
+                        <TD CLASS="t1" COLSPAN="2">
+                            <FONT STYLE="font:10pt Arial Black; color:magenta">Y Scale</FONT>
+                        </TD>
+                    </TR>
+                    <TR CLASS="r1">
+                        <TD CLASS="t1">
+                            Ymin
+                        </TD>
+                        <TD CLASS="t1">
+                            <INPUT NAME="Yscale0" TYPE="TEXT" SIZE="14" STYLE="font:8pt Arial Black; color:navy" />
+                        </TD>
+                    </TR>
+                    <TR CLASS="r1">
+                        <TD CLASS="t1">
+                            Ymax
+                        </TD>
+                        <TD CLASS="t1">
+                            <INPUT NAME="Yscale1" TYPE="TEXT" SIZE="14" STYLE="font:8pt Arial Black; color:navy" />
+                        </TD>
+                    </TR>
+                    <TR CLASS="r1">
+                        <TD CLASS="t1">
+                            GridY
+                        </TD>
+                        <TD CLASS="t1">
+                            <INPUT NAME="Yscale2" TYPE="TEXT" SIZE="14" STYLE="font:8pt Arial Black; color:navy" />
+                        </TD>
+                    </TR>
+                    <TR CLASS="r1">
+                        <TD CLASS="t1" COLSPAN="2">
+                            Auto Scale<INPUT TYPE="CHECKBOX" NAME="AutoScale" />
+                        </TD>
+
+                    </TR>
+                </TABLE>
+
+
+
+                <INPUT TYPE="BUTTON" NAME="GrApply" STYLE="font:8pt Arial Black; color:navy" VALUE="Apply" OnClick="PageApply()" />
+                <INPUT TYPE="BUTTON" NAME="GrClear" STYLE="font:8pt Arial Black; color:navy" VALUE="Clear" />
+                <INPUT TYPE="BUTTON" NAME="GrReturn" STYLE="font:8pt Arial Black; color:navy" VALUE="Return" />
+                <BR />
+                <HR />
+                <INPUT TYPE="BUTTON" NAME="GoTable" STYLE="font:8pt Arial Black; color:navy" VALUE="Export/Import Data" ONCLICK=window.navigate("table.htm") />
+            </TD>
+            <TD WIDTH="820" ALIGN="LEFT" BGCOLOR="WHITE">
+                <div id="myCanvas" style="position:relative;height:400px;width:800px"></div>
+            </TD>
+        </TR>
+    </TABLE>
+    <script language="javascript" type="text/javascript">
+    <!--
+        function PageStart() {
+            //var InputBufer=parent.document.getElementById('InputDat');
+            var InputBufer = parent.InputDat;
+            //var Sbufer=parent.document.getElementById('SDat');
+            var Sbufer = parent.SDat;
+            var Svalues = Sbufer.value;
+            var SLines = Svalues.split("\n");
+            var Np = SLines.length - 2;
+            if (Np < 2) { alert("Insufficient data to draw a plot!"); return; }
+            var v0 = SLines[0].split(" ");
+            var v1 = SLines[Np].split(" ");
+            Xscale0.value = v0[0];
+            Xscale1.value = v1[0];
+            Xscale2.value = "10";
+            Yscale0.value = "-100.0";
+            Yscale1.value = "0.0";
+            Yscale2.value = "10";
+            MainFrame();
+            DrawPlot(1, SLines);
+        }
+
+        function PageApply() {
+            //var InputBufer=parent.document.getElementById('InputDat');
+            var InputBufer = parent.InputDat;
+            //var Sbufer=parent.document.getElementById('SDat')
+            var Sbufer = parent.SDat
+            var Svalues = Sbufer.value;
+            var SLines = Svalues.split("\n");
+            var Np = SLines.length - 2;
+            if (Np < 2) { alert("Insufficient data to draw a plot!"); return; }
+            if (AutoScale.checked) {
+                var F0 = parseFloat(Xscale0.value);
+                var F1 = parseFloat(Xscale1.value);
+                var cv = MiniMax(F0, F1, 1, SLines);
+                Yscale0.value = cv[0];
+                Yscale1.value = cv[1];
+            }
+            MainFrame()
+            DrawPlot(1, SLines);
+        }
+
+        function MainFrame() {
+            var x0 = parseFloat(Xscale0.value);
+            var x1 = parseFloat(Xscale1.value);
+            var nxGrid = parseInt(Xscale2.value);
+            var y0 = parseFloat(Yscale1.value);
+            var y1 = parseFloat(Yscale0.value);
+            var nyGrid = parseInt(Yscale2.value);
+
+            if (nxGrid < 1) { nxGrid = 1; }
+            if (nyGrid < 1) { nyGrid = 1; }
+
+            GraphFrame(xFrame0, yFrame0, xFrame1, yFrame1);
+            GraphGrid(x0, y0, x1, y1, xFrame0, yFrame0, xFrame1, yFrame1, nxGrid, nyGrid);
+        }
+
+        function ExportImport() {
+            //document.navigate "table.htm"
+        }
+
+        // GRAPH SUPPORT FUNCTIONS  ################################################
+
+        //GRAPH FRAME==================================
+        function xFrame(xScale, xScale0, xScale1, xFrame0, xFrame1) {
+            var xFrame = xFrame0 + (xFrame1 - xFrame0) / (xScale1 - xScale0) * (xScale - xScale0);
+            if (xFrame < xFrame0) { xFrame = xFrame0 }
+            if (xFrame > xFrame1) { xFrame = xFrame1 }
+            return xFrame;
+        }
+
+        function yFrame(yScale, yScale0, yScale1, yFrame0, yFrame1) {
+            var yFrame = yFrame0 + (yFrame1 - yFrame0) / (yScale1 - yScale0) * (yScale - yScale0);
+            if (yFrame < yFrame0) { yFrame = yFrame0 }
+            if (yFrame > yFrame1) { yFrame = yFrame1 }
+            return yFrame;
+        }
+
+
+        function GraphFrame(xFrame0, yFrame0, xFrame1, yFrame1) {
+            jg.clear();
+            jg.setColor("#000000");
+            jg.drawRect(0, 0, xCanvasMax, yCanvasMax);
+            jg.paint();
+        }
+
+        function GraphGrid(xScale0, yScale0, xScale1, yScale1, xFrame0, yFrame0, xFrame1, yFrame1, nxGrid, nyGrid) {
+            jg.setColor("#0084A5");
+            jg.setFont("Arial Black", "10px", Font.PLAIN);
+            var x, xF, xT, y, yT, yF;
+            var nxx = Math.round(3.0 - Math.log(Math.max(Math.abs(xScale0), Math.abs(xScale1))) / Math.LN10);
+            var nyy = Math.round(3.0 - Math.log(Math.max(Math.abs(yScale0), Math.abs(yScale1))) / Math.LN10);
+            if (nxx < 0) { nxx = 0 }
+            if (nyy < 0) { nyy = 0 }
+            for (var i = 0; i <= nxGrid; i++) {
+                x = xScale0 + (xScale1 - xScale0) * i / nxGrid;
+                xT = x.toFixed(nxx);
+                xF = xFrame(x, xScale0, xScale1, xFrame0, xFrame1);
+                jg.drawLine(xF, yFrame0, xF, yFrame1); // co-ordinates related to "myCanvas"
+                jg.drawString(xT, xF - 10, yFrame1 + 10);
+            }
+            for (var i = 0; i <= nyGrid; i++) {
+                y = yScale0 + (yScale1 - yScale0) * i / nyGrid;
+                yT = y.toFixed(nyy)
+                yF = yFrame(y, yScale0, yScale1, yFrame0, yFrame1);
+                jg.drawLine(xFrame0, yF, xFrame1, yF); // co-ordinates related to "myCanvas"
+                jg.drawString(yT, xFrame0 - 45, yF - 7);
+            }
+            jg.paint();
+        }
+
+        // PLOT DRAW ===========================================
+
+        function DrawPlot(iSample, SLines, xScale0, yScale0, xScale1, yScale1) {
+            var x0 = parseFloat(Xscale0.value);
+            var x1 = parseFloat(Xscale1.value);
+            var y0 = parseFloat(Yscale1.value);
+            var y1 = parseFloat(Yscale0.value);
+
+            var xv;
+            var iType = 1;
+            for (i = 0; i <= 4; i++) {
+                if (ReportFun[i].checked) { iType = i + 1; }
+            }
+            var Np = SLines.length - 2;
+            //jg.setColor("#ff00dd"); // red
+            for (iPort = 0; iPort <= 3; iPort++) {
+                if (Path[iPort].checked) {
+                    var Xp = new Array();
+                    var Yp = new Array();
+                    for (i = 0; i <= Np; i++) {
+                        xv = vParam(iType, iPort, iSample, i, Np, SLines);
+                        //UBERY HUJ OTSJUDA
+                        Xp[i] = xFrame(xv[0], x0, x1, xFrame0, xFrame1);
+                        Yp[i] = yFrame(xv[1], y0, y1, yFrame0, yFrame1);
+                    }
+                    jg.setColor(GrColor[iPort]);
+                    jg.drawPolyline(Xp, Yp);
+                    jg.paint();
+
+                }
+            }
+        }
+
+        function vParam(iType, iPort, iSample, iCount, Np, SLines) {
+            var i = iCount
+            if (iType > 1) {
+                if (iCount < 1) { i = 1; }
+                if (iCount > Np - 1) { i = Np - 1; }
+            }
+            var S = SLines[i].split(" ");
+            var F = parseFloat(S[0]);
+            var V = Array(parseFloat(S[2 * iPort + 1]), parseFloat(S[2 * iPort + 2]));
+            if ((iType == 2) || (iType == 4) || (iType == 5)) {
+                var S0 = SLines[i - iSample].split(" ");
+                var S1 = SLines[i + iSample].split(" ");
+                var F0 = S0[0];
+                var F1 = S[0];
+                var V0 = Array(S0[2 * iPort + 1], S0[2 * iPort + 2]);
+                var V1 = Array(S1[2 * iPort + 1], S1[2 * iPort + 2]);
+                var dF = (F1 - F0) / 2.0;
+            }
+            if (iType == 2) {
+                var ILS = (dB(V1) - dB(V0)) / dF / 2000.0;
+                return Array(F, ILS);
+            }
+
+            if (iType == 3) {
+                return Array(F, DgRad * arg(V));
+            }
+
+            if (iType == 4) {
+                var dW = DeltaArg(V1, V0);
+                var dPdx = 0.5 * arg(dW) / dF;
+                var GD = -dPdx / 2.0 / Math.PI;
+                return Array(F, GD);
+            }
+
+            if (iType == 5) {
+                var W1 = DeltaArg(V1, V);
+                var W0 = DeltaArg(V, V0);
+                ddPdx2 = arg(DeltaArg(W1, W0));
+                var GDS = -0.001 * ddPdx2 / 2.0 / Math.PI;
+                return Array(F, GDS);
+            }
+            return Array(F, dB(V));
+        }
+
+        function MiniMax(F0, F1, iSample, SLines) {
+            var vMin = 1.e10;
+            var vMax = -1.e10;
+            var xv;
+            var iType = 1;
+            for (i = 0; i <= 4; i++) {
+                if (ReportFun[i].checked) { iType = i + 1; }
+            }
+            var Np = SLines.length - 2;
+            for (iPort = 0; iPort <= 3; iPort++) {
+                if (Path[iPort].checked) {
+                    for (i = 0; i <= Np; i++) {
+                        xv = vParam(iType, iPort, iSample, i, Np, SLines);
+                        if ((xv[0] >= F0) && (xv[0] <= F1)) {
+                            if (xv[1] > vMax) { vMax = xv[1]; }
+                            if (xv[1] < vMin) { vMin = xv[1]; }
+                        }
+                    }
+                }
+            }
+            return Array(vMin, vMax);
+        }
+
+
+
+
+
+
+
+        //'=================== COMPLEX FUNCTION MATH
+
+        function cmplx(x, y) {
+            return Array(x, y);
+        }
+
+        function xpy(x, y) {
+            return Array(x[0] + y[0], x[1] + y[1]);
+        }
+
+        function xmy(x, y) {
+            return Array(x[0] - y[0], x[1] - y[1]);
+        }
+
+        function xoy(x, y) {
+            return Array(x[0] * y[0] - x[1] * y[1], x[0] * y[1] + x[1] * y[0]);
+        }
+
+        function xdy(x, y) {
+            var M = y[0] * y[0] + y[1] * y[1];
+            return Array((x[0] * y[0] + x[1] * y[1]) / M, (-x[0] * y[1] + x[1] * y[0]) / M);
+        }
+
+        function cexp(x) {
+            var a = Math.exp(x[0]);
+            return Array(a * Math.cos(x[1]), a * Math.sin(x[1]));
+        }
+
+        function ax(a, x) {
+            return Array(a * x[0], a * x[1]);
+        }
+
+        function cabs(x) {
+            return Math.sqrt(x[0] * x[0] + x[1] * x[1]);
+        }
+
+
+        function arg(x) {
+            var pi = 3.141592653589793238;
+            var pi2 = 1.570796326794896619;
+            var up = x[1] + x[0];
+            var um = x[1] - x[0];
+            if (up > 0 && um > 0) {
+                return pi2 - Math.atan(x[0] / x[1]);
+            }
+            if (up >= 0 && um <= 0) {
+                return Math.atan(x[1] / x[0]);
+            }
+            if (up < 0 && um < 0) {
+                return -pi2 - Math.atan(x[0] / x[1]);
+            }
+            if (up <= 0 && um >= 0) {
+                if (x[1] >= 0) {
+                    return pi + Math.atan(x[1] / x[0]);
+                }
+                else {
+                    return -pi + Math.atan(x[1] / x[0]);
+                }
+            }
+            return 0.0;
+        }
+
+        function dB(x) {
+            var R;
+            R = cabs(x);
+            if (R > 1E-20) {
+                return 20. * Math.log(R) / Math.LN10;
+
+            }
+            else {
+                return -400;
+            }
+        }
+
+        function DeltaArg(x, y)
+        //exp(i*(dPhase(x)-dPase(y)))
+        {
+            var M = cabs(x) * cabs(y);
+            dT = Array((x[0] * y[0] + x[1] * y[1]) / M, (x[1] * y[0] - x[0] * y[1]) / M);
+            return dT;
+        }
+
+
+
+
+
+        // HEADS
+        if (top.location == self.location) {
+            top.name = "graph_0"
+            top.location.href = "start.htm"
+        }
+
+        var DgRad = 180.0 / Math.PI
+        var GrColor = Array("#000080", "#800000", "#007000", "#404040");
+        var xCanvasMax = 800;
+        var yCanvasMax = 500;
+        var xFrame0 = 50;
+        var xFrame1 = 750;
+        var yFrame0 = 20;
+        var yFrame1 = 470;
+        var jg = new jsGraphics("myCanvas");
+//var v=vParam(4,0,1,2,SLines);
+//alert(v);
+//XYDraw(SLines);
+
+//-->
+    </script>
+</BODY>
+
+</HTML>

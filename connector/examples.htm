@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+  <meta http-equiv="x-ua-compatible" content="IE=5"/>
+  <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<TITLE>Examples of waveguide filters designed using WR-Connect.</TITLE>
+  <META name="description" content="Pre-designed RF &#38; microwave waveguide filter models based on stepped impedance, corrugated and E- & H-plane iris structures."/>
+  <META name="keywords" content="RF microwave software, filter design software, low pass filter design, bandpass filter design, bandpass filter designs, WR 62, WR 75, WR 112, WR 229, model, demo, design example, corrugated, iris, E-plane, H-plane, spec, 17.3 18.4 GHz, 10.7  12.75 GHz, 5.85 6.45 GHz, 7.9 8.4 GHz, return loss, insertion loss, rejection, dB, harmonics, second harmonic, 3rd harmonic, receive reject filter, transmit reject Filter, interference filter"/>
+  <link href="class_1.css" rel="stylesheet" type="text/css"/>
+<style type="text/css">
+<!--
+td.pic{width:200px;text-align:center;font: 8pt Arial; color: navy}
+td.spec{width:170px;padding-left:20px;padding-right:20px; text-align: left; font: 8pt Arial; color: navy}
+td.note{padding-left:10px; padding-right:10px; text-align: justify; font: 8pt Arial; color: navy}
+    td.version {
+        text-align: center;
+        font: 8pt Arial;
+        color: navy;
+    }
+    .button {
+        font: bold 11px Arial;
+        text-decoration: none;
+        background-color: #EEEEEE;
+        color: navy;
+        padding: 2px 6px 2px 6px;
+        border-top: 1px solid #CCCCCC;
+        border-right: 1px solid #333333;
+        border-bottom: 1px solid #333333;
+        border-left: 1px solid #CCCCCC;
+    }
+-->
+</style>
+</HEAD>
+<BODY BGCOLOR="#c0c0c0" LEFTMARGIN="0" TOPMARGIN="20">
+    <CENTER>
+        <DIV class="external">
+            <p class="shapka">
+                WR_Connect
+                <FONT class="note0"><BR />a cool waveguide structure design tool</FONT>
+            </p>
+            <font style="font: 8pt 'Arial Black'; color: black">
+                <A HREF="../index.htm" class="main">Up</A>
+                <A HREF="index.htm" class="main">Home</A>
+                <A HREF="about.htm" class="main">About WR_Connect</A>
+                <A HREF="menus.htm" class="main">Menus &#38; Controls</A>
+                <A HREF="examples.htm" class="current">Demos &#38; Examples</A>
+                <A HREF="tutorial.htm" class="main">Tutorials</A>
+                <A HREF="start.htm" target="WR_Connect" class="main">Open WR_Connect Project</A>
+            </font>
+            <DIV class="internal" style="height:100px">
+                <p class="message">
+                    WR_Connect synthesizes a 20-order tapered corrugated waveguide low-pass (harmonic)
+                    filter for 7 seconds. Then it runs 500 frequency points for just 22 seconds naturally
+                    computing them one by one (no tricks with so-called "fast", "interpolated" or "adaptive" sweep)
+                    810 times faster than Ansoft HFSS-11. For the same amount of time WR_Connect can give you idea about
+                    how TE<sub>50</sub>-mode, for example, behaves in the filter, which would require even much more
+                    time by HFSS...<br /><br />
+                    The <a href="../WRC_2020/index.htm" class="main">NEW VERSION</a> is almost ready. Users are advised to migrate to the new version.
+                    Try it with this examples (click "Try it").
+                </p>
+            </DIV>
+            <hr />
+
+            <TABLE WIDTH="100%" BORDER="5" bordercolordark="#a0a0a0" bordercolorlight="#c0c0c0" bgcolor="#f0f0f0">
+                <TR>
+                    <TD COLSPAN="4">
+                        <CENTER>
+                            <FONT STYLE="font:10pt Arial; color:red">
+                                Clicking image will open WR-Connect project with design data - this option works on Internet Explorer.
+                            </FONT>
+                            <FONT STYLE="font:12pt Lucida Console; color:navy">
+                                <B>
+                                    <BR /><BR />
+                                    LIST OF EXAMPLES
+                                </B>
+                            </FONT>
+                        </CENTER>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD class="pic">
+                        <CENTER>
+                            <B>
+                                3D-VIEW &#38; LINK
+                            </B>
+                        </CENTER>
+                    </TD>
+                    <TD class="spec">
+                        <CENTER>
+                            <B>
+                                SPECIFICATION
+                            </B>
+                        </CENTER>
+                    </TD>
+                    <TD class="spec">
+                        <CENTER>
+                            <B>
+                                DESCRIPTION
+                            </B>
+                        </CENTER>
+                    </TD>
+                    <td class="version">
+                        <b>
+                            NEW<br />
+                            VERSION
+                        </b>
+                    </td>
+                </TR>
+
+                <TR>
+                    <TD class="pic">
+                        <A HREF="start.htm" TARGET="example_0"><IMG SRC="ex0.jpg" BORDER="0" /></A>
+                    </TD>
+                    <TD class="spec">
+                        <CENTER><B>WR-62 Receive-Reject Filter<BR /><BR /></B></CENTER>
+                        Pass-Band: 17.3 - 18.4 GHz<BR />
+                        Insertion Loss: 0.07 dB<BR />
+                        Return Loss: 25 dB<BR />
+                        Rejection: 90 dB @ 12.75 GHz
+                    </TD>
+                    <TD class="note">
+                        <CENTER><B>Waveguide H-plane Iris Filter<BR /></B></CENTER>
+                        This filter is realized as a sequence of thin full-height diaphragms (windows) in a rectangular waveguide. It is the most old, simple, popular, reliable and manufacturable waveguide band-pass filter solution. The design procedure is simple and well known among filter designers [1,2,3].
+                    </TD>
+                    <td class="version">
+                        <a href="javascript:void(0)" onclick="PrjFile0(); window.location.href = '/WRC_2020/editor.htm';" class="button">Try It</a>
+                    </td>
+                </TR>
+                <TR>
+                    <TD class="pic">
+                        <A HREF="start.htm" target="example_1"><IMG SRC="ex1.jpg" BORDER="0" /></A>
+                    </TD>
+                    <TD class="spec">
+                        <CENTER>
+                            <B>
+                                <br />
+                                WR-75 Transmit-Reject Filter<br />
+                            </B>
+                        </CENTER>
+                        Pass-Band: 10.7 - 12.75 GHz<br />
+                        Insertion Loss: 0.09 dB<br />
+                        Return Loss: 25 dB<br />
+                        Rejection: 50 dB @ 13.75 - 14.50 GHz
+                    </TD>
+                    <TD class="note">
+                        <CENTER><B>Waveguide E-plane Iris Filter<br /></B></CENTER>
+                        The filter is realized as a sequence of thin full-width diaphragms (windows) in a rectangular waveguide. This type of structure can be used as a low-pass filter to cut off unwanted spectrum higher than the pass-band. By implementation it is similar to E-plane stub [4] or corrugated filters [5,6,7]. WR_Connect provides templates for the both types as design starting point.
+                    </TD>
+                    <td class="version">
+                        <a href="javascript:void(0)" onclick="PrjFile1(); window.location.href = '/WRC_2020/editor.htm';" class="button">Try It</a>
+                    </td>
+                </TR>
+                <TR>
+                    <TD class="pic">
+                        <A HREF="start.htm" target="example_2"><IMG SRC="ex2.jpg" BORDER="0" /></A>
+                    </TD>
+                    <TD class="spec">
+                        <CENTER>
+                            <B>
+                                <br />
+                                WR-137 Receive-Reject Filter<br />
+                            </B>
+                        </CENTER>
+                        Pass-Band: 5.85 - 6.45 GHz<br />
+                        Insertion Loss: 0.04 dB<br />
+                        Return Loss: 25 dB<br />
+                        Rejection: 80 dB @ 3.7 - 4.2 GHz
+                    </TD>
+                    <TD class="note">
+                        <CENTER>
+                            <B>
+                                Waveguide Filter with Thick Irises<br />
+                            </B>
+                        </CENTER>
+                        This filter is a type of H-plane iris filter using thick irises. It is known that iris filters usually demonstrate more rejection at lower roll-off and less rejection of higher frequencies. Increasing thickness of diaphragms would gain the effect and make the frequency response closer to high-pass type.
+                    </TD>
+                    <td class="version">
+                        <a href="javascript:void(0)" onclick="PrjFile2(); window.location.href = '/WRC_2020/editor.htm';" class="button">Try It</a>
+                    </td>
+                </TR>
+                <TR>
+                    <TD class="pic">
+                        <A HREF="start.htm" target="example_3">
+                            <IMG SRC="ex3.jpg" BORDER="0>" />
+                        </A>
+                    </TD>
+                    <TD class="spec">
+                        <CENTER>
+                            <B>
+                                <br />
+                                WR-75 to WR-62 Transition<br />
+                            </B>
+                        </CENTER>
+                        Pass-Band: 11.0 - 15.0 GHz<br />
+                        Insertion Loss: 0.01 dB<br />
+                        Return Loss: 30 dB<br />
+                    </TD>
+                    <TD class="note">
+                        <CENTER><B>Stepped-Impedance Transformer<br /></B></CENTER><br />
+                        WR-Connect provides a template for projecting an exponentially matched transformer for different waveguide interfaces.
+                    </TD>
+                    <td class="version">
+                        <a href="javascript:void(0)" onclick="PrjFile3(); window.location.href = '/WRC_2020/editor.htm';" class="button">Try It</a>
+                    </td>
+                </TR>
+                <TR>
+                    <TD class="pic">
+                        <A HREF="start.htm" target="example_4"><IMG SRC="ex4.jpg" BORDER="0" /></A>
+                    </TD>
+                    <TD class="spec">
+                        <CENTER>
+                            <B>
+                                <br />
+                                WR-75 High-Pass Filter<br />
+                            </B>
+                        </CENTER>
+                        Pass-Band: 10.0 - 15.0 GHz<br />
+                        Insertion Loss: 0.05 dB<br />
+                        Return Loss: 30 dB<br />
+                        Rejection: 60 dB @ 8.0 GHz
+
+                    </TD>
+                    <TD class="note">
+                        <CENTER><B>H-plane Stepped Waveguide Filter<br /></B></CENTER>
+                        Using a cut-off section of waveguide as natural high-pass filter is quite old and still preferable for designers. This filter is based narrow waveguide section matched with interface by two transformers. Using WR-Connect you can design such a filter as simple as a transformer.
+                    </TD>
+                    <td class="version">
+                        <a href="javascript:void(0)" onclick="PrjFile4(); window.location.href = '/WRC_2020/editor.htm';" class="button">Try It</a>
+                    </td>
+                </TR>
+                <TR>
+                    <TD class="pic">
+                        <A HREF="start.htm" target="example_5"><IMG SRC="ex5.jpg" BORDER="0" /></A>
+                    </TD>
+                    <TD class="spec">
+                        <CENTER>
+                            <B>
+                                <br />
+                                WR-112 Corrugated Harmonic Filter<br />
+                            </B>
+                        </CENTER>
+                        Pass-Band: 7.9 - 8.4 GHz<br />
+                        Insertion Loss: 0.10 dB<br />
+                        Return Loss: 25 dB<br />
+                        Rejection:<br />
+                        65 dB @ 10.5 GHz (roll-off)<br />
+                        80 dB @ 15.8 - 16.8 GHz (2nd harmonic)<br />
+                        80 dB @ 23.7 - 25.2 GHz (3rd harmonic)<br />
+                        60 dB @ 31.6 - 33.6 GHz (4th harmonic)
+                    </TD>
+                    <TD class="note">
+                        <CENTER><B>Tapered Corrugated Low-Pass Filter<br /></B></CENTER>
+                        Periodically corrugated waveguide filters were originated by Conh [5] and much upgraded to aperiodic tapered structures by Levy [6,7]. The corrugated filters have the best rating among designers because of extreme high power handling, low loss, good match, manufacture reliability and repeatability in comparison with waffle-iron and ridge filters. However they are not much presented in market because of sophisticated spurious theory behind them. Digoria Microwave has previously presented  <A HREF="../oncorr/index.htm" target="oncorr">"Corrugated Low-pass Filter Design Workshop"</A>, which now is much upgraded with WR-Connect.
+                    </TD>
+                    <td class="version">
+                        <a href="javascript:void(0)" onclick="PrjFile5(); window.location.href = '/WRC_2020/editor.htm';" class="button">Try It</a>
+                    </td>
+                </TR>
+
+                <TR>
+                    <TD class="pic">
+                        <A HREF="start.htm" target="example_7"><IMG SRC="ex7.jpg" BORDER="0" /></A>
+                    </TD>
+                    <TD class="spec">
+                        <CENTER>
+                            <B>
+                                <br />
+                                WR-112 Band-Pass Filter<br />
+                            </B>
+                        </CENTER>
+                        Pass-Band: 8.20 - 8.45 GHz<br />
+                        Insertion Loss: 0.15 dB<br />
+                        Return Loss: 25 dB<br />
+                        Rejection:<br />
+                        60 dB @ DC - 7.65 GHz<br />
+                        60 dB @ 9.0 - 18.0 GHz
+                    </TD>
+                    <TD class="note">
+                        <CENTER><B>Composite H-plane / Corrugated Filter<br /></B></CENTER><br />
+                        The idea of cascading a band-pass iris filter with a corrugated low-pass filter is not new indeed, however using WR-Connect you could design the cascade as a single unit, make it smaller, less loss and free of spurious spikes caused by propagation of high-order modes.
+                    </TD>
+                    <td class="version">
+                        <a href="javascript:void(0)" onclick="PrjFile6(); window.location.href = '/WRC_2020/editor.htm';" class="button">Try It</a>
+                    </td>
+                </TR>
+                <TR>
+                    <TD class="pic">
+                        <A HREF="start.htm" target="example_8"><IMG SRC="ex8.jpg" BORDER="0" /></A>
+                    </TD>
+                    <TD class="spec">
+                        <CENTER>
+                            <B>
+                                <br />
+                                WR-75 Spurious Suppression Filter<br />
+                            </B>
+                        </CENTER>
+                        Pass-Band: 11 - 15.0 GHz<br />
+                        Insertion Loss: 0.02 dB<br />
+                        Return Loss: 30 dB<br />
+                        Rejection @ 15-17 GHz:<br />
+                        30 dB TE<sub>20</sub>-mode <br />
+                        30 dB TE<sub>01</sub>-mode <br />
+                    </TD>
+                    <TD class="note">
+                        <CENTER><B>TE20 &#38; TE01 Modes Rejection Filter<br /></B></CENTER><br />
+                        This waveguide structure is used to reject spurious spectrum carried by TE<sub>20</sub> and TE<sub>01</sub> modes. It can be used in combination with a conventional cavity filter and gain far-out-of-band rejection with almost no insertion loss increase. Using WR-Connect you can design a filter like this for 50 seconds in three steps (transformer template, transformer synthesis, connection to its Z-flip).
+                    </TD>
+                    <td class="version">
+                        <a href="javascript:void(0)" onclick="PrjFile7(); window.location.href = '/WRC_2020/editor.htm';" class="button">Try It</a>
+                    </td>
+                </TR>
+            </TABLE>
+            <h2>References:</h2>
+            <ol type="1" style="font: 8pt Century; text-align: left">
+                <li>Lewis, W. D., "Wave Filter", US Patent # 2,585,563, 1952</li>
+                <li>Colling, R. E., "Foundations for Microwave Engineering", McGraw-Hill, New York, 1966.</li>
+                <li>Mattai, G. L., L.Young, and E. M. T. Jones: "Microwave Filters, Impedance-matching Networks, and Coupling Structures", McGraw-Hill, New York, 1964.</li>
+                <li>Rhodes, J. D., "Stop-Band Filter", US Patent # 3,845,422, 1974</li>
+                <li>S.B. Conh "A theoretical and experimental study of a waveguide filter structure", Office Naval Res., Cruft Lab., Harvard Univ., Cambridge, Mass., Rep. 39, Apr. 25, 1948.</li>
+                <li>Levy, R., "Tapered Corrugated Waveguide Low-Pass Filter", IEEE Trans. Microwave Theory Tech., MTT-21, August 1973, pp. 526-532.</li>
+                <li>Levy, R., "Aperiodic Tapered Corrugated Waveguide Filter", US Patent 3,597,710, Nov. 28, 1969.</li>
+            </ol>
+        </DIV>
+    </CENTER>
+    <script type="text/javascript">
+        function PrjFile0() {
+            var rs = [];
+            rs[0] = 'SETUP_DAT';
+            rs[1] = '1 10 0';
+            rs[2] = '1 0.050 1.000  1.000  3.000  1.000  1.500';
+            rs[3] = '14.142 2.8284';
+            rs[4] = '10 20 500';
+            rs[5] = ' 1   30  0.02000  0.02000  0.02000';
+            rs[6] = 'DESIGN_DAT';
+            rs[7] = '-1  1   0';
+            rs[8] = '  0    0    0';
+            rs[9] = '  0   10  0';
+            rs[10] = '  1    1';
+            rs[11] = '1.0 0.0 6.1';
+            rs[12] = '0    1    0.150000    -0.311000    -0.155500    0.311000    0.155500';
+            rs[13] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[14] = '2    1    0.020000    -0.155860    -0.155500    0.155860    0.155500';
+            rs[15] = '1    2    0.294290    -0.311000    -0.155500    0.311000    0.155500';
+            rs[16] = '2    1    0.020000    -0.105140    -0.155500    0.105140    0.155500';
+            rs[17] = '1    2    0.340010    -0.311000    -0.155500    0.311000    0.155500';
+            rs[18] = '2    1    0.020000    -0.092280    -0.155500    0.092280    0.155500';
+            rs[19] = '1    2    0.348030    -0.311000    -0.155500    0.311000    0.155500';
+            rs[20] = '2    1    0.020000    -0.092280    -0.155500    0.092280    0.155500';
+            rs[21] = '1    2    0.340010    -0.311000    -0.155500    0.311000    0.155500';
+            rs[22] = '2    1    0.020000    -0.105130    -0.155500    0.105130    0.155500';
+            rs[23] = '1    2    0.294290    -0.311000    -0.155500    0.311000    0.155500';
+            rs[24] = '2    1    0.020000    -0.156080    -0.155500    0.156080    0.155500';
+            rs[25] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[26] = '0    1    0.150000    -0.311000    -0.155500    0.311000    0.155500';
+            rs[27] = '';
+            SetProject(rs);
+        }
+
+        function PrjFile1() {
+            //EX 1
+            var rs = [];
+            rs[0] = 'SETUP_DAT';
+            rs[1] = '1 0 10';
+            rs[2] = '1 0.050 1.000  1.000  3.000  1.000  1.500';
+            rs[3] = '14.142 2.8284';
+            rs[4] = '10 20 500';
+            rs[5] = ' 1   30  0.02000  0.02000  0.02000';
+            rs[6] = 'DESIGN_DAT';
+            rs[7] = '-1  0   0';
+            rs[8] = '  0    0    0';
+            rs[9] = '  1   0  10';
+            rs[10] = '  1    1';
+            rs[11] = '1.0 0.0 6.1';
+            rs[12] = '0    1    0.200000    -0.375000    -0.187500    0.375000    0.187500';
+            rs[13] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[14] = '3    1    0.520380    -0.375000    -0.158450    0.375000    0.158450';
+            rs[15] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[16] = '0    1    0.020000    -0.375000    -0.075000    0.375000    0.075000';
+            rs[17] = '3    2    0.150000    -0.375000    -0.251020    0.375000    0.251020';
+            rs[18] = '0    1    0.046730    -0.375000    -0.075000    0.375000    0.075000';
+            rs[19] = '3    2    0.150000    -0.375000    -0.282270    0.375000    0.282270';
+            rs[20] = '0    1    0.026160    -0.375000    -0.075000    0.375000    0.075000';
+            rs[21] = '3    2    0.150000    -0.375000    -0.294590    0.375000    0.294590';
+            rs[22] = '0    1    0.021920    -0.375000    -0.075000    0.375000    0.075000';
+            rs[23] = '3    2    0.150000    -0.375000    -0.296400    0.375000    0.296400';
+            rs[24] = '0    1    0.020420    -0.375000    -0.075000    0.375000    0.075000';
+            rs[25] = '3    2    0.150000    -0.375000    -0.297910    0.375000    0.297910';
+            rs[26] = '0    1    0.020420    -0.375000    -0.075000    0.375000    0.075000';
+            rs[27] = '3    2    0.150000    -0.375000    -0.296400    0.375000    0.296400';
+            rs[28] = '0    1    0.021920    -0.375000    -0.075000    0.375000    0.075000';
+            rs[29] = '3    2    0.150000    -0.375000    -0.294590    0.375000    0.294590';
+            rs[30] = '0    1    0.026160    -0.375000    -0.075000    0.375000    0.075000';
+            rs[31] = '3    2    0.150000    -0.375000    -0.282270    0.375000    0.282270';
+            rs[32] = '0    1    0.046730    -0.375000    -0.075000    0.375000    0.075000';
+            rs[33] = '3    2    0.150000    -0.375000    -0.251020    0.375000    0.251020';
+            rs[34] = '0    1    0.020000    -0.375000    -0.075000    0.375000    0.075000';
+            rs[35] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[36] = '3    1    0.520380    -0.375000    -0.158450    0.375000    0.158450';
+            rs[37] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[38] = '0    1    0.200000    -0.375000    -0.187500    0.375000    0.187500';
+            rs[39] = '';
+            SetProject(rs);
+        }
+
+        function PrjFile2() {
+            //EX 2
+            var rs = [];
+            rs[0] = 'SETUP_DAT';
+            rs[1] = '1 10 0';
+            rs[2] = '1 0.050 1.000  1.000  3.000  1.000  1.500';
+            rs[3] = '5.454 1.0909';
+            rs[4] = '3.5 8.5 500';
+            rs[5] = ' 1   30  0.02000  0.02000  0.02000';
+            rs[6] = 'DESIGN_DAT';
+            rs[7] = '-1  1   0';
+            rs[8] = '  0    0    0';
+            rs[9] = '  1   10  0';
+            rs[10] = '  1    1';
+            rs[11] = '1.0 0.0 6.1';
+            rs[12] = '0    1    0.300000    -0.686000    -0.311000    0.686000    0.311000';
+            rs[13] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[14] = '2    1    0.400000    -0.574810    -0.311000    0.574810    0.311000';
+            rs[15] = '1    2    0.488160    -0.686000    -0.311000    0.686000    0.311000';
+            rs[16] = '2    1    0.400000    -0.507590    -0.311000    0.507590    0.311000';
+            rs[17] = '1    2    0.607500    -0.686000    -0.311000    0.686000    0.311000';
+            rs[18] = '2    1    0.400000    -0.485940    -0.311000    0.485940    0.311000';
+            rs[19] = '1    2    0.641410    -0.686000    -0.311000    0.686000    0.311000';
+            rs[20] = '2    1    0.400000    -0.485940    -0.311000    0.485940    0.311000';
+            rs[21] = '1    2    0.607500    -0.686000    -0.311000    0.686000    0.311000';
+            rs[22] = '2    1    0.400000    -0.506200    -0.311000    0.506200    0.311000';
+            rs[23] = '1    2    0.488160    -0.686000    -0.311000    0.686000    0.311000';
+            rs[24] = '2    1    0.400000    -0.573240    -0.311000    0.573240    0.311000';
+            rs[25] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[26] = '0    1    0.300000    -0.686000    -0.311000    0.686000    0.311000';
+            rs[27] = '';
+            SetProject(rs);
+        }
+
+        function PrjFile3() {
+            //EX 3
+            var rs = [];
+            rs[0] = 'SETUP_DAT';
+            rs[1] = '1 7 10';
+            rs[2] = '1 0.050 1.000  1.000  3.000  1.000  1.500';
+            rs[3] = '12.247 2.4495';
+            rs[4] = '10 15 250';
+            rs[5] = ' 1   30  0.02000  0.02000  0.02000';
+            rs[6] = 'DESIGN_DAT';
+            rs[7] = '-1  1   0';
+            rs[8] = '  0    0    0';
+            rs[9] = '  1   7  10';
+            rs[10] = '  1    1';
+            rs[11] = '1.0 0.0 6.1';
+            rs[12] = '0    1    0.300000    -0.375000    -0.187500    0.375000    0.187500';
+            rs[13] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[14] = '0    1    0.302130    -0.352040    -0.176020    0.352040    0.176020';
+            rs[15] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[16] = '0    1    0.398620    -0.327480    -0.163740    0.327480    0.163740';
+            rs[17] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[18] = '0    1    0.460140    -0.314290    -0.157150    0.314290    0.157140';
+            rs[19] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[20] = '0    1    0.300000    -0.311000    -0.155500    0.311000    0.155500';
+            rs[21] = '';
+            SetProject(rs);
+        }
+
+        function PrjFile4() {
+            //EX 4
+            var rs = [];
+            rs[0] = 'SETUP_DAT';
+            rs[1] = '1 7 10';
+            rs[2] = '1 0.050 1.000  1.000  3.000  1.000  1.500';
+            rs[3] = '10.247 2.0494';
+            rs[4] = '7 15 250';
+            rs[5] = ' 1   30  0.02000  0.02000  0.02000';
+            rs[6] = 'DESIGN_DAT';
+            rs[7] = '-1  1   0';
+            rs[8] = '  0    0    0';
+            rs[9] = '  1   7  10';
+            rs[10] = '  1    1';
+            rs[11] = '1.0 0.0 6.1';
+            rs[12] = '0    1    0.375000    -0.375000    -0.187500    0.375000    0.187500';
+            rs[13] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[14] = '0    1    0.302130    -0.352040    -0.176020    0.352040    0.176020';
+            rs[15] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[16] = '0    1    0.398620    -0.327480    -0.163740    0.327480    0.163740';
+            rs[17] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[18] = '0    1    0.460140    -0.314290    -0.157150    0.314290    0.157140';
+            rs[19] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[20] = '0    1    0.750000    -0.311000    -0.155500    0.311000    0.155500';
+            rs[21] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[22] = '0    1    0.460140    -0.314290    -0.157150    0.314290    0.157140';
+            rs[23] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[24] = '0    1    0.398620    -0.327480    -0.163740    0.327480    0.163740';
+            rs[25] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[26] = '0    1    0.302130    -0.352040    -0.176020    0.352040    0.176020';
+            rs[27] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[28] = '0    1    0.375000    -0.375000    -0.187500    0.375000    0.187500';
+            rs[29] = '';
+            SetProject(rs);
+        }
+
+        function PrjFile5() {
+            //EX 5
+            var rs = [];
+            rs[0] = 'SETUP_DAT';
+            rs[1] = '1 7 10';
+            rs[2] = '1 0.050 1.000  1.000  3.000  1.000  1.500';
+            rs[3] = '14.697 2.9394';
+            rs[4] = '6 36 600';
+            rs[5] = ' 1   30  0.02000  0.02000  0.02000';
+            rs[6] = 'DESIGN_DAT';
+            rs[7] = '-1  1   0';
+            rs[8] = '  0    0    0';
+            rs[9] = '  1   7  10';
+            rs[10] = '  1    1';
+            rs[11] = '1.0 0.0 6.1';
+            rs[12] = '0    1    0.400000    -0.561000    -0.248500    0.561000    0.248500';
+            rs[13] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[14] = '1    1    0.486490    -0.500000    -0.171930    0.500000    0.171930';
+            rs[15] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[16] = '3    1    0.020000    -0.435000    -0.056510    0.435000    0.056510';
+            rs[17] = '0    2    0.150000    -0.435000    -0.160000    0.435000    0.160000';
+            rs[18] = '0    1    0.020000    -0.435000    -0.050000    0.435000    0.050000';
+            rs[19] = '0    2    0.150000    -0.435000    -0.165440    0.435000    0.165440';
+            rs[20] = '0    1    0.020000    -0.435000    -0.050000    0.435000    0.050000';
+            rs[21] = '3    2    0.150000    -0.435000    -0.180200    0.435000    0.180200';
+            rs[22] = '0    1    0.020000    -0.435000    -0.050000    0.435000    0.050000';
+            rs[23] = '3    2    0.150000    -0.435000    -0.201830    0.435000    0.201830';
+            rs[24] = '0    1    0.020000    -0.435000    -0.050000    0.435000    0.050000';
+            rs[25] = '3    2    0.150000    -0.435000    -0.273650    0.435000    0.273650';
+            rs[26] = '0    1    0.020000    -0.435000    -0.050000    0.435000    0.050000';
+            rs[27] = '3    2    0.150000    -0.435000    -0.295900    0.435000    0.295900';
+            rs[28] = '0    1    0.020000    -0.435000    -0.050000    0.435000    0.050000';
+            rs[29] = '3    2    0.150000    -0.435000    -0.328060    0.435000    0.328060';
+            rs[30] = '0    1    0.020000    -0.435000    -0.050000    0.435000    0.050000';
+            rs[31] = '3    2    0.150000    -0.435000    -0.348160    0.435000    0.348160';
+            rs[32] = '0    1    0.020000    -0.435000    -0.050000    0.435000    0.050000';
+            rs[33] = '3    2    0.150000    -0.435000    -0.379350    0.435000    0.379350';
+            rs[34] = '0    1    0.020000    -0.435000    -0.050000    0.435000    0.050000';
+            rs[35] = '3    2    0.150000    -0.435000    -0.392870    0.435000    0.392870';
+            rs[36] = '0    1    0.020000    -0.435000    -0.050000    0.435000    0.050000';
+            rs[37] = '3    2    0.150000    -0.435000    -0.394750    0.435000    0.394750';
+            rs[38] = '0    1    0.020000    -0.435000    -0.050000    0.435000    0.050000';
+            rs[39] = '3    2    0.150000    -0.435000    -0.394750    0.435000    0.394750';
+            rs[40] = '0    1    0.020000    -0.435000    -0.050000    0.435000    0.050000';
+            rs[41] = '3    2    0.150000    -0.435000    -0.392870    0.435000    0.392870';
+            rs[42] = '0    1    0.020000    -0.435000    -0.050000    0.435000    0.050000';
+            rs[43] = '3    2    0.150000    -0.435000    -0.379350    0.435000    0.379350';
+            rs[44] = '0    1    0.020000    -0.435000    -0.050000    0.435000    0.050000';
+            rs[45] = '3    2    0.150000    -0.435000    -0.348160    0.435000    0.348160';
+            rs[46] = '0    1    0.020000    -0.435000    -0.050000    0.435000    0.050000';
+            rs[47] = '3    2    0.150000    -0.435000    -0.328060    0.435000    0.328060';
+            rs[48] = '0    1    0.020000    -0.435000    -0.050000    0.435000    0.050000';
+            rs[49] = '3    2    0.150000    -0.435000    -0.295900    0.435000    0.295900';
+            rs[50] = '0    1    0.020000    -0.435000    -0.050000    0.435000    0.050000';
+            rs[51] = '3    2    0.150000    -0.435000    -0.273650    0.435000    0.273650';
+            rs[52] = '0    1    0.020000    -0.435000    -0.050000    0.435000    0.050000';
+            rs[53] = '3    2    0.150000    -0.435000    -0.201830    0.435000    0.201830';
+            rs[54] = '0    1    0.020000    -0.435000    -0.050000    0.435000    0.050000';
+            rs[55] = '3    2    0.150000    -0.435000    -0.180200    0.435000    0.180200';
+            rs[56] = '0    1    0.020000    -0.435000    -0.050000    0.435000    0.050000';
+            rs[57] = '0    2    0.150000    -0.435000    -0.165440    0.435000    0.165440';
+            rs[58] = '0    1    0.020000    -0.435000    -0.050000    0.435000    0.050000';
+            rs[59] = '0    2    0.150000    -0.435000    -0.160000    0.435000    0.160000';
+            rs[60] = '3    1    0.020000    -0.435000    -0.056510    0.435000    0.056510';
+            rs[61] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[62] = '1    1    0.486490    -0.500000    -0.171930    0.500000    0.171930';
+            rs[63] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[64] = '0    1    0.400000    -0.561000    -0.248500    0.561000    0.248500';
+            rs[65] = '';
+            SetProject(rs);
+        }
+
+        function PrjFile6() {
+            //EX 6
+            var rs = [];
+            rs[0] = 'SETUP_DAT';
+            rs[1] = '1 7 10';
+            rs[2] = '1 0.050 1.000  1.000  3.000  1.000  1.500';
+            rs[3] = '8.660 1.7321';
+            rs[4] = '5 15 300';
+            rs[5] = ' 1   30  0.02000  0.02000  0.02000';
+            rs[6] = 'DESIGN_DAT';
+            rs[7] = '-1  1   0';
+            rs[8] = '  0    0    0';
+            rs[9] = '  1   7  10';
+            rs[10] = '  1    1';
+            rs[11] = '1.0 0.0 6.1';
+            rs[12] = '0    1    0.500000    -0.561000    -0.248500    0.561000    0.248500';
+            rs[13] = '3    2    0.150000    -0.600000    -0.542280    0.600000    0.542280';
+            rs[14] = '1    1    0.444390    -0.600000    -0.248500    0.600000    0.248500';
+            rs[15] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[16] = '2    1    0.050000    -0.191770    -0.248500    0.191770    0.248500';
+            rs[17] = '1    2    0.806960    -0.600000    -0.248500    0.600000    0.248500';
+            rs[18] = '2    1    0.050000    -0.161880    -0.248500    0.161880    0.248500';
+            rs[19] = '1    2    0.819240    -0.600000    -0.248500    0.600000    0.248500';
+            rs[20] = '2    1    0.050000    -0.158330    -0.248500    0.158330    0.248500';
+            rs[21] = '1    2    0.819240    -0.600000    -0.248500    0.600000    0.248500';
+            rs[22] = '2    1    0.050000    -0.162690    -0.248500    0.162690    0.248500';
+            rs[23] = '1    2    0.806960    -0.600000    -0.248500    0.600000    0.248500';
+            rs[24] = '2    1    0.050000    -0.185940    -0.248500    0.185940    0.248500';
+            rs[25] = '1    2    0.717750    -0.600000    -0.248500    0.600000    0.248500';
+            rs[26] = '2    1    0.050000    -0.303560    -0.248500    0.303560    0.248500';
+            rs[27] = '1    2    0.319900    -0.561000    -0.248500    0.561000    0.248500';
+            rs[28] = '0    1    0.030000    -0.470000    -0.090000    0.470000    0.090000';
+            rs[29] = '3    2    0.150000    -0.470000    -0.282630    0.470000    0.282630';
+            rs[30] = '0    1    0.030000    -0.470000    -0.090000    0.470000    0.090000';
+            rs[31] = '3    2    0.150000    -0.470000    -0.337500    0.470000    0.337500';
+            rs[32] = '0    1    0.030000    -0.470000    -0.090000    0.470000    0.090000';
+            rs[33] = '3    2    0.150000    -0.470000    -0.412500    0.470000    0.412500';
+            rs[34] = '0    1    0.030000    -0.470000    -0.090000    0.470000    0.090000';
+            rs[35] = '3    2    0.150000    -0.470000    -0.450000    0.470000    0.450000';
+            rs[36] = '0    1    0.030000    -0.470000    -0.090000    0.470000    0.090000';
+            rs[37] = '3    2    0.150000    -0.470000    -0.406350    0.470000    0.406350';
+            rs[38] = '0    1    0.030000    -0.470000    -0.090000    0.470000    0.090000';
+            rs[39] = '3    2    0.150000    -0.470000    -0.347750    0.470000    0.347750';
+            rs[40] = '0    1    0.030000    -0.470000    -0.090000    0.470000    0.090000';
+            rs[41] = '3    2    0.150000    -0.470000    -0.303010    0.470000    0.303010';
+            rs[42] = '0    1    0.030000    -0.470000    -0.090000    0.470000    0.090000';
+            rs[43] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[44] = '3    1    0.800660    -0.500000    -0.172770    0.500000    0.172770';
+            rs[45] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[46] = '0    1    0.500000    -0.561000    -0.248500    0.561000    0.248500';
+            rs[47] = '';
+            SetProject(rs);
+        }
+
+        function PrjFile7() {
+            //EX 7
+            var rs = [];
+            rs[0] = 'SETUP_DAT';
+            rs[1] = '1 7 10';
+            rs[2] = '1 0.050 1.000  1.000  3.000  1.000  1.500';
+            rs[3] = '14.142 2.8284';
+            rs[4] = '10 20 200';
+            rs[5] = ' 1   30  0.02000  0.02000  0.02000';
+            rs[6] = 'DESIGN_DAT';
+            rs[7] = '-1  1   0';
+            rs[8] = '  0    0    0';
+            rs[9] = '  1   7  10';
+            rs[10] = '  1    1';
+            rs[11] = '1 0 6.1';
+            rs[12] = '0    1    0.375000    -0.375000    -0.187500    0.375000    0.187500';
+            rs[13] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[14] = '0    1    0.206300    -0.346760    -0.173380    0.346760    0.173380';
+            rs[15] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[16] = '0    1    0.239810    -0.319050    -0.159530    0.319050    0.159520';
+            rs[17] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[18] = '0    1    0.350000    -0.311000    -0.155500    0.311000    0.155500';
+            rs[19] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[20] = '0    1    0.239810    -0.319050    -0.159530    0.319050    0.159520';
+            rs[21] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[22] = '0    1    0.206300    -0.346760    -0.173380    0.346760    0.173380';
+            rs[23] = '0    0    0.000000    0.000000    0.000000    0.000000    0.000000';
+            rs[24] = '0    1    0.375000    -0.375000    -0.187500    0.375000    0.187500';
+            rs[25] = '';
+            SetProject(rs);
+        }
+
+        function SetProject(LNs) {
+            //document.getElementById('FileProjectOkno').value = localStorage.getItem('ProjectDat');
+            var i, key;
+            var SetupDat = '';
+            var DesignDat = '';
+            var MemoDat = '';
+            var kod = -1;
+            var n = LNs.length - 1;
+            if (n < 0) { return; }
+            for (i = 0; i <= n; i++) {
+                var LN = trim(LNs[i]);
+                if (LN.length > 3) {
+                    key = LNs[i].substr(0, 4);
+                    //alert(key);
+                    if (key == 'SETU') { kod = 1; }
+                    if (key == 'DESI') { kod = 2; }
+                    if (key == 'BACK') { kod = 3; }
+                    if (kod == 1 && key != 'SETU') {
+                        SetupDat += LNs[i] + '\r\n';
+                    }
+                    if (kod == 2 && key != 'DESI') {
+                        DesignDat += LNs[i] + '\r\n';
+                    }
+                    if (kod == 3 && key != 'BACK') {
+                        MemoDat += LNs[i] + '\r\n';
+                    }
+
+                }
+
+            }
+            if (kod > 0) {
+                localStorage.setItem("InputDatFileText", SetupDat);
+                localStorage.setItem("DesignFileText", DesignDat);
+                localStorage.setItem("MemoDatText", MemoDat);
+
+            }
+        }
+                //############################
+        function trim(str) {
+            return str.replace(/^\s+|\s+$/g, '');
+        }
+
+    </script>
+</BODY>
+</HTML>

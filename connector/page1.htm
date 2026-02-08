@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <meta http-equiv="x-ua-compatible" content="IE=5" />
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>Using Optimization to Improve RF Performance</title>
+    <link href="class_0.css" rel="stylesheet" type="text/css" />
+    <STYLE type="text/css">
+        <!--
+        table.data {
+            background: #ffffff;
+            color: #004040
+        }
+
+        td.data {
+            font: 9pt sans-serif;
+            width: 100px;
+            padding: 1px;
+            text-align: center
+        }
+
+        table.spec {
+            font: 12pt sans-serif;
+            background: #ffffff;
+            color: #004040
+        }
+
+        td.spec {
+            width: 200px;
+            padding: 10px
+        }
+
+        table.warning {
+            width: 600;
+            text-align: justify;
+            padding: 10px;
+            font: 12pt sans-serif;
+            color: #004040;
+            background: #ffffff
+        }
+
+        caption.warning {
+            background: #ffffff;
+            font: 12pt sans-serif;
+            color: red;
+            font-weight: bold
+        }
+        -->
+    </STYLE>
+</HEAD>
+<BODY BGCOLOR="#c0c0c0" LEFTMARGIN="0" TOPMARGIN="20">
+    <CENTER>
+        <DIV class="external">
+            <P class="shapka">
+                WR-Connect
+                <FONT class="note0">
+                    <BR />a cool waveguide structure design tool
+                </FONT>
+            </P>
+            <FONT style="font:  8pt 'Arial Black'; color: black">
+
+                <A HREF="../index.htm" class="main">Up</A>
+                <A HREF="index.htm" class="main">Home</A>
+                <A HREF="about.htm" class="main">About WR-Connect</A>
+                <A HREF="menus.htm" class="main">Menus & Controls</A>
+                <A HREF="examples.htm" class="main">Demos & Examples</A>
+                <A HREF="tutorial.htm" class="current">Tutorials</A>
+                <A HREF="start.htm" target="WR-Connect" class="main">Open WR-Connect Project</A>
+            </FONT>
+            <DIV class="internal" style="height:290">
+                <p class="message">
+                    Using optimization tecniques instead common synthesis procedures is preferable for customizing performance of RF/microwave filters in respect to the practical requirements and achieving optimal trade-offs of parameters. As all optimization methods are based on multiple evaluation of targeted parameters over hude variety of single performance evaluations applied to multiple combination of variables, it only becomes possible if the base computational engine performs fast enough. Due to almost instanteneous computational time per a single variation, all time required for WR-Connect to achieve the targets are few minutes.
+                    <hr />
+                </p>
+                <div class="SecondMenu">
+                    <a href="tutorial.htm" class="InsideMenuPassive">Old Version Manual</a>
+                    <a href="page0.htm" class="InsideMenuPassive">Entering Design Parameters and Dimensions</a>
+                    <a href="page1.htm" class="InsideMenuActive">Using Optimization to Improve Performance</a>
+                    <a href="page3.htm" class="InsideMenuPassive">Accuracy and Applicability Report</a>
+                    <a href="closed.htm" rel="nofollow" class="InsideMenuPassive">This Section is Coming Soon</a>
+                </div>
+                <IMG SRC="piclev.jpg" style="float:right" />
+            </DIV>
+            <DIV class="maintext">
+                <font style="font: 9pt Lucida Console; color:green; background: white; padding:5px">
+                    <b>
+                        <i>A4 / Landscape printable</i>
+                    </b>
+                </font>
+
+
+                <h1>
+                    WR-Connect:<br />Using Optimization to Improve RF Performance
+                </h1>
+
+                <h3>by Rousslan A. Goulouev</h3>
+
+                <h2>Introduction</h2>
+
+                In the previous article [1] we have shown how to open WR-Connect design project and enter dimensions and configuration of waveguide structure consisting from sections of rectangular waveguides. Then we ran simulations and reviewed the reflection/transmission characteristics corresponding to the dominant and some spurious modes. There We have verified how the inhomogeneous corrugated structure  presented by Levy in [2] works and double checked how the results obtained by WR-Connect correlate with the results obtained from software of different type. In other words we used WR-Connect for verification and validation purposes only. In engineering practice there might be often useful verifying properties of particular design or validating use of particular software.
+                However we consider the evolutionary role of design engineers in our technocratic society is creating something new and better serving all of us. In order to create that something better we must come up with a better concept and optimize it in respect to the performance valuables. Therefore all goods invented by mind and created by hands are in continious process of optimization. Let us return to our little task and learn how to improve RF performance of the existing design using basics of optimization tecnique.
+
+                <h2>Conceiving the Optimization Goals and Parameters</h2>
+
+                Before starting optimization process we need to clearly specify goals of performance improvement and particular tuning elements providing change of performance. Let us again run simulation and take look at near-band frequency response of the filter. Since we have WR-Connect project data in the
+                <a href="page0.htm#design" target="win0">Table 3</a> in the previous paper, we can simply transfer it into the text window in <b>File/Import Export</b> page of <a href="http://www.goulouev.com/connector/start.htm" target="win0">WR-Connect</a> by common Select/Copy/Paste methods. Then we go to the <b>Initial Setup</b> page and set the simulation bandwidth from 17 GHz to 32 GHz with 500 frequency points. After we saved the new settings, we execute the <b>"Analyze"</b> button on the <b>Structure Editor</b> page and obtain a plot identical with the one on Figure 1 below.
+                <h3>
+                    <img src="opt0.gif" /><br />
+                    Figure 1: Pre-optimized near-band frequency response characteristics
+                </h3>
+                Reviewing the return loss characteristic we can visually recognize potential possibility to improve the return loss over the bandwidth from about
+                21.0 to 27.7 GHz by pulling down those two ripples at the band edges.
+
+                <h2>Selecting Variables for Optimization</h2>
+
+                The first column of the schematic representation data (Table 1) contains the optimization variable keys showing which particular dimension of the node/junction is tunable during optimization process. Last time, whem we ran simulation and observed the plots, we did not need to set those keys and left them zeros. The variable key is set as the number of column of dimensions where the dimension is written;
+                <ol style="color: #004040">
+                    <li>
+                        Length of waveguide section, <font class="formulae">L</font>
+                    </li>
+                    <li>
+                        Width of waveguide section,<font class="formulae">A/2</font>
+                    </li>
+                    <li>
+                        Height of waveguide section, <font class="formulae">B</font>
+                    </li>
+                    <li>
+                        Position of bottom of waveguide,<font class="formulae">Y</font>
+                    </li>
+                </ol>
+                <br />
+                Generally there are no strict rules for selecting optimization variables, so we can deviate any "sensitive" dimension in practically reasonable range. Let us try to tune height of each cavity (key "3" in each junction "2") and distances between cavities (key "1" in each node "1") as it shown on Table 1.<br /><br />
+                <table width="500" align="center" style="font: 10pt Lucida Console; background:#ffffff; color:#004040">
+                    <caption style="font: 10pt Arial; color:#004040"> Table 1: Topology data corresponding to the filter dimensions before optimization with variables set for optimization.</caption>
+                    <tr>
+                        <td>
+                            <pre>
+                0   1     0.00000     4.32000     1.52000     -0.76000     0.00000
+                0   1     0.00000     0.00000     0.00000      0.00000     0.00000     0.00000
+                            <font color="red">1</font>   1     1.21000     4.32000     1.16000     -0.58000     0.00000
+                            <font color="red">3</font>   2     1.67000     4.32000     2.59000     -1.29500     0.00000     0.00000
+                            <font color="red">1</font>   1     1.03000     4.32000     0.69000     -0.34500     0.00000
+                            <font color="red">2</font>   2     1.61000     4.32000     3.52000     -1.76000     0.00000     0.00000
+                            <font color="red">1</font>   1     1.00000     4.32000     0.60000     -0.30000     0.00000
+                            <font color="red">2</font>   2     1.59000     4.32000     3.78000     -1.89000     0.00000     0.00000
+                            <font color="red">1</font>   1     1.08000     4.00000     0.55000     -0.27500     0.00000
+                            <font color="red">2</font>   2     1.67000     4.00000     3.80000     -1.90000     0.00000     0.00000
+                            <font color="red">1</font>   1     1.14000     3.81000     0.55000     -0.27500     0.00000
+                            <font color="red">2</font>   2     1.74000     3.81000     3.84000     -1.92000     0.00000     0.00000
+                            <font color="red">1</font>   1     1.13000     3.81000     0.56000     -0.28000     0.00000
+                            <font color="red">2</font>   2     1.74000     3.81000     3.90000     -1.95000     0.00000     0.00000
+                            <font color="red">1</font>   1     1.13000     3.81000     0.56000     -0.28000     0.00000
+                            <font color="red">2</font>   2     1.74000     3.81000     3.84000     -1.92000     0.00000     0.00000
+                            <font color="red">1</font>   1     1.14000     3.81000     0.55000     -0.27500     0.00000
+                            <font color="red">2</font>   2     1.67000     4.00000     3.80000     -1.90000     0.00000     0.00000
+                            <font color="red">1</font>   1     1.08000     4.00000     0.55000     -0.27500     0.00000
+                            <font color="red">2</font>   2     1.59000     4.32000     3.78000     -1.89000     0.00000     0.00000
+                            <font color="red">1</font>   1     1.00000     4.32000     0.60000     -0.30000     0.00000
+                            <font color="red">2</font>   2     1.61000     4.32000     3.52000     -1.76000     0.00000     0.00000
+                            <font color="red">1</font>   1     1.03000     4.32000     0.69000     -0.34500     0.00000
+                            <font color="red">2</font>   2     1.67000     4.32000     2.59000     -1.29500     0.00000     0.00000
+                            <font color="red">1</font>   1     1.21000     4.32000     1.16000     -0.58000     0.00000
+                0   1     0.00000     0.00000     0.00000      0.00000     0.00000     0.00000
+                0   1     0.00000     4.32000     1.52000     -0.76000     0.00000
+              </pre>
+                        </td>
+                    </tr>
+                </table>
+                <br />
+
+                <h2>Setting Optimization Methods and Targets</h2>
+
+                After we selected tunable dimensions, we go to the <b>Optimization Setup</b> and specify optimization parameters. First we need to determine the frequency ranges where we are going to improve performance. As it was mentioned above we could improve the return loss (S<sub>11</sub>) over the filter's pass-band from 21.0 to 27.7 GHz (# 1 on Figure 2) with 30 points (about 5 points per ripple) as much as possible (30 dB for example). The rest of parameters can be set as shown on Figure 2.
+
+                <h3>
+                    <img src="opt3.gif" /><br />
+                    Figure 2: Optimization settings
+                </h3>
+
+                <h2>Running Optimization</h2>
+                After we click the "Apply" button, the window will navigate back to the "Structure Editor" frame with controls. The process of optimization can be initiated by clicking the "Optimize" button.
+                Duration of optimization process can take several minutes, but it can be interrupted any time by clicking red "Abort" button. Normally optimization does not require much of computer resources, so the user may surf internet in a separate window or tab. The label on right from the "Ready/Abort" button shows some numbers changing during the process. The numbers show the current optimization step and current performance measure relative to goals and its best value achieved so far.
+
+                <h2>New Results</h2>
+
+                When optimization process stops and the green inscription "Ready" appears, the old dimensions will be replaced with new dimensions corresponing to the best optimized performance achieved during optimization. We would need to run simulation again (click "Analyze" button) in order to plot the frequency response. In result we achieve improved in-band performance shown on Figure 3 below.
+                <h3>
+                    <img src="opt4.gif" /><br />
+                    Figure 3: Post-optimized near-band frequency response characteristics
+                </h3>
+                Since we tuned the dimensions of filter to achieve better in-bands, the out-of-band performance could have also changed. Therefore the updated structure has to be also simulated over wider frequency range (for example from 15 GHz to 75 GHz).
+                <h3>
+                    <img src="opt5.gif" /><br />
+                    Figure 4: Post-optimized out-of-band frequency response characteristics
+                </h3>
+                As we note the out-of-band performance of the optimized filter is not significantly different from the pre-optimized performance (
+                <a href="page0.htm#spur" target="win0">see Figure 4 [1]</a>) except better match over the pass-band.
+
+                <h2>References:</h2>
+                <ol type="1" style="font: 8pt Century; text-align: left">
+                    <li>
+                        R. Goulouev, "WR-Connect: Entering Design Parameters and Dimensions", Digoria Microwave, http://www.goulouev.com/connector/page0.htm, Created 10.08.09
+                    <li>
+                        R. Levy, "Inhomogeneous Stepped-Impedance Corrugated Waveguide Low-Pass Filters", Microwave Symposium Digest, 2005 IEEE MTT-S International
+                        Volume , Issue , 12-17 June 2005 Page(s): 4 pp.
+                    </li>
+                    </li>
+                </ol>
+
+                <h3>
+                    <i>
+                        <b>&copy; R. Goulouev, 06.2009</b>
+                    </i>
+                </h3>
+
+            </DIV>
+        </DIV>
+    </CENTER>
+    <SCRIPT language="VBScript">
+<!--
+        sub window_onload()
+        window.name = "IndexPage"
+        end sub
+        -->
+    </SCRIPT>
+</BODY>
+</HTML>

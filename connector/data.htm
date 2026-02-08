@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <meta http-equiv="x-ua-compatible" content="IE=5" />
+    <title>Project Data Input/Output</title>
+</HEAD>
+<!--marked-->
+<BODY LEFTMARGIN="0" TOPMARGIN="20" BGCOLOR="#909090">
+    <CENTER>
+        <TABLE BORDER="1" WIDTH="100%" HEIGHT="520">
+            <TR VALIGN="TOP">
+                <TD WIDTH="250">
+                    <CENTER>
+                        <FONT STYLE="font:12pt Arial; color:navy">
+                            <B>
+                                <I>
+                                    <BR />
+                                    EXPORT
+                                    <BR /><BR />
+                                    <INPUT TYPE="button" NAME="command0" STYLE="font:9pt Lucida Console; color:navy" Value="WR_Connect Project File" />
+                                    <BR /><BR />
+                                    <INPUT TYPE="button" NAME="command5" STYLE="font:9pt Lucida Console; color:navy" Value="Go To  WR-Connect  2020" />
+                                    <BR /><BR />
+                                    <INPUT TYPE="button" NAME="command1" STYLE="font:9pt Lucida Console; color:navy" Value="3D  HFSS  Model  Script" />
+                                    <BR /><BR />
+                                    <INPUT TYPE="button" NAME="command2" STYLE="font:9pt Lucida Console; color:navy" Value="3D AutoCAD Model Script" />
+                                    <BR /><BR /><BR /><BR /><BR /><BR /><BR /><BR />
+                                    IMPORT
+                                    <BR /><BR />
+                                    <INPUT TYPE="button" NAME="command3" STYLE="font:9pt Lucida Console; color:navy" Value="WR_Connect Project File" />
+                                </I>
+                            </B>
+                        </FONT>
+                    </CENTER>
+                </TD>
+                <TD>
+                    <CENTER>
+                        <TEXTAREA NAME="Okno" COLS="85" ROWS="30" STYLE="8pt Lucida Console; color:navy; background-color:#DDDDDD"></TEXTAREA>
+                    </CENTER>
+                </TD>
+            </TR>
+        </TABLE>
+    </CENTER>
+
+
+    <SCRIPT LANGUAGE="VBScript">
+        sub window_onload()
+        if top.location = self.location then top.location = "start.htm"
+        end sub
+
+        Sub Command0_OnClick()
+        Okno.Value = "Notes:" & vbCrLf & vbCrLf & vbCrLf & "][" & Top.InputDat.Value & "][" & Top.StrucDat.value & "][" & Top.ProtoDat.Value & "][" & Top.OptDat.Value & "][" & Top.TemplateDat.value
+        End Sub
+
+
+        Sub Command3_OnClick()
+        Dim V
+        V = split(Okno.Value, "][")
+        Top.InputDat.Value = V(1)
+        Top.StrucDat.value = V(2)
+        Top.ProtoDat.Value = V(3)
+        Top.OptDat.Value = V(4)
+        Top.TemplateDat.value = V(5)
+        Okno.Value = ""
+        Window.Navigate "editor.htm"
+        End Sub
+
+        Sub Command1_OnClick()
+        dim V
+        Dim i, iUnit
+        V = split(Top.InputDat.Value, " ")
+        iUnit = CInt(V(0))
+        Set Guides = New Structure
+        Guides.StrucDat = top.StrucDat.value
+        Okno.Value = Guides.HfssModel(iUnit)
+        End Sub
+        Sub Command2_OnClick()
+        Set Guides = New Structure
+        Guides.StrucDat = top.StrucDat.value
+        Okno.Value = Guides.DrawAuto()
+        End Sub
+        Sub Command5_OnClick()
+        LN = Top.InputDat.Value
+        if trim(LN) <> "" then
+        nums = split(WordLineCorrect(" ", LN), " ")
+        //InputDatText=iUnit&" "&iSym&" "&Nx&" "&Ny&" "&eps&" "&tg&" "&sigm&" "&f0&" "&f1&" "&Np&" "&mode
+        iUnit = CInt(nums(0)): iSymX = -1: iSymY = CInt(nums(1)): Nx = CInt(nums(2)): Ny = CInt(nums(3))
+        eps = nums(4): tg = nums(5): sigm = nums(6)
+        f0 = CDbl(nums(7)): f1 = CDbl(nums(8)): Np = nums(9): mode = nums(10)
+        txt = "SETUP_DAT" & VbCrLf
+        txt = txt & iUnit & " " & Nx & " " & Ny & vbCrLf
+        fc = sqr(f0 * f1): df = 0.2 * fc
+        txt = txt & "1 0.050 1.000  1.000  3.000  1.000  1.500" & VbCrLf
+        txt = txt & formatnumber(fc, 3) & " " & formatnumber(df, 4) & VbCrLf
+        txt = txt & f0 & " " & f1 & " " & Np & VbCrLf
+        txt = txt & " 1   30  0.02000  0.02000  0.02000" & VbCrLf
+             else
+        exit sub
+        end if
+             txt = txt & "DESIGN_DAT" & VbCrLf
+             LNtxt = Top.StrucDat.value
+        if trim(LNtxt) <> "" then
+        LNs = split(LNtxt, vbCrLf)
+        nLN = ubound(LNs)
+        txt = txt & iSymX & "  " & iSymY & "   0" & VbCrLf
+        txt = txt & "  0    0    0" & VbCrLf
+        txt = txt & "  1   " & Nx & "  " & Ny & VbCrLf
+        txt = txt & "  1    1" & VbCrLf
+        txt = txt & eps & " " & tg & " " & sigm & VbCrLf
+        for i = 0 to nLN
+                    if LNs(i) <> "" then
+        vLN = split(WordLineCorrect(" ", LNs(i)), " ")
+        iOpt = 0: iType = 0: L = 0: A = 0: B = 0: H = 0: X0 = 0: X1 = 0: Y0 = 0: Y1 = 0
+        if ubound(vLN) = 7 then
+        iType = CInt(vLN(1))
+        if iType = 1 then
+        iType = 0
+                          else
+        if iType = 5 then iType = 3: end if
+                             iOpt = CInt(vLN(0))
+                             L = CDbl(vLN(2)): A = CDbl(vLN(3)): B = CDbl(vLN(4)): H = CDbl(vLN(5))
+        X0 = -A: X1 = A: Y0 = H: Y1 = H + B
+        end if
+                       else
+            iOpt = CInt(vLN(0)): iType = CInt(vLN(1))
+        L = CDbl(vLN(2)): A = CDbl(vLN(3)): B = CDbl(vLN(4)): H = CDbl(vLN(5))
+        X0 = -A: X1 = A: Y0 = H: Y1 = H + B
+        end if
+                       txt = txt & iOpt & "    " & iType & "    " & FormatNumber(L, 6)
+                       txt = txt & "    " & FormatNumber(X0, 6) & "    " & FormatNumber(Y0, 6)
+        txt = txt & "    " & FormatNumber(X1, 6) & "    " & FormatNumber(Y1, 6) & VbCrLf
+        end if
+                 next
+                 Okno.Value = txt
+        else
+            exit sub
+        end if
+End Sub
+
+    </SCRIPT>
+    <SCRIPT LANGUAGE=VBScript SRC="wg_class.vbs">
+    </SCRIPT>
+</BODY>
+
+</HTML>

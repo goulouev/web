@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <meta http-equiv="x-ua-compatible" content="IE=5" />
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <STYLE>
+        H1 {
+            font: 12pt Century Gothic;
+            color: navy;
+            font-weight: bold
+        }
+
+        H2 {
+            font: 10pt Century Gothic;
+            color: navy;
+            font-weight: bold
+        }
+
+        H3 {
+            font: 10pt Century Gothic;
+            color: magenta;
+            font-style: italic
+        }
+
+        div {
+            background: #b0b0b0
+        }
+    </STYLE>
+</HEAD>
+<!--marked-->
+<BODY LEFTMARGIN="0" TOPMARGIN="20" BGCOLOR="#909090">
+    <FONT STYLE="font: 10pt Century Gothic; color:navy">
+        <DIV>
+            <H1>Structures</H1>
+
+            This tool is to simulate frequency response of uniaxial rectangular waveguide structures composed from several types of elements (step, cavity, diaphragm) connected to each other by straight waveguide sections (See Figures 1-5).  <H3>
+                <CENTER>
+                    <IMG SRC="un1.jpg" />
+                    <BR />
+                    Figure 1: harmonic filters
+                    <BR />
+                    <IMG SRC="un2.jpg" /><BR />
+                    Figure 2: band-pass filters
+                    <BR />
+                    <IMG SRC="un4.jpg" /><BR />
+                    Figure 3: high-pass filters
+                    <BR />
+                    <IMG SRC="un5.jpg" /><BR />
+                    Figure 4: exotic filters
+                    <BR />
+                    <IMG SRC="un3.jpg" /><BR />
+                    Figure 5: transformers
+                </CENTER>
+            </H3><BR />
+
+            <H1>Elements</H1>
+            Two type of connections are used here:
+            1. A rectangular waveguide section, the "node", is a guide of smaller cross-section that is assumed to conduct only the dominant mode. It is used for input/output and interconnections.<BR />
+            2. A scattering element, the "connector", is a certain type of connection between the nodes. Those elements are generally used for matching and resonating purposes.
+
+            <H1>Connections</H1>
+
+            The structure starts from a node and ends to a node. The first and the last nodes are input and output ports. Each node can be only connected to a connector (see Figure 6).
+            <CENTER>
+                <H3>
+                    <IMG SRC="un7.jpg" /><BR />
+                    Figure 6: Schematic of connections.
+                </H3>
+            </CENTER>
+            <H1>Nodes</H1>
+            <H2>Types of Nodes</H2>
+
+            A node is usually a relatively smaller waveguide section with a single waveguide mode taken into account. The nodes might be used to represent waveguide sections where conversion of modes or coupling between modes is not significant and could be neglected. Generally they are relatively smaller waveguides, longer waveguides, or in sequence of gradually changes of dimensions, etc. Though only one type node, the rectangular waveguide, is presented here, some other types might be added in future. A particular order of data record is reserved for the nodes as shown below<BR /><BR />
+            <TABLE STYLE="font:9pt Arial Black; color: maroon">
+                <TR ALIGN="CENTER">
+                    <TD WIDTH="70">OptInd</TD>
+                    <TD WIDTH="50">NodInd</TD>
+                    <TD WIDTH="50">X1</TD>
+                    <TD WIDTH="50">X2</TD>
+                    <TD WIDTH="50">X3</TD>
+                    <TD WIDTH="50">X4</TD>
+                    <TD WIDTH="50">X5</TD>
+                </TR>
+            </TABLE><BR />
+
+            Where <BR /><BR />
+
+            <FONT STYLE="font:9pt Arial Black; color: navy">OptInd</FONT> is optimization or synthesis index, an integer number reserved for optimizer and synthesizer in future upgrades<BR />
+
+            <FONT STYLE="font:9pt Arial Black; color: navy">NodInd</FONT> is number of the node (1 for rectangular waveguide)<BR />
+
+            <FONT STYLE="font:9pt Arial Black; color: navy">X0,X1,..,X5 </FONT> are five characteristic geometric dimensions of the node.<BR />
+
+            <H2>Rectangular Waveguide</H2>
+
+
+            The rectangular waveguide (see Figure 7) is only type of nodes is available here for now.
+            <CENTER>
+                <H3>
+                    <IMG SRC="pc1.jpg" /><BR />
+                    Figure 7: A rectangular waveguide section (node).
+                </H3>
+            </CENTER>
+
+            The waveguide (node) has particular length [<B> L</B> ] and cross-section dimensions [ <B>A</B> (half of width) ], [ <B>B</B> (height) ] and [ <B>H</B> (absolute elevation in respect to a ground) ] (see Figure 8).
+
+
+            <CENTER>
+                <H3>
+                    <IMG SRC="un6.jpg" /><BR />
+                    Figure 8: Dimensions of a rectangular waveguide
+                </H3>
+            </CENTER>
+            All dimensions of a node are recorded to the schematic file in the following order<BR />
+            <TABLE STYLE="font:9pt Arial Black; color: maroon">
+                <TR ALIGN="CENTER">
+                    <TD WIDTH="70">OptInd</TD>
+                    <TD WIDTH="50">1</TD>
+                    <TD WIDTH="50">L</TD>
+                    <TD WIDTH="50">A</TD>
+                    <TD WIDTH="50">B</TD>
+                    <TD WIDTH="50">H</TD>
+                    <TD WIDTH="50">X5</TD>
+                </TR>
+            </TABLE><BR />
+
+            Where <BR /><BR />
+
+            <FONT STYLE="font:9pt Arial Black; color: navy">OptInd</FONT> is optimization or synthesis index, an integer number reserved for optimizer and synthesizer in future upgrades<BR />
+
+            <FONT STYLE="font:9pt Arial Black; color: navy">1</FONT> is the number identifying the node is a rectangular waveguide
+            <BR />
+            <FONT STYLE="font:9pt Arial Black; color: navy">L</FONT> is length of the waveguide
+
+            <BR />
+            <FONT STYLE="font:9pt Arial Black; color: navy"> A,B,H</FONT> are the dimensions of the cross-section of the waveguide (see Figure 8)<BR />
+            <FONT STYLE="font:9pt Arial Black; color: navy">X5 </FONT> is a reserved variable that can be put 0 (cannot be omitted).<BR />
+
+            <H1>Connectors</H1>
+
+            <H2>Types of Connectors</H2>
+
+
+
+            There are three types of connections are used here yet, i.e. direct (a flange), cavity and diaphragm (an iris). The connector is generally a scattering element providing particular reflection and transmission effects. The electro-magnetic models used for computation of S-parameters are based on some variational methods taking into account up to 200 waveguide modes on apertures (all junctions) and between apertures (cavities).  Each connector is represented in the schematic file by a line of parameters as following
+
+            <TABLE STYLE="font:9pt Arial Black; color: maroon">
+                <TR ALIGN="CENTER">
+                    <TD WIDTH="70">OptInd</TD>
+                    <TD WIDTH="50">JunInd</TD>
+                    <TD WIDTH="50">X1</TD>
+                    <TD WIDTH="50">X2</TD>
+                    <TD WIDTH="50">X3</TD>
+                    <TD WIDTH="50">X4</TD>
+                    <TD WIDTH="50">X5</TD>
+                    <TD WIDTH="50">X6</TD>
+                </TR>
+            </TABLE><BR />
+
+            Where <BR /><BR />
+
+            <FONT STYLE="font:9pt Arial Black; color: navy">OptInd</FONT> is optimization or synthesis index, an integer number reserved for optimizer and synthesizer in future upgrades<BR />
+
+            <FONT STYLE="font:9pt Arial Black; color: navy">JunInd</FONT> is the number identifying the connector (1 for direct, 2 for cavity, 5 for diaphragm).
+            <BR />
+
+            <FONT STYLE="font:9pt Arial Black; color: navy">X0,X1,..,X6 </FONT> six characteristic geometric dimensions of a connector.
+            <BR /><BR />
+
+            As some more connectors can be added in future, some of parameters are reserved. If the number of parameters are more than actually needed for representation of an element, they can be put zeros or any numbers, but they cannot be omitted in appropriate record line.
+
+            <H2>Direct Connection</H2>
+
+            <CENTER>
+                <H3>
+                    <IMG SRC="pc2.jpg" /><BR />
+                    Figure 9: Direct connection of a smaller waveguide to a large one.
+                </H3>
+            </CENTER>
+
+            Two nodes can be connected directly if the figure of cross-section of one of the waveguides is inside the figure of cross-section of the other waveguide (see Figure 9). The boundaries of the waveguides can coincide somewhere but cannot cross each other. As the direct connector does not have any dimension, it is characterized by only number [ JunInd=1 ] in its line in schematic file. All other numbers in line can be zeros or any, but cannot be omitted.  Record line corresponding to such a connection is as simple as following<BR /><BR />
+
+            <TABLE STYLE="font:9pt Arial Black; color: maroon">
+                <TR ALIGN="CENTER">
+                    <TD WIDTH="70">0</TD>
+                    <TD WIDTH="50">1</TD>
+                    <TD WIDTH="50">0</TD>
+                    <TD WIDTH="50">0</TD>
+                    <TD WIDTH="50">0</TD>
+                    <TD WIDTH="50">0</TD>
+                    <TD WIDTH="50">0</TD>
+                    <TD WIDTH="50">0</TD>
+                </TR>
+            </TABLE><BR />
+
+            <H2>Connection by a Cavity</H2>
+
+            <CENTER>
+                <H3>
+                    <IMG SRC="pc3.jpg" /><BR />
+                    Figure 10: A cavity between two waveguides.
+                </H3>
+            </CENTER>
+
+            Two nodes can be connected through a cavity also. Here cavity is a waveguide larger than the input and output waveguide nodes. Although geometrically the cavity can be represented as two direct connections between three nodes, the cavity model is much more accurate as it takes many waveguide modes into account. Therefore if the same structure can be represented by sequence of cavities or direct connections, it is recommended to use cavity connections as many as possible. Dimensions of a cavity connector are represented the same way as dimensions of a node (see Figure 8). However the data record differs<BR /><BR />
+
+            <TABLE STYLE="font:9pt Arial Black; color: maroon">
+                <TR ALIGN="CENTER">
+                    <TD WIDTH="70">OptInd</TD>
+                    <TD WIDTH="50">2</TD>
+                    <TD WIDTH="50">L</TD>
+                    <TD WIDTH="50">A</TD>
+                    <TD WIDTH="50">B</TD>
+                    <TD WIDTH="50">H</TD>
+                    <TD WIDTH="50">X5</TD>
+                    <TD WIDTH="50">X6</TD>
+                </TR>
+            </TABLE><BR />
+
+            Where <BR /><BR />
+
+            <FONT STYLE="font:9pt Arial Black; color: navy">OptInd</FONT> is optimization or synthesis index, an integer number reserved for optimizer and synthesizer in future upgrades<BR />
+
+            <FONT STYLE="font:9pt Arial Black; color: navy">2</FONT> is the number identifying the connector as a cavity
+
+            <BR />
+            <FONT STYLE="font:9pt Arial Black; color: navy">L </FONT> is length of the cavity.
+
+            <BR />
+
+            <FONT STYLE="font:9pt Arial Black; color: navy">A,B,H </FONT> are dimensions of the cross-section of the cavity (see Figure 8).
+            <BR />
+
+            <FONT STYLE="font:9pt Arial Black; color: navy">X5,X6 </FONT> are reserved variable that are not used in computation and can be put 0 but cannot be omitted.
+
+            <BR /><BR />
+
+            <H2>Connection by a Diaphragm</H2>
+
+            <CENTER>
+                <H3>
+                    <IMG SRC="pc4.jpg" /><BR />
+                    Figure 11: A diaphragm between two waveguides.
+                </H3>
+            </CENTER>
+
+            Two nodes can be connected through a diaphragm, a smaller window between two larger waveguides. Here the window is a waveguide smaller than the input and output waveguide nodes. The mathematical model used for computation of S-parameters of the diaphragm is based on cascading of two direct connectors by a smaller node. In a result the modes of higher order are taken into account only at planes of connections (apertures) but their propagation in the window is not taken into account. It is noticed that effect of the higher modes can be more for narrow diaphragms used in band-pass filters. Therefore it is recommended to represent the resonant structures by a sequence of cavities rather than diaphragms. For example the same iris filter can be represented as sequence of nodes (input/output and resonators) and diaphragms (irises) or as sequence of nodes (irises) and cavities (resonators) with input/output coupled with first/last iris direct connectors. So the second model is preferable though the results of computations might be close. The diaphragm is represented by a line of parameters in the same matter as following
+
+            <TABLE STYLE="font:9pt Arial Black; color: maroon">
+                <TR ALIGN="CENTER">
+                    <TD WIDTH="70">OptInd</TD>
+                    <TD WIDTH="50">5</TD>
+                    <TD WIDTH="50">L</TD>
+                    <TD WIDTH="50">A</TD>
+                    <TD WIDTH="50">B</TD>
+                    <TD WIDTH="50">H</TD>
+                    <TD WIDTH="50">X5</TD>
+                    <TD WIDTH="50">X6</TD>
+                </TR>
+            </TABLE><BR />
+
+            Where <BR /><BR />
+
+            <FONT STYLE="font:9pt Arial Black; color: navy">OptInd</FONT> is optimization or synthesis index, an integer number reserved for optimizer and synthesizer in future upgrades<BR />
+
+            <FONT STYLE="font:9pt Arial Black; color: navy">5</FONT> is the number identifying the connector as a diaphragm.
+
+            <BR />
+            <FONT STYLE="font:9pt Arial Black; color: navy">L </FONT> is length (thickness) of the diaphragm.
+
+            <BR />
+
+            <FONT STYLE="font:9pt Arial Black; color: navy">A,B,H </FONT> are dimensions of the cross-section of the window (see Figure 8).
+            <BR />
+
+            <FONT STYLE="font:9pt Arial Black; color: navy">X5,X6 </FONT> are reserved variable that are not used in computation and can be put 0 but cannot be omitted.
+
+            <BR /><BR />
+
+            <H1>Schematic File</H1>
+
+            The schematic file contains information of all nodes and connectors of a structure in same sequencential order they comprise the structure. Here below is an example of a schematic text for an WR112 harmonic filter<BR /><BR />
+            <CENTER>
+                <H3>
+                    <IMG SRC="un8.bmp" Border="0" /><BR />
+                    Figure 12: HFSS 3D view of surface of a WR-112 harmonic filter.
+                </H3>
+                <TABLE BORDER="1" BGCOLOR="White">
+                    <TR>
+                        <TD WIDTH="400">
+                            <FONT STYLE="font:9pt Arial; color: maroon">
+                                0    1    0.40000    0.55600    0.49940   -0.24970    0.00000<BR />
+                                0    1    0.00000    0.00000    0.00000    0.00000    0.00000    0.00000<BR />
+                                3    1    0.33463    0.50073    0.32854   -0.16427    0.00000<BR />
+                                0    1    0.00000    0.00000    0.00000    0.00000    0.00000    0.00000<BR />
+                                3    1    0.39751    0.43828    0.23434   -0.11717    0.00000<BR />
+                                0    1    0.00000    0.00000    0.00000    0.00000    0.00000    0.00000<BR />
+                                3    1    0.03000    0.43500    0.08862   -0.04431    0.00000<BR />
+                                0    2    0.13000    0.43500    0.32000   -0.16000    0.00000    0.00000<BR />
+                                0    1    0.03000    0.43500    0.10000   -0.05000    0.00000<BR />
+                                0    2    0.13077    0.43500    0.32440   -0.16220    0.00000    0.00000<BR />
+                                0    1    0.03000    0.43500    0.10000   -0.05000    0.00000<BR />
+                                0    2    0.13572    0.43500    0.35268   -0.17634    0.00000    0.00000<BR />
+                                0    1    0.03000    0.43500    0.10000   -0.05000    0.00000<BR />
+                                3    2    0.14697    0.43500    0.38310   -0.19155    0.00000    0.00000<BR />
+                                0    1    0.03000    0.43500    0.10000   -0.05000    0.00000<BR />
+                                3    2    0.16345    0.43500    0.52300   -0.26150    0.00000    0.00000<BR />
+                                0    1    0.03000    0.43500    0.10000   -0.05000    0.00000<BR />
+                                3    2    0.18119    0.43500    0.61524   -0.30762    0.00000    0.00000<BR />
+                                0    1    0.03000    0.43500    0.10000   -0.05000    0.00000<BR />
+                                3    2    0.19487    0.43500    0.73650   -0.36825    0.00000    0.00000<BR />
+                                0    1    0.03000    0.43500    0.10000   -0.05000    0.00000<BR />
+                                3    2    0.20000    0.43500    0.77112   -0.38556    0.00000    0.00000<BR />
+                                0    1    0.03000    0.43500    0.10000   -0.05000    0.00000<BR />
+                                3    2    0.19487    0.43500    0.73596   -0.36798    0.00000    0.00000<BR />
+                                0    1    0.03000    0.43500    0.10000   -0.05000    0.00000<BR />
+                                3    2    0.18119    0.43500    0.61490   -0.30745    0.00000    0.00000<BR />
+                                0    1    0.03000    0.43500    0.10000   -0.05000    0.00000<BR />
+                                3    2    0.16345    0.43500    0.52250   -0.26125    0.00000    0.00000<BR />
+                                0    1    0.03000    0.43500    0.10000   -0.05000    0.00000<BR />
+                                3    2    0.14697    0.43500    0.38428   -0.19214    0.00000    0.00000<BR />
+                                0    1    0.03000    0.43500    0.10000   -0.05000    0.00000<BR />
+                                0    2    0.13572    0.43500    0.35268   -0.17634    0.00000    0.00000<BR />
+                                0    1    0.03000    0.43500    0.10000   -0.05000    0.00000<BR />
+                                0    2    0.13077    0.43500    0.32440   -0.16220    0.00000    0.00000<BR />
+                                0    1    0.03000    0.43500    0.10000   -0.05000    0.00000<BR />
+                                0    2    0.13000    0.43500    0.32000   -0.16000    0.00000    0.00000<BR />
+                                3    1    0.03000    0.43500    0.08954   -0.04477    0.00000<BR />
+                                0    1    0.00000    0.00000    0.00000    0.00000    0.00000    0.00000<BR />
+                                3    1    0.40017    0.43821    0.23312   -0.11656    0.00000<BR />
+                                0    1    0.00000    0.00000    0.00000    0.00000    0.00000    0.00000<BR />
+                                3    1    0.33842    0.50049    0.32944   -0.16472    0.00000<BR />
+                                0    1    0.00000    0.00000    0.00000    0.00000    0.00000    0.00000<BR />
+                                0    1    0.40000    0.55600    0.49940   -0.24970    0.00000<BR />
+                            </FONT>
+                        </TD>
+                    </TR>
+                </TABLE>
+                <H3>Figure 13: Schematic file corresponding to the WR112 harmonic filter</H3>
+                <FONT STYLE="font:8pt Arial; color: maroon;font-style: italic">
+                    (<A HREF="wr112.htm"> Click here to import design data</A>)
+                </FONT>
+            </CENTER>
+            <H1>Accuracy</H1>
+
+
+
+            This simulation tool is practically accurate for E-plane structures comprising cavities and waveguide steps. For waveguide structures having changes on  H-direction on the both directions the accuracy is not as good as in case of E-plane structures, but it can be still practically acceptable for transformers, iris and resonant-iris filters. However it is known that for narrow band-pass filters and some other "high-Q" resonant devices the effect of production tolerances can be even greater than computational inaccuracy of this design tool.
+        </DIV>
+    </FONT>
+    <script language="javascript" type="text/javascript">
+
+<!--
+        if (top.location == self.location) {
+            top.name = "rules_0"
+            top.location.href = "start.htm"
+        }
+//-->
+    </script>
+</BODY>
+
+</HTML>
+

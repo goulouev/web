@@ -1,0 +1,516 @@
+﻿<!DOCTYPE html>
+<HTML>
+<HEAD>
+  <meta http-equiv="x-ua-compatible" content="IE=5"/>
+  <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+  <LINK href="class_0.css" rel="stylesheet" type="text/css"/>
+  <title>How to Design H-plane Iris Filter Using WR-Connect</title>
+<STYLE type="text/css">
+<!--
+table.spec{font: 12pt sans-serif; background:#ffffff; color:#004040}
+td.spec{width:200px; padding:10px}
+table.warning{width:600;text-align: justify; padding:10px;font: 12pt sans-serif; color:#004040;background:#ffffff}
+caption.warning{background:#ffffff;font: 12pt sans-serif;color:red;font-weight:bold}
+-->
+</STYLE>
+</HEAD>
+
+<BODY BGCOLOR="#c0c0c0" LEFTMARGIN="0" TOPMARGIN="20">
+    <CENTER>
+        <DIV class="external">
+            <P class="shapka">
+                WR-Connect
+                <FONT class="note0">
+                    <BR />a cool waveguide structure design tool
+                </FONT>
+            </P>
+            <FONT style="font:  8pt 'Arial Black'; color: black">
+
+                <A HREF="index.htm" class="main">Home</A>
+                <A HREF="about.htm" class="main">About WR-Connect</A>
+                <A HREF="menus.htm" class="main">Menus &#38; Controls</A>
+                <A HREF="examples.htm" class="main">Demos &#38; Examples</A>
+                <A HREF="tutorial.htm" class="current">Tutorials</A>
+                <A HREF="start.htm" target="WR-Connect" class="main">Open WR-Connect Project</A>
+            </FONT>
+            <DIV class="internal" style="height:270">
+                <P class="message">
+                    Despite the fact that the H-plane filters are the oldest waveguide filters applied to RF and microwave applications, they still remain the most popular in the field because of their simplicity, reliability and manufacturability.
+                    Those days, when engineers relied to follow sophisticated formulas and confusing diagrams, sunk into oblivion.
+                    Then the lazy era of computers and the Internet came. Now we open WR-Connect, type some numbers, make several mouse clicks...
+                    <HR />
+                </P>
+                <DIV class="SecondMenu">
+                    <a href="tutorial.htm" class="InsideMenuPassive">Old Version Manual</a>
+                    <a href="irisfil.htm" class="InsideMenuActive">How to Design H-plane Iris Filter</a>
+                    <a href="corrfil.htm" rel="nofollow" class="InsideMenuPassive">How to Design Corrugated Filter</a>
+                    <a href="closed.htm" rel="nofollow" class="InsideMenuPassive">This Section is Coming Soon</a>
+                    <a href="closed.htm" rel="nofollow" class="InsideMenuPassive">This Section is Coming Soon</a>
+                </DIV>
+                <IMG SRC="pic6.jpg" style="float:right" />
+            </DIV>
+            <DIV class="maintext">
+                <h1>How to Design H-plane Iris Filter Using WR-Connect</h1>
+                <h2>Start from Specs</h2>
+                As an example, we present a simplified version of the specification for a Ku-band waveguide filter (let's call it "VSAT receive reject filter").
+
+                <BR />
+                <table align="center" border="1" class="spec">
+                    <caption> Table 1: VSAT Receive Reject Filter Spec</caption>
+                    <tr>
+                        <td class="spec">
+                            <b>Parameter</b>
+                        </td>
+                        <td class="spec">
+                            <b>Spec </b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Pass-Band, GHz</td>
+                        <td class="spec"> 14.0 - 14.5 </td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Insertion Loss, dB</td>
+                        <td class="spec"> 0.2 </td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Return Loss, dB</td>
+                        <td class="spec"> 20 </td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Stop-Band, GHz</td>
+                        <td class="spec"> 10.7 - 12.75 </td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Rejection, dB</td>
+                        <td class="spec"> 60 </td>
+                    </tr>
+                    <tr>
+                        <td class="spec">I/O Interface</td>
+                        <td class="spec"> WR75 </td>
+                    </tr>
+                </table>
+                <h2>Think About Practical Implementation and Your Support</h2>
+
+                Although it seams the solution is a high-pass filter, it would be practically preferable to use a band-pass filter instead because the following reasons.
+                First, there is clearly no enough margin from the pass-band to the stop-band but high-pass filters usually provide less roll-off in comparison
+                with band-pass filters of same number of poles. Secondly the practical implementation of a band-pass filter may be simpler relatively
+                to cost and technology issues (we will talk about it later). This (still imaginary) design solution usually much depends on support from the machine shop and
+                supply of materials. Many small businesses making waveguide components use pre-fabricated waveguide tubes and flanges. For example, it is quite affordable
+                to buy tens of meters of WR75 copper pipe with a dozen of cover flanges from Penn Engineering, for example. Then we can cut, drill, screw and solder them using simple tools from the Home Depot.
+                We also may not have a big variety of RF &#38;
+                microwave design tools, such as, for example, Mician "<font style="font: 10pt Symbol">m</font>Wave Wizard" or "Super-Duper Filter Trooper" and rely on
+                Marcuvitz's "Waveguide Handbook" [1] or the "Filter Bible" [2]. In contrast, we could count on full support and have everything we need from pencils and washers to
+                CNC EDM machines, PNAs and absolutely full-wave design software. Then we would consider fantastic designs like a superconductive, spuriousless and screwless quarter-wave
+                coupled quadric-mode cavity filter. But let us down to earth and try to make a high Q filter relying on the first type of support, i.e. let us start
+                designing the good old H-plane iris filter just using WR-Connect.
+
+                <h2>Why H-plane Iris Filter</h2>
+
+                In addition to reasons above, the H-plane iris filter has obvious advantages to other "affordable" waveguide filters such as, for example, post and septum
+                (so-called E-plane) filters;
+                <ul>
+                    <li>
+                        H-plane iris filters provide more Q in resonators in comparison with post and septum filters. That is because the thin posts and septums introduce
+                        more losses than wide irises.
+                    </li>
+                    <li>H-plane iris filters are shorter than the septum filters because irises are thinner.</li>
+                    <li>
+                        H-plane iris filters reject more spurious spectrum than the septum and post filters do so. That is because a symmetric iris rejects the TE20-mode due to
+                        the field structure of that spurious mode, but the central posts and septums do not disturb it at all.
+                    </li>
+                    <li>
+                        H-plane iris filters are more forgiving to fabrication tolerances and design software inaccuracy. That's because software errors and factory tolerances
+                        are relatively smaller in comparison to the transverse dimensions of the iris than in comparison to thickness of bars or septums.
+                    </li>
+                    <li>
+                        H-plane iris filters have amazing tuning ability. We could try to tune the receive reject filter to the transmit-reject filters using the tuning screws
+                        in cavities and irises.
+                    </li>
+                </ul>
+
+                <h2> Open WR-Connect Frameset </h2>
+
+                Open WR-Connect project by clicking the right link on the top menu. Note that the most computational features of WR-Connect are written in VBScript, which is
+                supported by MS Internet Explorer but it is ignored by some other popular web browsers because of the "browser wars". We do not want to take any side in those
+                wars but we cannot pay tribute to all the browser warriors either.
+
+                <h2> Initial Setup</h2>
+
+                The Initial Setup page contains all the general information about symmetry, units, modes, environment, materials and sweep. We have to enter those basic
+                parameters in a form (see Fig. 1) and click the "Apply" button. We could also use the "Example" feature as an example of data entry as shown on the figure 1.
+
+                <br />
+                <h3>
+                    <img src="irisfil0.jpg" /><br />Figure 1: An example of initial setup entry
+                </h3>
+                Here we have taken advantage of using H-plane uniformity of the structure and counted only 10 first TE<sub>N0</sub>-modes for computation
+                (we set numbers 10 and 0 separated by blank spaces).
+                <br />
+                <center>
+                    <table class="warning" border="1">
+                        <caption class="warning">WARNING 1</caption>
+                        <tr>
+                            <td>
+                                If more than one number entered in a single data field, all the numbers have to be separated by blank spaces. No commas, tabs, etc.
+                            </td>
+                        </tr>
+                    </table>
+                </center><br />
+                Because of the fact that the filter is homogeneous in respect to Y-direction, the Y-symmetry setup does not alter the process of computation.
+                However, setting up the Y-symmetry would be preferable in case of expressing the vertical dimensions of the structure in respect to the central plane.
+                Then we leave the "example" settings for the active mode index and materials as they are and move on to the frequency sweep parameters.
+                By setting these parameters, we would recommend to take into account that we may need run the frequency response multiple times. Therefore it is
+                desirable  to choose a reasonable number of frequency points needed for quick run and adequate for the quality of plot (finally we could set more points and  wider range anyway). Now, after we are done on this page, we can click the button "Apply Changes" in order to memorize the settings and go to the next step.<br /><br />
+                <center>
+                    <table width="600" border="1" class="warning">
+                        <caption class="warning">WARNING 2</caption>
+                        <tr>
+                            <td>
+                                The setting entered here will be saved only by the button <font style="font: 8pt Arial Black; color: navy; background: #ddddff;padding-left:10px; padding-right:10px">Apply Changes</font>. Any other method of navigation ( links, bookmarks, back, forward, refresh, etc.) would rather cancel the entered data and recover the previously applied settings.
+                            </td>
+                        </tr>
+                    </table>
+                </center>
+
+                <h2>Schematic Editor</h2>
+
+                After we press the "Apply Changes" button of "Initial Setup" page we normally appear in the "Schematic Editor". Here we actually design the filter by putting irises and cavities.
+
+                <h2>Make Assumption of the Filter Order</h2>
+
+                First of all, we try to come up with a reasonable number of irises we would need to provide transmission of the pass-band and
+                adequate rejection of the stop-band. In old days the designers followed the tables and charts derived from Chebychev's polynomials in order to determine the right number of poles. There are still many businesses using those kind of charts in order to quote their filter products. In addition, the computerization evolution have brought a variety of software, which precisely synthesizes the optimal polynomial approximation for particular
+                specification ( we would recommend FAZA from <a href="http://www.matheonics.com"> Matheonics</a>). Nevertheless, we usually do not use the polynomial
+                approximation charts or software for designing waveguide filters, because of the three following reasons:
+                <ol>
+                    <li>
+                        The method does not take into account the inconstancy of RF properties of real waveguide elements over the frequency range.
+                        For example, in the reality an iris filter has always more rejection on lower roll-off than on the higher roll-off.
+                    </li>
+                    <li>
+                        The number of poles is not always important. For example a four-pole filter and a five-pole filter the both meet the spec. However, the four-pole one is
+                        shorter. Nevertheless, the five-pole would give us much more margins for the important parameters.
+                    </li>
+                    <li>
+                        It might be faster to run WR-Connect couple more times and determine the order of a real iris filter by observing the plots rather than opening
+                        additional software and enter the numbers one more time.
+                    </li>
+                    Following the last rule, we can start with number of poles to be 5. Why five? Because, practically, five is not much and not small value for a number of
+                    poles of filter. Suppose five is not enough, then we increase the number of fields for up to seven or eight (depending how much we fail the spec).
+                </ol>
+                <h2>Create Filter Template</h2>
+                The picture below shows the sequence of actions how to create a template for the structure file of an iris filter.
+                <h3>
+                    <img src="irisfil1.gif" /><br />Figure 2: How to create a template for waveguide H-plane iris filter.
+                </h3>
+                First, select the "H-plane Iris Band-Pass Filter" and click button named "Create Template". Then IE will send you pop-up message titled "VBScript: Waveguide..." with a strip for data entry (see figure 3).
+                Enter the number of filter cavities (number of poles), width of waveguide, height of waveguide and thickness of irises. Remember the entry rule that all
+                numbers have to be separated by blank spaces but not by commas. After the basic dimensions entered, press the OK button. The pop-up window will disappear
+                and a list of numbers will be created in the text window like it is shown on the picture below.
+                <h3>
+                    <img src="irisfil2.gif" /><br />Figure 3: A template for structure file of iris filter.
+                </h3>
+                <center>
+                    <table width="600" border="1" class="warning">
+                        <caption class="warning">WARNING 3</caption>
+                        <tr>
+                            <td>
+                                If you have too strict protection of popups,
+                                it can block the message with data entry form. If so, you would need to unlock the form in order to enter the filter order and basic dimensions.
+                            </td>
+                        </tr>
+                    </table>
+                </center>
+                <h2> Selection of the Filter Prototype</h2>
+                After the template is created, we go to the prototype selection page by clicking the link named "Prototypes". Then we come to a page with a small entry form
+                (see figure 4).
+                <h3>
+                    <img src="irisfil3.gif" /><br />Figure 4: Sequence of actions to setup the Chebychev prototype function.
+                </h3>
+                Here we enter all the required data, i.e. the resonance order, central frequency, bandwidth and ripple (<a href="menus.htm" rel="nofollow">see details here</a>) and click "Apply"
+                button.
+
+                <h2>Filter Synthesis</h2>
+
+                So we again come to the editor page. Now we push the "Synthesize" button and the Text in the box will change instantly (see figure 5).
+
+                <h3>
+                    <img src="irisfil4.gif" /><br />Figure 5: The text in window after executing "Synthesize" command.
+                </h3>
+
+                For more complex structures
+                IE would send a message complaining about the script  (<a href="menus.htm" rel="nofollow">see details here</a>), but it should normally not happen
+                for a five-pole filter.
+
+                <h2>Computation of the Frequency Response</h2>
+
+                So far we have the new numbers in the text window, which express the dimensions of the synthesized filter structure. In order to
+                see how it works, we click the "Analyze" button and wait until the counter at the bottom counts all 251 frequency points from 10.0 to 15 GHz (it would
+                take about 10 seconds).
+
+                <h2>Reviewing Plots</h2>
+
+                Finally we have got something we could visually review. Let us click the link named "Data Plots" to see the plots of frequency domain characteristics
+                of our filter.
+                <h3>
+                    <img src="irisfil5.gif" /><br />Figure 6: Reflection (dB) and transmission (dB) vs. frequency (GHz) characteristic
+                </h3>
+
+
+                <h2>Using External Plotting Software</h2>
+
+                Generally, the quality of plots on WR-Connect is not so good to catch small details of characteristics. But, fortunately, there are many graphic programs on internet to draw graphics very flexible for setting user preferences. If you are not satisfied with the quality of characteristics plotted here, we would recommend to use gnuplot. Gnuplot is just amazing! It is free, it draws everything and it allows users to plot 2D and 3D plots using their own style and preferences. In order to export the frequency response characteristics from here, go to the "Data Import/Export Page" and follow the instructions.
+
+                <h2>Making Adjustments of Bandwidth</h2>
+                It is obvious, we would need to make our filter wider and get more return loss. Respectively, we have to increase the bandwidth (click link to "Prototypes"  page) from 0.5 to 1.0 GHz and reduce the attenuation ripple from 0.05 to 0.025. We would also need prefer to see all the ripples, so we could adjust the frequency sweep parameters. Repeating the same sequence of steps, i.e. adjusting the prototype bandwidth, executing synthesis and analysis, and reviewing the
+                plots, we can approach moreorless optimal performance of the filter in two-three adjustments.
+                Here below we present the final configuration, which, according to our opinion, provides the most appropriate combination of simulated parameters in relation to the specification.<br /><br />
+                <table align="center" border="1" class="spec">
+                    <caption>Table 2: Optimal Synthesis Parameters</caption>
+                    <tr>
+                        <td class="spec">
+                            <b>Parameter</b>
+                        </td>
+                        <td class="spec">
+                            <b>Value</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Central Frequency, GHz</td>
+                        <td class="spec"> 14.225 </td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Bandwidth, GHz</td>
+                        <td class="spec"> 1.20 </td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Attenuation Ripple, dB</td>
+                        <td class="spec"> 0.015 </td>
+                    </tr>
+                </table><br /><br />
+                Those particular settings determine the schematic data shown on figure 7 and the performance shown on figures 8-9 below.
+                <h3>
+                    <img src="irisfil41.gif" /><br />Figure 7: Schematic data corresponding to the optimal synthesis parameters (table 2)
+                </h3>
+                <h3>
+                    <img src="irisfil6.gif" /><br />Figure 8: Reflection (dB) and transmission (dB) vs. frequency (GHz) response after adjustments
+                </h3>
+                <h3>
+                    <img src="irisfil61.gif" /><br />Figure 9: In-band insertion loss (dB) vs. frequency (GHz) response after adjustments
+                </h3>
+                <h2>Iris-Cavity Conversion</h2>
+
+                This option may seem strange and incomprehensible without further explanation. The point is that WR-Connect computes the diaphragm and the cavity using different mathematical algorithms. A diaphragm, based on its model, is represented by only one waveguide mode inside the window. On the contrary, the cavity algorithm takes into account all the waveguide modes established in the initial setup. Nonetheless, the use of smaller waveguides as the diaphragms is convenient for the synthesis of filters of iris type. In order to simplify conversion from one type of schematic to another type of schematic, WR-Connect has two options. Any sequence of scattering elements (diaphragms, impedance steps and cavities) can be instantly converted to a structure of only cavities and steps if the button "Extract Cavities" located in "Edit Structure" area on left. Conversely, any combination of the diaphragm, and the stages of cavities can be converted to a sequence of only the diaphragm and the steps by clicking the button "Extract Irises" also located there. Although applied to our filter, these two types of representations are showing almost same frequency response, it might be much different for the in-band insertion loss. Therefore, prior to the final adjustments and simulations, the waveguide structure has to be converted into the "cavity type". Applying the iris-cavity conversion method to the schematic data shown on figure 7 we obtain the schematic with all irises (junction 5) converted to the nodes (node 1) and the nodes converted into cavities (junction 2) as shown on figure 10.
+                <h3>
+                    <img src="irisfil42.gif" /><br />Figure 10: Converted schematic data with scattering elements described as cavities.
+                </h3>
+
+                <h2>Final Performance Reviewing</h2>
+
+                After we converted the irises into cavities by clicking the "Extract Cavities" button as discussed above, we need to run the re-structured model again in order to obtain more accurate performance details.
+
+                <br /><br />
+                <center>
+                    <table width="600" border="1" class="warning">
+                        <caption class="warning">WARNING 4</caption>
+                        <tr>
+                            <td>
+                                After conversion from iris type of structure into the cavity type, the "H-plane Iris Filter" template used before for synthesis is not valid anymore and the "Synthesize" method cannot be applied. In order to run synthesis option the structure must be converted back into the iris type of structure.
+                            </td>
+                        </tr>
+                    </table>
+                </center><br />
+                We can note that the general frequency response plots on figures 8 and 11 look almost same while the in-band insertion loss has significantly increased (see figures 9 and 12).
+
+                <h3>
+                    <img src="irisfil7.gif" /><br />Figure 11: Reflection (dB) and transmission (dB) vs. frequency (GHz) response after "iris-to-cavity" conversion
+                </h3>
+                <h3>
+                    <img src="irisfil71.gif" /><br />Figure 12: In-band insertion loss (dB) vs. frequency (GHz) response after "iris-to-cavity" conversion
+                </h3>
+                In this case we take the last approximation for the insertion loss as actual because the current "cavity" model is expected to be more accurate.
+
+                <h2>Design Finalization</h2>
+
+                If we were designing the filter in order to evaluate potential performance without actually fabricating the real hardware (for example for quoting, proposing or trying ideas), we could consider our design work to be done. In this case we actually have a design solution meeting the specs, so we can withdraw all the parameters we need to prepare a summary of performance of the filter and all the dimensions we would need to draw the formal layouts. But if we intend to build the filter and use it in operation, we would definitely have to consider the following issues.
+
+                <h2>Software Accuracy and Engineering Ethics</h2>
+
+                Many engineers believe in the "exact software" capable of accurately simulation of the real processes in a device. The logic is that if a thing is designed exactly by a computer meeting all requirements by exact simulation, then it is accurately fabricated using exact technology, so that means the thing must perform in the real world exactly like it is previously simulated. So in case of our the waveguide filter, we design it by HFSS ensuring it passes all requirements by simulation, then we make it by a CNC machine ensuring all dimensions are correct, now we can put it in a box and send to customer by UPS? This might work, but it is probably not a responsible and professional duty to the customer. For example, someone has designed an airplane, using a very precise software. Then the plane is made by using a precise machinery. Would we volunteer to fly on the plane in the first flight? No, of course. What kind of guarantees we would require from the plane designers to feel safe on board? We would definitely need to see tons of margins over those "exactly" simulated parameters including all uncertainties and worst cases. We would definitely require the aviation people to test their airplanes in very extreme conditions and demonstrate tons of margins over. The same responsible way applied to our iris filter would also include evaluation of all uncertainties, designing the filter having margins over those uncertainties, and final testing.
+
+                <h2>Software Inaccuracy</h2>
+
+                Applying numerical methods to complex problems of electrodynamics, such as the scattering on waveguide discontinuities, have caused many questions for convergence and accuracy of those methods. However, as we know, there is still no simple and valid criteria for accuracy and convergence. Usually, the problem of convergence and accuracy is determined by comparison of the results based on different levels of discretization. For example, we run particular software with different settings for "modes", "nodes" and "tetrahedra" and see the difference in computed values. The idea is if the difference seams reducing while the number of those elements is increasing, then the software is converging. That is actually wrong by well-known definition of convergence given by mathematicians. In order to prove the convergence of a numerical algorithm, it must be observed over infinite number of passes (much behind of computer capability). Therefore, practically any designer has his/her own idea about accuracy of a design software based on his/her experience of using it. That experience is usually based on correlation between the results obtained by the design software with the results measured or obtained by other design software applied to the same design. Processing of multiple data obtained from those different sources, we could have idea about software accuracy, uncertainties and correction factors. Applying this approach to our iris filter would be at least comparing WR_Connect simulation results with the results obtained from software of other type. For comparison, we present results of simulations obtained from different types of software (see Figure 13).
+                <h3>
+                    <img src="irisfil8.gif" /><br />Figure 13: Correlation between simulated data obtained by WR_Connect 01, HFSS and WR_Connect 11
+                </h3>
+                Here the results obtained by WR_Connect 01 (the online version) are compared with results obtained by HFSS 9 and WR_Connect 11 (full-wave Windows console version). The second program has ran 15 passes until showed visual signs of convergence, and the third program used different number of waveguide modes from 10 to 20 and also showed a tendency for convergence. From the plot we may assume that the bandwidth WR_Connect 01 simulation is slightly higher on frequency axis and slightly wider than  the bandwidth simulated by the other solvers. We might also assume that the real filter would rather show wider bandwidth and lower center frequency.
+
+                <h2>Fabrication Tolerances</h2>
+
+                We also need to have an idea of how accurate our method of production is, i.e. to know the magnitude and style of deviations of the fabricated filter in respect to the nominal dimensions demanded by us. If we expect to fabricate our filter from the prepared waveguide pipes, flanges and plates, we should take into account the following major tolerances:
+                <ul>
+                    <li>We could count on +/-0.003'' (the value is specified by the supplier) tolerance on internal dimensions of the WR75 waveguide tube.</li>
+                    <li>As we cut slots in the waveguide and solder the irises, we may count on +/-0.005'' tolerance of the position of each irises along the filter.</li>
+                    <li>We assume that the thickness of irises can also deviate +/-0.003''.</li>
+                    <li>It could also be at least +/-0.005'' precision on the width of each iris.</li>
+                </ul>
+                We also assume those tolerances to be random. Consistently applying different combinations of random tolerances to the nominal dimensions of our filter and drawing frequency responses on the same plot, we would obtained a picture similar to the one shown on Figure 14.
+                <h3>
+                    <img src="irisfil9.gif" /><br />Figure 14: +/-0.005'' tolerance effect on filter performance
+                </h3>
+
+                <h2>Finishing</h2>
+
+                If we intend to finish the internal surface of our filter, we should take it into account. Silver covering is commonly used for waveguide applications. We can assume the thickness of silver on the internal surface of our filter to be about 0.0005'' ( QQ-S-365C ). Let assume the silver layer is uniformly put on all internal surface of our filter (practically we have more silver on sharp edges and less on corners). In this case we should reduce the waveguide width, waveguide height, width of each iris and length of each cavity for 0.001'', and we should increase thickness of each iris for the same value. Then we manually correct the schematic text as shown below:
+                <center>
+                    <br />
+                    <DIV style="width:400;background:#ffffff;text-align:left;color:black;padding-left:30px;padding-top:10px;padding-bottom:10px;">
+                        0    1    0.30000    0.37450    0.37400   -0.18700    0.00000<br />
+                        0    1    0.00000    0.00000    0.00000    0.00000    0.00000    0.00000<br />
+                        2    1    0.05100    0.18130    0.37400   -0.18700    0.00000<br />
+                        0    2    0.38919    0.37450    0.37400   -0.18700    0.00000    0.00000<br />
+                        2    1    0.05100    0.12172    0.37400   -0.18700    0.00000<br />
+                        0    2    0.44296    0.37450    0.37400   -0.18700    0.00000    0.00000<br />
+                        2    1    0.05100    0.10873    0.37400   -0.18700    0.00000<br />
+                        0    2    0.45024    0.37450    0.37400   -0.18700    0.00000    0.00000<br />
+                        2    1    0.05100    0.10873    0.37400   -0.18700    0.00000<br />
+                        0    2    0.44296    0.37450    0.37400   -0.18700    0.00000    0.00000<br />
+                        2    1    0.05100    0.12172    0.37400   -0.18700    0.00000<br />
+                        0    2    0.38919    0.37450    0.37400   -0.18700    0.00000    0.00000<br />
+                        2    1    0.05100    0.18130    0.37400   -0.18700    0.00000<br />
+                        0    1    0.00000    0.00000    0.00000    0.00000    0.00000    0.00000<br />
+                        0    1    0.30000    0.37450    0.37400   -0.18700    0.00000<br />
+                    </DIV>
+                </center>
+                <br />
+                In result, after running simulation, we would have narrower bandwidth shifted up on frequency axis (see figure 15).
+                <h3>
+                    <img src="irisfil92.gif" /><br />Figure 15: Effect of silver 0.0005'' thick layer on bandwidth.
+                </h3>
+
+
+
+                However, the thickness of the finish material (for example silver) could be reasonably about 0.0005'' (depends on specs), which is negligible in comparison to the tolerances evaluated above. We may omit the calculations for now.
+
+                <h2>Environmental Conditions</h2>
+
+                If we intend to use our filter outdoor, we have also to take into account the temperature extremes. We can consider a change of temperature from the ambient temperature <font class="formulae">
+                    t<sub>0</sub>
+                </font> to the extreme (cold and hot) temperature <font class="formulae">t</font>, resulting in a proportional change in any dimension by the coefficient <font class="formulae">1+CTE*(t-t0)</font> and causing a frequency shift <font class="formulae">
+                    -f<sub>c</sub>*CTE*(t-t0)
+                </font>. Simple calculation show <font class="formulae">+/-14.5 MHz</font> bandwidth frequency shift for the filter made from copper (<font class="formulae">CTE=17ppm/°C</font>) waveguide over the temperature range from <font class="formulae">-40 °C</font> to <font class="formulae">+80  °C</font>.
+
+                <h2>Total Effect of Uncertainties</h2>
+
+                <br />
+                <table align="center" border="1" class="spec">
+                    <caption>Table 3: Uncertainties and margins</caption>
+                    <tr>
+                        <td class="spec">
+                            <b>Uncertainty</b>
+                        </td>
+                        <td class="spec">
+                            <b>Central Frequency</b><br />(relative to nominal)
+                        </td>
+                        <td class="spec">
+                            <b>Bandwidth</b><br />(relative to nominal)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spec">WR-Connect Inaccuracy</td>
+                        <td class="spec">0.994 - 1.000 </td>
+                        <td class="spec">1.000 - 1.048 </td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Fabrication Tolerances</td>
+                        <td class="spec">0.998 - 1.003 </td>
+                        <td class="spec">0.973 - 1.059 </td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Silver Plating</td>
+                        <td class="spec">1.000 - 1.003 </td>
+                        <td class="spec">0.982 - 1.000 </td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Temperature Shift</td>
+                        <td class="spec">0.999 - 1.001 </td>
+                        <td class="spec">0.999 - 1.001 </td>
+                    </tr>
+                    <tr style="color:green; font-weight: bold">
+                        <td class="spec">Total Effect</td>
+                        <td class="spec">0.991 - 1.007 </td>
+                        <td class="spec">0.954 - 1.111 </td>
+                    </tr>
+                </table>
+
+                <h2>Tuning Margins</h2>
+
+                H-plane iris filters are known as "well tuneable" waveguide hardware. The filters having the both types of tuning screws (frequency and coupling screws) usually have more than 20%-30% of capability to change the center frequency and bandwidth from the initial state (when all tuning screws are out). The frequency screws are usually put at the center of each cavity on the wide wall. When the screw is penetrating into the cavity the resonance frequency is reducing. The coupling screws are usually located on the wide wall in the middle of each diaphragm. When the screw is penetrating into the opening of iris, it increasing the coupling through the iris.
+
+                <h2>Corrections</h2>
+
+                Based on the data from Table 3, we can conclude that if we built a filter with the dimensions showed on Figure 10, that filter could possibly be 0.991 (-0.9%) times lower in frequency and 1.111 (11.1%) times wider than we expected. Then we would not been able to tune it at all. Therefore, we have to project our filter reasonably higher (for example 2%) and wider (for example 15%) in order to be able to bring it to the optimal state (figures 11, 12) by tuning screws. Now we go back to the prototype page and correct the previously set values (see Table 2) for the new values (see Table 4) taking into account margins for uncertainties and tuning.
+
+                <table align="center" border="1" class="spec">
+                    <caption>Table 4: Synthesis Parameters Corrected for Tuning</caption>
+                    <tr>
+                        <td class="spec">
+                            <b>Parameter</b>
+                        </td>
+                        <td class="spec">
+                            <b>Value</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Central Frequency, GHz</td>
+                        <td class="spec">
+                            14.225*1.02 = <b>14.51</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Bandwidth, GHz</td>
+                        <td class="spec">
+                            1.20/1.15 = <b>1.04</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spec">Attenuation Ripple, dB</td>
+                        <td class="spec"> 0.015 </td>
+                    </tr>
+                </table><br /><br />
+
+                As we have already done before, we enter the new values 14.51 instead 14.225 and 1.04 instead 1.20, click "Apply" button and return to the schematic editor page. On the schematic page we convert our filter structure into the "iris type" by clicking "Extract Irises" button (Warning 4) before we click "Synthesize" button. The dimensions we obtain in the text window are the final ones (Figure 15).
+                <h3>
+                    <img src="irisfil93.gif" /><br />Figure 15: List of dimensions of iris filter after corrections.
+                </h3>
+                Here below on figure 16 those dimensions are expressed as a sketch of internal dimensions of the filter.
+                <h3>
+                    <img src="sketch.gif" /><br />Figure 16: Sketch of internal dimensions of iris filter.
+                </h3>
+
+                <h2> Construction </h2>
+
+                There are many ways of making filters like ours depending on technology used, but the simplest, most popular and less expensive way is to build the filter from standard waveguide tube and flanges as shown on figure 17.
+
+                <h3>
+                    <img src="irisfil91.gif" /><br />Figure 17: Waveguide iris filter assembly
+                </h3>
+
+                <h2>Conclusion</h2>
+
+                WR-Connect can be used for
+
+            </DIV>
+        </DIV>
+    </CENTER>
+    <SCRIPT language="VBScript">
+<!--
+        sub window_onload()
+        window.name = "IndexPage"
+        end sub
+        -->
+    </SCRIPT>
+</BODY>
+</HTML>

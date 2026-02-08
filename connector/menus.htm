@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+  <meta http-equiv="x-ua-compatible" content="IE=5"/>
+  <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<TITLE>WR-Connect: Description of controls, menus and design methods.</TITLE>
+  <META name="description" content="WR-Connect - RF/microwave waveguide component/subsystem CAD modelling environment. How to set up design environment, schematic file, filter model, run synthesis, simulation, optimization, draw plots with frequency response and export to HFSS"/>
+  <META name="keywords" content="RF/microwave, computer aid design, CAD, design software, low-pass filter, band-pass filters, high-pass filter, waveguide, waveguide impedance, WR,GHz, MHz, waveguide theory, matching, online software, free software, Digoria Microwave, HFSS, design tool, RF/microwave designer, waveguide component, waveguide calculator, mode-matching, H-plane iris filter, post filter, corrugated filter, stub filter, filter prototype, chebychev, butterworth, maximally-flat, frequency response, frequency domain, frequency sweep, resonant frequency, frequency chart, cavity, dB, s-parameter, central frequency, bandwidth, ripple, spurious"/>
+  <link href="class_1.css" rel="stylesheet" type="text/css"/>
+</HEAD>
+<BODY BGCOLOR="#c0c0c0"  LEFTMARGIN="0" TOPMARGIN="20">
+  <CENTER>
+    <DIV class="external">
+      <P class="shapka">
+        WR_Connect
+        <FONT class="note0">
+          <BR/>a cool waveguide structure design tool
+        </FONT>
+      </P>
+      <FONT style="font:  8pt 'Arial Black'; color: black">
+        <A HREF="../index.htm" class="main">Up</A>
+        <A HREF="index.htm" class="main">Home</A>
+        <A HREF="about.htm" class="main">About WR_Connect</A>
+        <A HREF="menus.htm" class="current">Menus & Controls</A>
+        <A HREF="examples.htm" class="main">Demos & Examples</A>
+        <A HREF="tutorial.htm" class="main">Tutorials</A>
+        <A HREF="start.htm" target="WR_Connect" class="main">Open WR_Connect Project</A>
+      </FONT>
+      <DIV class="internal" style="height:100">
+          <p class="message">
+              This software version is outdated. It still works at Microsoft Internet
+              Explorer but is not supported by other browsers and internet platforms.
+              Users are encouraged to migratee to the
+              <a href="../WRC_2020/index.htm" class="main">NEW VERSION</a>,
+              which is very similar but universal in respect
+              to Internet technologies as it retains all functions. In addition, the new version
+              offers new technologies, such as agressive space mapping (ASM). The current users can easily convert
+              their project files and transfer them into new version (see import/export options).
+              <hr />
+          </p>
+      </DIV>
+      <DIV class="maintext">
+        <FONT class="note2">
+          <h1>Initial Setup</h1>
+          <h2>Computed TMnm/TEnm -modes</h2>
+          This is set of two numbers associated with indexing of modes in a rectangular waveguide. As we know the rectangular waveguide modes are characterized in terms of TE<SUB>nm</SUB> (H<SUB>nm</SUB>) and TM<SUB>nm</SUB> (E<SUB>nm</SUB>). As the computational approach used here assumes X-axis symmetry and optional Y-axis symmetry of waveguide structure, we have
+          <BR/><FONT class="formulae">
+            n= 2*k<SUB>x</SUB>+1
+          </FONT>and <FONT class="formulae">
+            m= (1+i<SUB>sym</SUB>)*k<SUB>y</SUB>
+          </FONT>,<br/>
+          where <FONT class="formulae">
+            k<SUB>x</SUB>
+          </FONT> and <FONT class="formulae">
+            k<SUB>y</SUB>
+          </FONT> can be any natural numbers but <FONT class="formulae">
+            i<SUB>sym</SUB>
+          </FONT> can be only <FONT class="formulae">0</FONT> (no y-symmetry) or <FONT class="formulae">1</FONT> (y-symmetry). In terms of such representation of mode indexing we enter the maximum numbers for <FONT class="formulae">
+            k<SUB>x</SUB>
+          </FONT> and <FONT class="formulae">
+            k<SUB>y</SUB>
+          </FONT> for TE and TM modes taken into account in junctions but less than 10.
+          <h2>Y Symmetry</h2>
+          All waveguide structures are assumed to be x-axis symmetrical (YZ-plane symmetry). However the y-axis symmetry (XZ-plane symmetry) is optional. Default setup for Y-symmetry is no symmetry. This option allows taking advantage of using only even m-indexed modes in computation for vertically symmetric structures and gain accuracy for the same number of waveguide modes taken into account.
+          <h2>Active Mode Index</h2>
+
+          Default value for this index is 1, which corresponds to the TE<sub>10</sub>-mode as the only mode propagating in all nodes. However this version of WR_Connect allows a user to enter some other natural numbers specifying a class of spurious and to evaluate spurious responses. In case of spurious responses the active mode index is the first index (<font class="formulae">n</font>) of the dominant spurious mode, i.e. 0 for TE<sub>01</sub>, 2 for TE<sub>20</sub>, 3 for TE<sub>30</sub>, etc. However it should be noted that synthesis and optimization methods are not applicable in case of the active mode index set to value not equal to 1 and simulation results give rather just characteristic picture of spurious than accurate computation results.
+
+          <h2>Units</h2>
+
+          This property sets unit of dimensions to inches or millimetres by preference of user. The default setup is millimetres.
+
+          <h2>
+            Dielectric Const., [ <FONT STYLE="font:12pt Symbol; font-weight: bold">e </FONT>]
+          </h2>
+
+          This property sets dielectric constant of material inside the waveguide structure. The default value is 1 (vacuum).
+
+          <h2>
+            Loss tangent, [ tan <FONT STYLE="font:12pt Symbol; font-weight: bold">d </FONT>]
+          </h2>
+          This property sets loss tangent corresponding to material inside the waveguide structure. The default value is 0 (vacuum).
+
+          <h2>
+            Surface Conductivity, [ <FONT STYLE="font:12pt Symbol; font-weight: bold">s</FONT>x10<SUP>7</SUP>S/m ]
+          </h2>
+
+          Here we enter the value of surface of structure normalized to 10<sup>7</sup> S/m (siemens per metre). For example the conductivity of silver is 6.14 x 10<sup>7</sup> S/m, so here we enter only value of 6.14 for the surface conductivity. Please note that we still have to use values for conductivity normalized to 10<sup>7</sup> S/m if even we selected inches for the structure dimensions. As we cannot enter infinity for the ideal conductivity of surface, we reserved the number 0 or empty for this case. If the value not entered, the surface of device is assumed to be ideal conductor.
+
+          <h2>
+            First Frequency Point, [ f<SUB>min</SUB> ]<br/>
+            Last Frequency Point, [ f<SUB>max</SUB> ]<br/>
+            Number of Points in Range [ N<SUB>p</SUB> ]
+          </h2>
+
+          This is about frequency sweep parameters. The computational engine runs over the specified frequency range point by points (N<SUB>p</SUB>+1 points or N<SUB>p</SUB> divisions). Normally it is reasonable to select the simulation bandwidth [f<sub>0</sub>,f<sub>1</sub>] covering all pass-band and stop-band zones and the number of points [N<sub>p</sub>] adequate to see in-band ripples and out-of-band spurious spikes. There are no default values for these parameters, so they have to be entered anyway.
+
+          <h2>Example Button</h2>
+
+          Clicking this button fills all parameters as an example of valid entry. Use refresh button of IE in order to restore initial values if the "Example" button is clicked by mistake.
+
+          <h2>Apply Button</h2>
+
+          Clicking this button validates the initial setup information, saves it in the project bufer and redirects to the design editor.
+
+          <h1>Schematic Editor</h1>
+
+          <h2>Structure Parameters</h2>
+
+          The text entry window in center is a text editor. It is used for entering and editing schematic file of waveguide structure. The schematic file is a list of dimensions All dimensions and characteristic features associating with the 3D appearance of the structure are there. Refer to <A HREF="tutorial.htm" class="maintext">manual</A> for details.
+
+          <h2>Available Templates</h2>
+
+          Here we can select a template for some type of waveguide components. Template is a sequence of nodes and junctions characteristic for the waveguide component selected.
+          <h2>Frequency Scale</h2>
+
+          This option is proportionally reducing or increasing all dimensions of the waveguide component listed in the text editor. It is the simplest way to apply the same design to a different frequency plan.
+
+          <h2>Make Adjustment</h2>
+
+          This option is similar to frequency scaling but it applies to particular elements of the structure. It is a useful method, for example, for slightly adjustment of bandwidth of a filter by proportionally changing width of irises and length of cavities without changing other dimensions of the waveguide component.
+
+          <h2>Y-Split/Mirror</h2>
+
+          Clicking this button inverts Y-symmetry of the waveguide structure. If the structure is symmetric, the structure is cut on the reference plane (y=0) with only the positive part (part above the reference plane) left.  If the structure is asymmetric then its negative part is replaced with the symmetry of its positive part.
+
+          <h2>Z-flip</h2>
+
+          This option reverses the sequence of elements, so the input becomes the output and vice versa.
+
+          <h2>Extract Irises</h2>
+
+          This option analyzes the sequence of elements in the waveguide structure, determines smaller waveguides and defines them as irises. This method can make the structure suitable for some synthesis methods.
+
+          <h2>Extract Cavities</h2>
+
+          This option analyzes the sequence of elements in the waveguide structure, determines bigger waveguides and defines them as cavities. As mentioned in the <A HREF="tutorial.htm" class="maintext">manual</A>, representing structure as a sequence of cavities increases accuracy of computation.
+
+          <h2>mm/inch</h2>
+
+          This option changes the unit of measurement from millimetre to inch or vice versa.
+
+          <h2>Show Schematics</h2>
+
+          This option checks syntax of data entry and shows a schematic sequence of icons corresponding to the structure entered in the text window. It is recommended to see the schematic of structure before starting computational methods (synthesis, simulation, optimization, etc.).
+
+          <h2>Delay for IE events</h2>
+          This option sets the computational engine to sleep for particular amount of time in order to give IE chance to respond for some other events while the solver is running. If the option is turned off, the browser does not respond for any other command until the script runs to the end. Then if the simulation requires more time, it is likely IE sends a pop-up (see Figure 1 below). It is recommended to use the default setup for this property.
+
+          <h2> IE pop-ups </h2>
+
+          While running the solver (VBScript functions) usually takes full control over the web browser, stops all events and blocks all controls until it runs to the end. That means IE will not respond to controls and can send <B>pop-ups</B> (see Figure 1 below) if it finds the computation requires too much IE memory or execution time.
+
+          <h3>
+            <img src="popup.jpg">
+              <br/>
+              Figure 1: IE pop-up with warning
+          </h3>
+
+          This web-based version of WR_Connect prevents the pop-ups by setting a sleeping time for script during simulation ( "Analyze" button ) and optimization ( "Optimize" ) when other IE events can be executed. However you may receive the IE pop-up if you are running synthesis ( "Synthesize" button) or simulation with "Delay for IE events" turned off. Anyway if the message is received, you may go on by answering "<b>No</b>".
+
+          <h2>Synthesize</h2>
+
+          Clicking this button executes the synthesis method. The computational engine reads a template of structure from the schematic window and sets dimensions of elements in accordance with the specified prototype. Therefore the prototype properties have to be set up before starting synthesis.
+
+          <h2>Analyze</h2>
+
+          Clicking this button executes the simulation method. By this command the computational engine computes s-parameters of structure represented by text line in the schematic window over sweep range specified on the initial setup page.
+
+          <h2>Optimize</h2>
+
+          Clicking this button executes the optimization method. The computational engine reads dimensions and schematic of structure and optimizes frequency response of the structure over targets and constrains specified on the optimization page.
+
+          <h2>Ready/Wait/Abort</h2>
+
+          This button indicates computational activities. If green word "Ready" is written on the button the computational engine is ready to start synthesis, simulation or optimization. Pressing the button in "Ready" status does not do anything. The red word "Wait" appears if synthesis or simulation is started and IE is in a [unresponsive state]. This status requires waiting until the script runs to the end and the design method executed. The green word "Abort" appears if simulation (the time delay is not off) or optimization is going on. You may abort it any time by clicking the button.
+
+          <h2>Indicator Label</h2>
+
+          This label is on left from the "Ready" button. The indicator label displays current stage of simulation or optimization.
+
+          <h1>Prototype Setup</h1>
+
+          <h2>Prototype Selection</h2>
+
+          Selection of prototype is only required when using synthesis method applied to a waveguide structure (template) entered in the schematic editor. During synthesis the synthesizer make corrections to junctions and nodes in order to achieve a characteristic performance with selected parameters of prototype (central frequency, bandwidth, ripple, etc.). There are five types of prototype circuitry presented here.
+
+          <h2>Central or Reference Frequency</h2>
+
+          This is the frequency point where the waveguide structure is matched. It is usually the centre of operational bandwidth of the waveguide device. The central/reference frequency is applicable to any type of prototype selected.
+
+          <h2>Resonant Order</h2>
+
+          Applied to waveguide cavity filters the resonance order is the number of half wavelengths in electrical length of cavity. Usually the number starts from 0 for filters with inductive diaphragms (H-plane irises) or from 1 for filters with capacitive irises (E-plane irises). If the resonant order is set to -1, the synthesizer reads the structure file and sets it for each cavity (node) individually by its optimization variable index.
+
+          <h2>In-Band Ripple</h2>
+
+          This parameter is applicable if Chebychev prototype function is selected. Generally it is insertion loss ripple for an ideal filter with no dissipation. Reasonable numbers for practical applications could be for example from 0.01 to 0.2.
+
+          <h2>Relative Susceptance Min & Max</h2>
+
+          Those parameters are applicable to the impedance tapers only. See note [ ] for details.
+
+          <h2>Profile Parameter</h2>
+
+          This parameter is applicable to the impedance tapers only. It characterizes shape of tapering of equivalent susceptance of junctions (discontinuities) along the structure of filter. Practically reasonable numbers for the profile parameter are about from 0.5 to 2.0.
+
+          <h2>Butterworth Type</h2>
+
+          This option sets a sequence of scattering Butterworth filter prototype. The prototype is specified by the central frequency, bandwidth and resonant order.
+          <h2>Chebychev Type</h2>
+
+          This option sets a sequence of scattering Butterworth filter prototype. The prototype is specified by the central frequency, bandwidth, resonant order and in-band ripple.
+
+          <h2>Impedance Taper</h2>
+
+          This prototype represents a sequence of discontinuities with equivalent relative susceptances tapered to the center of structure
+
+          <h2>Bi=Bmin+(Bmax-Bmin)*(sin(pi*i/N))^alfa ,</h2>
+
+          where Bmin, Bmax and alfa are susceptance of the first/last discontinuity, susceptance of the central discontinuity and the profile parameter. Using the impedance taper prototype can give better results for wide filters and quasi-periodic structures.
+
+          <h2> Impedance Transformer</h2>
+
+          This option is used for synthesis of waveguide transformers and corrugated filters. It needs only a reference frequency to be entered.
+
+          <h2>Apply Button</h2>
+
+          Clicking this button saves the prototype and navigates to the schematic editor (main command menu). If navigated out by any other way, the prototype will not be saved and the entered information will be lost.
+
+          <h2>Clear Button</h2>
+
+          This button empties the prototype data and erases it from internal memory.
+
+          <h2>Example Button</h2>
+
+          Clicking this button fills all parameters as an example of valid entry. Use refresh button of IE in order to restore initial values if the "Example" button is clicked by mistake.
+
+
+          <h1>Optimization Setup</h1>
+          <h2>OPTIMIZATION CONSTRAINS</h2>
+
+          This area is for entry of optimization constrains. Spec for each constrain contains frequency sweep range (starting and ending frequency points of the range and number of divisions), path (s-parameter indexes) and target in dBs. All three numbers for the frequency range have to be entered in the text strip separated by blank spaces (no commas, tabs or other symbols are allowed for delimitation).  The optimizer accepts up to five optimization constrains.
+
+          <h2>OPTIMIZATION STEPS</h2>
+
+          This area is to control steps of optimization, i.e. single step deviation (a relative change for parameter in percents during a single iteration), the number of steps (number of iterations to perform) and the minimum dimensions for nodes and junctions acceptable for the design (critical dimensions set to prevent optimizer going to practically unrealistic dimensions for irises or gaps).
+
+          <h2> TYPE OF FUNCTIONAL</h2>
+
+          Here there are two ways to evaluate how the structure performs in respect to the specified goals (constrains) targets. The MINIMAX option values the performance of structure by the worst case of specified s-parameter over the specified bandwidth. The L2 option values the performance of structure by a quadratic mean criterion.  According to examples designed here using optimization methods, L2 is found to have better convergence when the initial performance of design is not close to specified goals. However MINIMAX is preferable for final optimization to equalize ripples and optimize margins.
+
+          <h2>Apply Button</h2>
+
+          Clicking this button saves the optimization setup data into internal memory in order to use it during optimization.
+
+          <h2>Cancel Button</h2>
+
+          Clicking this button navigates to the schematic editor. If any data had been entered in input form by that time, it will not be saved.
+
+          <h2>Example Button</h2>
+
+          This option is to show an example of entry of optimization data.
+
+          <h1>Results Page</h1>
+
+
+
+          <h2>S-Parameter</h2>
+
+          This area is to select particular s-parameters used as arguments for plot functions in a X-Y chart style.
+
+          <h2>X Scale  </h2>
+
+          This area sets the range and division of frequency axis as the domain of plot.
+
+          <h2>Y Scale</h2>
+
+          This area sets the range and division of the co-domain of the selected plot function. If "Autoscale" option is selected the function will be plotted over the range of extremes (from minimum to maximum values).
+
+          <h2>Apply Button</h2>
+
+          This button re-plots the selected characteristic over updated scales.
+
+          <h2>Return Button</h2>
+
+          This button, if clicked, navigates back to the schematic editor.
+
+          <h2>Import/Export Data Button</h2>
+
+          Clicking this button navigates to a page with options to review tabulated s-parameters, export the table from WR_Connect environment, or bring s-data from outside.
+
+          <h1>Import/Export Page</h1>
+
+          <h2>(EXPORT) WR_Connect Project File</h2>
+
+          This option creates a text file with all project data (key properties of the design). The project data can be exported outside of WR_Connect by copying the text into the clipboard (right mouse click, Select All, Copy)  and paste it somewhere on hard drive as text file using a text editor (Edit, Paste, File, Save As).
+
+          <h2>(EXPORT) 3D HFSS Model Script</h2>
+
+          This option creates a text file containing VBScript code with commands for HFSS to open a project and draw the model automatically. In order to use this option we have to save the text as a file with *.vbs extension and execute it from Windows Explorer or Command Prompt. The script is compatible with version 11 of HFSS but it should run HFSS 9 or 10 with minor modification. Refer to HFSS manuals and VBScript reference for debugging.
+
+          <h2>(EXPORT) 3D AutoCAD Model Script</h2>
+
+          This option generates a text file containing commands for AutoCAD to draw 3D model. This option is used for AutoCAD 2002 but it has not been tested for later AutoCAD versions.
+
+          <h2>(IMPORT) WR_Connect Project File</h2>
+
+          This option is to import a WR_Connect project file into the design environment from outside though the text window. The text to be imported inside has to be written in WR_Connect project file format (any modification of delimiting characters may cause errors).
+        </FONT>
+      </DIV>
+    </DIV>
+  </CENTER>
+</BODY>
+</HTML>

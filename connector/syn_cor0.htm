@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <meta http-equiv="x-ua-compatible" content="IE=5" />
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta name="robots" content="noindex" />
+    <style type="text/css">
+        h1 {
+            font: 8pt Lucida Console;
+            color: navy
+        }
+
+        h2 {
+            font: 8pt Arial Black;
+            color: maroon
+        }
+
+        h3 {
+            font: 10pt Arial Black;
+            color: black
+        }
+
+        div {
+            background: #b0b0b0
+        }
+    </style>
+</HEAD>
+<!--marked-->
+<BODY LEFTMARGIN="0" TOPMARGIN="20" BGCOLOR="#909090">
+    <DIV>
+
+        <CENTER>
+            <h3>Basic Dimensions of Corrugated Filter</h3><BR />
+            <IMG SRC="asymcorr.bmp" />
+            <FONT style="font:10pt Arial Black; color:maroon">
+
+                <TABLE BORDER="1" ALIGN="TOP">
+                    <TR>
+                        <TD WIDTH="200">
+                            <h2>Interface Dimensions:</h2>
+                        </TD>
+
+                        <TD>
+
+                            <TABLE BORDER="0">
+                                <TR>
+                                    <TD WIDTH="220">
+                                        <h1>
+                                            External Waveguide Width (A<sub>0</sub>)
+                                        </h1>
+                                    </TD>
+                                    <TD>
+                                        <h1>
+                                            <INPUT NAME="Var0" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="20" />
+                                        </h1>
+                                    </TD>
+                                </TR>
+                                <TR>
+                                    <TD>
+                                        <h1>
+                                            External Waveguide Height (B<sub>0</sub>)
+                                        </h1>
+                                    </TD>
+                                    <TD>
+                                        <h1>
+                                            <INPUT NAME="Var0" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="20" />
+                                        </h1>
+                                    </TD>
+                                </TR>
+                            </TABLE>
+
+                        </TD>
+                    </TR>
+                    <TR>
+                        <TD>
+                            <h2>Internal Dimensions:</h2>
+                        </TD>
+                        <TD>
+                            <TABLE WIDTH="380">
+                                <TR>
+                                    <TD WIDTH="220">
+                                        <h1>Channel Waveguide Width (a)</h1>
+                                    </TD>
+                                    <TD>
+                                        <h1>
+                                            <INPUT NAME="Var0" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="20" />
+                                        </h1>
+                                    </TD>
+                                </TR>
+                                <TR>
+                                    <TD>
+                                        <h1>Channel Waveguide Height (b)</h1>
+                                    </TD>
+                                    <TD>
+                                        <h1>
+                                            <INPUT NAME="Var0" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="20" />
+                                        </h1>
+                                    </TD>
+                                </TR>
+                            </TABLE>
+                        </TD>
+                    </TR>
+
+
+                    <TR>
+                        <TD>
+                            <h2>Period of Cavities/Corrugations:</h2>
+                        </TD>
+                        <TD>
+                            <TABLE WIDTH="380">
+                                <TR>
+                                    <TD WIDTH="220">
+                                        <h1>Cavity Length (s)</h1>
+                                    </TD>
+                                    <TD>
+                                        <h1>
+                                            <INPUT NAME="Var0" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="20" />
+                                        </h1>
+                                    </TD>
+                                </TR>
+                                <TR>
+                                    <TD>
+                                        <h1>Iris Thickness (d)</h1>
+                                    </TD>
+                                    <TD>
+                                        <h1>
+                                            <INPUT NAME="Var0" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="20" />
+                                        </h1>
+                                    </TD>
+                                </TR>
+                            </TABLE>
+                        </TD>
+                    </TR>
+
+                    <TR>
+                        <TD>
+                            <h2>Order &#38; Impedance Tapering:</h2>
+                            <h1>
+                                <CENTER>
+                                    <FONT COLOR="blue">
+                                        h<sub>i</sub>=h<sub>min</sub>+(h<sub>max</sub>-h<sub>min</sub>)*<BR />
+                                        *<b>(</b>sin(<FONT STYLE="font: 8pt Symbol; color: navy">p</FONT>*(i-1)/(N-1)<b>)</b><sup>
+                                            <FONT STYLE="font: 8pt Symbol; color: navy">a</FONT>
+                                        </sup>
+                                    </FONT>
+                                </CENTER>
+                            </h1>
+                        </TD>
+                        <TD>
+                            <TABLE WIDTH="380">
+                                <TR>
+                                    <TD WIDTH="220">
+                                        <h1>Total Number of cavities (N)</h1>
+                                    </TD>
+                                    <TD>
+                                        <h1>
+                                            <INPUT NAME="Var0" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="20" />
+                                        </h1>
+                                    </TD>
+                                </TR>
+                                <TR>
+                                    <TD>
+                                        <h1>
+                                            Cavity Height at Ends (h<sub>min</sub>)
+                                        </h1>
+                                    </TD>
+                                    <TD>
+                                        <h1>
+                                            <INPUT NAME="Var0" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="20" />
+                                        </h1>
+                                    </TD>
+                                </TR>
+                                <TR>
+                                    <TD>
+                                        <h1>
+                                            Cavity Height at Center (h<sub>max</sub>)
+                                        </h1>
+                                    </TD>
+                                    <TD>
+                                        <h1>
+                                            <INPUT NAME="Var0" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="20" />
+                                        </h1>
+                                    </TD>
+                                </TR>
+                                <TR>
+                                    <TD>
+                                        <h1>
+                                            Profile Parameter
+                                            (<FONT STYLE="font: 8pt Symbol; color: navy">a</FONT>)
+                                        </h1>
+                                    </TD>
+                                    <TD>
+                                        <h1>
+                                            <INPUT NAME="Var0" TYPE="text" STYLE="font:8pt Lucida Console; color:navy" size="20" />
+                                        </h1>
+                                    </TD>
+                                </TR>
+                            </TABLE>
+                        </TD>
+                    </TR>
+                </TABLE>
+                <HR />
+                <INPUT NAME="Command1" TYPE="BUTTON" STYLE="font:8pt Lucida Console; color:navy; font-weight: bold" VALUE="  Apply  " />
+                <INPUT NAME="Command2" TYPE="BUTTON" STYLE="font:8pt Lucida Console; color:navy; font-weight: bold" VALUE="  Cancel " />
+                <INPUT NAME="Command3" TYPE="BUTTON" STYLE="font:8pt Lucida Console; color:blue" VALUE=" Example " />
+            </FONT>
+        </CENTER>
+
+    </DIV>
+    <SCRIPT LANGUAGE="VBScript">
+  <!--
+
+        sub command1_onclick()
+        Dim joc(50), jc(50), c(50, 6), jow(50), jw(50), w(50, 6)
+        for iCount = 0 to 9
+if not IsNumeric(trim(var0(iCount).value)) then
+        kod = msgbox("The parameter # " & (iCount + 1) & " is missing or not a numeric value." _
+            & vbCrLf & vbCrLf & "Please enter a reasonable value.", 0, "Wrong Entry")
+        exit sub
+        end if
+next
+Ao = CDbl(var0(0).value) / 2.0
+        Bo = CDbl(var0(1).value)
+        Xin = Ao / 2.0
+        A = CDbl(var0(2).value) / 2.0
+        B = CDbl(var0(3).value)
+        S = CDbl(var0(4).value)
+        D = CDbl(var0(5).value)
+        N = CInt(var0(6).value)
+        Hmin = CDbl(var0(7).value)
+        Hmax = CDbl(var0(8).value)
+        alfa = CDbl(var0(9).value)
+        At = (Ao + A) / 2.0
+        Bt = (Bo + B) / 2.0
+        Xt = A / 2.0
+        Np = 4 + N
+        for iCount = 0 to Np
+joc(i) = 0: jow(i) = 0: jw(0) = 0: jow(i) = 0
+        for iiCount = 0 to 6: c(iCount, iiCount) = 0.0000: w(iCount, iiCount) = 0.0000 : next
+        next
+        jw(0) = 1: w(0, 1) = Xin: w(0, 2) = Ao: w(0, 3) = Bo
+        jc(0) = 1
+        jow(1) = 3: jw(1) = 1: w(1, 1) = Xt: w(1, 2) = At: w(1, 3) = Bt
+        jc(1) = "1"
+        jw(2) = "1": w(2, 1) = D: w(2, 2) = A: w(2, 3) = B
+        for iCount = 1 to N
+Bi = Hx(iCount, alfa, N, Hmin, Hmax)
+        joc(1 + iCount) = 3: jc(1 + iCount) = "2": c(1 + iCount, 1) = S: c(1 + iCount, 2) = A:: c(1 + iCount, 3) = Bi:
+        jw(2 + iCount) = 1: w(2 + iCount, 1) = D: w(2 + iCount, 2) = A:: w(2 + iCount, 3) = B:
+        next
+        jc(2 + N) = "1"
+        jow(3 + N) = 3: jw(3 + N) = "1": w(3 + N, 1) = Xt: w(3 + N, 2) = At: w(3 + N, 3) = Bt
+        jc(3 + N) = "1"
+        jw(4 + N) = "1": w(4 + N, 1) = Xin: w(4 + N, 2) = Ao: w(4 + N, 3) = Bo
+        top.StrucDat.value = WG_Text(Np, jow, jw, w, joc, jc, c)
+        window.navigate "editor.htm"
+        end sub
+
+        function Hx(ix, alfa, N, Hmin, Hmax)
+        pi = 3.141592653589793236
+        x = sin(pi * (ix - 1) / (N - 1))
+        if x <= 0.0 then
+        Hx = Hmin
+        exit function
+else
+        Hx = Hmin + (Hmax - Hmin) * x ^ alfa
+        end if
+end function
+
+                sub command2_onclick()
+        window.navigate "editor.htm"
+        end sub
+
+        sub command3_OnClick()
+        Dim dims, Nv
+        dims = array(0.750, 0.375, 0.600, 0.100, 0.150, 0.020, 20, 0.220, 0.350, 1.5)
+        for iCount = 0 to 9
+select case iCount
+case 6
+        var0(iCount).value = dims(6)
+case 9
+        var0(iCount).value = dims(9)
+case else
+        var0(iCount).value = dims(iCount)
+        end select
+        next
+        end sub
+
+        Function WG_Text(Nw, jow, jw, w, joc, jc, c)
+        LN = ""
+
+        for i = 0 to Nw
+LN = LN & CInt(jow(i)) & "   " & CInt(jw(i))
+        for ii = 1 to 5: LN = LN & "   " & formatnumber(w(i, ii), 5): next: LN = LN & vbCrLf
+        if i < Nw then
+        LN = LN & CInt(joc(i)) & "   " & CInt(jc(i))
+        for ii = 1 to 6: LN = LN & "   " & formatnumber(c(i, ii), 5): next: LN = LN & vbCrLf
+        end if
+next
+WG_Text = LN
+        end function
+-->
+    </SCRIPT>
+</BODY>
+
+</HTML>
+
