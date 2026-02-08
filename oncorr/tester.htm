@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<!--marked-->
+<body>
+    <button onclick="test();">test</button>
+    <script src="corr.js"></script>
+    <script src="complx.js"></script>
+    <script>
+
+        function test() {
+            var pi = 3.141592653589793236;
+            //var eps = 1, tg = 0, rm = 0;
+            //var Ao = 0.75, Bo = 0.375;
+            //var At = 0.67, Bt = 0.25, Xt = 0.38;
+            //var A = 0.65, B = 0.1, D = 0.02;
+            //var Ac = 0.65, Bc = 0.2, Sc = 0.13, Dc = 0.02;
+            var ao = 0.75, bo = 0.375; //INTERFACE
+            //var at = 0.69, bt = 0.25; //TRANS
+            var a = 0.65, b = 0.1; //CHANNEL
+            var bc = 0.2, s = 0.13, d = 0.02, h0 = (bc - b) / 2, h1 = (bc - b) / 2; //CORROS
+            var kc = pi / a;
+            var k = 1.5*kc;
+            //var wK = hu006(k, kc);
+            //var sCorr = hu007(wK, b, s, h0, h1);
+            sTrans = TransRoot(k, ao, bo, a, b, d, s, h0, h1);
+                //JuncInfinite(wK, dc, b, sc, h0, h1); //STF(k, ao, bo, at, bt);
+            alert(sTrans);
+        }
+
+        function TransRoot(k, ao, bo, a, b, d, s, h0, h1) {
+            var pi = 3.141592653589793236;
+            var Np = 500;
+            var i, S0 = [0, 0], S1 = [0, 0];
+            var R1, B1, R0, B0, I0;
+            var at = (ao + a) / 2;
+            var xs = pi / at;
+            for (i = 0; i <= Np; i++) {
+                bt = b + (bo - b) * i * 1. / Np;
+                S0 = STF(k, ao, bo, at, bt);//STF(k, Ao, Bo, At, Bt);
+                S1 = SF(k, at, bt, a, b, d, s, h0, h1);//SF(k, At, Bt, A, B, D, Ac, Bc, Sc, Dc);
+                R1 = cabs(S0) - cabs(S1);
+                B1 = bt;
+                if (R1 > 0) { I1 = 1; } else { I1 = -1;}
+                if (i != 0) {
+                    if (I0 != I1) { break; }
+                }
+                R0 = R1;
+                B0 = B1;
+                I0 = I1;
+            }
+            var gt, F0, F1;
+            gt = Math.sqrt(k * k - xs*xs);
+            F0 = arg(S0);
+            F1 = arg(S1);
+            Fs = 0.5 * (F0 + F1)
+            if (Fs < 0) { Fs = Fs + pi; }
+            if (Fs >= pi) { Fs = Fs - pi; }
+            dt = Fs / gt;
+            return [at, bt, dt];
+        }
+
+
+        function SF(k, at, bt, a, b, d, s, h0, h1) {
+            var pi = 3.141592653589793236;
+            var x = pi / a;
+            var wK = hu006(k, x);
+            var Y = [wK[0] / k, wK[1] / k];
+            var S = JuncInfinite(wK, b, d, s, h0, h1); //d=dc
+            var St = EH(k, at, bt, a, b);
+            var Ex = cexp([wK[1] * d, -wK[0] * d]); //HUJ d=dc/2
+            var SEx = xoy([S[0], S[1]], Ex);
+            var vrx = xoy(xin2([St[2], St[3]]), SEx);
+            var niz = xmy([1, 0], xoy([St[6], St[7]], SEx));
+            var SS = xpy([St[0], St[1]], xdy(vrx, niz));
+            return SS;
+        }
+
+        function STF(k, Ao, Bo, At, Bt) {
+            var So=EH(k, Ao, Bo, At, Bt);
+            return [So[6], So[7]];
+        }
+
+
+        function JuncInfinite(wK, b, d, s, h0, h1) {
+            var E = [1, 0], j = [0, 1], cs, sn, ex;
+            var wave = cexp([wK[1] * d, -wK[0] * d]);
+            So = hu007(wK, b, s, h0, h1);
+            var S00 = xoy(wave, [So[0], So[1]]);
+            var S01 = xoy(wave, [So[2], So[3]]);
+            var cs = xdy(xpy(E, xmy(xin2(S01), xin2(S00))), aox(2, S01));
+            var sn = csqrt(xmy(E, xin2(cs)));
+            var ex = xpy(cs, xoy(j, sn));
+            So = xdy(xmy(E, xoy(S01, ex)), S00);
+            return So;
+        }
+    </script>
+</body>
+</html>

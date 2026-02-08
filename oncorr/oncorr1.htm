@@ -1,0 +1,506 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+    <TITLE>Corrugated Waveguide Low-Pass Filter Synthesis</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="keywords" CONTENT="RF, microwave, corrugated, filter, waveguide, low-pass, synthesis, design, equivalent, network">
+    <META NAME="description" CONTENT="Corrugated waveguide low-pass filter synthesis tool. Prototype network and initial dimensions.">
+    <META name="Author" content="Rousslan Goulouev">
+    <style>
+        input {
+            font: 10pt Arial;
+            color: navy;
+        }
+    </style>
+</HEAD>
+<BODY BACKGROUND="img/bkg05.jpg" leftmargin=0 topmargin=0 onload="window_onload()">
+    <CENTER>
+        <FONT SIZE=4 COLOR=#FFFFCC>
+            Initial Dimensions<BR><BR>
+            <TABLE>
+                <TR>
+                    <TD width=530>
+                        <IMG SRC="img/corpic1.bmp"><BR><IMG SRC="img/iskra1.gif">
+                    </TD>
+
+                    <TD>
+                        <TABLE BORDER=1>
+                            <TR>
+                                <TD>
+                                    <FONT SIZE=2 COLOR=#CCFFFF>
+                                        <CENTER><B><I>Dimension Units</I></B></CENTER>
+                                    </FONT>
+                                </TD>
+                                <TD>
+                                    <FONT SIZE=2 COLOR=#FFFFCC>
+                                        <CENTER>
+                                            <B>
+                                                <I>
+                                                    <input name="unit" type="radio" value="" checked> mm
+                                                    <input name="unit" type="radio" value=""> inch
+                                                </I>
+                                            </B>
+                                        </CENTER>
+                                    </FONT>
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD>
+                                    <FONT SIZE=2 COLOR=#CCFFFF>
+                                        <CENTER>
+                                            <B>
+                                                <I>
+                                                    Pass Band and Roll-off, GHz<BR>
+                                                    <FONT SIZE=2 COLOR=#FFCCFF>F<SUB>0</SUB>,F<SUB>1</SUB>,F<SUB>r</SUB></FONT>
+                                                </I>
+                                            </B>
+                                        </CENTER>
+                                    </FONT>
+                                </TD>
+
+                                <TD><INPUT TYPE="TEXT" id="Band" style="width:330px;"></TD>
+                            </TR>
+                            <TR>
+                                <TD>
+                                    <FONT SIZE=2 COLOR=#CCFFFF>
+                                        <CENTER>
+                                            <B>
+                                                <I>
+                                                    Corrugations<BR><FONT SIZE=2 COLOR=#FFCCFF>(Nc) (Ac, Bc , Sc, Dc )</FONT>
+                                                </I>
+                                            </B>
+                                        </CENTER>
+                                    </FONT>
+                                </TD>
+                                <TD><INPUT TYPE="TEXT" id="NumCorro" VALUE="" style="width:30px;"><INPUT TYPE="TEXT" id="Corro" VALUE="" style="width:300px;"></TD>
+                            </TR>
+                            <TR>
+                                <TD><FONT SIZE=2 COLOR=#CCFFFF><CENTER><B><I>Prototype Type: </I></B></CENTER></FONT></TD>
+                                <TD>
+                                    <FONT color="#AAAAFF">
+                                        1<INPUT type="radio" name="tip" checked>&nbsp;2<INPUT type="radio" name="tip">
+                                        <FONT SIZE=2 COLOR="#CCFFFF">
+                                            <B>
+                                                &nbsp;&nbsp;&nbsp;B-range <FONT SIZE=2 COLOR=#FFCCFF>
+                                                    <I>
+                                                        (B<SUB>min</SUB>,B<SUB>max</SUB>)
+                                                        <INPUT type="text" id="Bs" style="width:140px;">
+                                                    </I>
+                                                </FONT>
+                                            </B>
+                                        </FONT>
+                                    </FONT>
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD>
+                                    <FONT SIZE=2 COLOR=#CCFFFF>
+                                        <CENTER><B><I>Input/Output Ports<BR><FONT SIZE=2 COLOR=#FFCCFF>(Ao, Bo)</FONT></I></B></CENTER>
+                                    </FONT>
+
+                                </TD>
+                                <TD><INPUT TYPE=TEXT id="Inter" VALUE="" style="width:330px;"></TD>
+                            </TR>
+                        </TABLE>
+                        <IMG SRC="img/iskra1.gif">
+                    </TD>
+                </TR>
+            </TABLE>
+            <HR>
+            <TABLE BORDER=1>
+                <TR>
+                    <TD> <BUTTON id="run" onclick="Help()" style="font:8pt Arial Black;color:#400040">See Instructions</BUTTON></TD>
+                    <TD> <BUTTON id="run" onclick="CalcStruc()" style="font:8pt Arial Black;color:#400040">Generate Dimensions</BUTTON></TD>
+                    <TD> <BUTTON id="forw" onclick="Stepper(0)" style="font:8pt Arial Black;color:#400040">Simulate Response</BUTTON> </TD>
+                    <TD> <BUTTON id="forw" onclick="Stepper(0)" style="font:8pt Arial Black;color:#400040">Skip to Next Page</BUTTON> </TD>
+                    <TD> <BUTTON id="forw" onclick="Stepper(1)" style="font:8pt Arial Black;color:#400040">Go to Previous Page</BUTTON> </TD>
+                </TR>
+            </TABLE>
+            <BR><IMG SRC="img/iskra1.gif">
+            <BR><IMG SRC="img/iskra1.gif"> <I><B><FONT SIZE=2 COLOR=#FFFFFF>&#169 R. Goulouev, 15.10.02</FONT></B></I><IMG SRC="img/iskra1.gif">
+        </FONT>
+    </CENTER>
+    <script type="text/javascript" src="StrucForms.js"></script>
+    <script type="text/javascript" src="corr.js"></script>
+    <script type="text/javascript" src="complx.js"></script>
+    <script type="text/javascript">
+        //toFixed dB=4, mm=4; in=5; freq=6;
+        var Struc = new corro;
+        var pi = 3.1415926535897932384626433832795;
+        var pi2 = 1.5707963267948966192313216916398;
+        var br = "\r\n";
+
+        function tester() {
+            var N = 10, wK = [5, 0], b = 0.1, s = 0.135, h0 = 0, h1 = 0;
+            var hh = Hv(wK, b, s, 2);
+            //var SS = hu007(wK, b, s, h0, h1);
+            alert(hh);
+        }
+
+        function window_onload() {
+            var nUnit, unit = document.getElementsByName("unit");
+            var V = [];
+            if (sessionStorage.getItem("StrucBufer")) {
+                txt = sessionStorage.getItem("StrucBufer");
+                Struc.ImportBufer(txt);
+                ExportStrucToForms();
+            }
+        }
+
+        function Stepper(index) {
+            if (index === 0) {
+                document.location.href = "oncorr2.htm";
+            }
+            if (index === 1) {
+                document.location.href = "oncorr0.htm";
+            }
+        }
+
+        function ValidForm() {
+            if (areNumbers(WordsToArray(document.getElementById("Band").value)) < 2) {
+                alert(" ENTRY: 'Pass Band and Roll-Off'\n    incomplete or not specified.");
+                return false;
+            }
+            if (!isNumber(document.getElementById("NumCorro").value)) {
+                alert(" ENTRY: 'Number of Corrugations (Nc)'\n        not specified.");
+                return false;
+            }
+            if (areNumbers(WordsToArray(document.getElementById("Corro").value)) < 2) {
+                alert(" ENTRY: 'Corrugations (Ac, Bc , Sc, Dc)'\n incomplete or not specified.");
+                return false;
+            }
+            if (areNumbers(WordsToArray(document.getElementById("Bs").value)) < 1) {
+                alert(" ENTRY: 'Prototype Type (Bmin, Bmax)'\n incomplete or not specified.");
+                return false;
+            }
+            if (areNumbers(WordsToArray(document.getElementById("Inter").value)) < 1) {
+                alert(" ENTRY: 'Input/Output Ports (Ao, Bo)'\n incomplete or not specified.");
+                return false;
+            }
+            return true;
+        }
+
+        function ExportStrucToForms() {
+            var STAND = "";
+            Struc.setUnit();
+            var unit = document.getElementsByName("unit");
+            var tip = document.getElementsByName("tip");
+            if (Struc.ind === 1) { unit[1].checked = true; } else { unit[1].checked = false; }
+            if (Math.abs(Struc.FB0) < 1E-6) { Struc.FB0 = Struc.Fr - 0.50 * (Struc.Fr - Struc.Fcut); }
+            if (Math.abs(Struc.FB1) < 1E-6) { Struc.FB1 = Struc.Fr - 0.15 * (Struc.Fr - Struc.Fcut); }
+            if (Math.abs(Struc.Ao) < 1E-6 || Math.abs(Struc.Bo) < 1E-6) {
+                var dims = RangeFinder(Struc.ind, Struc.FB1);
+                Struc.Ao = dims[0]; Struc.Bo = dims[1]; STAND = dims[4];
+                Struc.F0 = dims[2]; Struc.F1 = dims[3];
+            }
+
+            if (Struc.iProto === 2) { tip[1].checked = true } else { tip[1].checked = false }
+            document.getElementById("Inter").value = Struc.Ao.toFixed(Struc.nUnit) + "  " + Struc.Bo.toFixed(Struc.nUnit);
+            document.getElementById("Band").value = Struc.FB0.toFixed(4) + "    " + Struc.FB1.toFixed(4) + "    " + Struc.Fr.toFixed(4);
+            document.getElementById("NumCorro").value = 21;
+            document.getElementById("Corro").value = Struc.Ac.toFixed(Struc.nUnit) + "    " + (Struc.Ac * 0.15).toFixed(Struc.nUnit) + "    " + (Struc.Ac * 0.18).toFixed(Struc.nUnit) + "    " + (Struc.Ac * 0.04).toFixed(Struc.nUnit);
+            document.getElementById("Bs").value = Struc.Bmin.toFixed(3) + "  " + Struc.Bmax.toFixed(3);
+        }
+
+        function CalcStruc() {
+            if (!ValidForm()) { return; }
+            var V = [], beta = [];
+            var unit = document.getElementsByName("unit");
+            if (unit[0].checked) { Struc.ind = 0; } else { Struc.ind = 1; }
+            LN = document.getElementById("Band").value; V = WordsToArray(LN);
+            Struc.FB0 = parseFloat(V[0]), Struc.FB1 = parseFloat(V[1]), Struc.Fr = parseFloat(V[2]);
+            Struc.Nc = parseInt(document.getElementById("NumCorro").value);
+            LN = document.getElementById("Corro").value; V = WordsToArray(LN);
+            Struc.Ac = parseFloat(V[0]); Struc.Bc = parseFloat(V[1]);
+            Struc.Sc = parseFloat(V[2]);
+            var D, D0, D1;
+            if (V.length < 4) { D = 0; } else { D = parseFloat(V[3]); }
+            LN = document.getElementById("Inter").value; V = WordsToArray(LN);
+            Struc.Ao = parseFloat(V[0]), Struc.Bo = parseFloat(V[1]);
+            LN = document.getElementById("Bs").value; V = WordsToArray(LN);
+            Struc.Bmin = parseFloat(V[0]), Struc.Bmax = parseFloat(V[1]);
+            var tip = document.getElementsByName("tip");
+            if (tip[1].checked) { Struc.iProto = 2 } else { Struc.iProto = 1 }
+            Struc.setUnit();
+            var kr = Struc.cfunit * (Struc.FB0 + Struc.FB1) / 2;
+            var beta = hu006(kr, pi / Struc.Ac);
+            var i, xx = " ";
+            var i, Hs;
+            for (i = 0; i <= Struc.Nc; i++) {
+                var yy = Math.sin(pi * i / Struc.Nc);
+                if (Struc.iProto === 1) {
+                    Bi = Struc.Bmin + (Struc.Bmax - Struc.Bmin) * yy;
+                } else {
+                    Bi = Struc.Bmin + (Struc.Bmax - Struc.Bmin) * yy * yy;
+                }
+                Hs = Hv(beta, Struc.Bc, Struc.Sc, Bi);
+                if (Hs < Struc.Hmin) { Struc.Hc[i] = Struc.Hmin; } else { Struc.Hc[i] = Hs; }
+            }
+            for (i = 0; i <= Struc.Nc + 1; i++) {
+                if (D < 0.025 * Struc.Ac) {
+                    if (i === 0) { D0 = Struc.Xc; } else { D0 = Dv(beta, Struc.Bc, Struc.Sc, Struc.Hc[i - 1]); }
+                    if (i === Struc.Nc + 1) { D1 = Struc.Xc } else { D1 = Dv(beta, Struc.Bc, Struc.Sc, Struc.Hc[i]); }
+                    Struc.Dc[i] = 0.5 * (D0 + D1);
+                } else {
+                    Struc.Dc[i] = D;
+                }
+            }
+            var Hmin = Struc.Hc[0], Dmin = Struc.Dc[0];
+            var trans = TransRoot(kr, Struc.Ao, Struc.Bo, Struc.Ac, Struc.Bc, Dmin, Struc.Sc, Hmin, Hmin);
+            Struc.At = trans[0], Struc.Bt = trans[1], Struc.Xt = trans[2], Struc.Xc = Struc.Dc[0];
+            sessionStorage.setItem("StrucBufer", Struc.ExportBufer());
+            alert("COMPLETE!");
+
+        }
+
+        function TransSyn(k, Ao, Bo, Ac, Bc) {
+            //k, Ao, Bo, At, Bt, Xt, Ac, Bc, Xc
+            var i, dAx = (Ao - Ac) / 20, dBx = (Bo - Bc) / 20;
+            for (i = 0; i <= 20; i++) {
+                var Bt = Bc + dBx * i, At = Ac + dAx * i;
+                var F1 = TransDif(k, Ao, Bo, At, Bt, Ac, Bc); T1 = i;
+                if (i === 0) {
+                    Fz = F1
+                } else {
+                    if (F1 / Fz <= 0) { break; }
+                }
+
+                F0 = F1; T0 = T1;
+            }
+
+            for (i = 0; i <= 3; i++) {
+                T1 = T0 - (T1 - T0) / (F1 - F0) * F0;
+                Bt = Bc + dBx * T1; At = Ac + dAx * T1;
+                F1 = TransDif(k, Ao, Bo, At, Bt, Ac, Bc);
+            }
+            //k, Ao, Bo, At, Bt, Ac, Bc
+            var trans = TransDis(k, Ao, Bo, At, Bt, Ac, Bc);
+            var Xt = trans[0], Xc = trans[1];
+            return [At, Bt, Xt, Xc];
+        }
+
+        function TransDif(k, Ao, Bo, At, Bt, Ac, Bc) {
+            var S0 = EH(k, Ao, Bo, At, Bt);
+            var S1 = EH(k, At, Bt, Ac, Bc);
+            R00 = S0[6]; R01 = S0[7]; R0 = Math.sqrt(R00 * R00 + R01 * R01);
+            R10 = S1[0]; R11 = S1[1]; R1 = Math.sqrt(R10 * R10 + R11 * R11);
+            return 2 * R0 / (1 - R0 * R0) - 2 * R1 / (1 - R1 * R1);
+        }
+
+        function TransDis(k, Ao, Bo, At, Bt, Ac, Bc) {
+            var wK = hu006(k, pi / At);
+            var S0 = EH(k, Ao, Bo, At, Bt);
+            var S1 = EH(k, At, Bt, Ac, Bc);
+            var R0 = [S0[6], S0[7]];
+            var R1 = [S1[0], S1[1]];
+            var Rx = [S1[6], S1[7]];
+            TransPh = pi + 0.5 * (arg(R0) + arg(R1));
+            if (TransPh > pi) { TransPh = TransPh - pi; }
+            //TransDis = TransPh / wK[0]; Xc = arg(Rx) / wK[0];
+            return [TransPh / wK[0], arg(Rx) / wK[0]];
+        }
+
+        function Tv(beta, Bc, Sc, Nc, d, x) {
+            var Dc = [], Hc = [];
+            for (i = 0; i <= Nc; i++) {
+                Bi = x * (0.3 + 0.7 * sin(pi / Nc * i));
+                Hc[i] = Hv(beta, Bc, Sc, Bi); Dc[i] = d;
+            }
+            So = hu001(beta, Nc, Ac, Bc, Sc, Dc, Hc);
+            var T = [So[2], So[3]];
+            return dB(T);
+        }
+
+
+        function Hv(beta, Bc, Sc, B) {
+            var x1, hmax = pi2 / beta[0], x0 = 0;
+            var B0, B1;
+            for (i = 0; i <= 100; i++) {
+                x1 = hmax * i / 100;
+                B1 = Bv(beta, Bc, Sc, x1);
+                if (B1 >= B) { break; }
+                if (B1 >= 20) { return x1; }
+                x0 = x1; B0 = B1;
+            }
+            for (i = 0; i <= 3; i++) {
+                x1 = x0 + (x1 - x0) / (B1 - B0) * (B - B0);
+                B1 = Bv(beta, Bc, Sc, x1);
+            }
+            return x1;
+        }
+
+
+        function Dv(beta, Bc, Sc, Hc) {
+            var So = hu007(beta, Bc, Sc, Hc, Hc);
+            R0 = So[0]; R1 = So[1];
+            return Math.atan(R1 / R0) / beta[0];
+        }
+
+
+
+        function Bv(beta, Bc, Sc, Hc) {
+            var So = hu007(beta, Bc, Sc, Hc, Hc);
+            R0 = So[0]; R1 = So[1]; R = Math.sqrt(R0 * R0 + R1 * R1);
+            return 2 * R / (1 - R * R);
+        }
+
+
+        function RangeFinder(ind, F) {
+            var WR = [], V = [];
+            var i, cf = 1;
+            if (ind === 0) {
+                cf = 25.4;
+            }
+            WR = Waveguides();
+            for (i = 20; i >= 0; i--) {
+                V = WordsToArray(WR[i]);
+                var FB0 = parseFloat(V[1]), FB1 = parseFloat(V[2]);
+                if (F < FB1) {
+                    A = parseFloat(V[3]) * cf;
+                    B = parseFloat(V[4]) * cf;
+                    F0 = FB0; F1 = FB1; St = "WR" + V[0];
+                    break;
+                }
+            }
+            //, A, B, F0, F1, St
+            return [A, B, F0, F1, St];
+        }
+
+        function Waveguides() {
+            var WR = [];
+            WR[0] = "3 220 325 .034 .017";
+            WR[1] = "4 170 260 .043 .0215";
+            WR[2] = "6 110 170 .065 .0325";
+            WR[3] = "8 90 140 .080 .040";
+            WR[4] = "10 75 110 .100 .050";
+            WR[5] = "19 40 60	.188 .094";
+            WR[6] = "22 33.0 50.0 0.224 0.112";
+            WR[7] = "28 26.5 40.0 0.28 0.14";
+            WR[8] = "34 22 33	.340 .170";
+            WR[9] = "42 18.0 26.5 0.42 0.17";
+            WR[10] = "51 15 22 .51 .255";
+            WR[11] = "62 12.4 18 .622 .311";
+            WR[12] = "75 10 15 .75 .375";
+            WR[13] = "90 8.20 12.4 0.9 0.4";
+            WR[14] = "102 7.00 11.00 1.02 .510";
+            WR[15] = "112 7.05 10.0 1.122 0.497";
+            WR[16] = "137 5.85 8.20 1.372 .622";
+            WR[17] = "159 4.90 7.05 1.59 .795";
+            WR[18] = "187 3.95 5.85 1.872 0.872";
+            WR[19] = "229 3.30 4.90 2.29 1.145";
+            WR[20] = "284 2.60 3.95 2.84 1.34";
+            return WR;
+        }
+        //####################################################
+        function TransRoot(k, ao, bo, a, b, d, s, h0, h1) {
+            var pi = 3.141592653589793236;
+            var Np = 500;
+            var i, S0 = [0, 0], S1 = [0, 0];
+            var R1, B1, R0, B0, I0;
+            var at = (ao + a) / 2;
+            var xs = pi / at;
+            for (i = 0; i <= Np; i++) {
+                bt = b + (bo - b) * i * 1. / Np;
+                S0 = STF(k, ao, bo, at, bt);//STF(k, Ao, Bo, At, Bt);
+                S1 = SF(k, at, bt, a, b, d, s, h0, h1);//SF(k, At, Bt, A, B, D, Ac, Bc, Sc, Dc);
+                R1 = cabs(S0) - cabs(S1);
+                B1 = bt;
+                if (R1 > 0) { I1 = 1; } else { I1 = -1; }
+                if (i != 0) {
+                    if (I0 != I1) { break; }
+                }
+                R0 = R1;
+                B0 = B1;
+                I0 = I1;
+            }
+            var gt, F0, F1;
+            gt = Math.sqrt(k * k - xs * xs);
+            F0 = arg(S0);
+            F1 = arg(S1);
+            Fs = 0.5 * (F0 + F1)
+            if (Fs < 0) { Fs = Fs + pi; }
+            if (Fs >= pi) { Fs = Fs - pi; }
+            dt = Fs / gt;
+            return [at, bt, dt];
+        }
+
+
+        function SF(k, at, bt, a, b, d, s, h0, h1) {
+            var pi = 3.141592653589793236;
+            var x = pi / a;
+            var wK = hu006(k, x);
+            var Y = [wK[0] / k, wK[1] / k];
+            var S = JuncInfinite(wK, b, d, s, h0, h1); //d=dc
+            var St = EH(k, at, bt, a, b);
+            var Ex = cexp([wK[1] * d, -wK[0] * d]); //HUJ d=dc/2
+            var SEx = xoy([S[0], S[1]], Ex);
+            var vrx = xoy(xin2([St[2], St[3]]), SEx);
+            var niz = xmy([1, 0], xoy([St[6], St[7]], SEx));
+            var SS = xpy([St[0], St[1]], xdy(vrx, niz));
+            return SS;
+        }
+
+        function STF(k, Ao, Bo, At, Bt) {
+            var So = EH(k, Ao, Bo, At, Bt);
+            return [So[6], So[7]];
+        }
+
+
+        function JuncInfinite(wK, b, d, s, h0, h1) {
+            var E = [1, 0], j = [0, 1], cs, sn, ex;
+            var wave = cexp([wK[1] * d, -wK[0] * d]);
+            So = hu007(wK, b, s, h0, h1);
+            var S00 = xoy(wave, [So[0], So[1]]);
+            var S01 = xoy(wave, [So[2], So[3]]);
+            var cs = xdy(xpy(E, xmy(xin2(S01), xin2(S00))), aox(2, S01));
+            var sn = csqrt(xmy(E, xin2(cs)));
+            var ex = xpy(cs, xoy(j, sn));
+            So = xdy(xmy(E, xoy(S01, ex)), S00);
+            return So;
+        }
+
+
+        //####################################################
+
+        function isNumber(txt) {
+            if (!txt) { return false; }
+            if (isNaN(txt)) {
+                return false;
+            }
+            return true;
+        }
+        function areValidNums(N, V) {
+            var Nv = V.length - 1;
+            if (N < Nv || !areNumbers(V)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        function areNumbers(V) {
+            if (!Array.isArray) {
+                Array.isArray = function (arg) {
+                    return Object.prototype.toString.call(arg) === '[object Array]';
+                };
+            } if (!Array.isArray(V)) { return -1; }
+            var i, N = V.length - 1;
+            for (i = 0; i <= N; i++) {
+                if (isNaN(V[i])) { return -1; }
+            }
+            return N;
+        }
+
+        function WordsToArray(str) {
+            // text line to array of words
+            return ReduceWhiteSpaces(str).split(/\s/g);
+        }
+
+        function ReduceWhiteSpaces(str) {
+            return trim(str).replace(/\s+/g, ' ');
+        }
+        function trim(str) {
+            return str.replace(/^\s+|\s+$/g, '');
+        }
+    </script>
+</BODY>
+</HTML>

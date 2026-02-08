@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+    <TITLE>Corrugated waveguide low-pass filter. Calculator of spurious pass-bands caused by high order modes.</TITLE>
+    <META http-equiv=Content-Type content="text/html; charset=windows-1251">
+    <META content="MSHTML 6.00.2600.0" name="GENERATOR">
+    <META name="description" content="This tool is a part of the corrugated filter design Workshop. It evaluates frequency bands of possible propagation of spurious modes causing lack of rejection.">
+    <META NAME="keywords" CONTENT="corrugated, waveguide, spurious, calculator, design">
+    <STYLE>
+        input {
+            font: 10pt Arial;
+            color: navy;
+        }
+        .passband {
+            color: green;
+            font-weight: bold;
+        }
+
+        .spurband {
+            color: red;
+            font-weight: bold;
+        }
+    </STYLE>
+</HEAD>
+
+
+
+<BODY background="img/bkg05.jpg" onload="OnLoad();" onunload="OnUnLoad();">
+    <CENTER>
+        <P>
+            <FONT face="Wide Latin" color=#FFFFF size=3>
+                Spurious Pass-Bands of a
+                Corrugated Filter
+            </FONT>
+        </P>
+        <table>
+            <tr>
+                <td>
+                    <IMG src="img/spur01.jpg" align=left>
+
+                </td>
+                <td>
+                    <TABLE cellSpacing=1 border=1>
+                        <TR>
+                            <TD>
+                                <FONT style="font:10pt Arial Black;color:#AAFFAA">
+                                    Internal Width ( <FONT style="font:9pt Arial Black;color:#DDDDFF">
+                                        <INPUT type=radio CHECKED value="" name="unit"> mm <INPUT type=radio value="" name="unit"> inch
+                                    </FONT>)
+                                </FONT>
+                            </TD>
+                            <TD><INPUT style="width:130px;" id="text1"></TD>
+                        </TR>
+                        <TR>
+                            <TD><FONT style="font:10pt Arial Black;color:#AAFFAA">Filter Roll-Off, GHz</FONT></TD>
+                            <TD><INPUT style="width:130px;" id="text2"></TD>
+                        </TR>
+
+                        <TR>
+                            <TD>
+                                <FONT style="font:10pt Arial Black;color:#AAFFAA">
+                                    TE<SUB>10</SUB>-mode pass-band,
+                                    GHz
+                                </FONT>
+                            </TD>
+                            <TD><INPUT style="width:130px;" id="mode1" class="passband"></TD>
+                        </TR>
+                        <TR>
+                            <TD>
+                                <FONT style="font:10pt Arial Black;color:#AAFFAA">
+                                    TE<SUB>20</SUB>-mode pass-band,
+                                    GHz
+                                </FONT>
+                            </TD>
+                            <TD><INPUT style="width:130px;" id="mode2" class="spurband"></TD>
+                        </TR>
+                        <TR>
+                            <TD>
+                                <FONT style="font:10pt Arial Black;color:#AAFFAA">
+                                    TE<SUB>30</SUB>-mode pass-band,
+                                    GHz
+                                </FONT>
+                            </TD>
+                            <TD><INPUT style="width:130px;" id="mode3" class="spurband"></TD>
+                        </TR>
+                        <TR>
+                            <TD>
+                                <FONT style="font:10pt Arial Black;color:#AAFFAA">
+                                    TE<SUB>40</SUB>-mode pass-band,
+                                    GHz
+                                </FONT>
+                            </TD>
+                            <TD><INPUT style="width:130px;" id="mode4" class="spurband"></TD>
+                        </TR>
+                        <TR>
+                            <TD>
+                                <FONT style="font:10pt Arial Black;color:#AAFFAA">
+                                    TE<SUB>50</SUB>-mode pass-band,
+                                    GHz
+                                </FONT>
+                            </TD>
+                            <TD><INPUT style="width:130px;" id="mode5" class="spurband"></TD>
+                        </TR>
+                        <TR>
+                            <TD>
+                                <FONT style="font:10pt Arial Black;color:#AAFFAA">
+                                    TE<SUB>60</SUB>-mode pass-band,
+                                    GHz
+                                </FONT>
+                            </TD>
+                            <TD><INPUT style="width:130px;" id="mode6" class="spurband"></TD>
+                        </TR>
+                    </TABLE><IMG SRC="img/iskra1.gif">
+
+                </td>
+            </tr>
+        </table>
+
+            <BR><IMG SRC="img/iskra1.gif">
+            <HR>
+            <TABLE BORDER=1>
+                <TR>
+                    <TD> <BUTTON onclick="Helper()" style="font:8pt Arial Black;color:#400040">Design Manual</BUTTON></TD>
+                    <TD> <BUTTON onclick="Spur()" style="font:8pt Arial Black;color:#400040">Show Spurious Responses</BUTTON> </TD>
+                    <TD> <BUTTON onclick="Stepper()" style="font:8pt Arial Black;color:#400040">Go to Next Page</BUTTON> </TD>
+                    <TD> <BUTTON onclick="Out()" style="font:8pt Arial Black;color:#400040">Exit</BUTTON> </TD>
+                </TR>
+            </TABLE>
+
+            <HR>
+
+            <IMG SRC="img/iskra1.gif" style="font:10pt Arial;color:#90CCFF"><B><I>© R. Goulouev, 15.04.00 </I></B><IMG SRC="img/iskra1.gif">
+        </CENTER>
+    <script src="StrucForms.js"></script>
+    <script>
+        var Struc = new corro;
+
+        function OnLoad() {
+            if (sessionStorage.getItem('StrucBufer')) {
+                var txt = sessionStorage.getItem('StrucBufer');
+                Struc.ImportBufer(txt);
+                var unit = document.getElementsByName('unit'), nUnit;
+                if (Struc.ind === 1) {
+                    unit[1].checked = true;
+                } else {
+                    unit[1].checked = false;
+                }
+                document.getElementById('text1').value = Struc.Ac.toFixed(Struc.nUnit);
+                document.getElementById('text2').value = Struc.Fr.toFixed(4);
+            }
+        }
+
+        function OnUnLoad() {
+            if (isNumber(document.getElementById("text1").value) && isNumber(document.getElementById("text2").value)) {
+                FormsToStruc();
+                sessionStorage.setItem("StrucBufer", Struc.ExportBufer());
+            }
+        }
+
+        function FormsToStruc() {
+            var pi = 3.141592653589, ind;
+            var nUnit, unit = document.getElementsByName('unit');
+            var Ac = parseFloat(document.getElementById("text1").value);
+            Fr = parseFloat(document.getElementById("text2").value);
+            if (unit[0].checked) { ind = 0; cf = .0209579; nUnit = 5; }
+            if (unit[1].checked) { ind = 1; cf = .532331; nUnit = 6; }
+
+            var Fcut = pi / Ac / cf;
+            Struc.Ac = Ac; Struc.Fr = Fr; Struc.ind = ind;
+            //if (Math.abs(Struc.Bmin) < 1E-5 || Math.abs(Struc.Bmin) < 1E-5) {
+            var Bmax = (3 * Fr / (Fr - Fcut)); Bmin = (Bmax / 8);
+            Struc.Bmin = Bmin; Struc.Bmax = Bmax; Struc.iProto = 1;
+            //}
+        }
+
+        function Stepper() {
+            document.location.href = "oncorr1.htm";
+        }
+
+        function Out() {
+            document.location.href = "index.htm";
+        }
+
+        function Spur() {
+            if (!isNumber(document.getElementById("text1").value)) {
+                alert(" Internal Width\n is not defined.");
+                return;
+            }
+            if (!isNumber(document.getElementById("text2").value)) {
+                alert(" Filter Roll-off\n is not defined.");
+                return;
+            }
+            var a, cf, kc, kr, pi, Fr, Fc, i, ky;
+            var F0 = [], F1 = [];
+            var pi = 3.141592653589;
+            var unit = document.getElementsByName('unit');
+            if (unit[0].checked === true) { cf = .0209579; }
+            if (unit[1].checked === true) { cf = .532331; }
+            var a = document.getElementById("text1").value;
+            var Fr = document.getElementById("text2").value;
+            a = parseFloat(a); Fr = parseFloat(Fr);
+            var kr = cf * Fr;
+            var kc = pi / a; Fc = kc / cf;
+            if (ky < .5) { return; }
+            if (kr <= kc) {
+                alert("      Filter Roll-Off\n is set under waveguide cut-off.");
+                return;
+            }
+            var i;
+            for (i = 1; i <= 6; i++) {
+                var xn = pi / kr / a;
+                F0[i] = Fc * i; F1[i] = Fr * Math.sqrt(1 + (i * i - 1) * xn * xn);
+            }
+            document.getElementById("mode1").value = F0[1].toFixed(4) + " - " + F1[1].toFixed(4);
+            document.getElementById("mode2").value = F0[2].toFixed(4) + " - " + F1[2].toFixed(4);
+            document.getElementById("mode3").value = F0[3].toFixed(4) + " - " + F1[3].toFixed(4);
+            document.getElementById("mode4").value = F0[4].toFixed(4) + " - " + F1[4].toFixed(4);
+            document.getElementById("mode5").value = F0[5].toFixed(4) + " - " + F1[5].toFixed(4);
+            document.getElementById("mode6").value = F0[6].toFixed(4) + " - " + F1[6].toFixed(4);
+        }
+
+        function Helper() {
+            document.location.href = "help.htm";
+        }
+
+        function isNumber(txt) {
+            if (!txt) { return false; }
+            if (isNaN(txt)) {
+                return false;
+            }
+            return true;
+        }
+    </script>
+</BODY>
+</HTML>

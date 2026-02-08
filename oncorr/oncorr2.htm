@@ -1,0 +1,447 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+    <TITLE>Corrugated Filter Simulator. Enter dimensions and frequency sweep.</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="keywords" CONTENT="RF, microwave, corrugated, filter, waveguide, low-pass, simulation, design, software, tool, calculator, frequency, domain">
+    <META NAME="description" CONTENT="Corrugated waveguide low-pass filter simulation tool. S-parameters over frequency range.">
+    <META name="Author" content="Rousslan Goulouev">
+    <style>
+        input {
+            font: 10pt Arial;
+            color: navy;
+        }
+
+        textarea {
+            font-family: "Courier New", Courier, monospace;
+            font-size: 10pt;
+            color: navy;
+        }
+    </style>
+</HEAD>
+
+<BODY BACKGROUND="img/bkg05.jpg" leftmargin=0 topmargin=0 onload="window_onload()" onunload="window_unload()">
+    <CENTER>
+        <FONT SIZE=4 COLOR=#ffffcc>
+            Corrugated Filter Simulator<BR><BR>
+            <HR>
+
+            <TABLE>
+                <TR>
+                    <TD width="530px">
+                        <CENTER>
+                            <IMG src="img/corpic.bmp">
+                            <IFRAME id="OKOSHKO" WIDTH=530 HEIGHT=100></IFRAME>
+                        </CENTER>
+                    </TD>
+                    <TD width="472">
+
+                        <TABLE BORDER=1>
+                            <TR>
+                                <TD width="200">
+                                    <FONT SIZE=3 COLOR=#ccffff>
+                                        <CENTER>
+                                            <B>
+                                                <I>
+                                                    Input/Output Ports<BR><FONT SIZE=2 COLOR=#ffccff>
+                                                        (Ao,
+                                                        Bo)
+                                                    </FONT>
+                                                </I>
+                                            </B>
+                                        </CENTER>
+                                    </FONT>
+                                </TD>
+                                <TD><INPUT type="text" id="text0" style="width:270px;"></TD>
+                            </TR>
+
+                            <TR>
+                                <TD><FONT SIZE=3 COLOR=#ccffff><CENTER><B><I>Transformer Sections<BR><FONT SIZE=2 COLOR=#ffccff>(At, Bt, Xt)</FONT></I></B></CENTER></FONT>  </TD>
+                                <TD><INPUT type="text" id="text1" style="width:270px;"></TD>
+                            </TR>
+                            <TR>
+                                <TD>
+                                    <FONT SIZE=3 COLOR=#ccffff>
+                                        <CENTER>
+                                            <B>
+                                                <I>
+                                                    Corrugated Section<BR><FONT SIZE=2 COLOR=#ffccff>
+                                                        (Ac, Bc , Sc
+                                                        )
+                                                    </FONT>
+                                                </I>
+                                            </B>
+                                        </CENTER>
+                                    </FONT>
+                                </TD>
+                                <TD><INPUT type="text" id="text2" style="width:270px;"></TD>
+                            </TR>
+                            <TR>
+                                <TD>
+                                    <FONT SIZE=3 COLOR=#ccffff>
+                                        <CENTER>
+                                            <B>
+                                                <I>
+                                                    Corrugations<BR><FONT SIZE=2 COLOR=#ffccff>
+                                                        ( D<SUB>0</SUB> , H<SUB>0</SUB> )<BR>
+                                                        ( D<SUB>1</SUB> , H<SUB>1</SUB> )<BR>
+                                                        - - - - - - - - - - - <BR>
+                                                        ( D<SUB>N-1</SUB> , H<SUB>N-1</SUB> )<BR>
+                                                        ( D<SUB>N</SUB> , H<SUB>N</SUB> )
+                                                    </FONT>
+                                                </I>
+                                            </B>
+                                        </CENTER>
+                                    </FONT>
+                                </TD>
+                                <TD><TEXTAREA id="text3" rows=7 style="width:270px;">  </TEXTAREA></TD>
+                            </TR>
+                            <TR>
+                                <TD><FONT SIZE=3 COLOR=#ccffff><CENTER><B><I>Frequency Sweep, GHz<BR><FONT SIZE=2 COLOR=#ffccff> ( F<SUB>0</SUB> , F<SUB>1</SUB> )</FONT></I></B></CENTER></FONT> </TD>
+                                <TD><INPUT type="text" id="text4" style="width:270px;"></TD>
+                            </TR>
+                            <TR>
+                                <TD><FONT SIZE=3 COLOR=#ccffff><CENTER><B><I>Dimension Units</I></B></CENTER></FONT> </TD>
+                                <TD>
+                                    <FONT SIZE=3 COLOR=#ffffcc>
+                                        <CENTER>
+                                            <B>
+                                                <I>
+                                                    <input name="unit" type="radio" value="" checked> mm
+                                                    <input name="unit" type="radio" value=""> inch
+                                                </I>
+                                            </B>
+                                        </CENTER>
+                                    </FONT>
+                                </TD>
+                            </TR>
+
+                        </TABLE>
+
+                    </TD>
+                </TR>
+            </TABLE>
+            <hr />
+            <TABLE border=1>
+                <TR>
+                    <TD>
+                        <FONT color=#ccffff size=2>
+                            <CENTER>
+                                <BUTTON style="FONT: 7pt Arial Black; COLOR: #400040" id="test" onclick="test_OnClick()">
+                                    Example
+                                </BUTTON>
+                            </CENTER>
+                        </FONT>
+                    </TD>
+                    <TD>
+                        <FONT color=#ccffff size=2>
+                            <CENTER>
+                                <BUTTON style="FONT: 7pt Arial Black; COLOR: #400040" id="run" onclick="run_onclick()">
+                                    Simulate
+                                </BUTTON>
+                            </CENTER>
+                        </FONT>
+                    </TD>
+                    <TD>
+                        <CENTER>
+                            <BUTTON style="FONT: 7pt Arial Black; COLOR: #400040" onclick="Stepper(0)" id="plotter">
+                                Plot S-Data
+                            </BUTTON>
+                        </CENTER>
+                    </TD>
+                    <TD>
+                        <CENTER>
+                            <BUTTON style="FONT: 7pt Arial Black; COLOR: #400040" onclick="Stepper(3)" id="plotter">
+                                File S-Data
+                            </BUTTON>
+                        </CENTER>
+                    </TD>
+                    <TD>
+                        <CENTER>
+                            <BUTTON style="FONT: 7pt Arial Black; COLOR: #400040" onclick="Stepper(1);" id="tabler">
+                                Tolerance
+                            </BUTTON>
+                        </CENTER>
+                    </TD>
+                    <TD>
+                        <CENTER>
+                            <BUTTON style="FONT: 7pt Arial Black; COLOR: #400040" onclick="Stepper(2)" id="opt">
+                                Optimize
+                            </BUTTON>
+                        </CENTER>
+                    </TD>
+                    <TD>
+                        <FONT color=#ccffff size=2>
+                            <CENTER>
+                                <BUTTON style="FONT: 7pt Arial Black; COLOR: #400040" id="wrc" onclick="ExportToWRC()">
+                                    Transfer To New Strudio
+                                </BUTTON>
+                            </CENTER>
+                        </FONT>
+                    </TD>
+                    <TD>
+                        <CENTER>
+                            <BUTTON style="FONT: 7pt Arial Black; COLOR: #400040" onclick="Stepper(4)" id="back">
+                                Back
+                            </BUTTON>
+                        </CENTER>
+                    </TD>
+                    <TD>
+                        <FONT color=#ccffff size=2>
+                            <CENTER>
+                                <BUTTON style="FONT: 7pt Arial Black; COLOR: #400040" onclick="Stepper(6)">
+                                    File Design
+                                </BUTTON>
+                            </CENTER>
+                        </FONT>
+                    </TD>
+                    <TD>
+                        <CENTER>
+                            <BUTTON style="FONT: 7pt Arial Black; COLOR: #400040" onclick="Stepper(5)" id="back">
+                                Exit
+                            </BUTTON>
+                        </CENTER>
+                    </TD>
+                </TR>
+            </TABLE>
+        </FONT>
+    </CENTER>
+    <script type="text/javascript" src="StrucForms.js"></script>
+    <SCRIPT>
+        //toFixed dB=4, mm=3; in=4; freq=6;
+        var np;
+        var pi = 3.1415926535897932384626433832795, pi2 = 1.5707963267948966192313216916398;
+        var Struc = new corro;
+
+        function window_onload() {
+            if (sessionStorage.getItem("StrucBufer")) {
+                txt = sessionStorage.getItem("StrucBufer");
+                Struc.ImportBufer(txt);
+                ExportStrucToForms();
+            }
+            var frm = window.frames
+            frm[0].document.write('<BODY BACKGROUND="img/bkg05.jpg"  leftmargin="0"  topmargin=0><IMG SRC="img/iskra1.gif"><BR><CENTER><IMG SRC="img/iskra1.gif"></BODY>');
+            return;
+        }
+
+        function window_unload() {
+            if (sessionStorage.getItem("StrucBufer")) {
+                sessionStorage.setItem("StrucBufer", Struc.ExportBufer());
+            }
+        }
+
+        function ExportToWRC() {
+            if (!ValidStrucForms()) {
+                return;
+            }
+            ExportFormsToStruc();
+            //alert(Struc.ExportInDat());
+            //alert(Struc.ExportStrucDat());
+            localStorage.setItem('InputDatFileText', Struc.ExportInDat());
+            localStorage.setItem('DesignFileText', Struc.ExportStrucDat());
+            document.location.href = "../WRC_2020/index.htm";
+        }
+
+        function Stepper(index) {
+            switch (index) {
+                case 0:
+                    //DataCheck(ind);
+                    //if (ind === 1) { document.location.href = "oncorr3.htm"; } else { alert("No data to plot"); }
+                    document.location.href = "graph.htm";
+                    //document.location.href = "oncorr3.htm";
+                    break;
+                case 1:
+                    document.location.href = "oncorr5.htm";
+                    break;
+                case 2:
+                    document.location.href = "oncorr4.htm";
+                    break;
+                case 3:
+                    document.location.href = "s_data.htm";
+                    break;
+                case 4:
+                    document.location.href = "oncorr1.htm";
+                    break;
+                case 5:
+                    document.location.href = "index.htm";
+                    break;
+                case 6:
+                    document.location.href = "oncorr6.htm";
+                    break;
+                default:
+                    return;
+            }
+
+        }
+
+        function test_OnClick() {
+            br = "\r\n";
+            var unit = document.getElementsByName('unit');
+            document.getElementById('text0').value = "0.75      0.375 ";
+            document.getElementById('text1').value = " .734250      .285154      .29852";
+            document.getElementById('text2').value = "0.610        0.100       0.100";
+            var rs = "";
+            rs = rs + "1.4105E-02       .098340" + br;
+            rs = rs + "2.4598E-02       .100820" + br;
+            rs = rs + "2.6037E-02       .134460" + br;
+            rs = rs + "2.0369E-02       .169680" + br;
+            rs = rs + "1.7267E-02       .197730" + br;
+            rs = rs + "1.9879E-02       .222350" + br;
+            rs = rs + "2.5088E-02       .246930" + br;
+            rs = rs + "2.5703E-02       .265930" + br;
+            rs = rs + "2.8966E-02       .271290" + br;
+            rs = rs + "2.8736E-02       .275010" + br;
+            rs = rs + "2.1165E-02       .278150" + br;
+            rs = rs + "2.1165E-02       .275010" + br;
+            rs = rs + "2.8736E-02       .271290" + br;
+            rs = rs + "2.8966E-02       .265930" + br;
+            rs = rs + "2.5703E-02       .246930" + br;
+            rs = rs + "2.5088E-02       .222350" + br;
+            rs = rs + "1.9879E-02       .197730" + br;
+            rs = rs + "1.7267E-02       .169680" + br;
+            rs = rs + "2.0369E-02       .134460" + br;
+            rs = rs + "2.6037E-02       .100820" + br;
+            rs = rs + "2.4598E-02       .098340" + br;
+            document.getElementById('text3').value = rs;
+            unit[1].checked = true
+            document.getElementById('text4').value = "10.0       15.0";
+        }
+
+
+        function run_onclick() {
+            if (!ValidStrucForms()) {
+                return;
+            }
+            var Ao, Bo, At, Bt, Xt, Ac, Bc, Sc;
+            var Dc = [], Hc = [], br, So = [], Nc, wK = [];
+            var nUnit, br = "\r\n";
+            //var unit = document.getElementsByName('unit');
+
+            ExportFormsToStruc();
+            var sDatos = "";
+            var i, f, Np = 200;
+            for (i = 0; i <= Struc.Np; i++) {
+                if (Np === 0) { f = Struc.F0; } else { f = Struc.F0 + (Struc.F1 - Struc.F0) * i / Struc.Np; }
+                var k = Struc.cfunit * f;
+                So = hu000(k, Struc.Ao, Struc.Bo, Struc.At, Struc.Bt, Struc.Xt, Struc.Nc, Struc.Ac, Struc.Bc, Struc.Sc, Struc.Dc, Struc.Hc);
+                var RdB = dB([So[0], So[1]]), TdB = dB([So[2], So[3]]);
+                sDatos = sDatos + f + ' ' + So.join(" ") + "\r\n";
+            }
+            sessionStorage.setItem('sDatSim', sDatos);
+            sessionStorage.setItem("StrucBufer", Struc.ExportBufer());
+        }
+
+        function ValidStrucForms() {
+            V = WordsToArray(document.getElementById('text0').value);
+            if (areNumbers(V) < 1) {
+                alert(" 'Input/Output' section not complete.");
+                return false;
+            }
+            V = WordsToArray(document.getElementById('text1').value);
+            if (areNumbers(V) < 2) {
+                alert(" 'Transformer section' not complete.");
+                return false;
+            }
+            V = WordsToArray(document.getElementById('text2').value);
+            if (areNumbers(V) < 2) {
+                alert(" Corrugations Parameters (Ac, Bc, Dc) \n not complete/specified.");
+                return false;
+            }
+            if (!ValidCorros(document.getElementById('text3').value)) {
+                return false;
+            }
+            V = WordsToArray(document.getElementById('text4').value);
+            if (areNumbers(V) < 1) {
+                alert(" 'Simulation Frequency' section not complete.");
+                return false;
+            }
+            return true;
+            function ValidCorros(txt) {
+                if (!txt) { alert('No corrugations specified\nSee "Example" as example.'); return false; }
+                var LNs = txt.replace("\r", "").split("\n");
+                var i, ii = -1;
+                var Ncc = LNs.length - 1;
+                for (i = 0; i <= Ncc; i++) {
+                    if (trim(LNs[i]) !== "") {
+                        V = WordsToArray(LNs[i]);
+                        if (areNumbers(V) === 1) {
+                            ii = ii + 1;
+                        } else {
+                            alert('Wrong dada record in Corrugations\n' + (ii + 2) + ' row');
+                            return false;
+                        }
+                    }
+                }
+                if (ii === -1) {
+                    alert('No corrugations specified\nSee "Example" as example.')
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        function ExportFormsToStruc() {
+            var units = document.getElementsByName('unit');
+            if (units[0].checked) { Struc.ind = 0; } else { Struc.ind = 1; }
+            V = WordsToArray(document.getElementById('text0').value);
+            Struc.Ao = parseFloat(V[0]); Struc.Bo = parseFloat(V[1]);
+            V = WordsToArray(document.getElementById('text1').value);
+            Struc.At = parseFloat(V[0]); Struc.Bt = parseFloat(V[1]); Struc.Xt = parseFloat(V[2]);
+            V = WordsToArray(document.getElementById('text2').value);
+            Struc.Ac = parseFloat(V[0]); Struc.Bc = parseFloat(V[1]); Struc.Sc = parseFloat(V[2]);
+            Struc.ImportCorros(document.getElementById('text3').value);
+            V = WordsToArray(document.getElementById('text4').value);
+            Struc.F0 = parseFloat(V[0]); Struc.F1 = parseFloat(V[1]);
+            if (areNumbers(V) > 1) { Struc.Np = parseInt(V[2]); }
+            Struc.setUnit();
+        }
+
+        function ExportStrucToForms(dat) {
+            var units = document.getElementsByName('unit');
+            //var i, LN = "";
+            //Struc.setUnit();
+            if (Struc.ind === 0) { units[0].checked = true; } else { units[1].checked = true; }
+            document.getElementById('text0').value = Struc.Ao.toFixed(Struc.nUnit) + "      " + Struc.Bo.toFixed(Struc.nUnit);
+            document.getElementById('text1').value = Struc.At.toFixed(Struc.nUnit) + "    " + Struc.Bt.toFixed(Struc.nUnit) + "    " + Struc.Xt.toFixed(Struc.nUnit);
+            document.getElementById('text2').value = Struc.Ac.toFixed(Struc.nUnit) + "    " + Struc.Bc.toFixed(Struc.nUnit) + "    " + Struc.Sc.toFixed(Struc.nUnit);
+            document.getElementById('text3').value = Struc.ExportCorros();//LN;
+            document.getElementById('text4').value = Struc.F0.toFixed(4) + "   " + Struc.F1.toFixed(4);
+        }
+
+        function areNumbers(V) {
+            if (!Array.isArray) {
+                Array.isArray = function (arg) {
+                    return Object.prototype.toString.call(arg) === '[object Array]';
+                };
+            } if (!Array.isArray(V)) { return -1; }
+            var i, N = V.length - 1;
+            for (i = 0; i <= N; i++) {
+                if (isNaN(V[i])) { return -1; }
+            }
+            return N;
+        }
+
+        function WordsToArray(str) {
+            // text line to array of words
+            return ReduceWhiteSpaces(str).split(/\s/g);
+        }
+
+        function ReduceWhiteSpaces(str) {
+            return trim(str).replace(/\s+/g, ' ');
+        }
+        function trim(str) {
+            return str.replace(/^\s+|\s+$/g, '');
+        }
+    </SCRIPT>
+
+
+    <SCRIPT src="corr.js"></SCRIPT>
+    <script src="complx.js"></script>
+
+
+
+
+</BODY>
+
+
+</HTML>

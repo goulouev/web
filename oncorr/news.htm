@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+    <TITLE>Corrugated waveguide low-pass workshop. Latest updates.</TITLE>
+   <STYLE>
+        input {
+            font: 10pt Arial;
+            color: navy;
+        }
+       div {
+           width: 1000px;
+           height: 450px;
+           background-color: white;
+           overflow: scroll;
+       }
+       .text_body {
+           color: navy;
+           font-family: 'Times New Roman', Times, serif;
+           font-size: 12pt;
+           margin-top: 10px;
+           margin-bottom: 10px;
+           margin-right: 10px;
+           margin-left: 10px;
+           text-align: justify;
+       }
+       .text_cap {
+           color: blue;
+           font-family: 'Times New Roman', Times, serif;
+           font-size: 16pt;
+           margin-top: 10px;
+           margin-bottom: 10px;
+           margin-right: 10px;
+           margin-left: 10px;
+           text-align:center;
+       }
+    </STYLE>
+</HEAD>
+
+
+
+<BODY background="img/bkg05.jpg">
+    <CENTER>
+        <P style="padding:10px;">
+            <FONT face="Wide Latin" color=#FFFFF size=4>
+                <IMG SRC="img/iskra1.gif"><b>Latest Updates</b><IMG SRC="img/iskra1.gif">
+            </FONT>
+        </P>
+        <HR>
+        <div>
+            <p class="text_cap">Summary</p>
+            <p class="text_body">
+                The updates mainly concerned those pages that were scripted in "VBScript".
+                As you know, at the dawn of the Internet, "VBScript" was actively introduced by Microsoft as the main language for dynamic programming of web pages.
+                However, over time, the situation has changed and currently "VBScript" is not supported even by new browsers from Microsoft itself.
+                Until that day, the workshop was fully functional only in the "Internet Explorer" browsers up to version 11.
+                The need to replace the scripting language arose long ago,
+                but it was a very difficult and time-consuming task.
+                Currently, all dynamic workshop pages are already scripted in "JavaScript",
+                which is supported by most web browsers. But since these two programming languages are very different,
+                it was impossible to keep the pages completely identical.
+                However, the basic functionality of the pages and the entire design process of a conventional pleated low-pass filter have only changed for the better.
+            </p>
+            <p class="text_cap">
+                Compatibility
+            </p>
+            <p class="text_body">
+                The updated workshop pages were mainly tested on Internet Explorer 11 and Google Chrome (version 85). A brief functional check was also carried out on the latest versions of Microsoft Edge and Mazilla Firefox. It was noted that newer versions of browsers (Chrome, Firefox, Edge) performed calculations and simulations much faster.
+            </p>
+            <p class="text_cap">Design Process Updates</p>
+            <p class="text_body">
+                A new low-pass filter synthesis method based on impedance matching of a weakly irregular ("quasi-periodic") corrugated waveguide with an input / output interface through a quarter-wave transformer (related links [1,2]). The new synthesis method generally leads to better matching results.
+            </p>
+            <p class="text_cap">
+                User Interface Updates
+            </p>
+            <p class="text_body">
+                The old methods of displaying the graphs of the filter characteristics are replaced by new ones with better resolution and image quality.
+            </p>
+            <p class="text_cap">
+                Data Input and Output
+            </p>
+            <p class="text_body">
+                Although the old methods of input and output of design and s-parameters remain unchanged, some data formats are already obsolete (old version of HFSS and AutoCAD). In the updated workshop, the user is invited to use the function of transferring the design to the new design studio "WR - Connect 2020", which has more diverse methods for designing waveguide filters, more convenient ways to save project files and translate them into new versions of Ansoft / ANSYS HFSS. It is proposed to use this workshop in the initial design stage only, then transfer the design to WR - Connect 2020 and finalize it there.
+            </p>
+            <p class="text_cap">
+                References
+            </p>
+            <p class="text_body">
+                [1] F. De Paolis, R. Goulouev, J. Zheng, and M. Yu, "CAD procedure for
+                high-performance composite corrugated filters," IEEE Trans. Microw.
+                Theory. Techn., vol. 61, no. 9, pp. 3216–3224, Sept. 2013. <a href="https://www.researchgate.net/publication/260333276_CAD_Procedure_for_High-Performance_Composite_Corrugated_Filters">Accessed on 09/2020 here</a>
+                <br />
+                [2] R. Goulouev, D. Garcia, Q. Shi, C. McLaren,
+                "Powerful Multiple Harmonics Reject Filter Design, Testing and
+                Acceptance Considering Ultra Overmoded Waveguide Conditions,"
+                5th Workshop on Advanced RF Sensors and Remote Sensing Instruments,
+                ESA/ESTEC, ARSI’17, vol. 1,  Noordwijk, Netherlands, 2017. <a href="https://www.researchgate.net/publication/321268957_POWERFUL_MULTIPLE_HARMONICS_REJECT_FILTER_DESIGN_TESTING_AND_ACCEPTANCE_CONSIDERING_ULTRA_OVERMODED_WAVEGUIDE_CONDITION">Accessed on 09/2020 here</a>
+            </p>
+        </div>
+        <HR>
+        <IMG SRC="img/iskra1.gif" style="font:10pt Arial;color:#90CCFF">
+        <font style="color:white; font-size:10pt;font-family:'Times New Roman', Times, serif"><B><I>R. Goulouev, 19.09.20 </I></B></font>
+        <IMG SRC="img/iskra1.gif">
+    </CENTER>
+</BODY>
+</HTML>

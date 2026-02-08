@@ -1,0 +1,109 @@
+<HTML>
+<HEAD>
+<meta http-equiv="x-ua-compatible" content="IE=5">
+  <TITLE>Rousslan Microwave ... Design Studio ... Corrgugated Low-Pass Filter</TITLE>
+<STYLE>
+H1{font: 12pt Arial Black; color:#AAFFFF}
+H2{font: 10pt Arial Black; color:#AAFFFF}
+H3{font: 10pt Arial; color:#AAFFAA; font-style: italian}
+</STYLE>
+</HEAD>
+<BODY background="img/bkg05.jpg" topmargin=0 leftmargin=0>
+
+<TABLE>
+<TR>
+<TD><IMG src="img/corpic.bmp"></TD>
+
+<TD>
+
+<TABLE border=1>
+<TR>
+<TD width=100><H2>Pass Band:</TD>
+<TD width=25><H3>F0=</TD>
+<TD><INPUT name=intF0 size=5 style="font:8pt Arial Black;color:#400040"></TD>
+<TD><H3>F1=</TD>
+<TD><INPUT name=intF1 size=5 style="font:8pt Arial Black;color:#400040"></TD>
+<TD><BUTTON name=But0 style="font:8pt Arial Black" ONCLICK=proc(1)>Help</BUTTON></TD>
+</TR>
+<TR>
+<TD width=100><H2>Stop Band:</TD>
+<TD width=25><H3>F0=</TD>
+<TD><INPUT name=intF2 size=5 style="font:8pt Arial Black;color:#400040"></TD>
+<TD width=25><H3>F1=</TD>
+<TD><INPUT name=intF3 size=5 style="font:8pt Arial Black;color:#400040"></TD>
+<TD><BUTTON name=But0 style="font:8pt Arial Black" ONCLICK=proc(2)>Help</BUTTON></TD>
+</TR>
+<TR>
+<TD width=100><H2>External:</TD>
+<TD width=25><H3>Ao=</TD>
+<TD><INPUT name=intAo size=5 style="font:8pt Arial Black;color:#400040"></TD>
+<TD width=25><H3>Bo=</TD>
+<TD><INPUT name=intBo size=5 style="font:8pt Arial Black;color:#400040"></TD>
+<TD><BUTTON name=But0 style="font:8pt Arial Black" ONCLICK=proc(3)>Help</BUTTON></TD>
+</TR>
+<TR>
+<TD width=100><H2>Internal:</TD>
+<TD width=25><H3>Ac=</TD>
+<TD><INPUT name=intAc size=5 style="font:8pt Arial Black;color:#400040"></TD>
+<TD width=25><H3>Bc=</TD>
+<TD><INPUT name=intBc size=5 style="font:8pt Arial Black;color:#400040"></TD>
+<TD><BUTTON name=But0 style="font:8pt Arial Black" ONCLICK=proc(4)>Help</BUTTON></TD>
+</TR>
+<TR>
+<TD width=100><H2>Corrugations:</TD>
+<TD width=25><H3>S =</TD>
+<TD><INPUT name=intSc size=5 style="font:8pt Arial Black;color:#400040"></TD>
+<TD width=25><H3>D =</TD>
+<TD><INPUT name=intDc size=5 style="font:8pt Arial Black;color:#400040"></TD>
+<TD><BUTTON name=But1 style="font:8pt Arial Black" ONCLICK=proc(5)>Help</BUTTON></TD>
+</TR>
+</TABLE><CENTER><FONT style="font: 10pt Arial Black; color:#AAFFFF">
+<input name=unit type=radio CHECKED>mm<input name=unit type=radio>inch
+</TD>
+</TR>
+</TABLE>
+
+
+</BODY>
+<SCRIPT language=VBScript>
+dim br,pi,Ao,Bo,Ac,Bc,Sc,inu
+pi=3.141592653589
+br=chr(13)&chr(10)
+inu=0
+
+sub helper(index)
+msgbox index
+end sub
+
+sub proc(index)
+if index=1 then
+msgbox "Enter end points of operational frequency range of your filter."  
+end if
+if index=2 then
+msgbox "Enter end points of frequency ranges to be rejected by filter." 
+end if
+if index=3 then
+msgbox "Enter filter interface dimensions Ao (width) and Bo (height)."&br&br&" Those are dimensions of external rectangular waveguide line to be connected to filter." 
+end if
+if index=4 then 
+F0=intF0.value
+F1=intF1.value
+F2=intF2.value
+F3=intF3.value
+Ao= intAo.value
+Bo=intBo.value
+msgbox Fmode(1,0)
+end if
+end sub
+
+function cf
+if unit(0).checked=true then cf=.0209579 else cf=.532331
+end function
+
+function Fmode(n,m)
+kc=sqr((pi/Ac)^2+(pi/Bc)^2)
+Fmode=fc*kc
+end function
+
+</SCRIPT>
+</HTML>

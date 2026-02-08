@@ -1,0 +1,373 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+    <TITLE>Corrugated Filter Structure Design Import/Export Files.</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META name="Author" content="Rousslan Goulouev">
+</HEAD>
+<BODY BACKGROUND="img/bkg05.jpg" leftmargin=0 topmargin=0 onload="window_onload();">
+    <CENTER>
+        <TABLE>
+            <TR>
+                <TD><FONT STYLE="font:10pt Arial Black; color:#CCCCFF"><CENTER>Design Data Import/Export</CENTER></FONT></TD>
+                <TD><FONT STYLE="font:10pt Arial Black; color:#CCCCFF"><CENTER>HFSS Macro / AutoCAD script</CENTER></FONT></TD>
+            </TR>
+            <TR>
+                <TD width=350>
+                    <CENTER>
+<TEXTAREA COLS="60" ROWS="20" id="BUF" STYLE="font:9pt Arial; color:red"> </TEXTAREA>
+                    </CENTER>
+                </TD>
+                <TD width=450>
+                    <CENTER>
+                        <TEXTAREA COLS="80" ROWS="20" id="OKNO" STYLE="font:9pt Arial; color:navy">
+WARNING:
+
+This tool is outdated.
+
+AutoCAD 2000 script compatibility with current AutoCAD versions is not tested.
+
+HFSS 8 macro is not compatible with newer Ansoft/ANSYS versions.
+
+A design, however, can be transferred to newer HFSS versions through WR-Connect 2020 design studio. To do so, go to Simulation Page (click "Simulate Response" button) and transfer design to WR-2020 (click "Transfer to New Studio") from there. 
+</TEXTAREA>
+                    </CENTER>
+                </TD>
+            </TR>
+        </TABLE>
+
+        <TABLE border=1>
+            <TR>
+                <TD>
+                    <FONT color=#ccffff size=2>
+                        <CENTER>
+                            <BUTTON style="FONT: 7pt Arial Black; COLOR: #400040"
+                                    onclick="steper(0);">
+                                Exit
+                            </BUTTON>
+                        </CENTER>
+                    </FONT>
+                </TD>
+                <TD>
+                    <FONT color=#ccffff size=2>
+                        <CENTER>
+                            <BUTTON style="FONT: 7pt Arial Black; COLOR: #400040"
+                                    onclick=Exo(1)>
+                                Example of Design
+                            </BUTTON>
+                        </CENTER>
+                    </FONT>
+                </TD>
+                <TD>
+                    <FONT color=#ccffff size=2>
+                        <CENTER>
+                            <BUTTON style="FONT: 7pt Arial Black; COLOR: #400040"
+                                    onclick=ImportBuf(0)>
+                                Import to Bufer
+                            </BUTTON>
+                        </CENTER>
+                    </FONT>
+                </TD>
+                <TD>
+                <TD>
+                    <FONT color=#ccffff size=2>
+                        <CENTER>
+                            <BUTTON style="FONT: 7pt Arial Black; COLOR: #400040"
+                                    onclick="steper(1);">
+                                Simulate Response
+                            </BUTTON>
+                        </CENTER>
+                    </FONT>
+                </TD>
+                <TD>
+                    <CENTER>
+                        <BUTTON style="FONT: 7pt Arial Black; COLOR: #400040"
+                                onclick="AutoScript();">
+                            Create AutoCAD Script
+                        </BUTTON>
+                    </CENTER>
+                </TD>
+                <TD>
+                    <CENTER>
+                        <BUTTON style="FONT: 7pt Arial Black; COLOR: #400040"
+                                onclick="HFMacro();">
+                            Create HFSS Macro
+                        </BUTTON>
+                    </CENTER>
+                </TD>
+                <TD>
+
+                <TD>
+                    <FONT color=#ccffff size=2>
+                        <CENTER>
+                            <BUTTON style="FONT: 7pt Arial Black; COLOR: #400040"
+                                    onclick=steper(0)>
+                                Exit
+                            </BUTTON>
+                        </CENTER>
+                    </FONT>
+                </TD>
+            </TR>
+        </TABLE> <BR><HR><BR><FONT STYLE="font:10pt Arial Black; color:#CCFFFF">
+            This page cannot access files located on your computer. Follow the instructions to Import/Export files.<BR><BR>
+        </FONT>
+        <TABLE BORDER=1>
+            <TR>
+                <TD WIDTH=300>
+                    <FONT STYLE="font:9pt Arial; color:#CCFFFF">
+                        <CENTER>
+                            <B><FONT COLOR=#FFCCFF>To Import Design</FONT></B>
+                        </CENTER>
+                        <BR>
+                        1. Upload your design file into NotePad or any other text editor.<BR>
+                        2. Copy design data to Clipboard (right mouse button click, Select All, Copy).<BR>
+                        3. Paste design data to the left window (Design Data Export/Import).<BR>
+                        4. Click button [Import to Bufer].
+                    </FONT>
+                </TD>
+                <TD WIDTH=300>
+                    <FONT STYLE="font:9pt Arial; color:#CCFFFF">
+                        <CENTER>
+                            <B><FONT COLOR=#FFCCFF>To Export Design</FONT></B>
+                        </CENTER>
+                        <BR>
+                        1. Copy design data from the left window (Design Data Export/Import) to Clipboard.<BR>
+                        3. Paste design data to NotePad or any other text editor.<BR>
+                        4. Save the data on your computer. <BR><BR><BR>
+                    </FONT>
+                </TD>
+
+                <TD WIDTH=300>
+                    <FONT STYLE="font:9pt Arial; color:#CCFFFF">
+                        <CENTER><FONT COLOR=#FFCCFF><B>To Export AutoCAD/HFSS scripts</B></FONT></CENTER><BR>
+                        1. Create AutoCAD/HFSS script by clicking appropriate button.<BR>
+                        2. Export it to your computer with extention *.scr (AutoCAD) or *.mac (HFSS).<BR>
+                        3. Load script by appropriate program option of AutoCAD (Tools/Run Script) or HFSS (Draw/File/Macros/Export).
+                        <BR>
+
+                    </FONT>
+                </TD>
+            </TR>
+        </TABLE>
+        <BR><FONT STYLE="font:12pt Arial Black; color:red"> Do not import AutoCAD/HFSS scripts into this page</FONT><BR>
+    </CENTER>
+    <script type="text/javascript" src="StrucForms.js"></script>
+    <script type="text/javascript">
+        var Struc = new corro;
+
+        function window_onload() {
+            if (sessionStorage.getItem("StrucBufer")) {
+                txt = sessionStorage.getItem("StrucBufer");
+                Struc.ImportBufer(txt);
+                Struc.setUnit();
+            }
+        }
+
+        function Exo(ind) {
+            var buf = document.getElementById("BUF");
+            var br = "\r\n";
+            var r0 = "0.75      0.375 ";
+            var r1 = " .734250      .285154      .29852";
+            var r2 = "0.610        0.100       0.100";
+            var r3 = "1.4105E-02       .098340" + br + "2.4598E-02       .100820" + br + "2.6037E-02       .134460" + br + "2.0369E-02       .169680" + br + "1.7267E-02       .197730" + br + "1.9879E-02       .222350" + br + "2.5088E-02       .246930" + br + "2.5703E-02       .265930" + br + "2.8966E-02       .271290" + br + "2.8736E-02       .275010" + br + "2.1165E-02       .278150" + br + "2.1165E-02       .275010" + br + "2.8736E-02       .271290" + br + "2.8966E-02       .265930" + br + "2.5703E-02       .246930" + br + "2.5088E-02       .222350" + br + "1.9879E-02       .197730" + br + "1.7267E-02       .169680" + br + "2.0369E-02       .134460" + br + "2.6037E-02       .100820" + br + "2.4598E-02       .098340";
+            var r4 = "1    10.0       15.0";
+            buf.value = r4 + br + r0 + br + r1 + br + r2 + br + r3;
+        }
+
+        function window_onload() {
+            var br = "\r\n";
+            var buf = document.getElementById("BUF");
+            if (sessionStorage.getItem("StrucBufer")) {
+                txt = sessionStorage.getItem("StrucBufer");
+                Struc.ImportBufer(txt);
+                //ExportStrucToForms();
+                var L = "";
+                var nUnit = Struc.nUnit;
+                L = L + Struc.ind + "  " + Struc.F0.toFixed(4) + "      " + Struc.F1.toFixed(4) + " " + br;
+                L = L + Struc.Ao.toFixed(nUnit) + "      " + Struc.Bo.toFixed(nUnit) + " " + br;
+                L = L + Struc.At.toFixed(nUnit) + "      " + Struc.Bt.toFixed(nUnit) + "      " + Struc.Xt.toFixed(nUnit) + " " + br;
+                L = L + Struc.Ac.toFixed(nUnit) + "      " + Struc.Bc.toFixed(nUnit) + "      " + Struc.Sc.toFixed(nUnit) + " " + br;
+                L = L + Struc.ExportCorros();
+                buf.value = L;
+            }
+        }
+
+        function GetStrucFromText(txt) {
+            var i, ii = -1, iii = -1;
+            var LNs = txt.replace("\r", "").split("\n");
+            var nLN = LNs.length - 1;
+            if (nLN < 5) { return; }
+            for (i = 0; i <= nLN; i++) {
+                if (LNs[i]) {
+                    var v = WordsToArray(LNs[i]);
+                    if (areNumbers(v)) {
+                        ii = ii + 1;
+                        switch (ii) {
+                            case 0:
+                                Struc.ind = parseInt(v[0]); Struc.F0 = parseFloat(v[1]); Struc.F1 = parseFloat(v[2]);
+                                break;
+                            case 1:
+                                Struc.Ao = parseFloat(v[0]); Struc.Bo = parseFloat(v[1]);
+                                break;
+                            case 2:
+                                Struc.At = parseFloat(v[0]); Struc.Bt = parseFloat(v[1]); Struc.Xt = parseFloat(v[2]);
+                                break;
+                            case 3:
+                                Struc.Ac = parseFloat(v[0]); Struc.Bc = parseFloat(v[1]); Struc.Sc = parseFloat(v[2]);
+                                break;
+                            default:
+                                iii = iii + 1;
+                                Struc.Dc[iii] = parseFloat(v[0]); Struc.Hc[iii] = parseFloat(v[1]);
+                        }
+                    }
+                }
+            }
+            Struc.Nc = iii;
+        }
+
+        function ImportBuf(ind) {
+            var txt = document.getElementById("BUF").value;
+            if (!txt) { return; }
+            GetStrucFromText(txt);
+            sessionStorage.setItem("StrucBufer", Struc.ExportBufer());
+            document.getElementById("OKNO").value = "Data Imported";
+        }
+
+        function steper(ind) {
+            if (ind === 0) {
+                document.location.href = "index.htm";
+            }
+            if (ind === 1) {
+                document.location.href = "oncorr2.htm";
+            }
+        }
+
+
+        function areNumbers(V) {
+            if (!Array.isArray) {
+                Array.isArray = function (arg) {
+                    return Object.prototype.toString.call(arg) === '[object Array]';
+                };
+            } if (!Array.isArray(V)) { return -1; }
+            var i, N = V.length - 1;
+            for (i = 0; i <= N; i++) {
+                if (isNaN(V[i])) { return -1; }
+            }
+            return N;
+        }
+        //#################################################################
+        function HFMacro() {
+            var txt = document.getElementById("BUF").value;
+            if (!txt) { return; }
+            GetStrucFromText(txt);
+            txt = HFFilter(Struc.Ao, Struc.Bo, Struc.At, Struc.Bt, Struc.Xt, Struc.Ac, Struc.Bc, Struc.Sc, Struc.Nc, Struc.Hc, Struc.Dc)
+            document.getElementById("OKNO").value = txt;
+        }
+        function AutoScript() {
+            var txt = document.getElementById("BUF").value;
+            if (!txt) { return; }
+            GetStrucFromText(txt);
+            txt = AutoFilter(Struc.Ao, Struc.Bo, Struc.At, Struc.Bt, Struc.Xt, Struc.Ac, Struc.Bc, Struc.Sc, Struc.Nc, Struc.Hc, Struc.Dc);
+            document.getElementById("OKNO").value = txt;
+        }
+
+        function AutoFilter(Ao, Bo, At, Bt, Xt, A, B, S, Nc, Hc, Dc) {
+            var z = 0, dz = Bo / 2, Ls = "";
+            Ls = Ls + AutoBox(-Ao / 2, -Bo / 2, z, Ao, Bo, dz);
+            z = z + dz;
+            Ls = Ls + AutoBox(-At / 2, -Bt / 2, z, At, Bt, Xt);
+            z = z + Xt;
+            Ls = Ls + AutoStruc(A, B, S, Nc, Hc, Dc);
+            Ls = Ls + AutoBox(-At / 2, -Bt / 2, z, At, Bt, Xt);
+            z = z + Xt;
+            Ls = Ls + AutoBox(-Ao / 2, -Bo / 2, z, Ao, Bo, dz);
+            z = z + dz;
+            Ls = Ls + AutoUnite();
+            return Ls;
+
+            function AutoStruc(A, B, S, N, H, D) {
+                var i, L = "";
+                for (i = 0; i <= N; i++) {
+                    L = L + AutoBox(-A / 2, -B / 2, z, A, B, D[i] + S);
+                    z = z + D[i];
+                    L = L + AutoBox(-A / 2, -(B / 2 + H[i]), z, A, 2 * (B / 2 + H[i]), S);
+                    z = z + S;
+                }
+                L = L + AutoBox(-A / 2, -B / 2, z, A, B, D[0]);
+                z = z + D[0];
+                return L;
+            }
+
+            function AutoBox(x0, y0, z0, dx, dy, dz) {
+                var fm = 4;
+                var br = "\r\n";
+                var L = "";
+                if (dx === 0) { return ""; }
+                if (dy === 0) { return ""; }
+                if (dz === 0) { return ""; }
+                L = L + "box" + br;
+                L = L + x0.toFixed(fm) + "," + y0.toFixed(fm) + "," + z0.toFixed(fm) + br;
+                L = L + (x0 + dx).toFixed(fm) + "," + (y0 + dy).toFixed(fm) + "," + (z0 + dz).toFixed(fm) + br;
+                return L;
+            }
+
+            function AutoUnite() {
+                var L, br = "\r\n";
+                L = "union" + br;
+                L = L + "all" + br + br;
+                return L;
+            }
+        }
+
+        function HFFilter(Ao, Bo, At, Bt, Xt, A, B, S, Nc, Hc, Dc) {
+            var z = 0, dz = Bo / 2, ind = 10;
+            var Ls = "";
+            Ls = Ls + HFBox(-Ao / 2, -Bo / 2, z, Ao, Bo, dz);
+            z = z + dz;
+            Ls = Ls + HFBox(-At / 2, -Bt / 2, z, At, Bt, Xt);
+            z = z + Xt;
+            Ls = Ls + HFStruc(A, B, S, Nc, Hc, Dc);
+            Ls = Ls + HFBox(-At / 2, -Bt / 2, z, At, Bt, Xt);
+            z = z + Xt;
+            Ls = Ls + HFBox(-Ao / 2, -Bo / 2, z, Ao, Bo, dz);
+            z = z + dz;
+            Ls = Ls + HFUnite();
+            return Ls;
+
+            function HFStruc(A, B, S, N, H, D) {
+                var L = "", i;
+                for (i = 0; i <= N; i++) {
+                    L = L + HFBox(-A / 2, -B / 2, z, A, B, D[i] + S);
+                    z = z + D[i];
+                    L = L + HFBox(-A / 2, -(B / 2 + H[i]), z, A, 2 * (B / 2 + H[i]), S);
+                    z = z + S;
+                }
+                L = L + HFBox(-A / 2, -B / 2, z, A, B, D[0]);
+                z = z + D[0];
+                return L;
+            }
+
+            function HFUnite() {
+                var br = "\r\n", L = "", i;
+                L = L + "FitAllViews" + br + "Unite { "
+                for (i = 10; i <= ind - 1; i++) {
+                    st = '"' + 'obj' + i + '"';
+                    L = L + " " + st;
+                }
+                return L + " }";
+            }
+
+            function HFBox(x0, y0, z0, dx, dy, dz) {
+                var br = "\r\n";
+                var L = "";
+                if (dx === 0 && dy === 0 && dz === 0) { return ""; }
+                st = '"' + 'obj' + ind + '"';
+                var HF = "Box [" + x0.toFixed(4) + "," + y0.toFixed(4) + "," + z0.toFixed(4) + "]";
+                HF = HF + " " + dx.toFixed(4) + " " + dy.toFixed(4) + " " + dz.toFixed(4) + " " + st + br
+                ind = ind + 1;
+                return HF;
+            }
+        }
+    </script>
+</BODY>
+</HTML>

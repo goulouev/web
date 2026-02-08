@@ -1,0 +1,818 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+    <TITLE>Corrugated Filter Sensitivity Analysis.</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="keywords" CONTENT="RF, microwave, corrugated, filter, waveguide, low-pass, tolerance, milling, sensitivity, tool, calculator">
+    <META NAME="description" CONTENT="Corrugated waveguide low-pass filter sensitivity analysis tool. Systematic and random production tolerances.">
+    <META name="Author" content="Rousslan Goulouev">
+    <style>
+        input {
+            font: 10pt Arial;
+            color: navy;
+        }
+
+        select {
+            font: 10pt Arial;
+            color: navy;
+        }
+
+        textarea {
+            font-family: "Courier New", Courier, monospace;
+            font-size: 10pt;
+            color: navy;
+        }
+    </style>
+</HEAD>
+
+<BODY BACKGROUND="img/bkg05.jpg" leftmargin="0" topmargin="0" onload="window_onload();">
+    <CENTER>
+        <FONT SIZE=4 COLOR=#ffffcc>
+            Sensitivity Analysis<BR><BR>
+            <HR />
+
+            <TABLE WIDTH=1000>
+                <TR>
+                    <TD width=530>
+                        <div id="myCanvas" style="position:relative;margin-top:0 ;height:300px;width:530px; background-color:white;"></div>
+                    </TD>
+                    <TD>
+
+                        <TABLE BORDER=1>
+
+                            <TR>
+                                <TD>
+                                    <FONT SIZE="3" COLOR="#ccffff">
+                                        <CENTER>
+                                            <B>
+                                                <I>
+                                                    Input/Output Ports<BR><FONT SIZE="2" COLOR="#ffccff">
+                                                        (Ao,
+                                                        Bo)
+                                                    </FONT>
+                                                </I>
+                                            </B>
+                                        </CENTER>
+                                    </FONT>
+                                </TD>
+                                <TD><INPUT id="text0" style="width:300px;"></TD>
+                            </TR>
+
+                            <TR>
+                                <TD><FONT SIZE="3" COLOR="#ccffff"><CENTER><B><I>Transformer Sections<BR><FONT SIZE="2" COLOR="#ffccff">(At, Bt, Xt)</FONT></I></B></CENTER></FONT>  </TD>
+                                <TD><INPUT id="text1" style="width:300px;"></TD>
+                            </TR>
+                            <TR>
+                                <TD>
+                                    <FONT SIZE="3" COLOR="#ccffff">
+                                        <CENTER>
+                                            <B>
+                                                <I>
+                                                    Corrugated Section<BR><FONT SIZE="2" COLOR="#ffccff">
+                                                        (Ac, Bc , Sc
+                                                        )
+                                                    </FONT>
+                                                </I>
+                                            </B>
+                                        </CENTER>
+                                    </FONT>
+                                </TD>
+                                <TD><INPUT id="text2" style="width:300px;"></TD>
+                            </TR>
+                            <TR>
+                                <TD>
+                                    <FONT SIZE="3" COLOR="#ccffff">
+                                        <CENTER>
+                                            <B>
+                                                <I>
+                                                    Corrugations<BR><FONT SIZE="2" COLOR="#ffccff">
+                                                        ( D<SUB>0</SUB> , H<SUB>0</SUB> )<BR>
+                                                        ( D<SUB>1</SUB> , H<SUB>1</SUB> )<BR> - - - - - - - - - - - <BR>
+                                                        ( D<SUB>N-1</SUB> , H<SUB>N-1</SUB> )<BR>
+                                                        ( D<SUB>N</SUB> , H<SUB>N</SUB> )
+                                                    </FONT>
+                                                </I>
+                                            </B>
+                                        </CENTER>
+                                    </FONT>
+                                </TD>
+                                <TD><TEXTAREA id="text3" rows="7" style="width:300px;">  </TEXTAREA></TD>
+                            </TR>
+                            <TR>
+                                <TD><FONT SIZE="3" COLOR="#ccffff"><CENTER><B><I>Sweep, GHz<BR><FONT SIZE="2" COLOR="#ffccff"> ( F<SUB>0</SUB> , F<SUB>1</SUB> )</FONT></I></B></CENTER></FONT> </TD>
+                                <TD><INPUT id="text4" style="width:300px;"></TD>
+                            </TR>
+                            <TR>
+                                <TD><FONT SIZE="3" COLOR="#ccffff"><CENTER><B><I>Dimension Units</I></B></CENTER></FONT> </TD>
+                                <TD>
+                                    <FONT SIZE="3" COLOR="#ffffcc">
+                                        <CENTER>
+                                            <B>
+                                                <I>
+                                                    <input name="unit" type="radio" value="" checked> mm
+                                                    <input name="unit" type="radio" value=""> inch
+                                                </I>
+                                            </B>
+                                        </CENTER>
+                                    </FONT>
+                                </TD>
+                            </TR>
+
+                        </TABLE>
+
+                    </TD>
+                </TR>
+            </TABLE>
+        </FONT>
+        <TABLE BORDER=1 WIDTH=900>
+            <TR>
+                <TD><FONT SIZE=3 COLOR=#ccffff>Radius of Milling Tool H-plane<br /> <INPUT TYPE="TEXT" id="Tol1" style="width:50px;"></FONT></TD>
+                <TD><FONT SIZE=3 COLOR=#ccffff>Radius of Milling Tool E-plane<br /> <INPUT TYPE="TEXT" id="Tol2" style="width:50px;"></FONT></TD>
+                <TD>
+                    <FONT SIZE=3 COLOR=#ccffff>
+                        Random Tolerance (+/-)<br /> <INPUT TYPE="TEXT" id="Tol3" style="width:50px;">
+                        <select id="RND">
+                            <option> 1</option>
+                            <option> 2</option>
+                            <option> 3</option>
+                            <option> 4</option>
+                            <option> 5</option>
+                            <option> 6</option>
+                            <option> 7</option>
+                            <option> 8</option>
+                            <option> 9</option>
+                            <option>10</option>
+                        </select>
+                    </FONT>
+                </TD>
+                <TD><FONT SIZE=3 COLOR=#ccffff>Worst Case (+/-)<br /><INPUT TYPE="TEXT" id="Tol4" style="width:50px;"></FONT></TD>
+            </TR>
+        </TABLE>
+
+
+        <TABLE border=1>
+            <TR>
+                <TD>
+                    <FONT color=#ccffff size=2>
+                        <CENTER>
+                            <BUTTON style="FONT: 7pt Arial Black; COLOR: #400040"
+                                    name=run onclick="sim();">
+                                Apply Tolerances
+                            </BUTTON>
+                        </CENTER>
+                    </FONT>
+                </TD>
+                <TD>
+                    <CENTER>
+                        <BUTTON style="FONT: 7pt Arial Black; COLOR: #400040"
+                                onclick="simOr();" name=run>
+                            Original Response
+                        </BUTTON>
+                    </CENTER>
+                </TD>
+                <TD>
+                    <CENTER>
+                        <BUTTON style="FONT: 7pt Arial Black; COLOR: #400040"
+                                onclick="Stepper(3);" name=back>
+                            Refresh
+                        </BUTTON>
+                    </CENTER>
+                </TD>
+                <TD>
+                    <CENTER>
+                        <BUTTON style="FONT: 7pt Arial Black; COLOR: #400040"
+                                onclick="Stepper(4);" name=back>
+                            Return Back
+                        </BUTTON>
+                    </CENTER>
+                </TD>
+                <TD>
+                    <CENTER>
+                        <BUTTON style="FONT: 7pt Arial Black; COLOR: #400040"
+                                onclick="Stepper(5);" name=back>
+                            Exit Home
+                        </BUTTON>
+                    </CENTER>
+                </TD>
+            </TR>
+        </TABLE>
+    </CENTER>
+    <script type="text/javascript" src="StrucForms.js"></script>
+    <script type="text/javascript" src="wz_jsgraphics.js"></script>
+    <SCRIPT type="text/javascript">
+        var DgRad = 180.0 / Math.PI
+        var GrColor = Array("#ff0000", "#0000ff", "#000000", "#00ff00", "#ffa500", "#ee82ee", "#404040", "#808000");
+        var xCanvasMax = 530;
+        var yCanvasMax = 300;
+        var xFrame0 = 50;
+        var xFrame1 = 500;
+        var yFrame0 = 20;
+        var yFrame1 = 270;
+        var jg = new jsGraphics("myCanvas");
+        //dim np, br, OptStepIndex
+        //dim pi, cfunit, pi2
+        var br = "\r\n";
+        var OptStepIndex = 0;
+        var Struc = new corro;
+
+        function window_onload() {
+            if (sessionStorage.getItem("StrucBufer")) {
+                var txt = sessionStorage.getItem("StrucBufer");
+                Struc.ImportBufer(txt);
+                StrucToForms();
+            }
+            GraphStart();
+        }
+
+        //#########################################################
+        function NumFromTxt(txt) {
+            if (txt) {
+                if (isNaN(txt)) { return 0; } else { return parseFloat(txt); }
+            } else {
+                return 0;
+            }
+        }
+
+        function sim() {
+            var dMAX;
+            if (!ValidStrucForms()) { return; };
+            FormsToStruc();
+            var rH = NumFromTxt(document.getElementById("Tol1").value);
+            var rE = NumFromTxt(document.getElementById("Tol2").value);
+            var dX = NumFromTxt(document.getElementById("Tol3").value);
+            var Tol4 = document.getElementById("Tol4");
+            if (Tol4.value) {
+                dMAX = NumFromTxt(Tol4.value);
+                WorstCase(dMAX);
+            } else {
+                dMAX = 0;
+                Random(dX);
+            }
+            //alert(dX);
+            var sDatos = "";
+            var i, f, Np = 200;
+            var Scc = Seff(rH);
+            for (i = 0; i <= Struc.Np; i++) {
+                if (Np === 0) { f = Struc.F0; } else { f = Struc.F0 + (Struc.F1 - Struc.F0) * i / Struc.Np; }
+                var k = Struc.cfunit * f;
+                var Hcc = Heff(k, rH, rE);
+                So = hu000(k, Struc.Ao, Struc.Bo, Struc.At, Struc.Bt, Struc.Xt, Struc.Nc, Struc.Ac, Struc.Bc, Scc, Struc.Dc, Hcc);
+                var RdB = dB([So[0], So[1]]), TdB = dB([So[2], So[3]]);
+                sDatos = sDatos + f + ' ' + So.join(" ") + "\r\n";
+            }
+            sessionStorage.setItem('sDatSim', sDatos);
+            GraphStart();
+        }
+
+        function simOr() {
+            if (!ValidStrucForms()) { return; };
+            FormsToStruc();
+            var sDatos = "";
+            var i, f, Np = 200;
+            for (i = 0; i <= Struc.Np; i++) {
+                if (Np === 0) { f = Struc.F0; } else { f = Struc.F0 + (Struc.F1 - Struc.F0) * i / Struc.Np; }
+                var k = Struc.cfunit * f;
+                So = hu000(k, Struc.Ao, Struc.Bo, Struc.At, Struc.Bt, Struc.Xt, Struc.Nc, Struc.Ac, Struc.Bc, Struc.Sc, Struc.Dc, Struc.Hc);
+                var RdB = dB([So[0], So[1]]), TdB = dB([So[2], So[3]]);
+                sDatos = sDatos + f + ' ' + So.join(" ") + "\r\n";
+            }
+            sessionStorage.setItem('sDatSim', sDatos);
+            GraphStart();
+        }
+
+        function WorstCase(dx) {
+            var zn = 1, i;
+            for (i = 0; i <= Struc.Nc; i++) {
+                zn = -1 * zn
+                Struc.Hc[i] = Struc.Hc[i] + dx * zn;
+                Struc.Dc[i] = Struc.Dc[i] + 2 * dx * zn;
+            }
+        }
+
+        function Random(dx) {
+            var i;
+            var Nst = parseInt(document.getElementById("RND").value);
+            var start;
+            for (i = 0; i <= 2 * Nst * Struc.Nc; i++) {
+                start = Math.random();
+            }
+            for (i = 0; i <= Struc.Nc; i++) {
+                Struc.Hc[i] = Struc.Hc[i] + dx * (2 * Math.random() - 1);
+                Struc.Dc[i] = Struc.Dc[i] + 2 * dx * (2 * Math.random() - 1);
+            }
+        }
+
+        function Seff(rH) {
+            return Struc.Sc - 0.214 * rH * rH / Struc.Ac;
+        }
+
+        function Heff(k, rH, rE) {
+            var i, kx = Xs(Struc.Ac, Struc.Sc, rH);
+            var H = [];
+            var kc = Math.PI / Struc.Ac;
+            var w = Math.sqrt(Math.abs((k * k - kc * kc) / (k * k - kx * kx)));
+            var dH = 0.214 * rE * rE / Struc.Sc;
+            for (i = 0; i <= Struc.Nc; i++) {
+                H[i] = (Struc.Hc[i] - dH) * w
+            }
+            return H;
+        }
+
+        function Radius(k, rH, rE) {
+            var i, kx = Xs(Struc.Ac, Struc.Sc, rH);
+            var kc = Math.PI / Struc.Ac;
+            var w = Math.sqrt(Math.abs((k * k - kc * kc) / (k * k - kx * kx)));
+            var dH = 0.214 * rE * rE / Struc.Sc;
+            Struc.Sc = Struc.Sc - 0.214 * rH * rH / Struc.Ac;
+            for (i = 0; i <= Struc.Nc; i++) {
+                Struc.Hc[i] = (Struc.Hc[i] - dH) * w
+            }
+        }
+
+        function Xs(a, b, r) {
+            var xso = Math.PI / a;
+            var w0 = 1.4212 * Math.pow(r, 4) / Math.pow(a, 3) / b;
+            var w1 = 1.72 * r * r / a / b;
+            return xso * Math.sqrt((1 - w0) / (1 + w0));
+        }
+
+        //#########################################################
+
+        function GraphStart() {
+            var Sdats = GetSdatsFromBufer();
+            var Scale = GetInitialScale(Sdats);
+            //SetScale(Scale);
+            MainFrame(Scale);
+            //var Scale = GetScale();
+            DrawPlots(Scale, Sdats);
+        }
+
+
+
+        function StrucToForms() {
+            Struc.setUnit();
+            var nUnit = Struc.nUnit;
+            var unit = document.getElementsByName('unit');
+            if (Struc.ind === 0) { unit[0].checked = true; } else { unit[1].checked = true; }
+            document.getElementById("text0").value = Struc.Ao.toFixed(nUnit) + "      " + Struc.Bo.toFixed(nUnit);
+            document.getElementById("text1").value = Struc.At.toFixed(nUnit) + "      " + Struc.Bt.toFixed(nUnit) + "      " + Struc.Xt.toFixed(nUnit);
+            document.getElementById("text2").value = Struc.Ac.toFixed(nUnit) + "      " + Struc.Bc.toFixed(nUnit) + "      " + Struc.Sc.toFixed(nUnit);
+            document.getElementById("text3").value = Struc.ExportCorros();
+            document.getElementById("text4").value = Struc.F0.toFixed(4) + "        " + Struc.F1.toFixed(4);
+        }
+        function ValidStrucForms() {
+            V = WordsToArray(document.getElementById('text0').value);
+            if (areNumbers(V) < 1) {
+                alert(" 'Input/Output' section not complete.");
+                return false;
+            }
+            V = WordsToArray(document.getElementById('text1').value);
+            if (areNumbers(V) < 2) {
+                alert(" 'Transformer section' not complete.");
+                return false;
+            }
+            V = WordsToArray(document.getElementById('text2').value);
+            if (areNumbers(V) < 2) {
+                alert(" Corrugations Parameters (Ac, Bc, Dc) \n not complete/specified.");
+                return false;
+            }
+            if (!ValidCorros(document.getElementById('text3').value)) {
+                return false;
+            }
+            V = WordsToArray(document.getElementById('text4').value);
+            if (areNumbers(V) < 1) {
+                alert(" 'Simulation Frequency' section not complete.");
+                return false;
+            }
+            return true;
+            function ValidCorros(txt) {
+                if (!txt) { alert('No corrugations specified\nSee "Example" as example.'); return false; }
+                var LNs = txt.replace("\r", "").split("\n");
+                var i, ii = -1;
+                var Ncc = LNs.length - 1;
+                for (i = 0; i <= Ncc; i++) {
+                    if (trim(LNs[i]) !== "") {
+                        V = WordsToArray(LNs[i]);
+                        if (areNumbers(V) === 1) {
+                            ii = ii + 1;
+                        } else {
+                            alert('Wrong dada record in Corrugations\n' + (ii + 2) + ' row');
+                            return false;
+                        }
+                    }
+                }
+                if (ii === -1) {
+                    alert('No corrugations specified\nSee "Example" as example.')
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        function FormsToStruc() {
+            var unit = document.getElementsByName('unit');
+            if (unit[0].checked) { Struc.ind = 0; } else { Struc.ind = 1; }
+            V = WordsToArray(document.getElementById('text0').value);
+            Struc.Ao = parseFloat(V[0]); Struc.Bo = parseFloat(V[1]);
+            V = WordsToArray(document.getElementById('text1').value);
+            Struc.At = parseFloat(V[0]); Struc.Bt = parseFloat(V[1]); Struc.Xt = parseFloat(V[2]);
+            V = WordsToArray(document.getElementById('text2').value);
+            Struc.Ac = parseFloat(V[0]); Struc.Bc = parseFloat(V[1]); Struc.Sc = parseFloat(V[2]);
+            Struc.ImportBufer2(document.getElementById('text3').value);
+            V = WordsToArray(document.getElementById('text4').value);
+            Struc.F0 = parseFloat(V[0]); Struc.F1 = parseFloat(V[1]);
+            if (areNumbers(V) > 1) { Struc.Np = parseInt(V[2]); }
+        }
+
+        function Stepper(index) {
+            switch (index) {
+                case 3:
+                    //document.location.href = "oncorr4.htm";
+                    if (sessionStorage.getItem("StrucBufer")) {
+                        var txt = sessionStorage.getItem("StrucBufer");
+                        Struc.ImportBufer(txt);
+                        StrucToForms();
+                        simOr();
+                    }
+                    break;
+                case 4:
+                    document.location.href = "oncorr2.htm";
+                    break;
+                case 5:
+                    document.location.href = "index.htm";
+                    break;
+            }
+        }
+
+        function CheckData(F0, F1, Ao, Bo, At, Bt, Xt, Ac, Bc, Sc, Nc, Dc, Hc) {
+            //on error resume next
+            var Index = 0;
+            if (isNole(Ao)) { text0.value = "Interface not defined"; Index = 1; }
+            if (isNole(Bo)) { text0.value = "Interface not defined"; Index = 1; }
+            if (isNole(At)) { text1.value = "Transformer not defined"; Index = 1; }
+            if (isNole(Bt)) { text1.value = "Transformer not defined"; Index = 1; }
+
+            if (isNole(Xt)) { text1.value = "Transformer not defined"; Index = 1; }
+            if (isNole(Ac)) { text2.value = "Internal structure not defined"; Index = 1; }
+            if (isNole(Bc)) { text2.value = "Internal structure not defined"; Index = 1; }
+            if (isNole(Sc)) { text2.value = "Internal structure not defined"; Index = 1; }
+            if (isNole(Nc)) { text3.value = "Corrugated section not specified " + br; Index = 1; }
+            for (i = 0; i <= Nc; i++) {
+                if (isNole(Dc[i])) { text5.value = text5.value & "Iris not specified " + br; Index = 1; }
+                if (isNole(Hc[i])) { text5.value = text5.value & "Cavity not specified " + br; Index = 1; }
+            }
+            if (isNole(F0)) { text4.value = "Frequency plan not defined"; Index = 1; }
+            if (isNole(F1)) { text4.value = "Frequency plan not defined"; Index = 1; }
+            k = cfunit * F0;
+            if (isNole(Ac)) { return; }
+            if (k < 0.5 * Math.PI / Ac) {
+                alert("Frequency plan starting point is far under waveguide cut-off frequency.  Please check dimensions, size unit and frequency sweep.");
+                Index = 1;
+            }
+            return Index;
+        }
+
+        function isNole(x) {
+            if (isNaN(x)) { return true; }
+            var xx = parseFloat(x), delta = 1E-6;;
+            if (Math.abs(xx) < delta) { return true; }
+            return false;
+        }
+
+        //######################### GRAPHS #####################################
+        function MainFrame(Scale) {
+            //document.getElementById('Xscale0').value = Scale[1];
+            //document.getElementById('Xscale1').value = Scale[2];
+            //document.getElementById('Xscale2').value = Scale[3];
+            //document.getElementById('Yscale0').value = Scale[4];
+            //document.getElementById('Yscale1').value = Scale[5];
+            //document.getElementById('Yscale2').value = Scale[6];
+
+            var x0 = Scale[1];//parseFloat(document.getElementById('Xscale0').value);
+            var x1 = Scale[2];//parseFloat(document.getElementById('Xscale1').value);
+            var nxGrid = Scale[3];//parseInt(document.getElementById('Xscale2').value);
+            var y0 = Scale[5];//parseFloat(document.getElementById('Yscale1').value);
+            var y1 = Scale[4];//parseFloat(document.getElementById('Yscale0').value);
+            var nyGrid = Scale[6];//parseInt(document.getElementById('Yscale2').value);
+
+            if (nxGrid < 1) { nxGrid = 1; }
+            if (nyGrid < 1) { nyGrid = 1; }
+
+            GraphFrame(xFrame0, yFrame0, xFrame1, yFrame1);
+            GraphGrid(x0, y0, x1, y1, xFrame0, yFrame0, xFrame1, yFrame1, nxGrid, nyGrid);
+        }
+
+        function SetScale(Scale) {
+            if (Scale === null) { return; }
+            var RepFun = document.getElementsByName('ReportFun');
+            var Auto = document.getElementById('AutoScale');
+            var iType = Scale[0];
+            for (i = 0; i <= 4; i++) {
+                if (i + 1 === iType) {
+                    RepFun[i].checked = true;
+                } else {
+                    RepFun[i].checked = false;
+                }
+            }
+            document.getElementById('Xscale0').value = Scale[1];
+            document.getElementById('Xscale1').value = Scale[2];
+            document.getElementById('Xscale2').value = Scale[3];
+            document.getElementById('Yscale0').value = Scale[4];
+            document.getElementById('Yscale1').value = Scale[5];
+            document.getElementById('Yscale2').value = Scale[6];
+            Auto.checked = false;
+            Auto = null; RepFun = null;
+        }
+
+        function DrawPlots(Scale, Sdats) {
+            var DatFun = document.getElementsByName('sDatSource');
+            var Sdats = GetSdatsFromBufer();
+            if (Scale === null) { return; }
+            var RepFun = document.getElementsByName('ReportFun');
+            var Patho = document.getElementsByName('Path');
+            var i, iDat, iPath, iColor = -1;
+            var iType = 0;
+            if (Sdats[0]) {
+                for (iPath = 0; iPath <= 1; iPath++) {
+                    iColor = iColor + 1;
+                    DrawPlot(iType, iPath, iColor, Scale, Sdats[0]);
+                }
+
+            }
+            sDats = null; DatFun = null;
+        }
+
+        function GetSdatLines(sText) {
+            var SLines;
+            var sDatOut = [];
+            if (sText === '' || sText === null) { return null; }
+            SLines = sText.split("\r\n");
+            if (Array.isArray(SLines)) {
+                Np = SLines.length - 1;
+                var i, ii = -1;
+
+                for (var i = 0; i <= Np; i++) {
+                    var xDat = GetFloats(9, SLines[i]);
+                    if (xDat) {
+                        ii = ii + 1;
+                        sDatOut[ii] = xDat;
+                    }
+                }
+                return sDatOut;
+            } else {
+                return null;
+            }
+        }
+
+        function GetSdatsFromBufer() {
+            var sSim = GetSdatLines(sessionStorage.getItem('sDatSim'));
+            var sDat = GetSdatLines(sessionStorage.getItem('sDatFile'));
+            var sDats = [null, null];
+            if (sSim != null) {
+                sDats[0] = sSim;
+            }
+            if (sDat != null) {
+                sDats[1] = sDat;
+            }
+            return sDats;
+        }
+
+        function GetInitialScale(Sdats) {
+            var Np = [-1, -1];
+            var fmin0, fmin1, fmax0, fmax1, fmin, fmax;
+            if (Sdats[0] !== null) {
+                Np[0] = Sdats[0].length - 1;
+                fmin0 = Sdats[0][0][0];
+                fmax0 = Sdats[0][Np[0]][0];
+                fmin = fmin0; fmax = fmax0;
+            }
+            if (Sdats[1] !== null) {
+                Np[1] = Sdats[1].length - 1;
+                fmin1 = Sdats[1][0][0];
+                fmax1 = Sdats[1][Np[1]][0];
+                fmin = fmin1; fmax = fmax1;
+            }
+            if (Np[0] > -1 && Np[1] > -1) {
+                fmin = Math.max(fmin0, fmin1), fmax = Math.min(fmax0, fmax1);
+            }
+            if (Np[0] === -1 && Np[1] === -1) {
+                return [1, 10, 15, 5, -100, 0, 10];
+            } else {
+                return [1, fmin, fmax, 10, -100, 0, 10];
+            }
+        }
+
+        function GetScale() {
+            var RepFun = document.getElementsByName('ReportFun');
+            var i, iType = 1;
+            for (i = 0; i <= 4; i++) {
+                if (RepFun[i].checked) { iType = i + 1; }
+            }
+            RepFun = null;
+            var x0 = parseFloat(document.getElementById('Xscale0').value);
+            var x1 = parseFloat(document.getElementById('Xscale1').value);
+            var Nx = parseInt(document.getElementById('Xscale2').value);
+            var y0 = parseFloat(document.getElementById('Yscale0').value);
+            var y1 = parseFloat(document.getElementById('Yscale1').value);
+            var Ny = parseInt(document.getElementById('Yscale2').value);
+            return [iType, x0, x1, Nx, y0, y1, Ny];
+        }
+
+
+        function MiniMax(iType, iPath, F0, F1, Sdat) {
+            //var DatFun = document.getElementsByName('sDatSource');
+            //var RepFun = document.getElementsByName('ReportFun');
+            //var Patho = document.getElementsByName('Path');
+            var vMin = 1.e10, vMax = -1.e10;
+            var xv, iSample = 1;
+            var i;
+            var Np = Sdat.length - 1;
+            for (i = 0; i <= Np; i++) {
+                xv = ParamFromSdat(iType, iPath, iSample, i, Sdat);
+                //xv = vParam(iType, iPort, iSample, i, Np, SLines[ii]);
+                if ((xv[0] >= F0) && (xv[0] <= F1)) {
+                    if (xv[1] > vMax) { vMax = xv[1]; }
+                    if (xv[1] < vMin) { vMin = xv[1]; }
+                }
+            }
+            return Array(vMin, vMax);
+        }
+
+        function DrawPlot(iType, iPath, iColor, Scale, Sdat) {
+            var x0 = Scale[1], x1 = Scale[2], y0 = Scale[5], y1 = Scale[4];
+            var iSample = 1;
+            if (Sdat === null) { return; }
+            var Np = Sdat.length - 1;
+            var Xp = new Array();
+            var Yp = new Array();
+            for (i = 0; i <= Np; i++) {
+                xv = ParamFromSdat(iType, iPath, iSample, i, Sdat);
+                Xp[i] = xFrame(xv[0], x0, x1, xFrame0, xFrame1);
+                Yp[i] = yFrame(xv[1], y0, y1, yFrame0, yFrame1);
+            }
+            jg.setColor(GrColor[iColor]);
+            jg.drawPolyline(Xp, Yp);
+            jg.paint();
+        }
+
+        function ParamFromSdat(iType, iPort, iSample, iCount, Sdat) {
+            if (Sdat === null) { return null; }
+            var Np = Sdat.length - 1;
+            var i = iCount;
+            if (iType > 1) {
+                if (iCount < 1) { i = 1; }
+                if (iCount > Np - 1) { i = Np - 1; }
+            }
+            var S = Sdat[i];
+            var F = S[0];
+            var V = Array(S[2 * iPort + 1], S[2 * iPort + 2]);
+            if ((iType == 2) || (iType == 4) || (iType == 5)) {
+                var S0 = Sdat[i - iSample];
+                var S1 = Sdat[i + iSample];
+                var F0 = S0[0];
+                var F1 = S1[0];
+                var V0 = Array(S0[2 * iPort + 1], S0[2 * iPort + 2]);
+                var V1 = Array(S1[2 * iPort + 1], S1[2 * iPort + 2]);
+                var dF = (F1 - F0) / 2.0;
+            }
+            if (iType == 2) {
+                var ILS = (dB(V1) - dB(V0)) / dF / 2000.0;
+                return Array(F, ILS);
+            }
+
+            if (iType == 3) {
+                return Array(F, DgRad * arg(V));
+            }
+
+            if (iType == 4) {
+                var dW = DeltaArg(V1, V0);
+                var dPdx = 0.5 * arg(dW) / dF;
+                var GD = -dPdx / 2.0 / Math.PI;
+                return Array(F, GD);
+            }
+
+            if (iType == 5) {
+                var W1 = DeltaArg(V1, V);
+                var W0 = DeltaArg(V, V0);
+                ddPdx2 = arg(DeltaArg(W1, W0));
+                var GDS = -0.001 * ddPdx2 / 2.0 / Math.PI;
+                return Array(F, GDS);
+            }
+            return Array(F, dB(V));
+
+        }
+        //GRAPH FRAME==================================
+        function xFrame(xScale, xScale0, xScale1, xFrame0, xFrame1) {
+            var xFrame = xFrame0 + (xFrame1 - xFrame0) / (xScale1 - xScale0) * (xScale - xScale0);
+            if (xFrame < xFrame0) { xFrame = xFrame0 }
+            if (xFrame > xFrame1) { xFrame = xFrame1 }
+            return xFrame;
+        }
+
+        function yFrame(yScale, yScale0, yScale1, yFrame0, yFrame1) {
+            var yFrame = yFrame0 + (yFrame1 - yFrame0) / (yScale1 - yScale0) * (yScale - yScale0);
+            if (yFrame < yFrame0) { yFrame = yFrame0 }
+            if (yFrame > yFrame1) { yFrame = yFrame1 }
+            return yFrame;
+        }
+
+
+        function GraphFrame(xFrame0, yFrame0, xFrame1, yFrame1) {
+            jg.clear();
+            jg.setColor("#000000");
+            jg.drawRect(0, 0, xCanvasMax, yCanvasMax);
+            jg.paint();
+        }
+
+        function GraphGrid(xScale0, yScale0, xScale1, yScale1, xFrame0, yFrame0, xFrame1, yFrame1, nxGrid, nyGrid) {
+            jg.setColor("#0084A5");
+            jg.setFont("Arial Black", "10px", Font.PLAIN);
+            var x, xF, xT, y, yT, yF;
+            var nxx = Math.round(3.0 - Math.log(Math.max(Math.abs(xScale0), Math.abs(xScale1))) / Math.LN10);
+            var nyy = Math.round(3.0 - Math.log(Math.max(Math.abs(yScale0), Math.abs(yScale1))) / Math.LN10);
+
+            if (nxx < 0) { nxx = 0 }
+            if (nyy < 0) { nyy = 0 }
+            for (var i = 0; i <= nxGrid; i++) {
+                x = xScale0 + (xScale1 - xScale0) * i / nxGrid;
+                xT = x.toFixed(nxx);
+                xF = xFrame(x, xScale0, xScale1, xFrame0, xFrame1);
+                jg.drawLine(xF, yFrame0, xF, yFrame1); // co-ordinates related to "myCanvas"
+                jg.drawString(xT, xF - 10, yFrame1 + 10);
+            }
+            for (var i = 0; i <= nyGrid; i++) {
+                y = yScale0 + (yScale1 - yScale0) * i / nyGrid;
+                yT = y.toFixed(nyy)
+                yF = yFrame(y, yScale0, yScale1, yFrame0, yFrame1);
+                jg.drawLine(xFrame0, yF, xFrame1, yF); // co-ordinates related to "myCanvas"
+                jg.drawString(yT, xFrame0 - 45, yF - 7);
+            }
+            jg.paint();
+        }
+
+
+        //######################### END GRAPHS #################################
+        function areNumbers(V) {
+            if (!Array.isArray) {
+                Array.isArray = function (arg) {
+                    return Object.prototype.toString.call(arg) === '[object Array]';
+                };
+            } if (!Array.isArray(V)) { return -1; }
+            var i, N = V.length - 1;
+            for (i = 0; i <= N; i++) {
+                if (isNaN(V[i])) { return -1; }
+            }
+            return N;
+        }
+
+
+        function WordsToArray(str) {
+            // text line to array of words
+            return ReduceWhiteSpaces(str).split(/\s/g);
+        }
+
+        function ReduceWhiteSpaces(str) {
+            return trim(str).replace(/\s+/g, ' ');
+        }
+        function trim(str) {
+            return str.replace(/^\s+|\s+$/g, '');
+        }
+
+        function GetFloats(nVars, VarLine) {
+            var i;
+            var v = WordsToArray(VarLine);
+            //var v = VarLine.split(/\s/g);
+            if (v.length >= nVars) {
+                var vv = [];
+                for (i = 0; i <= nVars - 1; i++) {
+                    vv[i] = parseFloat(v[i]);
+                    if (isNaN(vv[i])) {
+                        //return NaN;
+                        return null;
+                    }
+                }
+
+            } else {
+                //alert("Number of entered values is less than required (" + nVars.toString() + ").")
+                //return NaN;
+                return null;
+            }
+            return vv;
+        }
+
+
+    </SCRIPT>
+
+    <SCRIPT src="corr.js">
+    </SCRIPT>
+
+
+
+    <SCRIPT SRC="complx.js">
+    </SCRIPT>
+
+
+</BODY>
+
+
+</HTML>

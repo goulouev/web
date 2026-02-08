@@ -1,0 +1,1844 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html">
+<META name=Generator content="Mathcad Professional">
+<META name=ProgID content="Mathcad">
+<TITLE>Corrugated Filter with Quarter-Wave Coupled Resonators. MathCAD design procedure</TITLE>
+<META NAME="keywords" CONTENT="RF microwave, millimeter wave, wave guide, waveguide, GHz, quarter wave coupled filter, corrugated harmonic filter, corrugated lowpass filter, bandpass filter, band-pass filter, corrugated low-pass filter, E-plane filter, corrugated waveguide, filter, waveguide, low-pass, lowpass, harmonic, design procedure, application note, MathCAD spreadsheet, Math CAD spreadsheet">
+<META NAME="description" CONTENT="This is a MathCAD style written application note with design procedure for the quarter-wave-coupled corrugated waveguide filter.">
+<META name="Author" content="Rousslan Goulouev">
+<STYLE TYPE="text/css">
+BODY { background : #ffffff }
+.Normal { font-family:Arial,sans-serif; font-size:10pt }
+.Heading_1 { font-family:Arial,sans-serif; font-size:14pt
+; font-weight:bold }
+.Heading_2 { font-family:Arial,sans-serif; font-size:12pt
+; font-weight:bold; font-style:italic }
+.Heading_3 { font-family:Arial,sans-serif; font-size:12pt }
+.Paragraph { font-family:Arial,sans-serif; font-size:10pt
+; text-indent:28px }
+.List { font-family:Arial,sans-serif; font-size:10pt; margin-left:19px
+; text-indent:-19px }
+.Indent { font-family:Arial,sans-serif; font-size:10pt; margin-left:
+144px }
+.Title { font-family:Times New Roman,sans-serif; font-size:24pt
+; font-weight:bold; text-align:center }
+.Subtitle { font-family:Times New Roman,sans-serif; font-size:18pt
+; text-align:center }
+</STYLE>
+</HEAD>
+<BODY>
+<DIV STYLE ="position:absolute;top:7;left:8;width:553">
+<LAYER TOP=7 LEFT=8 WIDTH=553>
+<DIV CLASS=Normal STYLE="text-align:center">
+<SPAN STYLE="color:#0000ff;font-family:Book Antiqua,sans-serif
+;font-size:14pt;font-weight:bold">
+Corrugated Filter with Quarter-Wave Coupled Resonators
+ <br></SPAN></DIV>
+<DIV CLASS=Normal STYLE="text-align:center">
+<SPAN STYLE="color:#0000ff;font-family:Book Antiqua,sans-serif
+;font-size:12pt;font-style:italic">Design procedure</SPAN>
+<SPAN STYLE="color:#008080;font-family:Book Antiqua,sans-serif
+;font-size:12pt;font-style:italic"><br></SPAN></DIV>
+<DIV CLASS=Normal STYLE="text-align:center">
+<SPAN STYLE="color:#008080;font-family:Book Antiqua,sans-serif
+;font-size:12pt;font-style:italic">R. Goulouev<br></SPAN></DIV>
+<DIV CLASS=Normal STYLE="text-align:center">
+<SPAN STYLE="color:#008080;font-family:Book Antiqua,sans-serif
+;font-size:12pt;font-style:italic"><br></SPAN></DIV>
+<DIV CLASS=Normal>
+Corrugated waveguide filters are widely used in powerful
+ microwave applications in order to reject high frequency
+ spurious spectrum. Here a corrugated harmonic filter
+ of new type [1] using
+ quarter-wave-coupled E-plane corrugated reflection-zero
+ 
+resonators providing high loaded Q is presented. The
+ expressions for scattering parameters of filter structure
+ are represented in terms of known variational approximations
+ and grouped into completed two s
+tep design procedure, which combines a first-order synthesis,
+ based on quarter-wave-coupled prototype, with gradient
+ optimization procedure. The design procedure is realized
+ as MathCAD spreadsheet allowing performing complete
+ filter design 
+including synthesis, optimization and detailed verification
+ within several minutes. <br></DIV>
+<DIV CLASS=Normal>
+<br></DIV>
+<DIV CLASS=Normal STYLE="text-align:center">
+Forward your comments &amp; questions to R. Goulouev
+ <br></DIV>
+<DIV CLASS=Normal STYLE="text-align:center">
+<SPAN STYLE="color:#0000ff">E-mail: gouloue@ieee.org<br></SPAN></DIV>
+<DIV CLASS=Normal STYLE="text-align:center">
+<SPAN STYLE="color:#0000ff">Web Page: http://www.goulouev.com/<br>
+</SPAN></DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:363;left:8;width:578">
+<LAYER TOP=363 LEFT=8 WIDTH=578>
+<DIV CLASS=Normal STYLE="text-align:center">
+<SPAN STYLE="font-weight:bold">Waveguide</SPAN><br></DIV>
+<DIV CLASS=Normal>
+<br></DIV>
+<DIV CLASS=Normal>
+The filter [1] is represented as a number of wave guiding
+ elements of scattering matrices <SPAN STYLE="font-weight:bold
+;font-style:italic">S</SPAN><SPAN STYLE="font-weight:bold
+;font-style:italic;vertical-align:sub">i</SPAN>
+ and connected to each other by straight waveguide lines
+ of length <SPAN STYLE="font-weight:bold;font-style:italic">L</SPAN>
+<SPAN STYLE="font-weight:bold;font-style:italic;vertical-align:sub">i
+</SPAN><SPAN STYLE="vertical-align:sub">.</SPAN></DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:536;left:16">
+<LAYER TOP=536 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro2046.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:659;left:120;width:270">
+<LAYER TOP=659 LEFT=120 WIDTH=270>
+<DIV CLASS=Normal>
+Figure 1: Cascade of N+1 scattering elements.</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:707;left:16;width:562">
+<LAYER TOP=707 LEFT=16 WIDTH=562>
+<DIV CLASS=Normal>
+S-parameters of cascade of any two elements with S-matrices
+ <SPAN STYLE="font-weight:bold;font-style:italic">S0</SPAN>
+ and <SPAN STYLE="font-weight:bold;font-style:italic">S1</SPAN>
+ can be expressed: </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:890;left:24">
+<LAYER TOP=890 LEFT=24>
+<IMG SRC=".\tcorro_images\tcorro0828.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:923;left:496;width:15">
+<LAYER TOP=923 LEFT=496 WIDTH=15>
+<DIV CLASS=Normal>
+(1)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:1227;left:8;width:552">
+<LAYER TOP=1227 LEFT=8 WIDTH=552>
+<DIV CLASS=Normal>
+Where <SPAN STYLE="font-family:Symbol,sans-serif;font-weight:bold
+;font-style:italic">b</SPAN>
+ is propagation constant taking into account finite
+ conductivity of waveguide surface [2] </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:1266;left:8">
+<LAYER TOP=1266 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1200.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:1275;left:368;width:29">
+<LAYER TOP=1275 LEFT=368 WIDTH=29>
+<DIV CLASS=Normal>
+silver</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:1291;left:496;width:15">
+<LAYER TOP=1291 LEFT=496 WIDTH=15>
+<DIV CLASS=Normal>
+(2)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:1315;left:360;width:39">
+<LAYER TOP=1315 LEFT=360 WIDTH=39>
+<DIV CLASS=Normal>
+copper</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:1363;left:360;width:56">
+<LAYER TOP=1363 LEFT=360 WIDTH=56>
+<DIV CLASS=Normal>
+aluminum</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:1403;left:368;width:34">
+<LAYER TOP=1403 LEFT=368 WIDTH=34>
+<DIV CLASS=Normal>
+nickel</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:1603;left:8;width:34">
+<LAYER TOP=1603 LEFT=8 WIDTH=34>
+<DIV CLASS=Normal>
+where</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:1678;left:8">
+<LAYER TOP=1678 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1504.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:1697;left:168">
+<LAYER TOP=1697 LEFT=168>
+<IMG SRC=".\tcorro_images\tcorro1505.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:1707;left:480;width:15">
+<LAYER TOP=1707 LEFT=480 WIDTH=15>
+<DIV CLASS=Normal>
+(3)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:1771;left:8;width:578">
+<LAYER TOP=1771 LEFT=8 WIDTH=578>
+<DIV CLASS=Normal>
+are wavelength and wave number corresponding to free
+ space, <SPAN STYLE="color:#000000;font-weight:bold;font-style:italic
+">a</SPAN> is waveguide width and <SPAN STYLE="font-weight:bold
+;font-style:italic">b</SPAN>
+ is waveguide height. The initial value of loss factor
+ is multiplied by 1.7 practical correction in order
+ to take into account roughness of surface. </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:1891;left:8;width:578">
+<LAYER TOP=1891 LEFT=8 WIDTH=578>
+<DIV CLASS=Normal STYLE="text-align:center">
+<SPAN STYLE="font-weight:bold">Single E-plane Cavity</SPAN><br></DIV>
+<DIV CLASS=Normal>
+<br></DIV>
+<DIV CLASS=Normal>
+The filter structure is based on shorted E-plane symmetric
+ stubs (cavities) grouped in resonating pairs. Scattering
+ properties of such a cavity can be evaluated using
+ E-plane T-junction model [3]. </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:2064;left:16">
+<LAYER TOP=2064 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro2050.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:2283;left:48;width:394">
+<LAYER TOP=2283 LEFT=48 WIDTH=394>
+<DIV CLASS=Normal>
+Figure 2: Single E-plane corrugation and its equivalent
+ circuit. </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:2371;left:8;width:586">
+<LAYER TOP=2371 LEFT=8 WIDTH=586>
+<DIV CLASS=Normal>
+Where reactive elements of T-junction's equivalent circuit
+ from [3] modified for non-ideal waveguide impedances
+ are given by sequence of expressions</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:2506;left:8">
+<LAYER TOP=2506 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro2005.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:2891;left:496;width:15">
+<LAYER TOP=2891 LEFT=496 WIDTH=15>
+<DIV CLASS=Normal>
+(4)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:3131;left:8;width:578">
+<LAYER TOP=3131 LEFT=8 WIDTH=578>
+<DIV CLASS=Normal>
+Here the short circuited waveguide susceptance <SPAN STYLE="
+font-weight:bold;font-style:italic">Bs</SPAN>
+ representing the shorted waveguide section has to be
+ connected in parallel to <SPAN STYLE="font-weight:bold
+;font-style:italic">Bd</SPAN>
+ susceptance of the T-junction circuit reactance to
+ simulate a single corrugation as given  </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:3194;left:32">
+<LAYER TOP=3194 LEFT=32>
+<IMG SRC=".\tcorro_images\tcorro0207.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:3203;left:504;width:15">
+<LAYER TOP=3203 LEFT=504 WIDTH=15>
+<DIV CLASS=Normal>
+(5)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:3259;left:8;width:567">
+<LAYER TOP=3259 LEFT=8 WIDTH=567>
+<DIV CLASS=Normal>
+Thus the reflection and transmission coefficients of
+ a single corrugation can be expressed from the equivalent
+ circuit and represented by </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:3338;left:16">
+<LAYER TOP=3338 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro0749.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:3483;left:528;width:15">
+<LAYER TOP=3483 LEFT=528 WIDTH=15>
+<DIV CLASS=Normal>
+(6)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:3699;left:8;width:560">
+<LAYER TOP=3699 LEFT=8 WIDTH=560>
+<DIV CLASS=Normal STYLE="text-align:center">
+<SPAN STYLE="font-weight:bold">Resonators</SPAN><br></DIV>
+<DIV CLASS=Normal>
+<br></DIV>
+<DIV CLASS=Normal>
+A single resonator can be represented as a pair of two
+ corrugations connected to each other by a waveguide
+ section as shown on Figure 3. </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:3784;left:8">
+<LAYER TOP=3784 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro2051.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:4035;left:144;width:307">
+<LAYER TOP=4035 LEFT=144 WIDTH=307>
+<DIV CLASS=Normal>
+Figure 3: A single resonator and its equivalent circuit.</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:4075;left:8;width:578">
+<LAYER TOP=4075 LEFT=8 WIDTH=578>
+<DIV CLASS=Normal>
+The length d of the waveguide is chosen to provide reflection
+ zero at resonance frequency <SPAN STYLE="
+font-family:Symbol,sans-serif">b</SPAN>r. 
+Using the expressions (6) and (1) S-parameters of such
+ a resonator can be derived </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:4163;left:16">
+<LAYER TOP=4163 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro1058.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:4195;left:448;width:15">
+<LAYER TOP=4195 LEFT=448 WIDTH=15>
+<DIV CLASS=Normal>
+(7)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:4411;left:8;width:578">
+<LAYER TOP=4411 LEFT=8 WIDTH=578>
+<DIV CLASS=Normal>
+The length of connecting waveguide <SPAN STYLE="font-weight:bold
+;font-style:italic">d</SPAN>
+ can be found from the condition of reflection zero
+ at resonant frequency <SPAN STYLE="font-weight:bold;font-style:italic
+">k</SPAN><SPAN STYLE="font-weight:bold;font-style:italic">r</SPAN>
+ as </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:4467;left:456;width:15">
+<LAYER TOP=4467 LEFT=456 WIDTH=15>
+<DIV CLASS=Normal>
+(8)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:4459;left:8">
+<LAYER TOP=4459 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro0932.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:4523;left:8;width:578">
+<LAYER TOP=4523 LEFT=8 WIDTH=578>
+<DIV CLASS=Normal>
+Let represent the differential unloaded Q factor of
+ the resonator at the vicinity of <SPAN STYLE="
+font-family:Symbol,sans-serif;font-weight:bold;font-style:italic">b
+</SPAN><SPAN STYLE="font-weight:bold;font-style:italic">r</SPAN>
+ as</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:4560;left:16">
+<LAYER TOP=4560 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro0945.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:4571;left:464;width:15">
+<LAYER TOP=4571 LEFT=464 WIDTH=15>
+<DIV CLASS=Normal>
+(9)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:4635;left:8;width:563">
+<LAYER TOP=4635 LEFT=8 WIDTH=563>
+<DIV CLASS=Normal>
+where R(<SPAN STYLE="font-family:Symbol,sans-serif">b</SPAN>)
+ and T(<SPAN STYLE="font-family:Symbol,sans-serif">b</SPAN>
+) are reflection and transmission functions from (7).
+ 
+After simple manipulations the Q value can be expressed
+ from reflection and transmission functions of single
+ corrugation (6) </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:4683;left:8">
+<LAYER TOP=4683 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1079.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:4731;left:560;width:22">
+<LAYER TOP=4731 LEFT=560 WIDTH=22>
+<DIV CLASS=Normal>
+(10)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:4867;left:8;width:564">
+<LAYER TOP=4867 LEFT=8 WIDTH=564>
+<DIV CLASS=Normal>
+Now we can enter a simple relationship of loaded <SPAN STYLE="
+font-weight:bold;font-style:italic">Q </SPAN>
+of resonator with its dimension <SPAN STYLE="font-weight:bold
+;font-style:italic">h</SPAN> das follows: </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:4913;left:24">
+<LAYER TOP=4913 LEFT=24>
+<IMG SRC=".\tcorro_images\tcorro0956.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:4923;left:520;width:22">
+<LAYER TOP=4923 LEFT=520 WIDTH=22>
+<DIV CLASS=Normal>
+(11)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:5027;left:16;width:560">
+<LAYER TOP=5027 LEFT=16 WIDTH=560>
+<DIV CLASS=Normal STYLE="text-align:center">
+<SPAN STYLE="font-weight:bold">Filter Structure</SPAN><br></DIV>
+<DIV CLASS=Normal>
+<br></DIV>
+<DIV CLASS=Normal>
+By analogy with iris quarter-wave-coupled filters from
+ [2], here the resonators are integrated into a filter
+ structure by impedance inverting waveguide sections
+ of length <SPAN STYLE="font-weight:bold">t~</SPAN><SPAN STYLE="
+font-family:Symbol,sans-serif;font-weight:bold">l</SPAN><SPAN STYLE="
+font-weight:bold">g</SPAN><SPAN STYLE="font-weight:bold">/4</SPAN>
+ as shown on Figure 4 below</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:5112;left:8">
+<LAYER TOP=5112 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro2053.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:5315;left:136;width:382">
+<LAYER TOP=5315 LEFT=136 WIDTH=382>
+<DIV CLASS=Normal>
+Figure 4: Corrugated filter consisting of single pairs
+ of corrugations</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:5347;left:8;width:578">
+<LAYER TOP=5347 LEFT=8 WIDTH=578>
+<DIV CLASS=Normal>
+Filter structure with pseudo-maximally-flat frequency
+ response characterized by central frequency <SPAN STYLE="
+font-family:Symbol,sans-serif">b</SPAN>r and bandwidth
+ <SPAN STYLE="font-family:Symbol,sans-serif">D</SPAN><SPAN STYLE="
+font-family:Symbol,sans-serif">b</SPAN> 
+can be synthesized using expressions (11) and (8) matching
+ required Q-values [2]   </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:5426;left:8">
+<LAYER TOP=5426 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1010.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:5427;left:528">
+<LAYER TOP=5427 LEFT=528>
+<IMG SRC=".\tcorro_images\tcorro1013.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:5659;left:8;width:564">
+<LAYER TOP=5659 LEFT=8 WIDTH=564>
+<DIV CLASS=Normal>
+As scattering parameters of each resonator is known
+ (7), the frequency response of filter structure  can
+ be calculated using consecutive cascading S-elements
+ as follows:</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:5811;left:8">
+<LAYER TOP=5811 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro0961.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:5811;left:520">
+<LAYER TOP=5811 LEFT=520>
+<IMG SRC=".\tcorro_images\tcorro1014.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:6147;left:8;width:552">
+<LAYER TOP=6147 LEFT=8 WIDTH=552>
+<DIV CLASS=Normal STYLE="text-align:center">
+<SPAN STYLE="font-weight:bold">Interface Transformers<br></SPAN>
+</DIV>
+<DIV CLASS=Normal STYLE="text-align:center">
+<br></DIV>
+<DIV CLASS=Normal>
+<br></DIV>
+<DIV CLASS=Normal>
+Because the dimensions of external waveguide line <SPAN STYLE="
+font-weight:bold">A x B</SPAN>
+ can differ from the dimensions of internal cross section
+ of filter structure <SPAN STYLE="font-weight:bold">a
+ x b</SPAN>
+, the transformer sections are necessary. Here a single
+ quarter-wave step is used to match filter structure
+ with interface. In order to simulate the frequency
+ response of such a waveguide transformer, Macfarlane's
+ formulas [4] for HE-plane waveguide step can be used.</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:6288;left:16">
+<LAYER TOP=6288 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro2055.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:6475;left:96;width:300">
+<LAYER TOP=6475 LEFT=96 WIDTH=300>
+<DIV CLASS=Normal>
+Figure 5: HE-plane junction and its equivalent circuit</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:6515;left:8;width:555">
+<LAYER TOP=6515 LEFT=8 WIDTH=555>
+<DIV CLASS=Normal>
+Here the impedance transformation factor, admittance
+ of smaller waveguide and equivalent shunt susceptance
+ are expressed in following expressions</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:6577;left:24">
+<LAYER TOP=6577 LEFT=24>
+<IMG SRC=".\tcorro_images\tcorro2060.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:6651;left:520">
+<LAYER TOP=6651 LEFT=520>
+<IMG SRC=".\tcorro_images\tcorro2081.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:7059;left:8;width:578">
+<LAYER TOP=7059 LEFT=8 WIDTH=578>
+<DIV CLASS=Normal>
+<SPAN STYLE="font-weight:bold;text-decoration:underline">CORRECTION
+</SPAN><SPAN STYLE="font-weight:bold">
+: The previous expression for EH-plane junctions from
+ [4] are replaced with expression (16) obtained using
+ variational method [3]. </SPAN></DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:7115;left:8;width:348">
+<LAYER TOP=7115 LEFT=8 WIDTH=348>
+<DIV CLASS=Normal>
+Thus we can derive expression for S-matrix of HE-plane
+ step</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:7154;left:16">
+<LAYER TOP=7154 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro2093.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:7307;left:504">
+<LAYER TOP=7307 LEFT=504>
+<IMG SRC=".\tcorro_images\tcorro2085.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:7459;left:8;width:578">
+<LAYER TOP=7459 LEFT=8 WIDTH=578>
+<DIV CLASS=Normal>
+and S-matrix of double step transformer as a cascade
+ (1) of two junctions</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:7514;left:8">
+<LAYER TOP=7514 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro2065.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:7667;left:8;width:578">
+<LAYER TOP=7667 LEFT=8 WIDTH=578>
+<DIV CLASS=Normal>
+The dimensions of cross section At xBt and length of
+ transforming step can be synthesized from condition
+ of reflection zero at kr, the wave number corresponding
+ to the central frequency of filter's pass-band and
+ expressed as </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:7746;left:8">
+<LAYER TOP=7746 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1163.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:7947;left:496;width:22">
+<LAYER TOP=7947 LEFT=496 WIDTH=22>
+<DIV CLASS=Normal>
+(22)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:8011;left:8;width:563">
+<LAYER TOP=8011 LEFT=8 WIDTH=563>
+<DIV CLASS=Normal>
+As the quarter-wave transformer can be considered as
+ a reflection-zero resonator of low  loaded Q (9), it
+ can replace the end resonators for most practical cases
+ in order to reduce length of filter and get rid of
+ practically unreal shallow corrugations. </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:8139;left:200;width:149">
+<LAYER TOP=8139 LEFT=200 WIDTH=149>
+<DIV CLASS=Normal STYLE="text-align:center">
+<SPAN STYLE="font-weight:bold">Entire Corrugated Filter</SPAN></DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:8160;left:8">
+<LAYER TOP=8160 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro2056.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:8339;left:184;width:229">
+<LAYER TOP=8339 LEFT=184 WIDTH=229>
+<DIV CLASS=Normal>
+Figure 6: Sketch of entire filter structure</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:8379;left:8;width:571">
+<LAYER TOP=8379 LEFT=8 WIDTH=571>
+<DIV CLASS=Normal>
+Now dimensions of internal filter structure with end
+ resonators removed are obtained from (12), (11), and
+ (8) and expressed as follows:  </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:8434;left:8">
+<LAYER TOP=8434 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1331.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:8435;left:280">
+<LAYER TOP=8435 LEFT=280>
+<IMG SRC=".\tcorro_images\tcorro1333.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:8563;left:536;width:22">
+<LAYER TOP=8563 LEFT=536 WIDTH=22>
+<DIV CLASS=Normal>
+(23)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:8635;left:8;width:578">
+<LAYER TOP=8635 LEFT=8 WIDTH=578>
+<DIV CLASS=Normal>
+where <SPAN STYLE="font-family:Symbol,sans-serif">w</SPAN>=
+<SPAN STYLE="font-family:Symbol,sans-serif">D</SPAN><SPAN STYLE="
+font-family:Symbol,sans-serif">b</SPAN>/<SPAN STYLE="
+font-family:Symbol,sans-serif">b</SPAN>
+ is relative bandwidth of filter. 
+Since all dimensions of filter are known, the S-parameters
+ of entire filter can be obtained as cascade of two
+ transformers (21) and internal corrugated structure
+ (13)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:8706;left:16">
+<LAYER TOP=8706 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro1045.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:8795;left:544;width:22">
+<LAYER TOP=8795 LEFT=544 WIDTH=22>
+<DIV CLASS=Normal>
+(24)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:8963;left:8;width:578">
+<LAYER TOP=8963 LEFT=8 WIDTH=578>
+<DIV CLASS=Normal STYLE="text-align:center">
+<SPAN STYLE="font-weight:bold">Response Optimization</SPAN><br></DIV>
+<DIV CLASS=Normal>
+<br></DIV>
+<DIV CLASS=Normal>
+<br></DIV>
+<DIV CLASS=Normal>
+As usual filter synthesizing procedures are based on
+ representation of waveguide structure as a circuit
+ of lumped elements, it is a very complicated problem
+ to extract the L-C parameters from waveguide junctions
+ and compensate their frequency dependence or overmoding.
+ Besides if even the problem is solved and the filter
+ has an ideal Chevychev or Zolotorev function response
+ in the vicinity of its pass-band, it is quite not obvious
+ the filter show rejection of far frequency spectrum
+ will be also so well. Therefore most designers rather
+ prefer to design from scratch a draft filter matching
+ the  specification in common sense, and optimize its
+ pass-band and roll-off points. A simple gradient approach
+ is used here to adjust filter bandwidth. First of all
+ we extract physical parameters to be optimized from
+ constant and dependant parameters and group them in
+ two vectors as shown </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:9202;left:24">
+<LAYER TOP=9202 LEFT=24>
+<IMG SRC=".\tcorro_images\tcorro1315.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:9227;left:528;width:22">
+<LAYER TOP=9227 LEFT=528 WIDTH=22>
+<DIV CLASS=Normal>
+(25)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:9209;left:304">
+<LAYER TOP=9209 LEFT=304>
+<IMG SRC=".\tcorro_images\tcorro1324.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:9451;left:8;width:567">
+<LAYER TOP=9451 LEFT=8 WIDTH=567>
+<DIV CLASS=Normal>
+Let declare a function evaluating average return loss
+ of pass-band [k0,k1] and isolation at specified point
+ k2 in respect to corresponding spec values R and T
+ in dB as  </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:9506;left:8">
+<LAYER TOP=9506 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro2006.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:9955;left:640;width:22">
+<LAYER TOP=9955 LEFT=640 WIDTH=22>
+<DIV CLASS=Normal>
+(26)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:10035;left:16;width:550">
+<LAYER TOP=10035 LEFT=16 WIDTH=550>
+<DIV CLASS=Normal>
+Now we can express any next vector approximation v1
+ from previous vector approximation v0 by  scalar increment
+ dv</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:10082;left:32">
+<LAYER TOP=10082 LEFT=32>
+<IMG SRC=".\tcorro_images\tcorro1309.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:10115;left:624;width:22">
+<LAYER TOP=10115 LEFT=624 WIDTH=22>
+<DIV CLASS=Normal>
+(27)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:10379;left:8;width:511">
+<LAYER TOP=10379 LEFT=8 WIDTH=511>
+<DIV CLASS=Normal>
+The procedure can be repeated any Nsteps times until
+ the minimum of function f is found</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:10427;left:16">
+<LAYER TOP=10427 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro1310.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:10451;left:536;width:22">
+<LAYER TOP=10451 LEFT=536 WIDTH=22>
+<DIV CLASS=Normal>
+(28)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:10555;left:8;width:554">
+<LAYER TOP=10555 LEFT=8 WIDTH=554>
+<DIV CLASS=Normal>
+After optimization is completed the new optimized dimensions
+ can be found as inverse functions from (25)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:10642;left:8">
+<LAYER TOP=10642 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1346.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:10642;left:256">
+<LAYER TOP=10642 LEFT=256>
+<IMG SRC=".\tcorro_images\tcorro1349.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:10675;left:536;width:22">
+<LAYER TOP=10675 LEFT=536 WIDTH=22>
+<DIV CLASS=Normal>
+(29)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:10842;left:48">
+<LAYER TOP=10842 LEFT=48>
+<IMG SRC=".\tcorro_images\tcorro1347.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:10850;left:288">
+<LAYER TOP=10850 LEFT=288>
+<IMG SRC=".\tcorro_images\tcorro1350.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:11003;left:288;width:141">
+<LAYER TOP=11003 LEFT=288 WIDTH=141>
+<DIV CLASS=Normal>
+<SPAN STYLE="font-weight:bold">Derivative Parameters</SPAN></DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:11051;left:8;width:456">
+<LAYER TOP=11051 LEFT=8 WIDTH=456>
+<DIV CLASS=Normal>
+Most technical parameters can be obtained from S-response
+ of filter as follows:<br></DIV>
+<DIV CLASS=Normal>
+<br></DIV>
+<DIV CLASS=Normal>
+Insertion and return loss in dB</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:11139;left:16">
+<LAYER TOP=11139 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro1532.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:11259;left:8;width:70">
+<LAYER TOP=11259 LEFT=8 WIDTH=70>
+<DIV CLASS=Normal>
+Group delay</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:11298;left:24">
+<LAYER TOP=11298 LEFT=24>
+<IMG SRC=".\tcorro_images\tcorro1538.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:11345;left:8">
+<LAYER TOP=11345 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1535.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:11411;left:8;width:109">
+<LAYER TOP=11411 LEFT=8 WIDTH=109>
+<DIV CLASS=Normal>
+Group delay slope </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:11441;left:8">
+<LAYER TOP=11441 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1534.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:11515;left:8;width:116">
+<LAYER TOP=11515 LEFT=8 WIDTH=116>
+<DIV CLASS=Normal>
+Insertion Loss slope</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:11569;left:8">
+<LAYER TOP=11569 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1527.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:11667;left:8;width:578">
+<LAYER TOP=11667 LEFT=8 WIDTH=578>
+<DIV CLASS=Normal STYLE="text-align:center">
+<SPAN STYLE="font-weight:bold">Harmonics Rejection</SPAN><br></DIV>
+<DIV CLASS=Normal>
+<br></DIV>
+<DIV CLASS=Normal>
+As corrugated filters are based on E-plane structures
+ the filter response over frequency is a function of
+ waveguide propagation number <SPAN STYLE="
+font-family:Symbol,sans-serif">b.</SPAN>
+ Therefore if a pass-band exists for TE10-mode, it must
+ be for any TEno-mode having the same <SPAN STYLE="
+font-family:Symbol,sans-serif">b</SPAN>-plan. 
+Practically there is no way to eliminate spurious pass-bands
+ corresponding to spurious waveguide modes of higher
+ order except keeping TE10-mode clearance. That is a
+ property of E-plane corrugated filters of any type
+ [4]. Nevertheless, corrugated filters are commonly
+ used as low-pass filters because of their low cost,
+ low loss and extremely high power handling. Practically
+ designers of corrugated filters try to move those spurious
+ pass-bands out of important frequency bands required
+ to be rejected. Prediction of spurious rejection is
+ easier problem as the expressions (13) and (24) can
+ be used to evaluate frequency response of any TEno-mode
+ by substituting wavenumber k by given     </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:11887;left:16">
+<LAYER TOP=11887 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro1567.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:11907;left:544">
+<LAYER TOP=11907 LEFT=544>
+<IMG SRC=".\tcorro_images\tcorro1568.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:11963;left:8;width:578">
+<LAYER TOP=11963 LEFT=8 WIDTH=578>
+<DIV CLASS=Normal>
+A simple procedure [5] shows how to select optimal <SPAN STYLE="
+font-weight:bold;font-style:italic">a</SPAN>
+-dimension in order to provide rejection of modes of
+ higher order in particular frequency bands.</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:12019;left:8;width:578">
+<LAYER TOP=12019 LEFT=8 WIDTH=578>
+<DIV CLASS=Normal STYLE="text-align:center">
+<SPAN STYLE="font-weight:bold">Peak Power Handling <br></SPAN></DIV>
+<DIV CLASS=Normal STYLE="text-align:center">
+<br></DIV>
+<DIV CLASS=Normal>
+Electrical breakdown can occur in air or vacuum due
+ to ionization or emission. Practically the peak power
+ handling of straight waveguide section can be approximately
+ evaluated as</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:12106;left:8">
+<LAYER TOP=12106 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1574.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:12211;left:544;width:22">
+<LAYER TOP=12211 LEFT=544 WIDTH=22>
+<DIV CLASS=Normal>
+(31)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:12363;left:8;width:578">
+<LAYER TOP=12363 LEFT=8 WIDTH=578>
+<DIV CLASS=Normal>
+This value should be reduced by 1+Q times for each resonator
+ of filter (12) take into account the power stored by
+ each resonator. Then the maximum peak power handling
+ can be estimated as  </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:12427;left:552;width:22">
+<LAYER TOP=12427 LEFT=552 WIDTH=22>
+<DIV CLASS=Normal>
+(32)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:12425;left:8">
+<LAYER TOP=12425 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1587.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:12491;left:8;width:452">
+<LAYER TOP=12491 LEFT=8 WIDTH=452>
+<DIV CLASS=Normal>
+for filters with pseudo-maximally-flat response with
+ frequency bandwidth [f0,f1].</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:12539;left:216;width:157">
+<LAYER TOP=12539 LEFT=216 WIDTH=157>
+<DIV CLASS=Normal>
+<SPAN STYLE="font-weight:bold">Dimensions of filter
+ body</SPAN></DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:12579;left:8;width:398">
+<LAYER TOP=12579 LEFT=8 WIDTH=398>
+<DIV CLASS=Normal>
+Finally we can summarize the internal dimensions of
+ filter W x H x L </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:12625;left:8">
+<LAYER TOP=12625 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1932.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:12651;left:544;width:22">
+<LAYER TOP=12651 LEFT=544 WIDTH=22>
+<DIV CLASS=Normal>
+(33)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:12811;left:8;width:578">
+<LAYER TOP=12811 LEFT=8 WIDTH=578>
+<DIV CLASS=Normal>
+which are maximum dimensions of internal surface of
+ filter body. The real dimensions of filter assembly
+ must include thickness of metal and flanges in addition
+ to those simulated dimensions.  </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:12867;left:8;width:575">
+<LAYER TOP=12867 LEFT=8 WIDTH=575>
+<DIV CLASS=Normal STYLE="text-align:center">
+<SPAN STYLE="font-weight:bold">Manufacturing</SPAN><br></DIV>
+<DIV CLASS=Normal>
+<br></DIV>
+<DIV CLASS=Normal>
+The filter can be made from two symmetric half bodies
+ using regular milling or EDM machining. Though central
+ E-plane cut is recommended because of absence transversal
+ currents, central H-plane cut is commonly used in corrugated
+ filters production because of milling preferences.
+ If so, contact grooves should be used in order to provide
+ good electrical contact on flanges between filter cuts.
+ Electroforming is used more seldom, but allows creating
+ entire filter. Practically +/-0.002<SPAN STYLE="font-weight:bold
+;font-style:italic">a</SPAN>
+ random tolerance on dimensions and positions of corrugations
+ might be allowed as it should not degrade much pass-band
+ performance of filter of this type. Reasonable radii
+ (not larger than 0.07<SPAN STYLE="font-weight:bold;font-style:italic
+">a</SPAN>
+) of milling tool might be allowed, as it does usually
+ not impact electrical properties of filer of this type.
+ <br></DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:13075;left:8;width:573">
+<LAYER TOP=13075 LEFT=8 WIDTH=573>
+<DIV CLASS=Normal STYLE="text-align:center">
+<SPAN STYLE="font-weight:bold">Comparison with experimental
+ data</SPAN><br></DIV>
+<DIV CLASS=Normal>
+<br></DIV>
+<DIV CLASS=Normal>
+An experimental Ku-band WR75 filter has been designed
+ using the following design procedure. The following
+ dimensions has been specified</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:13147;left:8">
+<LAYER TOP=13147 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1469.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:13147;left:112">
+<LAYER TOP=13147 LEFT=112>
+<IMG SRC=".\tcorro_images\tcorro1470.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:13147;left:200">
+<LAYER TOP=13147 LEFT=200>
+<IMG SRC=".\tcorro_images\tcorro1471.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:13147;left:296">
+<LAYER TOP=13147 LEFT=296>
+<IMG SRC=".\tcorro_images\tcorro1472.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:13147;left:384">
+<LAYER TOP=13147 LEFT=384>
+<IMG SRC=".\tcorro_images\tcorro1473.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:13171;left:16">
+<LAYER TOP=13171 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro1474.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:13171;left:112">
+<LAYER TOP=13171 LEFT=112>
+<IMG SRC=".\tcorro_images\tcorro1475.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:13171;left:200">
+<LAYER TOP=13171 LEFT=200>
+<IMG SRC=".\tcorro_images\tcorro1476.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:13171;left:280">
+<LAYER TOP=13171 LEFT=280>
+<IMG SRC=".\tcorro_images\tcorro1477.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:13171;left:368">
+<LAYER TOP=13171 LEFT=368>
+<IMG SRC=".\tcorro_images\tcorro1478.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:13196;left:8">
+<LAYER TOP=13196 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1466.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:13228;left:8">
+<LAYER TOP=13228 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1467.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:13275;left:8;width:562">
+<LAYER TOP=13275 LEFT=8 WIDTH=562>
+<DIV CLASS=Normal>
+During production the real dimensions of filters are
+ assumed to be deviated from the designed dimensions
+ as +/-0.001'' random manufacturing tolerance were applied
+ to all corrugations and corners of all cavities were
+ rounded by milling tool of 0.064'' radius. After being
+ manufactured the both filters were measured using a
+ vector network analyzer and measurement errors are
+ expected to be +/-0.03 dB for insertion loss of pass-band,
+ +/- 2 dB for in-band return loss, +/-2 dB on roll-off
+ rejection and 70-80 dB noise floor limits. During testing
+ the following data of return and insertion loss over
+ WR75 waveguide bandwidth has been measured </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:13427;left:16">
+<LAYER TOP=13427 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro1385.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:13427;left:232">
+<LAYER TOP=13427 LEFT=232>
+<IMG SRC=".\tcorro_images\tcorro1386.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:13523;left:8;width:577">
+<LAYER TOP=13523 LEFT=8 WIDTH=577>
+<DIV CLASS=Normal>
+Here the data simulated by (24) and data measured by
+ a network analyzer are put on the same plot </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:13555;left:8">
+<LAYER TOP=13555 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1482.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:13555;left:112">
+<LAYER TOP=13555 LEFT=112>
+<IMG SRC=".\tcorro_images\tcorro1490.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:13555;left:208">
+<LAYER TOP=13555 LEFT=208>
+<IMG SRC=".\tcorro_images\tcorro1495.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:13555;left:312">
+<LAYER TOP=13555 LEFT=312>
+<IMG SRC=".\tcorro_images\tcorro1492.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:13555;left:432">
+<LAYER TOP=13555 LEFT=432>
+<IMG SRC=".\tcorro_images\tcorro1493.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:13611;left:48">
+<LAYER TOP=13611 LEFT=48>
+<IMG SRC=".\tcorro_images\tcorro2078.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:13671;left:16">
+<LAYER TOP=13671 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro2080.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:14155;left:8;width:553">
+<LAYER TOP=14155 LEFT=8 WIDTH=553>
+<DIV CLASS=Normal>
+It is shown that deviation from performance simulated
+ to performance measured is in reasonable range corresponding
+ to applied manufacturing and measurement inaccuracy.
+ Far-out-of-band rejection has been measured for three
+ experimental filters. Test results have shown the rejection
+ evaluated by expression (24) is in practical match
+ with test data corresponding to TE10-mode in frequency
+ ranges up to 2.5-3.0 times filter pass-band. Thus accuracy
+ of the design expressions written above is matching
+ common practical requirements. </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:14299;left:256;width:103">
+<LAYER TOP=14299 LEFT=256 WIDTH=103>
+<DIV CLASS=Normal>
+<SPAN STYLE="font-weight:bold">Design Example</SPAN></DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:14355;left:8;width:438">
+<LAYER TOP=14355 LEFT=8 WIDTH=438>
+<DIV CLASS=Normal>
+Let us design a WR-75 corrugated filter matching the
+ following specification <br></DIV>
+<DIV CLASS=Normal>
+<br></DIV>
+<DIV CLASS=Normal>
+<br></DIV>
+<DIV CLASS=Normal>
+<br></DIV>
+<DIV CLASS=Normal>
+Frequency Range, GHz          12.50 - 13.75<br></DIV>
+<DIV CLASS=Normal>
+Insertion Loss, dB                         0.35<br></DIV>
+<DIV CLASS=Normal>
+Return Loss, dB                            25<br></DIV>
+<DIV CLASS=Normal>
+Rejection, dB<br></DIV>
+<DIV CLASS=Normal>
+14.55- 15.6 GHz                            50<br></DIV>
+<DIV CLASS=Normal>
+21.3 - 24.0 GHz                             80<br></DIV>
+<DIV CLASS=Normal>
+28.2 - 31.1 GHz                             60<br></DIV>
+<DIV CLASS=Normal>
+Gain slope, dB/MHz                     0.002<br></DIV>
+<DIV CLASS=Normal>
+Insertion Loss Ripple, dBpp           0.02         
+        <br></DIV>
+<DIV CLASS=Normal>
+Group Delay Variation, ns              1.0<br></DIV>
+<DIV CLASS=Normal>
+Group Delay Slope, ns/MHz          0.03<br></DIV>
+<DIV CLASS=Normal>
+Peak Power Handling W               3000<br></DIV>
+<DIV CLASS=Normal>
+Interface                                     WR75<br></DIV>
+<DIV CLASS=Normal>
+Dimensions WxHxL, in             1.35x1.15x8.00<br></DIV>
+<DIV CLASS=Normal>
+including flanges </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:14667;left:8;width:371">
+<LAYER TOP=14667 LEFT=8 WIDTH=371>
+<DIV CLASS=Normal>
+A spec function can be specified in order to design
+ margins later</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:14712;left:8">
+<LAYER TOP=14712 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1852.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:14947;left:8;width:345">
+<LAYER TOP=14947 LEFT=8 WIDTH=345>
+<DIV CLASS=Normal>
+Interface dimensions A x B are specified as WR75 standard</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:14979;left:8">
+<LAYER TOP=14979 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1846.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:14979;left:80">
+<LAYER TOP=14979 LEFT=80>
+<IMG SRC=".\tcorro_images\tcorro1847.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15011;left:8;width:578">
+<LAYER TOP=15011 LEFT=8 WIDTH=578>
+<DIV CLASS=Normal>
+However the internal <SPAN STYLE="font-weight:bold;font-style:italic">
+a</SPAN>
+ dimension of corrugated structure must be selected
+ in order to remove pass-bands of spurious TEno-modes
+ (30) from frequency bands specified by specification</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15067;left:16">
+<LAYER TOP=15067 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro1840.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15067;left:104">
+<LAYER TOP=15067 LEFT=104>
+<IMG SRC=".\tcorro_images\tcorro1868.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15106;left:8">
+<LAYER TOP=15106 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1869.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15106;left:160">
+<LAYER TOP=15106 LEFT=160>
+<IMG SRC=".\tcorro_images\tcorro1875.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15071;left:440">
+<LAYER TOP=15071 LEFT=440>
+<IMG SRC=".\tcorro_images\tcorro1878.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15195;left:8;width:571">
+<LAYER TOP=15195 LEFT=8 WIDTH=571>
+<DIV CLASS=Normal>
+Trying different <SPAN STYLE="font-weight:bold;font-style:italic">a
+</SPAN>-values from larger to smaller we find <SPAN STYLE="
+font-weight:bold;font-style:italic">a=0.70''</SPAN>
+ provides clearance of TE20-,TE30- and TE40-modes. Selecting
+ <SPAN STYLE="font-weight:bold;font-style:italic">b</SPAN>
+ and <SPAN STYLE="font-weight:bold;font-style:italic">s</SPAN>
+ is less sophisticated and depends on requirements of
+ power handling and rejection of high frequency spectrum.
+ Practically <SPAN STYLE="font-weight:bold;font-style:italic">
+b ~ 0.05a - 0.1</SPAN><SPAN STYLE="font-weight:bold;font-style:italic
+">a</SPAN> and <SPAN STYLE="font-weight:bold;font-style:italic">
+s ~ 2.0b - 2.6b</SPAN> for 3-rd harmonic requirements.
+ For example   </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15275;left:8">
+<LAYER TOP=15275 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1885.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15275;left:88">
+<LAYER TOP=15275 LEFT=88>
+<IMG SRC=".\tcorro_images\tcorro1886.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15307;left:8;width:371">
+<LAYER TOP=15307 LEFT=8 WIDTH=371>
+<DIV CLASS=Normal>
+Now we select design bandwidth and order of filter,
+ for example  </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15331;left:8">
+<LAYER TOP=15331 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1716.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15331;left:128">
+<LAYER TOP=15331 LEFT=128>
+<IMG SRC=".\tcorro_images\tcorro1717.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15331;left:248">
+<LAYER TOP=15331 LEFT=248>
+<IMG SRC=".\tcorro_images\tcorro1890.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15362;left:8">
+<LAYER TOP=15362 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1894.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15362;left:152">
+<LAYER TOP=15362 LEFT=152>
+<IMG SRC=".\tcorro_images\tcorro1895.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15353;left:288">
+<LAYER TOP=15353 LEFT=288>
+<IMG SRC=".\tcorro_images\tcorro1896.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15362;left:384">
+<LAYER TOP=15362 LEFT=384>
+<IMG SRC=".\tcorro_images\tcorro1897.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15399;left:16">
+<LAYER TOP=15399 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro1898.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15459;left:8;width:569">
+<LAYER TOP=15459 LEFT=8 WIDTH=569>
+<DIV CLASS=Normal>
+The design bandwidth can differ from the bandwidth specified
+ because it is used only to synthesize  initial dimensions
+ of filter</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15521;left:8">
+<LAYER TOP=15521 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1901.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15531;left:184">
+<LAYER TOP=15531 LEFT=184>
+<IMG SRC=".\tcorro_images\tcorro1902.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15521;left:360">
+<LAYER TOP=15521 LEFT=360>
+<IMG SRC=".\tcorro_images\tcorro1905.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15581;left:16">
+<LAYER TOP=15581 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro1906.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15659;left:8;width:564">
+<LAYER TOP=15659 LEFT=8 WIDTH=564>
+<DIV CLASS=Normal>
+By changing filter design bandwidth <SPAN STYLE="font-weight:bold
+;font-style:italic">f0-f1</SPAN>
+, filter order N and distance between resonators t we
+ can adjust real bandwidth and roll-off of filter </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15715;left:8">
+<LAYER TOP=15715 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1911.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15747;left:8;width:275">
+<LAYER TOP=15747 LEFT=8 WIDTH=275>
+<DIV CLASS=Normal>
+and fit it within the spec mask as shown on plot</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15794;left:8">
+<LAYER TOP=15794 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1915.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15803;left:160">
+<LAYER TOP=15803 LEFT=160>
+<IMG SRC=".\tcorro_images\tcorro1917.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15843;left:8">
+<LAYER TOP=15843 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1918.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15843;left:176">
+<LAYER TOP=15843 LEFT=176>
+<IMG SRC=".\tcorro_images\tcorro1919.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:15919;left:64">
+<LAYER TOP=15919 LEFT=64>
+<IMG SRC=".\tcorro_images\tcorro1654.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:16259;left:32">
+<LAYER TOP=16259 LEFT=32>
+<IMG SRC=".\tcorro_images\tcorro1684.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:16259;left:192">
+<LAYER TOP=16259 LEFT=192>
+<IMG SRC=".\tcorro_images\tcorro1685.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:16259;left:304">
+<LAYER TOP=16259 LEFT=304>
+<IMG SRC=".\tcorro_images\tcorro1686.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:16291;left:8;width:232">
+<LAYER TOP=16291 LEFT=8 WIDTH=232>
+<DIV CLASS=Normal>
+Now we specify optimization constrains </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:16315;left:8">
+<LAYER TOP=16315 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1729.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:16315;left:120">
+<LAYER TOP=16315 LEFT=120>
+<IMG SRC=".\tcorro_images\tcorro1739.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:16315;left:240">
+<LAYER TOP=16315 LEFT=240>
+<IMG SRC=".\tcorro_images\tcorro1740.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:16315;left:392">
+<LAYER TOP=16315 LEFT=392>
+<IMG SRC=".\tcorro_images\tcorro1735.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:16315;left:496">
+<LAYER TOP=16315 LEFT=496>
+<IMG SRC=".\tcorro_images\tcorro1736.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:16347;left:8;width:578">
+<LAYER TOP=16347 LEFT=8 WIDTH=578>
+<DIV CLASS=Normal>
+Because the initial design is already close to meet
+ requirements, several steps of optimization <SPAN STYLE="
+font-weight:bold;font-style:italic">Nst</SPAN>
+ should be enough to achieve near-band requirements
+ for return loss and rejection.</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:16395;left:16">
+<LAYER TOP=16395 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro2040.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:16399;left:432;width:137">
+<LAYER TOP=16399 LEFT=432 WIDTH=137>
+<DIV CLASS=Normal STYLE="text-align:center">
+<SPAN STYLE="color:#ff0000;font-size:14pt;font-weight:bold">WAIT:<br>
+</SPAN></DIV>
+<DIV CLASS=Normal STYLE="text-align:center">
+<SPAN STYLE="color:#ff0000;font-size:14pt;font-weight:bold">
+OPTIMIZATION MAY <br></SPAN></DIV>
+<DIV CLASS=Normal STYLE="text-align:center">
+<SPAN STYLE="color:#ff0000;font-size:14pt;font-weight:bold">
+REQUIRE COUPLE OF MINUTES</SPAN></DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:16427;left:16">
+<LAYER TOP=16427 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro1741.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:16459;left:8">
+<LAYER TOP=16459 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1742.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:16491;left:16">
+<LAYER TOP=16491 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro1745.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:16643;left:8;width:578">
+<LAYER TOP=16643 LEFT=8 WIDTH=578>
+<DIV CLASS=Normal>
+For more complicated specs more optimization steps might
+ be required. Now we upgrade dimensions of filter</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:16691;left:8">
+<LAYER TOP=16691 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1758.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:16691;left:160">
+<LAYER TOP=16691 LEFT=160>
+<IMG SRC=".\tcorro_images\tcorro1759.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:16691;left:296">
+<LAYER TOP=16691 LEFT=296>
+<IMG SRC=".\tcorro_images\tcorro1760.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:16691;left:432">
+<LAYER TOP=16691 LEFT=432>
+<IMG SRC=".\tcorro_images\tcorro1761.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:16747;left:8;width:355">
+<LAYER TOP=16747 LEFT=8 WIDTH=355>
+<DIV CLASS=Normal>
+and compute its frequency response over the frequency
+ range</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:16786;left:16">
+<LAYER TOP=16786 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro1694.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:16843;left:72">
+<LAYER TOP=16843 LEFT=72>
+<IMG SRC=".\tcorro_images\tcorro1695.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:16903;left:48">
+<LAYER TOP=16903 LEFT=48>
+<IMG SRC=".\tcorro_images\tcorro1798.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:17379;left:16;width:570">
+<LAYER TOP=17379 LEFT=16 WIDTH=570>
+<DIV CLASS=Normal>
+The pass-band and roll-off seem to mach the spec. Now
+ we see where the spurious modes are expected to pop
+ up</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:17450;left:40">
+<LAYER TOP=17450 LEFT=40>
+<IMG SRC=".\tcorro_images\tcorro1668.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:17450;left:240">
+<LAYER TOP=17450 LEFT=240>
+<IMG SRC=".\tcorro_images\tcorro1676.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:17450;left:416">
+<LAYER TOP=17450 LEFT=416>
+<IMG SRC=".\tcorro_images\tcorro1677.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:17507;left:96">
+<LAYER TOP=17507 LEFT=96>
+<IMG SRC=".\tcorro_images\tcorro1669.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:17539;left:8">
+<LAYER TOP=17539 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1796.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:17591;left:24">
+<LAYER TOP=17591 LEFT=24>
+<IMG SRC=".\tcorro_images\tcorro1671.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:17899;left:8;width:518">
+<LAYER TOP=17899 LEFT=8 WIDTH=518>
+<DIV CLASS=Normal>
+The a-dimension of filter is selected right, so the
+ TE20-, TE30 and TE40-modes passing in frequency bands
+ other than specified. Now we can see details of pass-band
+ performance. </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:17971;left:8">
+<LAYER TOP=17971 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1941.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:17962;left:88">
+<LAYER TOP=17962 LEFT=88>
+<IMG SRC=".\tcorro_images\tcorro1808.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:18019;left:144">
+<LAYER TOP=18019 LEFT=144>
+<IMG SRC=".\tcorro_images\tcorro1810.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:18091;left:56">
+<LAYER TOP=18091 LEFT=56>
+<IMG SRC=".\tcorro_images\tcorro1811.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:18275;left:192;width:168">
+<LAYER TOP=18275 LEFT=192 WIDTH=168>
+<DIV CLASS=Normal>
+Insertion loss over pass-band</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:18311;left:24">
+<LAYER TOP=18311 LEFT=24>
+<IMG SRC=".\tcorro_images\tcorro1945.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:18771;left:16">
+<LAYER TOP=18771 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro1827.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:18803;left:344">
+<LAYER TOP=18803 LEFT=344>
+<IMG SRC=".\tcorro_images\tcorro1821.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:18819;left:16">
+<LAYER TOP=18819 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro1825.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:18811;left:136">
+<LAYER TOP=18811 LEFT=136>
+<IMG SRC=".\tcorro_images\tcorro1826.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:18867;left:184;width:212">
+<LAYER TOP=18867 LEFT=184 WIDTH=212>
+<DIV CLASS=Normal>
+Group delay variation over pass-band</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:18895;left:8">
+<LAYER TOP=18895 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1823.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:18907;left:1008">
+<LAYER TOP=18907 LEFT=1008>
+<IMG SRC=".\tcorro_images\tcorro1233.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:19131;left:16">
+<LAYER TOP=19131 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro1831.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:19179;left:248;width:105">
+<LAYER TOP=19179 LEFT=248 WIDTH=105>
+<DIV CLASS=Normal>
+Group delay slope</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:19199;left:8">
+<LAYER TOP=19199 LEFT=8>
+<IMG SRC=".\tcorro_images\tcorro1834.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:19419;left:16">
+<LAYER TOP=19419 LEFT=16>
+<IMG SRC=".\tcorro_images\tcorro1836.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:19467;left:216;width:152">
+<LAYER TOP=19467 LEFT=216 WIDTH=152>
+<DIV CLASS=Normal>
+Insertion loss (gain) slope </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:19495;left:24">
+<LAYER TOP=19495 LEFT=24>
+<IMG SRC=".\tcorro_images\tcorro1839.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:19723;left:48;width:298">
+<LAYER TOP=19723 LEFT=48 WIDTH=298>
+<DIV CLASS=Normal>
+Power handling in vacuum (multipaction breakdown)</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:19763;left:64">
+<LAYER TOP=19763 LEFT=64>
+<IMG SRC=".\tcorro_images\tcorro1946.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:19803;left:48;width:120">
+<LAYER TOP=19803 LEFT=48 WIDTH=120>
+<DIV CLASS=Normal>
+Power handling in air</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:19835;left:64">
+<LAYER TOP=19835 LEFT=64>
+<IMG SRC=".\tcorro_images\tcorro1947.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:19875;left:48;width:186">
+<LAYER TOP=19875 LEFT=48 WIDTH=186>
+<DIV CLASS=Normal>
+Internal dimensions of filter body</DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:19933;left:24">
+<LAYER TOP=19933 LEFT=24>
+<IMG SRC=".\tcorro_images\tcorro1948.JPG">
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:20019;left:16;width:547">
+<LAYER TOP=20019 LEFT=16 WIDTH=547>
+<DIV CLASS=Normal>
+Now we can assume the design to be completed, as all
+ specified parameters are in match with specification.
+ </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:20091;left:24;width:554">
+<LAYER TOP=20091 LEFT=24 WIDTH=554>
+<DIV CLASS=Normal STYLE="text-align:center">
+<SPAN STYLE="font-weight:bold">Conclusion</SPAN> <br></DIV>
+<DIV CLASS=Normal>
+<br></DIV>
+<DIV CLASS=Normal>
+A corrugated harmonic filter of new type [1] using quarter-wave-coupled
+ E-plane corrugated reflection-zero 
+resonators providing high loaded Q. The expressions
+ for scattering parameters of whole filter structure
+ have been derived in terms of known variational approximations
+ and expressed in elementary functions
+ and compiled into a simulation tool. It has been shown
+ 
+on practical example that accuracy of simulation of
+ frequency response of such filter is with good match
+ with measured data. The design expressions have been
+ represented as two s
+tep design procedure, which combines a first-order synthesis,
+ based on quarter-wave-coupled prototype, with gradient
+ optimization procedure, presented as MathCAD spreadsheet.
+ It is shown that the design procedure allows performing
+ complete design including synthesis, optimization and
+ verification within several minutes. </DIV>
+</LAYER>
+</DIV>
+<DIV STYLE ="position:absolute;top:20451;left:16;width:554">
+<LAYER TOP=20451 LEFT=16 WIDTH=554>
+<DIV CLASS=Normal STYLE="text-align:center">
+<SPAN STYLE="font-weight:bold">References</SPAN><br></DIV>
+<DIV CLASS=Normal>
+ <br></DIV>
+<DIV CLASS=Normal>
+1. R. Goulouev &quot;
+Corrugated waveguide filter having coupled resonator
+ cavities&quot;, US patent 6,169,466, 2001<br></DIV>
+<DIV CLASS=Normal>
+<br></DIV>
+<DIV CLASS=Normal>
+2. R.E. Collin &quot;Foundations for Microwave Engineering&quot;,
+ McGraw-Hill, 1966.<br></DIV>
+<DIV CLASS=Normal>
+<br></DIV>
+<DIV CLASS=Normal>
+3. N. Marcuvitz &quot;Waveguide Handbook&quot;, Peter
+ Peregrinus Ltd., 1993.<br></DIV>
+<DIV CLASS=Normal>
+<br></DIV>
+<DIV CLASS=Normal>
+4. G.F. Graven and C.K. Mok &quot;The Design of Evanescent
+ Mode Waveguide Bandpass Filters for a Prescribed Insertion
+ Loss Characteristic&quot;, IEEE, MTT-19, pp. 295-308,
+ March 1971.<br></DIV>
+<DIV CLASS=Normal>
+<br></DIV>
+<DIV CLASS=Normal>
+5
+. R. Levy &quot;Tapered Corrugated Waveguide Low-Pass
+ Filters&quot;, IEEE, MTT-21, pp. 526-532, Aug. 1973.<br></DIV>
+<DIV CLASS=Normal>
+<br></DIV>
+<DIV CLASS=Normal>
+6. R. Goulouev &quot;Corrugated Filter Spurious Pass-Bands&quot;,
+ MathCAD spreadsheet,  http://mathcad.adeptscience.co.uk/mcadlib/apps/corrfilt
+.mcd or http://www.circuitsage.com/filter/corrfilt.mcd,
+ 1999.<br></DIV>
+</LAYER>
+</DIV>
+</BODY>
+</HTML>
