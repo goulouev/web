@@ -1,0 +1,33 @@
+H1{font: 12pt Century Gothic; color:navy; font-weight: bold; background: #d0d0d0; text-align: center}
+H2{font: 10pt Arial; color:blue; font-weight: bold; text-align: center}
+H3{font: 10pt Century Gothic; color:navy; font-style: italic; text-align: center}
+font.formulae{font:10pt Arial; color:#500000; font-style: italic; margin-left:5; margin-right: 5}
+a.maintext:link {  background: #f0f0f0; color: blue; text-decoration: none}
+a.maintext:visited { background: #f0f0f0; color: blue; text-decoration: none}
+a.maintext:hover {  background:  #ffffff; color: black; text-decoration: none}
+a.main:link {  background: #e0e0e0; color: navy; text-decoration: none}
+a.main:visited { background: #e0e0e0; color: navy; text-decoration: none}
+a.main:hover {  background:  #e5e5e5; color: black; text-decoration: none}
+        a.main{
+         padding: 3px 12px;
+         color:#fff;
+         background: #b0b0b0;
+         font: 8pt 'Arial Black';
+         }
+a.current:link {  background: #606060; color: white; text-decoration: none}
+a.current:visited { background: #606060; color: white; text-decoration: none}
+a.current:hover {  background:  #606060; color: #d0f0d0; text-decoration: none}
+        a.current{
+         padding: 3px 12px;
+         color:#fff;
+         background: #b0b0b0;
+         font:  8pt 'Arial Black';
+         }
+p.shapka{font: 12pt Impact;color: navy;background: #d0d0d0;}
+font.note0{font: 10pt Century Gothic; color: blue; background: #d0d0d0}
+font.note1{font: 10pt Century; color: navy; background: white}
+font.note2{font: 10pt Century; color: #004040;}
+p.message{font: 10pt Arial; color: white;}
+div.external{padding:20px; width:850px; background:white}
+div.internal{padding:10px; background:#606060; text-align: justify; height:80px}
+div.maintext{text-align: left; background: #f0f0f0; padding: 10px}

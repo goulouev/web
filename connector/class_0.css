@@ -1,0 +1,41 @@
+H1{font: 12pt Century Gothic; color:navy; font-weight: bold; text-align: center}
+H2{font: 10pt Century Gothic; color:navy; font-weight: bold; text-align: center}
+H3{font: 10pt Century Gothic; color: #004060; font-style: italic; text-align: center}
+H4{font: 10pt Century Gothic; color: #004060; font-weight: bold; font-style: italic; text-align: center}
+a.main:link {  background: #e0e0e0; color: navy; text-decoration: none}
+a.main:visited { background: #e0e0e0; color: navy; text-decoration: none}
+a.main:hover {  background:  #e5e5e5; color: black; text-decoration: none}
+        a.main{
+         padding: 3px 12px;
+         color:#fff;
+         background: #b0b0b0;
+         font: 8pt 'Arial Black';
+         }
+a.current:link {  background: #606060; color: white; text-decoration: none}
+a.current:visited { background: #606060; color: white; text-decoration: none}
+a.current:hover {  background:  #606060; color: #d0f0d0; text-decoration: none}
+        a.current{
+         padding: 3px 12px;
+         color:#fff;
+         background: #b0b0b0;
+         font:  8pt 'Arial Black';
+         }
+p.shapka{font: 12pt Impact;color: navy;background: #d0d0d0;}
+font.note0{font: 10pt Century Gothic; color: blue; background: #d0d0d0}
+font.note1{font: 10pt Century; color: navy; background: white}
+font.note2{font: 10pt Century Gothic; color:navy}
+font.formulae{font:10pt Arial; color:#500000; font-style: italic; margin-left:5; margin-right: 5}
+p.message{font: 10pt Arial; color: white;}
+div.external{padding:20px; width:850px; background:white}
+div.internal{padding:10px; background:#606060; text-align: justify}
+div.maintext{text-align: justify; background: #f0f0f0; padding: 10;font:10pt Arial;color: blue;}
+div.SecondMenu{width:300;float:left;background:#ffffff;font: 10pt Arial; color: white}
+a.InsideMenuPassive{display:block; background:#606060;margin-top:3px;padding-left:20px;padding-top:6px;padding-bottom:6px}
+a.InsideMenuPassive:link {  background: #e0e0e0; color: navy; text-decoration: none}
+a.InsideMenuPassive:visited { background: #e0e0e0; color: navy; text-decoration: none}
+a.InsideMenuPassive:hover {  background:  #e5e5e5; color: black; text-decoration: none}
+
+a.InsideMenuActive{display:block; background:#ffffff;margin-top:3px;padding-left:20px;padding-top:6px;padding-bottom:6px}
+a.InsideMenuActive:link {  background: #606060; color: white; text-decoration: none}
+a.InsideMenuActive:visited { background: #606060; color: white; text-decoration: none}
+a.InsideMenuActive:hover {  background:  #606060; color: #d0f0d0; text-decoration: none}
