@@ -1,0 +1,1023 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="author" content="Rousslan Goulouev">
+    <meta name="description" content="About WR-Connect, instructions and manuals">
+    <meta name="keywords" content="RF, frequency, sweep, filter, prototype, optimization, MiniMax, L2, optimizer">
+    <title>WR-Connect: Initial settings</title>
+    <link rel="stylesheet" href="navbars.css" />
+    <style>
+        .vertical-menu {
+            width: 15%;
+            height: 530px;
+            overflow-y: auto;
+            float: left;
+            color: navy;
+            background-color: white;
+            /* width: 50%;*/
+            /*padding: 10px;*/
+            /*height: 300px;*/ /* Should be removed. Only for demonstration */
+        }
+
+            .vertical-menu a {
+                background-color: #eee;
+                color: black;
+                display: block;
+                padding: 12px;
+                text-decoration: none;
+            }
+
+                .vertical-menu a:hover {
+                    background-color: #ccc;
+                }
+
+                .vertical-menu a.active {
+                    background-color: #624e4e;
+                    color: white;
+                }
+
+            .vertical-menu p {
+                font-size: 18px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: bold;
+                color: navy;
+                padding-left:15px;
+            }
+/*========================================*/
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column {
+            float: left;
+            width: 85%;
+            padding: 10px;
+            height: 530px;
+            overflow-y: auto;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /*======================================*/
+
+        td p {
+            margin-bottom: 0.25cm;
+            background: transparent;
+            line-height: 115%
+        }
+
+        h1 {
+            margin-bottom: 0.2cm;
+            background: transparent
+        }
+
+            h1.western {
+                font-family: "Liberation Sans", sans-serif;
+                font-size: 18pt
+            }
+
+            h1.cjk {
+                font-family: "Microsoft YaHei";
+                font-size: 18pt
+            }
+
+            h1.ctl {
+                font-family: "Mangal";
+                font-size: 18pt
+            }
+
+        p {
+            margin-bottom: 0.25cm;
+            background: transparent;
+            line-height: 115%
+        }
+
+        h2 {
+            margin-top: 0.36cm;
+            margin-bottom: 0.2cm;
+            background: transparent
+        }
+
+            h2.western {
+                font-family: "Liberation Sans", sans-serif;
+                font-size: 16pt
+            }
+
+            h2.cjk {
+                font-family: "Microsoft YaHei";
+                font-size: 16pt
+            }
+
+            h2.ctl {
+                font-family: "Mangal";
+                font-size: 16pt
+            }
+
+        h3 {
+            margin-top: 0.25cm;
+            margin-bottom: 0.2cm;
+            background: transparent
+        }
+
+            h3.western {
+                font-family: "Liberation Sans", sans-serif
+            }
+
+            h3.cjk {
+                font-family: "Microsoft YaHei"
+            }
+
+            h3.ctl {
+                font-family: "Mangal"
+            }
+
+    </style>
+</head>
+<body >
+    <div class="navbar">
+        <a href="index.htm">File</a>
+        <a href="setup.htm">Setup</a>
+        <a href="editor.htm">Edit</a>
+        <a href="editor.htm">Design</a>
+        <a href="editor.htm">Run</a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="javascript:void(0)">
+                Reports
+            </button>
+            <div class="dropdown-content">
+                <a href="graph.htm">Plot</a>
+                <a href="s_data.htm">Import/Export</a>
+            </div>
+        </div>
+        <a href="javascript:void(0)">Help</a>
+    </div>
+    <div class="row">
+        <div class="vertical-menu">
+            <p>WR-Connect</p>
+            <a href="help.htm">About Software</a>
+            <a href="menus.htm">Main Menus</a>
+            <a href="help_setup.htm" class="active">Initial Setup</a>
+            <a href="help_edit.htm">Design Editor</a>
+            <p>Tutorials</p>
+            <a href="help_app0.htm">Simple Filter Design</a>
+            <a href="help_app1.htm">Corrugated Filter #1</a>
+            <a href="help_app2.htm">Space Mapping</a>
+            <a href="#">--------------</a>
+            <p>Examples</p>
+            <a href="examps.htm">Conventional Designs</a>
+        </div>
+        <div class="column" style="background-color:white;">
+            <h1 class="western">Initial Setup</h1>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h2 class="western">Controls and Forms</h2>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The Setup Page
+                (setup.htm) contains controls and forms (see Figure ) with general
+                project setting such as:
+            </p>
+            <ul>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <b>Units</b> of
+                        measure
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <b>Simulation</b>:
+                        frequency sweep
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <b>Synthesis</b>
+                        options and parameters
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <b>Optimization</b>
+                        parameters
+                    </p>
+                    <ul>
+                        <li>
+                            <p style="margin-bottom: 0cm; line-height: 100%">
+                                Optimization
+                                Method
+                            </p>
+                        <li>
+                            <p style="margin-bottom: 0cm; line-height: 100%">
+                                Optimization
+                                Function
+                            </p>
+                        <li>
+                            <p style="margin-bottom: 0cm; line-height: 100%">
+                                Optimization
+                                Settings
+                            </p>
+                        <li>
+                            <p style="margin-bottom: 0cm; line-height: 100%">
+                                Optimization
+                                Targets
+                            </p>
+                    </ul>
+            </ul>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p align="left" style="margin-bottom: 0cm; line-height: 100%">
+                <img src="img/help_setup_htm_af87f7c567a59067.gif" name="Image1" />
+                <br />
+                <font color="#2a6099">
+                    <i>
+                        <b>
+                            Figure
+                            1: Setup Page screenshot
+                        </b>
+                    </i>
+                </font>
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h2 class="western">Units</h2>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                All geometric
+                dimensions and parameters are measured either in millimetres (<font color="#2a6099"><i><b>mm</b></i></font>)
+                or inches (<font color="#2a6099"><i><b>in</b></i></font>). All
+                parameters and quantities having a frequency dimension are measured
+                in gigahertz (<font color="#2a6099"><i><b>GHz</b></i></font>).
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h2 class="western">Simulation</h2>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The frequency sweep
+                of simulation is linear and it is defined by the starting frequency
+                point (<font color="#2a6099"><i><b>Fmin</b></i></font>), ending
+                frequency point (<font color="#2a6099"><i><b>Fmax</b></i></font>) and
+                number of all frequency points (<font color="#2a6099"><i><b>Np</b></i></font>)
+                of analysis reduced by one. For example, if we perform simulation
+                from 10 GHz to 15 GHz with 10 MHz step, we should enter Fmin=10,
+                Fmax=15 and Np=500 (not 501), Thus,
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <i>
+                    <b>
+                        Np=(Fmax -
+                        Fmin) /dF
+                    </b>
+                </i>,
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                where <i><b>dF </b></i>is
+                frequency descreet.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h2 class="western">Synthesis</h2>
+            <p>
+                <br />
+                <br />
+
+            </p>
+            <h3 class="western">Distributed Network Representation</h3>
+            <p>
+                <br />
+                <br />
+
+            </p>
+            <p>
+                WR-Connect offers several synthesis methods based on
+                representation of the waveguide structure as a surrogate distributed
+                network (see Figure 2).
+            </p>
+            <p>
+                <br />
+                <br />
+
+            </p>
+            <p>
+                <img src="img/help_setup_htm_68b9ca756ca014af.gif" name="Image2" />
+                <br />
+                <font color="#2a6099">
+                    <i>
+                        <b>
+                            Figure
+                            2: Distributed network representation (b) of a waveguide
+                            discontinuity (junction) with s-parameters matrix (a).
+                        </b>
+                    </i>
+                </font>
+            </p>
+            <p>
+                For synthesis purpose, each waveguide junction (iris, step,
+                cavity) with zero-length interface and with given complex
+                s-parameters (Figure 2a) is represented as a lumped element with real
+                values of reflection and transmission coefficients (Figure 2b) and
+                with interface having certain electrical length (given by expressions
+                in Figure 2). Such a distributed network element is further
+                represented as an equivalent shunt susceptance (Figure 3) with
+                corresponding electrical phase.
+            </p>
+            <p>
+                <br />
+                <br />
+
+            </p>
+            <p align="left">
+                <img src="img/help_setup_htm_4e46429e33b235c2.gif" name="Image3" />
+                <br />
+                <font color="#2a6099">
+                    <i>
+                        <b>
+                            Figure
+                            3: Equivalent lumped representation of a waveguide discontinuity
+                            (junction).
+                        </b>
+                    </i>
+                </font>
+            </p>
+            <p>
+                <br />
+                <br />
+
+            </p>
+            <p>
+                All synthesis methods used in WR-Connect are applied to waveguide
+                component represented as a sequence of such connections (see Figure
+                4)
+            </p>
+            <p>
+                <img src="img/help_setup_htm_3b761aaa8dae02c2.gif" />
+                <br />
+
+            </p>
+            <p>
+                <font color="#2a6099">
+                    <i>
+                        <b>
+                            Figure 4: Distributed network
+                            representation of a filter or transformer
+                        </b>
+                    </i>
+                </font>
+            </p>
+            <p>
+                <br />
+                <br />
+
+            </p>
+            <h3 class="western">Options</h3>
+            <p>
+                <br />
+                <br />
+
+            </p>
+            <p>
+                WR-Connect offers three filter synthesis methods based on
+                representation of the waveguide structure as a surrogate distributed
+                network:
+            </p>
+            <ul>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        Butterworth or
+                        Maximally Flat
+                    </p>
+                <li><p style="margin-bottom: 0cm; line-height: 100%">Chebyshev</p>
+                <li><p style="margin-bottom: 0cm; line-height: 100%">Tapered</p>
+            </ul>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                Each of those
+                synthesis methods is set by appropriate radio button with
+                corresponding synthesis options and keys listed in the table below.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h3 class="western">Parameters and Keys</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <font color="#00a933">
+                    <i>
+                        <b>
+                            Table
+                            1: List of filter synthesis parameters and keys
+                        </b>
+                    </i>
+                </font>
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <table border=1>
+                <tr valign="top">
+                    <td width="12%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        Parameter
+                                        or Key
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                    <td width="15%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Synthesis</font></font></font>
+                        </p>
+                    </td>
+                    <td width="73%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Description</font></font></font>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="12%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Fc</font></font></font>
+                        </p>
+                    </td>
+                    <td width="15%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Butterworth,</font></font></font>
+                        </p>
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Chebyshev,</font></font></font>
+                        </p>
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Tapered</font></font></font>
+                        </p>
+                    </td>
+                    <td width="73%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        Central
+                                        or characteristic frequency in GHz. This parameter is also used in
+                                        other simulations. It must be specified if even it is not used.
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="12%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">BW</font></font></font>
+                        </p>
+                    </td>
+                    <td width="15%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Butterworth,</font></font></font>
+                        </p>
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Chebyshev</font></font></font>
+                        </p>
+                    </td>
+                    <td width="73%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        Characteristic
+                                        filter bandwidth in GHz. It is an optional parameter used only in
+                                        Butterworth/Chebyshev filter synthesis.
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="12%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Ripple</font></font></font>
+                        </p>
+                    </td>
+                    <td width="15%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Chebyshev</font></font></font>
+                        </p>
+                    </td>
+                    <td width="73%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        Insertion
+                                        loss ripple in dB. An optional parameter used in Chebyshev filter
+                                        synthesis only.
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="12%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">B0</font></font></font>
+                        </p>
+                    </td>
+                    <td width="15%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Tapered</font></font></font>
+                        </p>
+                    </td>
+                    <td width="73%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        Starting
+                                        relative susceptance in the distributed filter network (Figure 4)
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="12%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Bc</font></font></font>
+                        </p>
+                    </td>
+                    <td width="15%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Tapered</font></font></font>
+                        </p>
+                    </td>
+                    <td width="73%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        Middle
+                                        relative susceptance in the distributed filter network (Figure 4)
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="12%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">B1</font></font></font>
+                        </p>
+                    </td>
+                    <td width="15%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Tapered</font></font></font>
+                        </p>
+                    </td>
+                    <td width="73%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        Ending
+                                        relative susceptance in the distributed filter network (Figure 4)
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="12%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Alpha</font></font></font>
+                        </p>
+                    </td>
+                    <td width="15%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Tapered</font></font></font>
+                        </p>
+                    </td>
+                    <td width="73%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        Taper
+                                        profile parameter. Used in tapered filter synthesis.
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="12%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Synthesize</font></font></font>
+                        </p>
+                    </td>
+                    <td width="15%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Butterworth,</font></font></font>
+                        </p>
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Chebyshev,</font></font></font>
+                        </p>
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Tapered</font></font></font>
+                        </p>
+                    </td>
+                    <td width="73%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        If
+                                        turned on, the length of waveguide sections between the junctions
+                                        is automatically set in accordance with prototype network.
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="12%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        Do
+                                        not Change
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                    <td width="15%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Butterworth,</font></font></font>
+                        </p>
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Chebyshev,</font></font></font>
+                        </p>
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Tapered</font></font></font>
+                        </p>
+                    </td>
+                    <td width="73%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        If
+                                        turned on, the length of waveguide sections between the junctions
+                                        remains same.
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="12%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        Resonant
+                                        Order
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                    <td width="15%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Butterworth,</font></font></font>
+                        </p>
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Chebyshev,</font></font></font>
+                        </p>
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Tapered</font></font></font>
+                        </p>
+                    </td>
+                    <td width="73%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        It
+                                        is associated with electrical length of distributed lines measured
+                                        in half-wavelengths. In case of conventional direct coupled is
+                                        related to the last index of the resonant mode in conventional
+                                        iris/stub filters. For example, it is set to 0 (zero) in case of
+                                        TE<sub>101</sub> resonance.
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h2 class="western">Optimization</h2>
+            <h3 class="western">Methods</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                Only Pattern Search
+                optimization engine is currently available.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h3 class="western">Function</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The optimization is
+                perform as an iteration algorithms, which minimizes a cost function
+                representing a deviation of simulated performance from the targets
+                (specs). There are two types of optimization functions are available.
+                The <b>L2</b> evaluates the root mean square of the selected
+                s-parameter magnitude simulated over the specified frequency ranges
+                relative to the specified targets. The <b>MiniMax</b> minimizes the
+                maximum value of the selected s-parameter of simulation (the worst
+                case) found within the specified frequency ranges relative to the
+                corresponding spec target. In the both cases the optimizer has a goal
+                to achieve a performance, which is better (not equal) than the specs.
+                For example, if we design a filter with 23 dB return loss and 50 dB
+                near-band rejection, the optimizer would tend to achieve more dBs
+                (say 35 dB return loss and 70 dB rejection if achievable). In case of
+                preventing &ldquo;over-optimization&rdquo;, a user can interrupt the
+                optimization during the process or initially set lesser number of
+                iterations.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h3 class="western">Settings</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <table cellpadding="4" cellspacing="0" border="1">
+                <tr valign="top">
+                    <td width="20%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Parameter</font></font></font>
+                        </p>
+                    </td>
+                    <td width="80%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Meaning</font></font></font>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="20%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Steps</font></font></font>
+                        </p>
+                    </td>
+                    <td width="80%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        The
+                                        number of iterations. This number of steps will be performed.
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="20%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Dmin</font></font></font>
+                        </p>
+                    </td>
+                    <td width="80%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        A
+                                        reserved parameter. It is currently not utilized.
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="20%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">Cmin</font></font></font>
+                        </p>
+                    </td>
+                    <td width="80%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        A
+                                        reserved parameter. It is currently not utilized.
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="20%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">dX</font></font></font>
+                        </p>
+                    </td>
+                    <td width="80%" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        A
+                                        relative deviation of a structure dimension during optimization.
+                                        In other words, each dimension selected for optimization will
+                                        variate proportionally (increase or reduces) for about dX*100%.
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%"><b>Targets</b></p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The targets (the
+                specs) are set as separate text lines in the window. Each spec has 6
+                numbers, which are the first s-parameter path index, the second
+                s-parameter path index, specified frequency range starting frequency
+                in GHz, specified frequency range ending frequency in GHz, targetted
+                s-parameter magnitude (absolute value) in dB and the number of
+                frequency points in the specified range. For example, the following
+                text line below
+            </p>
+            <table width="222" cellpadding="0" cellspacing="0">
+
+                <tr valign="top">
+                    <td width="36" bgcolor="#b2b2b2" style="background: #b2b2b2; padding: 0cm">
+                        <p align="center">
+                            <span style="background: transparent">1</span>
+                        </p>
+                    </td>
+                    <td width="30" bgcolor="#b2b2b2" style="background: #b2b2b2; padding: 0cm">
+                        <p align="center">
+                            <span style="background: transparent">1</span>
+                        </p>
+                    </td>
+                    <td width="42" bgcolor="#b2b2b2" style="background: #b2b2b2; padding: 0cm">
+                        <p align="center">
+                            <span style="background: transparent">7.67</span>
+                        </p>
+                    </td>
+                    <td width="48" bgcolor="#b2b2b2" style="background: #b2b2b2; padding: 0cm">
+                        <p align="center">
+                            <span style="background: transparent">7.89</span>
+                        </p>
+                    </td>
+                    <td width="30" bgcolor="#b2b2b2" style="background: #b2b2b2; padding: 0cm">
+                        <p align="center">
+                            <span style="background: transparent">30</span>
+                        </p>
+                    </td>
+                    <td width="36" bgcolor="#b2b2b2" style="background: #b2b2b2; padding: 0cm">
+                        <p align="center">
+                            <span style="background: transparent">25</span>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <p style="margin-bottom: 0cm; line-height: 100%; background: transparent">
+                sets the optimization of the absolute magnitude of S11 (|dB(S11)|)
+                over the frequency range from 7.67 GHz to 7.89 GHz to be more than 30
+                dB when simulated as a linear sweep of 30 frequency points. All specs
+                must have 6 parameters including two frequency points, if even
+                optimization performs on a single frequency point as shown below.
+            </p>
+            <table width="222" cellpadding="0" cellspacing="0">
+                <tr valign="top">
+                    <td width="36" bgcolor="#b2b2b2" style="background: #b2b2b2; padding: 0cm">
+                        <p align="center">
+                            <span style="background: transparent">2</span>
+                        </p>
+                    </td>
+                    <td width="30" bgcolor="#b2b2b2" style="background: #b2b2b2; padding: 0cm">
+                        <p align="center">
+                            <span style="background: transparent">1</span>
+                        </p>
+                    </td>
+                    <td width="42" bgcolor="#b2b2b2" style="background: #b2b2b2; padding: 0cm">
+                        <p align="center">
+                            <span style="background: transparent">7.45</span>
+                        </p>
+                    </td>
+                    <td width="48" bgcolor="#b2b2b2" style="background: #b2b2b2; padding: 0cm">
+                        <p align="center">
+                            <span style="background: transparent">7.45</span>
+                        </p>
+                    </td>
+                    <td width="30" bgcolor="#b2b2b2" style="background: #b2b2b2; padding: 0cm">
+                        <p align="center">
+                            <span style="background: transparent">60</span>
+                        </p>
+                    </td>
+                    <td width="36" bgcolor="#b2b2b2" style="background: #b2b2b2; padding: 0cm">
+                        <p align="center">
+                            <span style="background: transparent">1</span>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <p style="margin-bottom: 0cm; line-height: 100%; background: transparent">
+                Here optimization is set as S21 (|dB(S21)|) positive magnitude
+                obtained at a single frequency point of 7.45 GHz and targetted to be
+                greater than 60 dB. Up to several specs can be specified in the
+                widow, though in many cases only one is enough. It should be also
+                noted, that the same settings are used for aggressive space mapping
+                (ASM) optimization also.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%; background: transparent">
+                <br />
+
+            </p>
+        </div>
+    </div>
+</body>
+</html >

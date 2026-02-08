@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="author" content="Rousslan Goulouev">
+    <meta name="description" content="How to export WR-Connect project to Ansys Electronic Desctop">
+    <meta name="keywords" content="HFSS, filter, EM, model, space, mapping">
+    <title>WR-Connect: Export WR-Connect design to Ansys HFSS </title>
+    <link rel="stylesheet" href="navbars.css" />
+    <style>
+        .okna {
+            height: 395px;
+            overflow-y: auto;
+            width: 99%;
+            background-color: white;
+        }
+        .toptop {
+            width: 100%;
+            height: 130px;
+            overflow-y: auto;
+            background-color:lightgray;
+        }
+        .monos {
+            color: navy;
+            background-color: white;
+            border: double;
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            height: 530px;
+            font-size: 11px;
+            color: navy;
+            overflow-y: auto;
+        }
+        .zagolov {
+            font-family:Courier New, Courier, monospace;
+            font-size: 18px;
+            font-weight:bold;
+            color:darkred;
+            margin:0;
+            text-align:center;
+        }
+        td {
+            font-family:'Times New Roman', Times, serif;
+            font-size: 12px;
+            text-align:justify;
+        }
+        table{
+            margin:0;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.htm">File</a>
+        <a href="setup.htm">Setup</a>
+        <a href="editor.htm">Edit</a>
+        <a href="editor.htm">Design</a>
+        <a href="editor.htm">Run</a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="javascript:void(0)">
+                Reports
+            </button>
+            <div class="dropdown-content">
+                <a href="graph.htm">Plot</a>
+                <a href="s_data.htm">Import/Export</a>
+            </div>
+        </div>
+        <a href="javascript:void(0)">Help</a>
+    </div>
+    <div class="divdiv">
+        <div class="toptop">
+            <p class="zagolov">
+                &nbsp;&nbsp;&nbsp;&nbsp;How to Transfer WR-Connect Design to HFSS.
+                <font style="font-weight:normal;font-size:14px;color:darkgreen;">
+                    <br />Download Generic VS Script Macro. It can be used for any WR-Connect design.
+                    Default WR-Connect project file name
+                    is <font style="font-weight:bold;color:red">"project.dat"</font> (it can be changed by user in the source code). The defaults can be changed by user. 
+                </font>
+            </p>
+            <table border="1">
+                <tr>
+                    <td style="width:25%;">
+                        1) Allocate a working folder to keep the project files. <br />
+                        2) Export WR-Connect project to the folder named "project.dat".<br />
+                        3) Right-click the frame with code below, Select All and Copy.<br />
+                        4) Paste the code into a plain text editor (NotePad)<br />
+                    </td>
+                    <td style="width:28%;">
+                        5) Save the code in the working folder as VB Script (*.vbs).<br />
+                        6) Open new HFSS project with an empty 3D design<br />
+                        7) Save the project in the working folder with any name<br />
+                        8) Click Run Script option in Tools menu as (*.vbs) type
+                    </td>
+                    <td>
+                        This is an universal script configured for automatic transfer and execution
+                        of a WR-Connect project in an existing empty HFSS project. It is configured
+                        to be openned from <b>HFSS/Tools/Run Script</b> menu (see instructions). It is open source
+                        software written in Windows Script (VB Script) under <a href="https://www.gnu.org/licenses/gpl-3.0.html">GNU General Public License</a>.
+                        Basic knowledge of VBScript and HFSS scripting is required to execute the code from HFSS.
+                        Advanced programming skills are required to make modifications.
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <iframe id="okoshko" src="hfss_run.htm" class="okna"></iframe>
+    </div>
+</body>
+</html >

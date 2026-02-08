@@ -1,0 +1,176 @@
+﻿
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="author" content="Rousslan Goulouev">
+    <meta name="description" content="Part of WR-Connect online CAD software on waveguide filters">
+    <meta name="keywords" content="waveguide, filter, freeware">
+    <meta charset="utf-8" />
+    <title>Import Project / Export Project</title>
+    <link rel="stylesheet" href="navbars.css" />
+</head>
+<body>
+    <div class="navbar">
+        <div class="dropdown">
+            <button class="dropbtn" onclick="javascript:void(0)">
+                File
+            </button>
+            <div class="dropdown-content">
+                <a href="javascript:void(0)" onclick="document.getElementById('fileToLoad').click();">Import Project</a>
+                <a href="javascript:void(0)" onclick="saveDynamicDataToFile();">Export Project</a>
+                <a href="javascript:void(0)" onclick="ConvertJS();">Convert to JS</a>
+                <a href="javascript:void(0)" onclick="tst();">Test</a>
+            </div>
+        </div>
+        <a href="javascript:void(0)" onclick="ProjectUnload();window.location.href = 'setup.htm';">Setup</a>
+        <a href="javascript:void(0)" onclick="ProjectUnload();window.location.href = 'editor.htm';">Edit</a>
+        <a href="javascript:void(0)" onclick="ProjectUnload();window.location.href = 'editor.htm';">Design</a>
+        <a href="javascript:void(0)" onclick="ProjectUnload();window.location.href = 'editor.htm';">Run</a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="javascript:void(0)">
+                Reports
+            </button>
+            <div class="dropdown-content">
+                <a href="javascript:void(0)" onclick="window.location.href = 'graph.htm';">Plot</a>
+                <a href="javascript:void(0)" onclick="window.location.href = 's_data.htm';">Import/Export</a>
+            </div>
+        </div>
+        <a href="help.htm">Help</a>
+    </div>
+    <input type="file" id="fileToLoad" style="display:none" accept=".txt,.dat" />
+
+    <form id="form1">
+        <div class="divdiv">
+            <textarea id="FileProjectOkno" class="fontos" style="width:800px;height :500px"></textarea>
+        </div>
+    </form>
+    <p style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:10px;font-style:italic;color:white;text-align:right;">&copy;2006 R. Goulouev, WR-Connect 2.0 Web (javascripted)</p>
+
+    <script type="text/javascript">
+        //LOAD PROJECT FILE
+        // Click "Convert to JS"
+        function tst() {
+            PrjFile();
+        }
+        //############################
+        //INSERT TEXT FROM WINDOW AND SetProject(LNs)
+        function PrjFile() {
+            var rs = [];
+            rs[0] = 'SETUP_DAT';
+            rs[1] = '1 10 10';
+            rs[2] = '1 0.05 0 1 2 1 1.5';
+            rs[3] = '12.5 0.5';
+            rs[4] = '9 14 500';
+            rs[5] = '1 20 0.02 0.05 0.05';
+            rs[6] = '1 1 10.7 13 20 25';
+            rs[7] = 'DESIGN_DAT';
+            rs[8] = '0  1  0';
+            rs[9] = '0  1  0';
+            rs[10] = '1  10  0';
+            rs[11] = '1  1';
+            rs[12] = '1  0  0';
+            rs[13] = '0    1     0.480000     0.000000    -0.187500     0.750000     0.187500';
+            rs[14] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[15] = '4    1     0.060000     0.000000    -0.187500     0.578867     0.187500';
+            rs[16] = '1    2     0.396588     0.000000    -0.187500     0.750000     0.187500';
+            rs[17] = '4    1     0.060000     0.000000    -0.187500     0.497326     0.187500';
+            rs[18] = '1    2     0.473299     0.000000    -0.187500     0.750000     0.187500';
+            rs[19] = '4    1     0.060000     0.000000    -0.187500     0.475000     0.187500';
+            rs[20] = '1    2     0.489567     0.000000    -0.187500     0.750000     0.187500';
+            rs[21] = '4    1     0.060000     0.000000    -0.187500     0.475000     0.187500';
+            rs[22] = '1    2     0.473299     0.000000    -0.187500     0.750000     0.187500';
+            rs[23] = '4    1     0.060000     0.000000    -0.187500     0.497329     0.187500';
+            rs[24] = '1    2     0.396360     0.000000    -0.187500     0.750000     0.187500';
+            rs[25] = '4    1     0.060000     0.000000    -0.187500     0.578908     0.187500';
+            rs[26] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[27] = '0    1     0.480000     0.000000    -0.187500     0.750000     0.187500';
+            SetProject(rs);
+        }
+        function SetProject(LNs) {
+            //document.getElementById('FileProjectOkno').value = localStorage.getItem('ProjectDat');
+            var i, key;
+            var SetupDat = '';
+            var DesignDat = '';
+            var MemoDat = '';
+            var kod = -1;
+            var n = LNs.length - 1;
+            if (n < 0) { return;}
+                for (i = 0; i <= n; i++) {
+                    var LN = LNs[i].trim();
+                    if (LN.length > 3) {
+                        key = LNs[i].substr(0, 4);
+                        //alert(key);
+                        if (key == 'SETU') { kod = 1; }
+                        if (key == 'DESI') { kod = 2; }
+                        if (key == 'BACK') { kod = 3; }
+                        if (kod == 1 && key != 'SETU') {
+                            SetupDat += LNs[i] + '\r\n';
+                        }
+                        if (kod == 2 && key != 'DESI') {
+                            DesignDat += LNs[i] + '\r\n';
+                        }
+                        if (kod == 3 && key != 'BACK') {
+                            MemoDat += LNs[i] + '\r\n';
+                        }
+
+                    }
+
+                }
+            if (kod > 0) {
+                localStorage.setItem("InputDatFileText", SetupDat);
+                localStorage.setItem("DesignFileText", DesignDat);
+                localStorage.setItem("MemoDatText", MemoDat);
+                window.location.href = 'editor.htm';
+            }
+        }
+        //############################
+
+        function ConvertJS() {
+            var txt = document.getElementById('FileProjectOkno').value;
+            var scrpt = "function PrjFile(){\r\n";
+            scrpt = scrpt + "var rs=[];\r\n";
+            var ii = -1;
+            if (txt != '') {
+                var LNs = txt.match(/[^\r\n]+/g);
+                var n = LNs.length - 1;
+                for (i = 0; i <= n; i++) {
+                    var LN = LNs[i].trim();
+                    if (LN) {
+                        ii = ii + 1;
+                        scrpt = scrpt + "rs["+ii+"]='"+LN+"';\r\n";
+                    }
+                }
+            }
+            scrpt = scrpt = scrpt + "SetProject(rs);\r\n"
+            //scrpt = scrpt = scrpt + "return rs;\r\n";
+            scrpt = scrpt = scrpt + "}\r\n";
+            document.getElementById('FileProjectOkno').value=scrpt;
+        }
+
+
+        document.getElementById('fileToLoad').onchange = function (event) {
+            var fileToLoad = event.target.files[0];
+            if (fileToLoad) {
+                var reader = new FileReader();
+                reader.onload = function (fileLoadedEvent) {
+                    var textFromFileLoaded = fileLoadedEvent.target.result;
+                    //document.getElementById('FileProjectOkno').value = textFromFileLoaded;
+                    document.getElementById('FileProjectOkno').value = textFromFileLoaded;
+                };
+                reader.readAsText(fileToLoad, 'UTF-8');
+            }
+        };
+
+        function saveDynamicDataToFile() {
+
+            var userInput = document.getElementById("FileProjectOkno").value;
+
+            var blob = new Blob([userInput], { type: "text/plain;charset=utf-8" });
+            saveAs(blob, "design.txt");
+        }
+
+    </script>
+    <script src="FileSaver.js"></script>
+</body>
+</html>

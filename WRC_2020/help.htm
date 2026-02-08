@@ -1,0 +1,311 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="author" content="Rousslan Goulouev">
+    <meta name="description" content="About WR-Connect, instructions and manuals">
+    <meta name="keywords" content="s-parameter, group delay, slope, s2p, Re/Im, freeware">
+    <title>WR-Connect: Software help, instructions, tutorials and application notes</title>
+    <link rel="stylesheet" href="navbars.css" />
+    <style>
+        .vertical-menu {
+            width: 15%;
+            height: 530px;
+            overflow-y: auto;
+            float: left;
+            color: navy;
+            background-color: white;
+            /* width: 50%;*/
+            /*padding: 10px;*/
+            /*height: 300px;*/ /* Should be removed. Only for demonstration */
+        }
+
+            .vertical-menu a {
+                background-color: #eee;
+                color: black;
+                display: block;
+                padding: 12px;
+                text-decoration: none;
+            }
+
+                .vertical-menu a:hover {
+                    background-color: #ccc;
+                }
+
+                .vertical-menu a.active {
+                    background-color: #624e4e;
+                    color: white;
+                }
+
+            .vertical-menu p {
+                font-size: 18px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: bold;
+                color: navy;
+                padding-left:15px;
+            }
+/*========================================*/
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column {
+            float: left;
+            width: 85%;
+            padding: 10px;
+            height: 530px;
+            overflow-y: auto;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /*======================================*/
+
+        p {
+            margin-bottom: 0.1in;
+            background: transparent;
+            line-height: 115%;
+            background: transparent
+        }
+
+        h2 {
+            margin-top: 0.14in;
+            margin-bottom: 0.08in;
+            background: transparent;
+            background: transparent;
+            page-break-after: avoid
+        }
+
+            h2.western {
+                font-family: "Liberation Sans", sans-serif;
+                font-size: 16pt;
+                font-weight: bold
+            }
+
+            h2.cjk {
+                font-family: "Microsoft YaHei";
+                font-size: 16pt;
+                font-weight: bold
+            }
+
+            h2.ctl {
+                font-family: "Mangal";
+                font-size: 16pt;
+                font-weight: bold
+            }
+
+
+    </style>
+</head>
+<body >
+    <div class="navbar">
+        <a href="index.htm">File</a>
+        <a href="setup.htm">Setup</a>
+        <a href="editor.htm">Edit</a>
+        <a href="editor.htm">Design</a>
+        <a href="editor.htm">Run</a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="javascript:void(0)">
+                Reports
+            </button>
+            <div class="dropdown-content">
+                <a href="graph.htm">Plot</a>
+                <a href="s_data.htm">Import/Export</a>
+            </div>
+        </div>
+        <a href="javascript:void(0)">Help</a>
+    </div>
+    <div class="row">
+        <div class="vertical-menu">
+            <p>WR-Connect</p>
+            <a href="help.htm" class="active">About Software</a>
+            <a href="menus.htm">Main Menus</a>
+            <a href="help_setup.htm">Initial Setup</a>
+            <a href="help_edit.htm">Design Editor</a>
+            <p>Tutorials</p>
+            <a href="help_app0.htm">Simple Filter Design</a>
+            <a href="help_app1.htm">Corrugated Filter #1</a>
+            <a href="help_app2.htm">Space Mapping</a>
+            <a href="#">--------------</a>
+            <p>Examples</p>
+            <a href="examps.htm">Conventional Designs</a>
+            <a href="#">--------------</a>
+            <a href="#">--------------</a>
+            <a href="#">--------------</a>
+        </div>
+        <div class="column" style="background-color:white;">
+            <h2>About Version 2020</h2>
+            <p style="margin-bottom: 0in; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0in; line-height: 100%">
+                The version 2020 is
+                an upgrade of the Waveguide Connector (version of 15.09.02). The
+                current version has been upgraded with waveguide structure templates,
+                synthesizing and optimizing tools.
+            </p>
+            <p style="margin-bottom: 0in; line-height: 100%">
+                <br />
+
+            </p>
+            <h2 class="western">Field of Application</h2>
+            <p style="margin-bottom: 0in; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0in; line-height: 100%">
+                WR-Connect is fast
+                &quot;non-rigorous&quot; RF/microwave engineering CAD software
+                created to design waveguide components of the URWS (uniaxial
+                rectangular waveguide structures) class. The main purpose of
+                WR-Connect is conceptual designing (exploration of design ideas,
+                technical proposals, quoting). Although, in many cases, it can be
+                directly used for real hardware designing. Besides, this version can
+                be linked with other waveguide structures simulators (for example
+                ANSYS HFSS) by aggressive space mapping (ASM).
+            </p>
+            <p style="margin-bottom: 0in; line-height: 100%">
+                <br />
+
+            </p>
+            <h2 class="western">Components Covered</h2>
+            <p style="margin-bottom: 0in; line-height: 100%">
+                The area of
+                waveguide components, which can be designed using WR-Connect are
+                mostly band-pass, low-pass, high-pass waveguide filters and also
+                matching and transforming components.
+            </p>
+            <p style="margin-bottom: 0in; line-height: 100%">
+                <br />
+
+            </p>
+            <h2 class="western">Structures Covered</h2>
+            <p style="margin-bottom: 0in; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0in; line-height: 100%">
+                WR-Connect is
+                applicable to uniaxial rectangular waveguide structures (URWS)
+                composed from several types of elements (step, cavity and diaphragm)
+                connected to each other by straight waveguide sections.
+            </p>
+            <p style="margin-bottom: 0in; line-height: 100%">
+                <br />
+
+            </p>
+            <h2 class="western">Design Process</h2>
+            <p style="margin-bottom: 0in; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0in; line-height: 100%">
+                WR-Connect is an
+                integrated design environment compromising URWS simulator,
+                synthesizer, optimizer, space mapping tools, correctors, editor and
+                templates.
+            </p>
+            <p style="margin-bottom: 0in; line-height: 100%">
+                <br />
+
+            </p>
+            <h2 class="western">Accuracy</h2>
+            <p style="margin-bottom: 0in; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0in; line-height: 100%">
+                Although the
+                computational engine is based on rigorous mode-matching computational
+                methods, the number of waveguide modes taken into account is set to
+                minimum in order to fit computational ability of IE, reduce design
+                time but still keep accuracy practically acceptable for wide class of
+                applications. For more information refer to Accuracy &amp;
+                Applicability Report to see how simulation results obtained by
+                WR-Connect correlate to results of measurement or simulation
+                performed by some other software.
+            </p>
+            <p style="margin-bottom: 0in; line-height: 100%">
+                <br />
+
+            </p>
+            <h2 class="western">Copyright</h2>
+            <p style="margin-bottom: 0in; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0in; line-height: 100%">
+                Copyright &copy;
+                2020 Rousslan Goulouev &amp; Digoria Microwave. All rights
+                reserved.<br />
+                WR-Connect copyright covers the following IPs:
+            </p>
+            <ul>
+                <li>
+                    <p style="margin-bottom: 0in">
+                        Computational engine
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0in">
+                        Design Environment
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0in">
+                        Design Examples
+                    </p>
+                <li>
+                    <p>
+                        Tutorials and Application Notes
+                    </p>
+            </ul>
+            <p style="margin-bottom: 0in; line-height: 100%">
+                <br />
+
+            </p>
+            <h2 class="western">
+                Courtesy of
+            </h2>
+            <p style="margin-bottom: 0in; line-height: 100%">
+                <br />
+
+            </p>
+            <ul>
+                <li>
+                    <p style="margin-bottom: 0in; line-height: 100%">
+                        Walter Zorn (<a href="http://www.walterzorn.com/" target="_blank">http://www.walterzorn.com</a>)
+                        for the great JavaScript graphic library.
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0in; line-height: 100%">
+                        Rouslan Mamoukhov (<a href="http://www.matheonics.com/" target="_blank">http://www.matheonics.com/</a>
+                        ) for consulting on computational algorithms.
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0in; line-height: 100%">
+                        W3Schools
+                        (<a href="https://www.w3schools.com/" target="_blank">https://www.w3schools.com/</a><font face="Times New Roman, serif">
+                            <font size="3" style="font-size: 12pt">
+                                )
+                                for very helpful tutorials on HTML and JavaScript
+                            </font>
+                        </font>
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0in; line-height: 100%">
+                        Jeremy Heleine (<a href="https://www.sitepoint.com/building-3d-engine-javascript/" target="_blank">https://www.sitepoint.com/building-3d-engine-javascript/</a>)
+                                for very helpful article on 3D objects
+                    </p>
+            </ul>
+        </div>
+    </div>
+</body>
+</html >

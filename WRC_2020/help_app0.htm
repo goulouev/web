@@ -1,0 +1,2322 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="author" content="Rousslan Goulouev">
+    <meta name="description" content="About WR-Connect, instructions and manuals">
+    <meta name="keywords" content="waveguide, filter, design, high-pass, band-pass, inducive, iris, free, software">
+    <title>WR-Connect: Simple waveguide filter design tutorial</title>
+    <link rel="stylesheet" href="navbars.css" />
+    <style>
+        .vertical-menu {
+            width: 15%;
+            height: 530px;
+            overflow-y: auto;
+            float: left;
+            color: navy;
+            background-color: white;
+            /* width: 50%;*/
+            /*padding: 10px;*/
+            /*height: 300px;*/ /* Should be removed. Only for demonstration */
+        }
+
+            .vertical-menu a {
+                background-color: #eee;
+                color: black;
+                display: block;
+                padding: 12px;
+                text-decoration: none;
+            }
+
+                .vertical-menu a:hover {
+                    background-color: #ccc;
+                }
+
+                .vertical-menu a.active {
+                    background-color: #624e4e;
+                    color: white;
+                }
+
+            .vertical-menu p {
+                font-size: 18px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: bold;
+                color: navy;
+                padding-left:15px;
+            }
+/*========================================*/
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column {
+            float: left;
+            width: 85%;
+            padding: 10px;
+            height: 530px;
+            overflow-y: auto;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /*======================================*/
+        td p {
+            margin-bottom: 0.25cm;
+            background: transparent
+        }
+
+        h1 {
+            margin-bottom: 0.2cm;
+            background: transparent
+        }
+
+            h1.western {
+                font-family: "Liberation Sans", sans-serif;
+                font-size: 18pt
+            }
+
+            h1.cjk {
+                font-family: "Microsoft YaHei";
+                font-size: 18pt
+            }
+
+            h1.ctl {
+                font-family: "Mangal";
+                font-size: 18pt
+            }
+
+        p {
+            margin-bottom: 0.25cm;
+            background: transparent
+        }
+    </style>
+</head>
+<body >
+    <div class="navbar">
+        <a href="index.htm">File</a>
+        <a href="setup.htm">Setup</a>
+        <a href="editor.htm">Edit</a>
+        <a href="editor.htm">Design</a>
+        <a href="editor.htm">Run</a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="javascript:void(0)">
+                Reports
+            </button>
+            <div class="dropdown-content">
+                <a href="graph.htm">Plot</a>
+                <a href="s_data.htm">Import/Export</a>
+            </div>
+        </div>
+        <a href="javascript:void(0)">Help</a>
+    </div>
+    <div class="row">
+        <div class="vertical-menu">
+            <p>WR-Connect</p>
+            <a href="help.htm">About Software</a>
+            <a href="menus.htm">Main Menus</a>
+            <a href="help_setup.htm">Initial Setup</a>
+            <a href="help_edit.htm">Design Editor</a>
+            <p>Tutorials</p>
+            <a href="help_app0.htm" class="active">Simple Filter Design</a>
+            <a href="help_app1.htm">Corrugated Filter #1</a>
+            <a href="help_app2.htm">Space Mapping</a>
+            <a href="#">--------------</a>
+            <p>Examples</p>
+            <a href="examps.htm">Conventional Designs</a>
+        </div>
+        <div class="column" style="background-color:white;">
+            <P align="center" style="line-height: 100%; margin-top: 0.43cm; margin-bottom: 0.2cm; page-break-after: avoid;">
+                <FONT face="Liberation Sans, sans-serif">
+                    <FONT size="6"
+                          style="font-size: 28pt;"><B>Simple Waveguide Filter Design</B></FONT>
+                </FONT>
+            </P>
+            <H1 class="western">1. Introduction</H1>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                This is a “getting started”
+                tutorial about how to design a simple waveguide interference reject filter using
+                new online version of WR-Connect (version 2.0).
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <H1 class="western">2. Problem Statement</H1>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                Let us imagine (the problem
+                stated here is not real), our Ku-band satellite TV receiver (it has been working
+                fine for years) has stopped working properly (distortions, static, errors,
+                etc.). The possible reason is an interference caused by a new weather or airport
+                radar appeared nearby recently. We have also found that the thing is working at
+                9.5 GHz.
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                <IMG name="Image5" width="623"
+                     height="543" align="left" src="img/help_app0_html_c1c2e091345a21e.gif"><BR clear="left"><BR>
+            </P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 1: Schematic representation of
+                        satellite Ku-band downlink reception affected by unwanted
+                        interference
+                    </I>
+                </FONT>
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <H1 class="western">3. Possible Solution</H1>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                A simple solution of this
+                problem would be a high-pass filter, which would pass our “shows” transmuted
+                from the satellite (see Figure 1) at frequencies from 10.95 GHz to 12.75 GHz
+                (Ku-band typical downlink frequencies) and reject the spurious interference (9.5
+                GHz). After closer look at our receiver station, we also found some space to put
+                such a filter between antenna output and receiver input, which are connected
+                with conventional WR-75 flanges.
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <H1 class="western">4. Specification</H1>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                In terms of design goals, we
+                would need a waveguide high-pass, band-pass or band-stop filter with
+                sufficiently good characteristics, such that it would not impair the quality of
+                the receiving signal to any noticeable degree. Let us target the following
+                parameters:
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Table 1: A specification with list of
+                        important parameters and their targetted values.
+                    </I>
+                </FONT>
+            </P>
+            <TABLE width="643" border="1">
+                <TR valign="top">
+                    <TD width="147" style="background: none;">
+                        <P align="left" style="font-style: normal; font-variant: normal; text-decoration: none;">
+                            <FONT color="#000000"><FONT face="Liberation Serif, serif"><FONT size="3" style="font-size: 12pt;"><B>Parameter</B></FONT></FONT></FONT>
+                        </P>
+                    </TD>
+                    <TD width="118" style="background: none;">
+                        <P align="center" style="font-style: normal; font-variant: normal; text-decoration: none;">
+                            <FONT color="#000000"><FONT face="Liberation Serif, serif"><FONT size="3" style="font-size: 12pt;"><B>Value</B></FONT></FONT></FONT>
+                        </P>
+                    </TD>
+                    <TD width="352" style="background: none;">
+                        <P align="left" style="font-style: normal; font-variant: normal; text-decoration: none;">
+                            <FONT color="#000000"><FONT face="Liberation Serif, serif"><FONT size="3" style="font-size: 12pt;"><B>Notes</B></FONT></FONT></FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR valign="top">
+                    <TD width="147" style="background: none;">
+                        <P align="left" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        Pass-Band,
+                                        GHz
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="118" style="background: none;">
+                        <P align="center" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        10.95
+                                        - 12.75
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="352" style="background: none;">
+                        <P align="left" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        Reception
+                                        signals frequency range
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR valign="top">
+                    <TD width="147" style="background: none;">
+                        <P align="left" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        Insertion
+                                        Loss, dB
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="118" style="background: none;">
+                        <P align="center" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        &lt;
+                                        0.2
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="352" style="background: none;">
+                        <P align="left" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        Receiver
+                                        noise figure is 0.6 dB. We don’t want to degrade it too			much.
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR valign="top">
+                    <TD width="147" style="background: none;">
+                        <P align="left" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        Return
+                                        Loss, dB
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="118" style="background: none;">
+                        <P align="center" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        &gt;
+                                        18
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="352" style="background: none;">
+                        <P align="left" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        To
+                                        minimize in-band ripple caused by standing
+                                        wave
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR valign="top">
+                    <TD width="147" style="background: none;">
+                        <P align="left" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        Stop-Band,
+                                        GHz
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="118" style="background: none;">
+                        <P align="center" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        9.4
+                                        - 9.5
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="352" style="background: none;">
+                        <P align="left" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        Unwanted
+                                        interference signals
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR valign="top">
+                    <TD width="147" style="background: none;">
+                        <P align="left" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        Rejection,
+                                        dB
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="118" style="background: none;">
+                        <P align="center" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        &gt;
+                                        40
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="352" style="background: none;">
+                        <P align="left" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        The
+                                        attenuation needed to remove the
+                                        interference
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR valign="top">
+                    <TD width="147" style="background: none;">
+                        <P align="left" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        Size
+                                        W x H x L, inch
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="118" style="background: none;">
+                        <P align="center" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        &lt;
+                                        2.0 x 1.8 x 4.0
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="352" style="background: none;">
+                        <P align="left" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        We
+                                        have no more space for the
+                                        filter
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                </TR>
+            </TABLE>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <H1 class="western">5. Design Concept</H1>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                Within common RF/microwave
+                engineering art, many types of waveguide filters have been invented, studied and
+                intensively utilized in various RF systems. In the public domain, according to
+                the RF/microwave engineering handbooks, publications and patents, at least more
+                than hundred of waveguide filter concepts are disclosed. Despite the broadband
+                knowledge on the filters, a designer always face a challenge when designing a
+                filter for particular application. This is because each RF system usually has
+                its own individual and often unique requirements to a filter. The optimal design
+                concept is usually considered one that not only satisfies all the parameters of
+                the specification with a good margin, but also is technological, inexpensive
+                and reliable in operation. A proposed design concept is commonly considered as
+                good one, when it meets all parameters of the specification with good margins,
+                it is technologically simple, inexpensive and reliable in operation. In other
+                words, the best design is optimized over a preferred trade-off between the
+                performance, technological feasibility and cost. In our case, we are very
+                limited in the technology and the budget. Let's start with what we can do in our
+                current conditions (workshop in basement) and what kind of materials and tools
+                we can get. We guess we are able to make a simple iris filter based on a
+                standard WR-75 copper waveguide tube and a couple of appropriate cover flanges
+                by just soldering (more simple tools might be needed).
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                <IMG name="Image1" style="max-width:50%;max-height:50%;" align="left" src="img/help_app0_html_486317e048e0e93b.gif"><BR clear="left"><BR>
+            </P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 2: WR-75 waveguide tube and 2 cover
+                        flanges
+                    </I>
+                </FONT>
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                The iris filter is perhaps the
+                most old, known, popular and the simplest waveguide band-pass filter type. It
+                can be made from thin inductive diaphragms (irises) placed in a waveguide. The
+                technologically simplest way would be putting the irises from one side of the
+                waveguide (asymmetrically as shown on Figure 3).
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                <IMG name="Image2"  style="max-width:50%;max-height:50%;" align="left" src="img/help_app0_html_25b49619a4778194.gif"><BR clear="left"><BR>
+            </P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 3: Simplified images showing the
+                        asymmetric waveguide iris filter fabrication steps
+                    </I>
+                </FONT>
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                Thus, we have found a simple
+                and inexpensive technological way of making a waveguide filter in general. Now
+                we need to check if this type of waveguide structure can perform electrically in
+                the way to meet our specification (Table 1). In the other words, we need to find
+                out if our design concept actually works in respect to our requirements and we
+                want to do it fast (we don’t want to waste much of time for useless ideas).
+                WR-Connect is a perfect tool to do this as it is simple, flexible, fast and free
+                to use.
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <H1 class="western">6. Designing from Scratch</H1>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                According to a common view,
+                the RF filter engineering is a sophisticated mathematical discipline about
+                polynomials, matrices and special functions, which does not have obvious links
+                to the real world. Actually, many engineering books and university courses on
+                electrical filters pay more attention to idealistic mathematical interpretation
+                than their practical implementation. Therefore, the design process of an
+                electrical filter is usually based on selection and fitting common polynomial
+                functions (Butterworth, Chebyshev, elliptic, etc.) and further applying
+                appropriate synthesis methods following corresponding equivalent networks. We do
+                not want to go this way, because it is practically complex, generally inaccurate
+                and rarely applicable to the all filter ideas possibly generated by our brains.
+                A lazy but efficient filter design approach is proposed here, which does not
+                require an expert type of knowledge on the filters theory. This simple procedure
+                can be applied to practically any direct or quarter-wave coupled filter (see
+                definitions in [1]) and described in several steps:
+            </P>
+            <OL>
+                <LI>
+                    <P style="line-height: 100%; margin-bottom: 0cm;">
+                        We put	identical irises in
+                        the waveguide and at the same distance from each	other.
+                    </P>
+                <LI>
+                    <P style="line-height: 100%; margin-bottom: 0cm;">
+                        Run simulation	and plot S11
+                        and S21 magnitudes.
+                    </P>
+                <LI>
+                    <P style="line-height: 100%; margin-bottom: 0cm;">
+                        Spot the	positions of the
+                        pass-band and stop-band over the specs. The	pass-band can be defined as the
+                        bandwidth containing reflection	(S11) zeros and ripples. The stop-band we
+                        define as the bandwidth	from both sides of the pass-band, where the
+                        transmission (S21)	magnitude monotonically decreases on the both
+                        directions.
+                    </P>
+                <LI>
+                    <P style="line-height: 100%; margin-bottom: 0cm;">
+                        If the	pass-band contains
+                        the specified bandwidth and the rejection is	greater then specified, then
+                        continue to the step # 5. If it does	not, make necessary adjustments (listed
+                        below) and return to the	step #2.
+                    </P>
+                    <OL type="a">
+                        <LI>
+                            <P style="line-height: 100%; margin-bottom: 0cm;">
+                                If the		pass-band is too
+                                narrow, then increase iris coupling by increasing		of the width of aperture.
+                                In vice versa, when bandwidth is too		wide, reduce the iris width.
+                            </P>
+                        <LI>
+                            <P style="line-height: 100%; margin-bottom: 0cm;">
+                                If the		pass-band is
+                                offset, change the length between the irises. Increase		the length between
+                                the irises to move the bandwidth down and, vice		versa, reduce the distances
+                                to move the bandwidth up.
+                            </P>
+                        <LI>
+                            <P style="line-height: 100%; margin-bottom: 0cm;">
+                                If the		pass-band is
+                                correct but the rejection is not achieved, increase		the number of poles by
+                                one (insert one iris and one node in the		middle).
+                            </P>
+                        </LI>
+                    </OL>
+                <LI>
+                    <P style="line-height: 100%; margin-bottom: 0cm;">
+                        Set	optimization goals and
+                        start optimization.
+                    </P>
+                <LI>
+                    <P style="line-height: 100%; margin-bottom: 0cm;">
+                        Run simulation	and review
+                        the results.
+                    </P>
+                <LI>
+                    <P style="line-height: 100%; margin-bottom: 0cm;">
+                        Repeat step 5	or/and make
+                        fine adjustments to irises and distances until all specs	are met with adequate
+                        margins.
+                    </P>
+                </LI>
+            </OL>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                Although the “designing from
+                scratch” method requires multiple simulations, optimizations and manual
+                corrections, each operation normally takes not more than tens of seconds with
+                WR-Connect.
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <H1 class="western">7. Setting WR-Connect Project</H1>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                Once we clearly understand
+                what we need to do, we will prepare the tools. The easiest way to get started is
+                using an appropriate design starter page. In our case, the appropriate menu
+                option called “<FONT color="#2a6099"><I><B>H-Plane Iris BPF</B></I></FONT>” can
+                be found under “<FONT color="#2a6099"><I><B>Design</B></I></FONT>” menu option
+                located on the top menu black bar. The page with basic data entry fields will be
+                opened.
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                <IMG name="Image3" width="759"
+                     height="465" align="left" src="img/help_app0_html_a5f218332c668d38.gif"><BR clear="left"><BR>
+            </P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 4: Screenshot with design steps. The
+                        first three steps can be performed in any order.
+                    </I>
+                </FONT>
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                The initial settings can be
+                done in few clicks as shown on Figure 4. Here we can use the initial data
+                corresponding to the selection of WR-75, with only one change. We will change
+                the thickness of the iris, as it is predetermined here (we will cut plates for
+                irises from the same waveguide tube, which is <B>0.060</B> inches thick). It
+                should be noted, the “Setup Project” button must be clicked before clicking the
+                “Design Filter” (otherwise the active page will be navigated to the design
+                concept editor with no basic frequency plans required for simulations). It
+                should be also mentioned that the required frequency plans can be entered
+                directly on the <FONT color="#2a6099">“</FONT><FONT color="#2a6099">
+                    <I>
+                        <B>
+                            Setup
+                            Page”
+                        </B>
+                    </I>
+                </FONT>fields as well. Anyway, the frequencies and structure
+                geometry must be entered before performing simulations.
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <H1 class="western">8. Initial Design Profile</H1>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                After clicking “Design Filter”
+                button on “<FONT color="#2a6099"><I><B>H-Plane Iris BPF</B></I></FONT>” page,
+                the browser will navigate into the “<FONT color="#2a6099">
+                    <I>
+                        <B>
+                            Editor
+                            Page
+                        </B>
+                    </I>
+                </FONT>” (see Figure 6).
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <IMG name="Image4" width="755" height="551" align="left" src="img/help_app0_htm_7cff597542bf1cff.gif"><BR clear="left"><FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 5: A truncated
+                        screenshot of the “Editor Page” with the loaded iris filter structure profile
+                        and modal settings.
+                    </I>
+                </FONT>
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                The lines of numbers in the
+                text box correspond to the sizes of each section of the waveguide (interface,
+                iris or cavity) that would form the waveguide filter. But all sizes of these
+                filter elements, in cross section, correspond to a WR-75 standard waveguide
+                cross-section dimensions. The lengths of those waveguide sections are also the
+                same for irises and cavities. In other words, this piece of text with numbers
+                corresponds to the design concept and is a kind of template that contains all
+                the necessary conceptual information.
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <H1 class="western">9. Starting Simulations</H1>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                The initial design profile of
+                our waveguide filter (Figure 5) corresponds to just straight (homogeneous)
+                waveguide (click “Go To 3D View” button to see 3D image). Thus, if we run
+                simulation, we should get full transmission and no reflection for all
+                frequencies of WR-75 operation (try it by executing “<FONT color="#2a6099"><I><B>Run Simulation</B></I></FONT>” menu option under “Run” top
+                menu bar item and then clicking the “<FONT color="#2a6099"><I><B>Plot</B></I></FONT>” button).
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <IMG name="Image6" width="480" height="435" align="left" src="img/help_app0_html_a1a73a8777edd2f5.gif"><BR clear="left"><FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 6: A 3D view of
+                        the template structure corresponding to the initial design profile (Figure
+                        4).
+                    </I>
+                </FONT>
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                In order to create a working
+                waveguide iris filter we need to determine proper dimensions of the irises (iris
+                width) and the cavities (cavity length). In a general case of waveguide filter
+                synthesis we can use the “<FONT color="#2a6099">
+                    <I>
+                        <B>
+                            Run
+                            Synthesis
+                        </B>
+                    </I>
+                </FONT>” menu option under “<FONT color="#2a6099"><I><B>Run</B></I></FONT>”. In this tutorial, however, we will do
+                it manually following the procedure described in Section 6 above. This approach
+                is applied here due to two reasons. 1) The conventional synthesis methods do not
+                usually work well, if they are applied to broadband band-pass filters. The
+                relative bandwidth of our filter is to be more than 15%. 2) They are also only
+                applicable to a narrow class of structures having certain type of construction
+                from elementary scattering elements (irises, posts, step junctions, etc.) and
+                with certain coupling topology. In contrast, our design approach is universal
+                and can be applied to any type of filter (including unknown yet). Now let us
+                start from a periodic structure consisting from irises having same width and
+                same distance between.
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <H1 class="western">10. Using “Replace” Function</H1>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                WR-Connect provide several
+                methods for automatic changing or correcting a group of dimensions. The
+                “Replace” function is the simplest way of changing a group of similar dimensions
+                in one single step. Here we will create (see Figure 7 with instructions) a rough
+                blank of a waveguide filter structure having the equidistant asymmetric
+                inductive diaphragms of same width of windows (let us start from 0.5 inch).
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <IMG name="Image7" width="1067" height="468" align="left" src="img/help_app0_htm_b3db741ec2f35a87.gif"><BR clear="left"><FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 7: Instructions
+                        how to set all irises to 0.5 inch wide opening.
+                    </I>
+                </FONT>
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                After pressing “<FONT color="#2a6099"><I><B>With</B></I></FONT>”
+                button (Figure 7), all “<FONT color="#2a6099"><I><B>0.750000</B></I></FONT>”
+                dimensions corresponding to rows with irises (the first dimension is 0.06) will
+                be replaced with “<FONT color="#2a6099"><I><B>0.500000</B></I></FONT>”. After
+                this operation, we get a primitive waveguide filter, a rough first
+                approximation. If we press the “Go To 3D View” button, we will see a waveguide
+                iris structure with identical diaphragms and cavities (Figure 8). No we can try
+                it.
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                <IMG name="Image8" width="493"
+                     height="436" align="left" src="img/help_app0_htm_7e06fadb61a8f35c.gif"><BR clear="left"><BR>
+            </P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 8: 3D appearance of the filter
+                        structure after replacing 0.75 iris widths with 0.5.
+                    </I>
+                </FONT>
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <H1 class="western">11. Running First Simulation</H1>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                To run simulation (analysis of
+                scattering parameters over a discrete frequency sweep) we just select “<FONT color="#2a6099"><I><B>Run Simulation</B></I></FONT>” drop-down option under
+                “<FONT color="#2a6099"><I><B>Run</B></I></FONT>” menu bar item. In our case we
+                can do it right a way, because we have already set the basic frequency plans (we
+                did it when we clicked “<FONT color="#2a6099">
+                    <I>
+                        <B>
+                            Setup
+                            Project
+                        </B>
+                    </I>
+                </FONT>” button on <FONT color="#2a6099">
+                    <I>
+                        <B>
+                            Iris Filter
+                            Design
+                        </B>
+                    </I>
+                </FONT> page). Since our modal setting includes only several
+                vertically polarized TE-modes (H-plane uniformity), the simulation takes about 5
+                seconds. After the red status bar (in the “<FONT color="#2a6099">
+                    <I>
+                        <B>
+                            Run
+                            Status
+                        </B>
+                    </I>
+                </FONT>” control area) stops expanding, and the left button below
+                the line displays “<FONT color="#2a6099"><I><B>Stop</B></I></FONT>”, the
+                simulation will end. Further, in order to see the simulation graphs, we can
+                click the next button named "<FONT color="#2a6099"><I><B>Plot</B></I></FONT>"
+                (it navigates to the "Reports Page").
+            </P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <IMG name="Image9" width="802" height="503" align="left" src="img/help_app0_htm_fd63b9b8d1c70e07.gif"><BR clear="left"><FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 9: Reflection and
+                        transmission magnitudes (dB) versus frequency (GHz) simulated characteristics
+                        for equidistant waveguide structure of 6 identical irises (0.5 inch wide),
+                        spaced 0.608 inches apart.
+                    </I>
+                </FONT>
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                The obtained performance,
+                however, does not look great and it is also offset (we cannot see frequencies
+                below 10 GHz).
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <H1 class="western">12. Customizing Frequency Sweep</H1>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                Since we initially selected
+                the iris filter template based on the appropriate waveguide size, our frequency
+                range was automatically set from 10 to 15 GHz, which corresponds to WR-75
+                operation frequency range. Our rejection specs of 40 dB, however, is set over
+                the range from 9.4 to 9.5 GHz (not covered by current frequency sweep). To fix
+                it we navigate to “Setup Page” by clicking the appropriate “Setup” menu option,
+                then we change the settings of the sweep parameters named “Fmin” and “Fmax” by
+                setting them 9 and 14 GHz accordingly.
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <IMG name="Image10" width="948" height="370" align="left" src="img/help_app0_htm_401142502af502a.gif"><BR clear="left"><FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 10: Screenshot of
+                        Setup Page and instructions how to change frequency sweep from 10-15 GHz to 9-14
+                        GHz.
+                    </I>
+                </FONT>
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                New simulation results would
+                look like shown on Figure 11.
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <IMG name="Image11" width="806" height="507" align="left" src="img/help_app0_htm_d8ef8fc9d12266c6.gif"><BR clear="left"><FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 11: Reflection
+                        and transmission magnitudes (dB) versus frequency (GHz) simulated
+                        characteristics for the same (as on Figure 9) waveguide structure but performed
+                        over new frequency sweep.
+                    </I>
+                </FONT>
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <H1 class="western">13. Iris to Cavity Structural Conversion</H1>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                As it is mentioned in
+                WR-Connect software introduction, the software is based on pre-solved solutions
+                of three EM boundary (step junction, cavity junction, and iris junction) of
+                scattering problems scattering. Those elementary problems are numerically solved
+                in terms of variational mode-matching and then been approximated. Therefore, all
+                solutions are approximate (since a limited number of waveguide modes are counted
+                in the solution) with different level of fidelity. According to convergence
+                analysis and practical correlations, the cavity junction (scattering junction
+                #2) performs the highest accuracy. Since, any waveguide structure based on
+                irises can be also represented by coupled cavities (the cavities are between the
+                irises except input and output). Although the both ways of representation
+                present the same structure geometrically, WR-Connect performs the simulations
+                using different EM models with different degrees of fidelity (cavity model is
+                the most realistic). The iris type of structures are found to be simpler to
+                compose and preferable to apply the synthesis methods. Therefore, WR-Connect is
+                provided by a control for automated conversion from iris type to the cavity type
+                and vice versa in a single click of mouse. The Iris/Cavity conversion controls
+                are under the “<FONT color="#2a6099"><I><B>Edit</B></I></FONT>” menu (top menu
+                bar) and named “<FONT color="#2a6099"><I><B>Convert to Irises</B></I></FONT>”
+                and “<FONT color="#2a6099"><I><B>Convert to Irises</B></I></FONT>” respectively.
+                So, if we click the “<FONT color="#2a6099">
+                    <I>
+                        <B>
+                            Convert to
+                            Irises
+                        </B>
+                    </I>
+                </FONT>” option, the text window content will change (see left
+                column in Table 2 below) and two more lines will be added. If we, however, look
+                at 3D view, no any difference in appearance will be noticed.
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Table 2: Same waveguide structure of irises
+                        represented in cavity junctions
+                    </I>
+                </FONT>
+            </P>
+            <TABLE border="1">
+                <TR valign="top">
+                    <TD width="430px">
+                        <FONT face="Lucida Console, monospace">
+                            <FONT size="2" style="font-size: 10pt;">
+                                <br />0      			1 0.608000 0.000000 -0.187500 0.750000 0.187500
+                            </FONT>
+                        </FONT><br />
+                        <FONT color="#ce181e">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2" style="font-size: 10pt;">
+                                    0			0 0.000000 0.000000 &nbsp;0.000000
+                                    0.000000 0.000000
+                                </FONT>
+                            </FONT>
+                        </FONT><br />
+                        <FONT face="Lucida Console, monospace">
+                            <FONT size="2" style="font-size: 10pt;">
+                                4
+                                1 0.060000 0.000000 -0.187500 0.500000 0.187500
+                            </FONT>
+                        </FONT><br />
+                        <FONT color="#2a6099">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2" style="font-size: 10pt;">
+                                    1			2 0.608000 0.000000 -0.187500
+                                    0.750000 0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><br />
+                        <FONT face="Lucida Console, monospace">
+                            <FONT size="2" style="font-size: 10pt;">
+                                4
+                                1 0.060000 0.000000 -0.187500 0.500000 0.187500
+                            </FONT>
+                        </FONT><br />
+                        <FONT color="#2a6099">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2" style="font-size: 10pt;">
+                                    1			2 0.608000 0.000000 -0.187500
+                                    0.750000 0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><br />
+                        <FONT face="Lucida Console, monospace">
+                            <FONT size="2" style="font-size: 10pt;">
+                                4
+                                1 0.060000 0.000000 -0.187500 0.500000 0.187500
+                            </FONT>
+                        </FONT><br />
+                        <FONT color="#2a6099">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2" style="font-size: 10pt;">
+                                    1			2 0.608000 0.000000 -0.187500
+                                    0.750000 0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><br />
+                        <FONT face="Lucida Console, monospace">
+                            <FONT size="2" style="font-size: 10pt;">
+                                4
+                                1 0.060000 0.000000 -0.187500 0.500000 0.187500
+                            </FONT>
+                        </FONT><br />
+                        <FONT color="#2a6099">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2" style="font-size: 10pt;">
+                                    1			2 0.608000 0.000000 -0.187500
+                                    0.750000 0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><br />
+                        <FONT face="Lucida Console, monospace">
+                            <FONT size="2" style="font-size: 10pt;">
+                                4
+                                1 0.060000 0.000000 -0.187500 0.500000 0.187500
+                            </FONT>
+                        </FONT><br />
+                        <FONT color="#2a6099">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2" style="font-size: 10pt;">
+                                    1			2 0.608000 0.000000 -0.187500
+                                    0.750000 0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><br />
+                        <FONT face="Lucida Console, monospace">
+                            <FONT size="2" style="font-size: 10pt;">
+                                4
+                                1 0.060000 0.000000 -0.187500 0.500000 0.187500
+                            </FONT>
+                        </FONT><br />
+                        <FONT color="#ce181e">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2" style="font-size: 10pt;">
+                                    0			0 0.000000 0.000000 &nbsp;0.000000
+                                    0.000000 0.000000
+                                </FONT>
+                            </FONT>
+                        </FONT><br />
+                        <FONT face="Lucida Console, monospace">
+                            <FONT size="2" style="font-size: 10pt;">
+                                0
+                                1 0.608000 0.000000 -0.187500 0.750000 0.187500
+                            </FONT>
+                        </FONT><br />
+                    </TD>
+                    <TD>
+                        <FONT face="Lucida Console, monospace">
+                            <FONT size="2"
+                                  style="font-size: 10pt;"><br />Node			N1 (Input)</FONT>
+                        </FONT><br />
+                        <FONT color="#ff0000">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2" style="font-size: 10pt;">
+                                    Junction			J0 (Step)
+                                </FONT>
+                            </FONT>
+                        </FONT><br />
+                        <FONT color="#000000">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2" style="font-size: 10pt;">
+                                    Node			N1 (Iris)
+                                </FONT>
+                            </FONT>
+                        </FONT><br />
+                        <FONT color="#2a6099">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2" style="font-size: 10pt;">
+                                    Junction			J2 (Cavity)
+                                </FONT>
+                            </FONT>
+                        </FONT><br />
+                        <FONT color="#000000">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2" style="font-size: 10pt;">
+                                    Node			N1 (Iris)
+                                </FONT>
+                            </FONT>
+                        </FONT><br />
+                        <FONT color="#2a6099">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2" style="font-size: 10pt;">
+                                    Junction			J2 (Cavity)
+                                </FONT>
+                            </FONT>
+                        </FONT><br />
+                        <FONT color="#000000">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2"
+                                      style="font-size: 10pt;">Node			N1 (Iris)</FONT>
+                            </FONT>
+                        </FONT><br />
+                        <FONT color="#2a6099">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2"
+                                      style="font-size: 10pt;">
+                                    Junction			J2
+                                    (Cavity)
+                                </FONT>
+                            </FONT>
+                        </FONT><br />
+                        <FONT color="#000000">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2"
+                                      style="font-size: 10pt;">Node			N1 (Iris)</FONT>
+                            </FONT>
+                        </FONT><br />
+                        <FONT color="#2a6099">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2"
+                                      style="font-size: 10pt;">
+                                    Junction			J2
+                                    (Cavity)
+                                </FONT>
+                            </FONT>
+                        </FONT><br />
+                        <FONT color="#000000">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2"
+                                      style="font-size: 10pt;">Node			N1 (Iris)</FONT>
+                            </FONT>
+                        </FONT><br />
+                        <FONT color="#2a6099">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2"
+                                      style="font-size: 10pt;">
+                                    Junction			J2
+                                    (Cavity)
+                                </FONT>
+                            </FONT>
+                        </FONT><br />
+                        <FONT color="#000000">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2"
+                                      style="font-size: 10pt;">Node			N1 (Iris)</FONT>
+                            </FONT>
+                        </FONT><br />
+                        <FONT color="#ff0000">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2"
+                                      style="font-size: 10pt;">
+                                    Junction			J0
+                                    (Step)
+                                </FONT>
+                            </FONT>
+                        </FONT><br />
+                        <FONT color="#000000">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2"
+                                      style="font-size: 10pt;">Node			N1 (Input)</FONT>
+                            </FONT>
+                        </FONT><br />
+                    </TD>
+                    <TD>
+                        <IMG name="Image12" width="200" heigt="200" src="img/help_app0_htm_f00da252f461cc91.gif">
+                    </TD>
+                </TR>
+            </TABLE>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                Nevertheless, if we simulate
+                the same but reconfigured structure, we will see a slight difference in
+                simulation results (see correlation plots on Figure 12 below). The new
+                simulation of transmission magnitude (blue) shows a slightly wider bandwidth.
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <IMG name="Image13" width="804" height="505" align="left" src="img/help_app0_htm_ffc0046778c59c20.gif"><BR clear="left"><FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 12: Same
+                        waveguide structure configured in cavity junctions simulated (red and blue)
+                        compared with the simulation results (black and green) of the structure
+                        configured in irises (Figure 11).
+                    </I>
+                </FONT>
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                Now we can continue on
+                actually designing the iris filter.
+            </P>
+            <H1 class="western">14. Manual Adjustments of Bandwidth</H1>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                Observing the simulated
+                performance (Figure 11) we can notice that our set of irises actually works as a
+                high-pass filter, but the achieved performance is definitely not great.
+                Nevertheless, it can be accepted as a zero approximation. We can also notice
+                that our pass-band (a bunch of return loss ripples and poles located between 9.9
+                and 11.7 GHz) is about 1 GHz lower than targeted according to our spec (Table
+                1). It should be also mentioned that we still need some more bandwidth to
+                provide good margins. Thus, we would need to move the filter bandwidth up for
+                about 1 GHz and make it wider for about 500 MHz (just a guess). According to
+                conventional direct coupled waveguide filters theory, we are provided with the
+                following controls over those parameters:
+            </P>
+            <UL>
+                <LI>
+                    <P style="line-height: 100%; margin-bottom: 0cm;">
+                        Increase widths	(the
+                        windows) of all irises simultaneously to make the bandwidth	wider.
+                    </P>
+                <LI>
+                    <P style="line-height: 100%; margin-bottom: 0cm;">
+                        Reduce widths	of all irises
+                        simultaneously to make the bandwidth narrower.
+                    </P>
+                <LI>
+                    <P style="line-height: 100%; margin-bottom: 0cm;">
+                        Reduce lengths	of all
+                        cavities simultaneously to move the bandwidth up (filter’s	center frequency
+                        will be increased).
+                    </P>
+                <LI>
+                    <P style="line-height: 100%; margin-bottom: 0cm;">
+                        Increase	lengths of all
+                        cavities simultaneously to move the bandwidth down	(filter’s center frequency
+                        will be reduced).
+                    </P>
+                </LI>
+            </UL>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                At the same time, it should be
+                taken into account that the changing any of those controls (iris width or cavity
+                length) has actually effects the both frequency parameters (bandwidth and center
+                frequency changing). For example, if we reduce the size of the iris aperture, in
+                addition to reducing the actual bandwidth, the center frequency of the bandwidth
+                will be affected and increased (but in a smaller degree).
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                Observing the plots on Figure
+                11 from the both simulations (cavity and iris configurations), we would just
+                reduce lengths of cavities (reduction of the cavities will increase the coupling
+                between them also). To do so, we can use the same “Replace” method as we have
+                done it in the Section 10. We can try several guesses and reduce the cavities
+                lengths from current value “0.608000” up to “0.4500000” until the bandwidth
+                covers the specified frequencies (from <SPAN style="font-variant: normal;">
+                    <FONT color="#000000">
+                        <SPAN style="text-decoration: none;">
+                            <FONT face="Liberation Serif, serif">
+                                <FONT size="3" style="font-size: 12pt;">
+                                    <SPAN style="font-style: normal;">
+                                        <SPAN style="font-weight: normal;">
+                                            10.95
+                                            to 12.75 GHz
+                                        </SPAN>
+                                    </SPAN>
+                                </FONT>
+                            </FONT>
+                        </SPAN>
+                    </FONT>
+                </SPAN>) with margins and
+                the lower roll-off also provides a good rejection of 9.5 GHz. In result, the
+                value of “0.48” looks an optimal fit. Now the structure profile (junctions and
+                dimensions list) will be as shown in Table 3 below.
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Table 3: Structure profile data with new
+                        dimensions (marked red)
+                    </I>
+                </FONT>
+            </P>
+            <TABLE border="1">
+                <TR>
+                    <TD width="100%" valign="top" style="background: none;">
+                        <FONT color="#000000">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2"
+                                      style="font-size: 10pt;">
+                                    0			1 <FONT color="#ce181e">0.480000</FONT>
+                                    0.000000 -0.187500			0.750000 0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2"
+                                      style="font-size: 10pt;">
+                                    0			0 0.000000 0.000000 &nbsp;0.000000 0.000000
+                                    0.000000
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2"
+                                      style="font-size: 10pt;">
+                                    <FONT color="#2a6099">4</FONT>			1 0.060000
+                                    0.000000 -0.187500 0.500000 0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2"
+                                      style="font-size: 10pt;">
+                                    1			2 <FONT color="#ce181e">0.480000</FONT>
+                                    0.000000 -0.187500			0.750000 0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2"
+                                      style="font-size: 10pt;">
+                                    <FONT color="#2a6099">4</FONT>			1 0.060000
+                                    0.000000 -0.187500 0.500000 0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2"
+                                      style="font-size: 10pt;">
+                                    1			2 <FONT color="#ce181e">0.480000</FONT>
+                                    0.000000 -0.187500			0.750000 0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2"
+                                      style="font-size: 10pt;">
+                                    <FONT color="#2a6099">4</FONT>			1 0.060000
+                                    0.000000 -0.187500 0.500000 0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2"
+                                      style="font-size: 10pt;">
+                                    1			2 <FONT color="#ce181e">0.480000</FONT>
+                                    0.000000 -0.187500			0.750000 0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2"
+                                      style="font-size: 10pt;">
+                                    <FONT color="#2a6099">4</FONT>			1 0.060000
+                                    0.000000 -0.187500 0.500000 0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2"
+                                      style="font-size: 10pt;">
+                                    1			2 <FONT color="#ce181e">0.480000</FONT>
+                                    0.000000 -0.187500			0.750000 0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2"
+                                      style="font-size: 10pt;">
+                                    <FONT color="#2a6099">4</FONT>			1 0.060000
+                                    0.000000 -0.187500 0.500000 0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2"
+                                      style="font-size: 10pt;">
+                                    1			2 <FONT color="#ce181e">0.480000</FONT>
+                                    0.000000 -0.187500			0.750000 0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2"
+                                      style="font-size: 10pt;">
+                                    <FONT color="#2a6099">4</FONT>			1 0.060000
+                                    0.000000 -0.187500 0.500000 0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2"
+                                      style="font-size: 10pt;">
+                                    0			0 0.000000 0.000000 &nbsp;0.000000 0.000000
+                                    0.000000
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Lucida Console, monospace">
+                                <FONT size="2"
+                                      style="font-size: 10pt;">
+                                    0			1 <FONT color="#ce181e">0.480000</FONT>
+                                    0.000000 -0.187500			0.750000
+                                    0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                    </TD>
+                </TR>
+            </TABLE>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                The simulated performance of
+                the updated structure (Table 3) is displayed on Figure 13 below with
+                instructions for the next steps (next section). Now it can be visually confirmed
+                that the bandwidth of the ripples covers the specified pass-band (10.95-12.75
+                GHz)with margins and the attenuation of the specified stop-band (9.4-9.5 GHz) is
+                greater than the specified value of 40 dB with a margin. The achieved
+                performance, however, is still far to be acceptable. We would need to achieve
+                the return loss target while keeping the rejection to be not worse than
+                specified.
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <H1 class="western">15. Setting Optimization</H1>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                In other words, we need to
+                optimize our design in respect to our performance standards. WR-Connect is
+                provided with a pattern search optimizer (the gradient optimizer is not
+                available yet).
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <IMG name="Image15" width="809" height="507" align="left" src="img/help_app0_htm_104a480b8a3d696b.gif"><BR clear="left"><FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 13: Reflection
+                        and transmission magnitudes (dB) responses for the adjusted cavities (Table 3)
+                        with spec lines and optimization targets.
+                    </I>
+                </FONT>
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                Optimization methods are very
+                widely used by modern RF designers, who often even prefer direct solving the
+                optimization problem than rather using common filter synthesis methods [2]. This
+                is because the optimization techniques are straightly based on maximizing the
+                “design performance function”, which can be defined in respect to the technical
+                parameters to be achieved. In the other words, a correctly set optimization
+                problem has a solution, which is the best over a given set of targetted
+                parameters. Even so, defining the right optimization function, parameters and
+                goals in the optimization task is not a simple task either. Generally, there are
+                no universal rules or instructions except of keeping trying (we will do the
+                trying here). When observing the results of the last simulation (Figure 13), we
+                can get an impression that we only need to improve the current return loss of
+                our filter. It seems, if we do it, everything else will automatically fall into
+                the spec lines. It is not as simple usually, but it is normally achievable in
+                several iterations. During each iteration we would need to update the
+                optimization targets to the current state of performance and possibly make some
+                adjustments to the bandwidth (if something went wrong). All those manipulations
+                could be easily performed with WR-Connect. Then, let us start.
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <IMG name="Image14" width="946" height="463" align="left" src="img/help_app0_htm_f4f2b2d56768232a.gif"><BR clear="left"><FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 14: Entering an
+                        optimization target: The entered numbers mean S11 (first two integers) from 10.3
+                        to 13.3 GHz (second two real numbers) for -20 dB (sign can be omitted) with 25
+                        frequency points.
+                    </I>
+                </FONT>
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                The only thing we have to do
+                is entering the optimization specs into the appropriate field new goals in the
+                optimization field. We need to enter six numbers into the text field named
+                “Targets” at the right bottom corner of the “<FONT color="#2a6099">
+                    <I>
+                        <B>
+                            Setup
+                            Page
+                        </B>
+                    </I>
+                </FONT>” as marked on Figure 14. Those numbers must be separated by
+                at least one space and they have the following interpretation:
+            </P>
+            <UL>
+                <LI>
+                    <P style="line-height: 100%; margin-bottom: 0cm;">
+                        First two	numbers show the
+                        s-parameter path indexes. In our case we have “1	1”, so we optimize S11.
+                    </P>
+                <LI>
+                    <P style="line-height: 100%; margin-bottom: 0cm;">
+                        The second two	numbers are
+                        real numbers showing the frequency range to be	optimized. In our case, we are
+                        going to optimize the bandwidth from	10.3 GHz to 13.3 GHz.
+                    </P>
+                <LI>
+                    <P style="line-height: 100%; margin-bottom: 0cm;">
+                        The fifth	number in the line
+                        is also a real number but specifying the	dB-magnitude of the s-parameter to be
+                        reached. In our case we want	the return loss to be better than 20 dB (the sign
+                        does not matter).	The optimizer will be set to get |S11| to be lower than -20
+                        dB (the	less the better) in a mean squared definition (if <I><B>L2</B></I>	is
+                        checked).
+                    </P>
+                <LI>
+                    <P style="line-height: 100%; margin-bottom: 0cm;">
+                        The last number	is a natural
+                        number showing the number of frequency points taken for	s-parameter evaluation
+                        over the specified frequency range. In our	case, we entered 25 points (5
+                        points for each filter pole).
+                    </P>
+                </LI>
+            </UL>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                The other optimization
+                parameters are left with their default values. Questions could be raised “why we
+                target only S11?” or “why we set L2 function instead of MiniMax?”. All tricks we
+                use when we optimize things (even in our real life) are often based on our
+                experience and there are too many preferences and constrains making the problem
+                to be very complex. Therefore, in most cases (especially in design engineering),
+                it is better to keep it simple and make it fast. Using L2 and optimizing only
+                return loss are practically found more efficient.
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                After we entered the
+                optimization targets (Figure 14), we can launch optimization process by
+                clicking the “Run Optimization” drop-down item located under “Run” top menu. It
+                would take about half of a minute for optimization to end and the dimensions
+                window on “<FONT color="#2a6099"><I><B>Editor Page</B></I></FONT>” will be
+                updated. The next step would be to run simulation again (click “<FONT color="#2a6099">
+                    <I>
+                        <B>
+                            Run
+                            Simulation
+                        </B>
+                    </I>
+                </FONT>” drop-down option under “<FONT color="#2a6099"><I><B>Run</B></I></FONT>” menu). The obtained characteristics
+                are still not good enough, so we would need to run optimization the second time.
+                After two runs, we would further improve the return loss (Figure 15).
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <IMG name="Image16" width="809" height="508" align="left" src="img/help_app0_htm_24b4212fa00cc3b3.gif"><BR clear="left"><FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 15: Return loss
+                        and insertion loss near-band performance achieved after two runs of
+                        optimization.
+                    </I>
+                </FONT>
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                Thus, our filter is almost
+                there. We would need just some minor adjustments. We would try to run
+                optimization again with a rejection spec included but we go a different way (the
+                purpose of this tutorial is to learn how to use the WR-Connect tools).
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <H1 class="western">16. Scaling Dimensions</H1>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                Let us make the bandwidth
+                narrower (we have it too wide) and move it up to get more margins (we need good
+                margins because our production method is very inaccurate). Let us try to reduce
+                the widths of all irises instantly. If we do so, the filter bandwidth will be
+                narrowed and also moved up (since the irises contribute inductive effects).
+                WR-Connect is provided with a special tool for automatic correcting or scaling a
+                group of dimensions. If we look to the design profile records (Figure 15), we
+                can see the first column of numbers. Each of those numbers points to a certain
+                dimension in the node or junction, which is marked for a change if a synthesis,
+                optimization or scaling method is applied. During that process, the software
+                algorithm is set to change only those “marked” dimensions. When we executed
+                optimizations, only “marked” variables have been updated. Those dimensions are
+                set as #1 (to update the length <I><B>L</B></I>) and #4 (to update the position
+                of right sidewall <I><B>X1</B></I>). We can also notice that the first and last
+                nodes/junctions are not marked. This because the first and last nodes are
+                interface dimensions and the second junctions from the ends are step junctions
+                with no dimensions. In the other words, during optimization only lengths of
+                cavities and widths of irises have been set to be changed during the process.
+                Here below (Figure 16), in a similar way, it is instructed how to scale the
+                width of each irises for 5% reduction.
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <IMG name="Image18" width="531" height="450" align="left" src="img/help_app0_html_23eea053368f0a1d.gif"><BR clear="left"><FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 16: Truncated
+                        screenshot of the “Editor Page” with instructions how to set group dimensions
+                        scaling (each iris to make 5% narrower).
+                    </I>
+                </FONT>
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                The appropriate controls named
+                “Design Corrections” have to set in the following way:
+            </P>
+            <OL>
+                <LI>
+                    <P style="line-height: 100%; margin-bottom: 0cm;">
+                        The first	option is to be
+                        set for “Scale”. This means that each	dimension number will be multiplied by
+                        the same number (the factor).
+                    </P>
+                <LI>
+                    <P style="line-height: 100%; margin-bottom: 0cm;">
+                        The second	option is to be
+                        set as “X1” (dimension #4), which is the	iris dimension (the width) used to
+                        control the coupling.
+                    </P>
+                <LI>
+                    <P style="line-height: 100%; margin-bottom: 0cm;">
+                        If the third	option is set
+                        as “Marked”, only the “marked”	 dimensions will be scaled. The dimensions with
+                        0 mark will not be	touched.
+                    </P>
+                <LI>
+                    <P style="line-height: 100%; margin-bottom: 0cm;">
+                        The forth	option is to be
+                        set to “Nodes”. This makes the algorithm	to modify X1 dimensions only in the
+                        nodes (identified as Type 1),	which are actually irises in our structure. In
+                        this case the	cavities (Type 2) will not be touched and input and output nodes
+                        will remain same also (because they are marked as 0).
+                    </P>
+                <LI>
+                    <P style="line-height: 100%; margin-bottom: 0cm;">
+                        The last entry	(labelled as
+                        “By”) is the field for a scaling factor. In	our case, we try 0.95, which is
+                        just 5% reduction.
+                    </P>
+                <LI>
+                    <P style="line-height: 100%; margin-bottom: 0cm;">
+                        After all those	options
+                        (listed above) are set, we can click the “Apply”	 button to apply the scaling
+                        factor to the right dimensions.
+                    </P>
+                </LI>
+            </OL>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                After pressing the “Apply”
+                button, all irises will be reduced 0.95 times and the appropriate values in the
+                schematic profile content will be updated. As usual, after any modification of
+                the structure, we need to run the simulation and review the results to confirm
+                if everything is going fine. The simulation results (omitted here) now show that
+                the filter bandwidth became narrower and moved up, but it is also degraded a
+                little (the return loss is about 17 dB). So, one more optimization would be
+                required. Since the bandwidth is changed, we need to update the targeted
+                bandwidth (now it is from 10.7 to 13 GHz) as well. In a same manner, we can run
+                the optimization two times without changing the other optimization parameters
+                (to make it simple). After the optimizations, we would obtain an acceptable
+                performance (Figure 17).
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <IMG name="Image17" width="805" height="509" align="left" src="img/help_app0_html_3041f4b911d61ca.gif"><BR clear="left"><FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 17: Near-band
+                        return loss and insertion loss over frequency characteristics of the optimized
+                        filter.
+                    </I>
+                </FONT>
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                The list of filter dimensions
+                can be directly extracted from the structure profile (Table 4) displayed below.
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Table 4: The textual content of the
+                        structure schematic of post-optimized (see responses on Figure 17) filter
+                        structure (see 3D view on Figure 18).
+                    </I>
+                </FONT>
+            </P>
+            <TABLE border="1">
+                <TR>
+                    <TD width="380px" valign="top" style="background: none;">
+                        <FONT color="#000000">
+                            <FONT face="Liberation Serif, serif">
+                                <FONT size="3" style="font-size: 12pt;">
+                                    0
+                                    1 0.480000 0.000000 -0.187500 0.750000
+                                    0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Liberation Serif, serif">
+                                <FONT size="3" style="font-size: 12pt;">
+                                    0
+                                    0 0.000000 0.000000 &nbsp;0.000000 0.000000 0.000000
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Liberation Serif, serif">
+                                <FONT size="3" style="font-size: 12pt;">
+                                    4
+                                    1 0.060000 0.000000 -0.187500 0.578867
+                                    0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Liberation Serif, serif">
+                                <FONT size="3" style="font-size: 12pt;">
+                                    1
+                                    2 0.396588 0.000000 -0.187500 0.750000
+                                    0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Liberation Serif, serif">
+                                <FONT size="3" style="font-size: 12pt;">
+                                    4
+                                    1 0.060000 0.000000 -0.187500 0.497326
+                                    0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Liberation Serif, serif">
+                                <FONT size="3" style="font-size: 12pt;">
+                                    1
+                                    2 0.473299 0.000000 -0.187500 0.750000
+                                    0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Liberation Serif, serif">
+                                <FONT size="3" style="font-size: 12pt;">
+                                    4
+                                    1 0.060000 0.000000 -0.187500 0.475000
+                                    0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Liberation Serif, serif">
+                                <FONT size="3" style="font-size: 12pt;">
+                                    1
+                                    2 0.489567 0.000000 -0.187500 0.750000
+                                    0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Liberation Serif, serif">
+                                <FONT size="3" style="font-size: 12pt;">
+                                    4
+                                    1 0.060000 0.000000 -0.187500 0.475000
+                                    0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Liberation Serif, serif">
+                                <FONT size="3" style="font-size: 12pt;">
+                                    1
+                                    2 0.473299 0.000000 -0.187500 0.750000
+                                    0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Liberation Serif, serif">
+                                <FONT size="3" style="font-size: 12pt;">
+                                    4
+                                    1 0.060000 0.000000 -0.187500 0.497329
+                                    0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Liberation Serif, serif">
+                                <FONT size="3" style="font-size: 12pt;">
+                                    1
+                                    2 0.396360 0.000000 -0.187500 0.750000
+                                    0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Liberation Serif, serif">
+                                <FONT size="3" style="font-size: 12pt;">
+                                    4
+                                    1 0.060000 0.000000 -0.187500 0.578908
+                                    0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Liberation Serif, serif">
+                                <FONT size="3" style="font-size: 12pt;">
+                                    0
+                                    0 0.000000 0.000000 &nbsp;0.000000 0.000000 0.000000
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                        <FONT color="#000000">
+                            <FONT face="Liberation Serif, serif">
+                                <FONT size="3" style="font-size: 12pt;">
+                                    0
+                                    1 0.480000 0.000000 -0.187500 0.750000
+                                    0.187500
+                                </FONT>
+                            </FONT>
+                        </FONT><BR />
+                    </TD>
+                    <td width="170px" style="text-align:center;">
+                        <font class="scriptos">Open Project in Editor</font><br />
+                        <button class="fontos" style="width:150px;font-weight:bold;" onclick="PrjFile();window.location.href = 'editor.htm';">Try It!</button>
+                        <br /><br />
+                        <font class="scriptos">See 3D Image</font><br />
+                        <button class="fontos" style="width:150px;font-weight:bold;" onclick="PrjFile();window.location.href = 'view_d3.htm';">Try It!</button>
+                    </td>
+                </TR>
+            </TABLE>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                <IMG name="Image19" width="492"
+                     height="441" align="left" src="img/help_app0_html_8275a66050c768c4.gif"><BR clear="left"><BR>
+            </P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 18: 3D view image of the
+                        post-optimized filter structure corresponding to the schematic and dimensions
+                        profile written in Table 4.
+                    </I>
+                </FONT>
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <H1 class="western">17. Insertion Loss</H1>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                By default settings the surface of the waveguide structure is assumed to be a perfect conductor
+                (having infinitive conductivity). Nevertheless, the default value of conductivity is set
+                as zero for a convenience.  Setting the appropriate number for surface conductivity is generally
+                recommended at the last design steps prior to finalization.  This is because the realistic
+                settings do not make a noticeable difference to the rough return loss and attenuation
+                characteristics, but they would significantly slow down the simulations and make the design
+                process longer. Therefore, it is recommended to set the surface conductivity when the design
+                is already finalized. Then, the conductivity value (relative to 10^7 S/m) is to be entered into
+                appropriate field (see Figure 19).  
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <IMG name="Image21" width="498" height="116" align="left" src="img/help_app0_html_5c0a82fa312049be.gif"><BR clear="left"><FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 19: “Filling and
+                        Surface” entries with instruction how to evaluate conductivity losses using
+                        Q-factor approach.
+                    </I>
+                </FONT>
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                Finally, in a same manner, we run simulation, plot the
+                results and extract in-band insertion loss over pass-band characteristic (Figure 20) by adjusting
+                the grids and scales.
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <IMG name="Image20" width="809" height="508" align="left" src="img/help_app0_html_7b6b652e73a306c4.gif"><BR clear="left"><FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 20: Simulated
+                        insertion loss (dB) over pass-band frequencies (GHz)
+                    </I>
+                </FONT>
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <H1 class="western">18. Dimensions and Envelope</H1>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                The exterior box of the
+                internal dimensions of our filter are displayed at the top of its 3D view and
+                labelled as “<FONT color="#2a6099"><I><B>Envelope Size</B></I></FONT>”, which
+                shows “<I><B>0.750 x 0.375 x 3.549</B></I>”. Those dimensions are the dimensions
+                of the smallest parallelepiped, which contains all waveguide structure from the
+                “<FONT color="#2a6099"><I><B>Design Page</B></I></FONT>”. They are actually the
+                waveguide channel dimensions with no walls thickness applied. In our case when
+                taking into account the walls (<I><B>0.06’’</B></I>) and flanges (<I>
+                    <B>
+                        1.5’’ x
+                        1.5’’
+                    </B>
+                </I>), we would suggest that our filter fits <I>
+                    <B>
+                        1.5’’ x 1.5’’ x
+                        3.55’’
+                    </B>
+                </I> envelope.
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <H1 class="western">19. Performance Summary</H1>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                Finally, we can summarize the
+                expected values of all specified parameters (Table 1) and put them against their
+                targeted values (Table 5).
+            </P>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-top: 0.2cm; margin-bottom: 0.2cm;">
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Table 5: Specified parameters and their
+                        expected values
+                    </I>
+                </FONT>
+            </P>
+            <TABLE width="643" border="1">
+                <TR valign="top">
+                    <TD width="139" style="background: none;">
+                        <P align="left" style="font-style: normal; font-variant: normal; text-decoration: none;">
+                            <FONT color="#000000"><FONT face="Liberation Serif, serif"><FONT size="3" style="font-size: 12pt;"><B>Parameter</B></FONT></FONT></FONT>
+                        </P>
+                    </TD>
+                    <TD width="147" style="background: none;">
+                        <P align="center" style="font-style: normal; font-variant: normal; text-decoration: none;">
+                            <FONT color="#000000"><FONT face="Liberation Serif, serif"><FONT size="3" style="font-size: 12pt;"><B>Value</B></FONT></FONT></FONT>
+                        </P>
+                    </TD>
+                    <TD width="102" style="background: none;">
+                        <P align="left" style="font-style: normal; font-variant: normal; text-decoration: none;">
+                            <FONT color="#000000"><FONT face="Liberation Serif, serif"><FONT size="3" style="font-size: 12pt;"><B>Expected</B></FONT></FONT></FONT>
+                        </P>
+                    </TD>
+                    <TD width="223" style="background: none;">
+                        <P align="center" style="font-style: normal; font-variant: normal; text-decoration: none;">
+                            <FONT color="#000000"><FONT face="Liberation Serif, serif"><FONT size="3" style="font-size: 12pt;"><B>Notes</B></FONT></FONT></FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR valign="top">
+                    <TD width="139" style="background: none;">
+                        <P align="left" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        Pass-Band,
+                                        GHz
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="147" style="background: none;">
+                        <P align="center" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        10.95
+                                        - 12.75
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="102" style="background: none;">
+                        <P align="center" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        10.95
+                                        - 12.75
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="223" style="background: none;">
+                        <P align="center" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        Compliant
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR valign="top">
+                    <TD width="139" style="background: none;">
+                        <P align="left" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        Insertion
+                                        Loss, dB
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="147" style="background: none;">
+                        <P align="center" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        &lt;
+                                        0.2
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="102" style="background: none;" sdnum="2057;" sdval="0.12">
+                        <P align="center" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000"><FONT face="Liberation Serif, serif"><FONT size="3" style="font-size: 12pt;">0.12</FONT></FONT></FONT>
+                        </P>
+                    </TD>
+                    <TD width="223" style="background: none;">
+                        <P align="center" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        Compliant
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR valign="top">
+                    <TD width="139" style="background: none;">
+                        <P align="left" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        Return
+                                        Loss, dB
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="147" style="background: none;">
+                        <P align="center" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        &gt;
+                                        18
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="102" style="background: none;" sdnum="2057;" sdval="20">
+                        <P align="center" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000"><FONT face="Liberation Serif, serif"><FONT size="3" style="font-size: 12pt;">20</FONT></FONT></FONT>
+                        </P>
+                    </TD>
+                    <TD width="223" style="background: none;">
+                        <P align="center" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        Compliant
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR valign="top">
+                    <TD width="139" style="background: none;">
+                        <P align="left" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        Stop-Band,
+                                        GHz
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="147" style="background: none;">
+                        <P align="center" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        9.4
+                                        - 9.5
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="102" style="background: none;">
+                        <P align="center" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        9.4
+                                        - 9.5
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="223" style="background: none;">
+                        <P align="center" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        Compliant
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR valign="top">
+                    <TD width="139" style="background: none;">
+                        <P align="left" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        Rejection,
+                                        dB
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="147" style="background: none;">
+                        <P align="center" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        &gt;
+                                        40
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="102" style="background: none;" sdnum="2057;" sdval="45">
+                        <P align="center" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000"><FONT face="Liberation Serif, serif"><FONT size="3" style="font-size: 12pt;">45</FONT></FONT></FONT>
+                        </P>
+                    </TD>
+                    <TD width="223" style="background: none;">
+                        <P align="center" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        Compliant
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                </TR>
+                <TR valign="top">
+                    <TD width="139" style="background: none;">
+                        <P align="left" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        Size
+                                        W x H x L, inch
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="147" style="background: none;">
+                        <P align="center" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        &lt;
+                                        2.0 x 1.8 x 4.0
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="102" style="background: none;">
+                        <P align="center" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        1.5
+                                        x 1.5 x 3.6
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                    <TD width="223" style="background: none;">
+                        <P align="center" style="font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none;">
+                            <FONT color="#000000">
+                                <FONT face="Liberation Serif, serif">
+                                    <FONT size="3" style="font-size: 12pt;">
+                                        Compliant
+                                    </FONT>
+                                </FONT>
+                            </FONT>
+                        </P>
+                    </TD>
+                </TR>
+            </TABLE>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <h1 class="western">20. Saving the Design Project</h1>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <p style="line-height: 100%; margin-bottom: 0cm;">
+                Until now, there has never been a mention of how to save work, although this is important.
+                "WR-Connect", as it was said, is based on scripts that are executed directly in the browser.
+                Therefore, each browser has its own limitations on what and how can be imported to the
+                client's computer. In other words, it is not as simple as with home programs installed
+                on the computer. "WR-Connect" has a special “<FONT color="#2a6099"><I><B>File Page</B></I></FONT>” (click the option of
+                the same name on the main menu) to import and export the project file.
+                There, the user will have stwo ways to save the project file.<br /><br />
+                1. The surest way is to simply mark all the text in the window and copy it to any text editor
+                and then save it to any place on the drive.<br /><br />
+                2. Click on the "Export Project" option. But here, each browser behaves differently.
+                The user may be given the opportunity to record a file using a dialogue as in
+                the <b>MS Internet Explorer</b>.
+                Or this file will automatically load into the "<b>Downloads</b>" folder (<b>Google Chrome</b>).
+                Or nothing at all.<br /><br />
+                The same ways can be used when importing the project file back to the design environment.<br />
+            </p>
+            <H1 class="western">21. Finaly</H1>
+            <P style="line-height: 100%; margin-bottom: 0cm;"><BR></P>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                We could conclude that our
+                task has been completed. In fact, we developed a good and affordable “budget”
+                filter design, designed it and calculated the dimensions and performance. We can
+                start sawing the waveguide tube, cut out the plates and solder everything in a
+                row. However, this is not the case, unfortunately. We just developed a good
+                concept that suits us in terms of budget, technology and electrical parameters.
+                That is, in fact, we can only say that we can make such a filter with such
+                characteristics. But to make it in real metal is completely different. There is
+                still much to think about and consider. At first, we need to know how accurately
+                we calculated this design, characteristics and parameters. In other words, what
+                is the accuracy of our calculation tools? At second, we need to know how
+                accurate our technological process is. We should definitely expect significant
+                tolerances (maybe 0.005’’ or even more). At third, based on our design and
+                production errors/tolerances, we need to find some ways how to compensate them.
+                It is very possible, we would need tuning. If we do, we would need to know about
+                the tuning ranges. All this should be taken into account and properly
+                compensated, but we will discuss this another time. Here, however, the purpose
+                of this tutorial is limited only to the development of a concept, which we did a
+                great job of.
+            </P>
+            <br /><br />
+            <H1 class="western">References</H1>
+            <P style="line-height: 100%; margin-bottom: 0cm;">
+                [1] R. E. Collin, Foundations for Microwave Engineering, 2nd edition, Wiley-IEEE Press, Hoboken,
+                N.J., 2001.<br /><br />
+                [2] F. De Paolis, R. Goulouev, J. Zheng, and M. Yu, “CAD Procedure for
+                High-Performance Composite Corrugated Filters,” IEEE Trans. Microw.
+                Theory. Techn., vol. 61, no. 9, pp. 3216–3224, Sept. 2013.
+            </P>
+        </div>
+    </div>
+    <script type="text/javascript">
+        //############################
+        //INSERT TEXT FROM WINDOW AND SetProject(LNs)
+        function PrjFile() {
+            var rs = [];
+            rs[0] = 'SETUP_DAT';
+            rs[1] = '1 10 10';
+            rs[2] = '1 0.05 0 1 2 1 1.5';
+            rs[3] = '12.5 0.5';
+            rs[4] = '9 14 500';
+            rs[5] = '1 20 0.02 0.05 0.05';
+            rs[6] = '1 1 10.7 13 20 25';
+            rs[7] = 'DESIGN_DAT';
+            rs[8] = '0  1  0';
+            rs[9] = '0  1  0';
+            rs[10] = '0  10  0';
+            rs[11] = '1  1';
+            rs[12] = '1  0  0';
+            rs[13] = '0    1     0.480000     0.000000    -0.187500     0.750000     0.187500';
+            rs[14] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[15] = '4    1     0.060000     0.000000    -0.187500     0.578867     0.187500';
+            rs[16] = '1    2     0.396588     0.000000    -0.187500     0.750000     0.187500';
+            rs[17] = '4    1     0.060000     0.000000    -0.187500     0.497326     0.187500';
+            rs[18] = '1    2     0.473299     0.000000    -0.187500     0.750000     0.187500';
+            rs[19] = '4    1     0.060000     0.000000    -0.187500     0.475000     0.187500';
+            rs[20] = '1    2     0.489567     0.000000    -0.187500     0.750000     0.187500';
+            rs[21] = '4    1     0.060000     0.000000    -0.187500     0.475000     0.187500';
+            rs[22] = '1    2     0.473299     0.000000    -0.187500     0.750000     0.187500';
+            rs[23] = '4    1     0.060000     0.000000    -0.187500     0.497329     0.187500';
+            rs[24] = '1    2     0.396360     0.000000    -0.187500     0.750000     0.187500';
+            rs[25] = '4    1     0.060000     0.000000    -0.187500     0.578908     0.187500';
+            rs[26] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[27] = '0    1     0.480000     0.000000    -0.187500     0.750000     0.187500';
+            SetProject(rs);
+        }
+        function SetProject(LNs) {
+            //document.getElementById('FileProjectOkno').value = localStorage.getItem('ProjectDat');
+            var i, key;
+            var SetupDat = '';
+            var DesignDat = '';
+            var MemoDat = '';
+            var kod = -1;
+            var n = LNs.length - 1;
+            if (n < 0) { return; }
+            for (i = 0; i <= n; i++) {
+                var LN = LNs[i].trim();
+                if (LN.length > 3) {
+                    key = LNs[i].substr(0, 4);
+                    //alert(key);
+                    if (key == 'SETU') { kod = 1; }
+                    if (key == 'DESI') { kod = 2; }
+                    if (key == 'BACK') { kod = 3; }
+                    if (kod == 1 && key != 'SETU') {
+                        SetupDat += LNs[i] + '\r\n';
+                    }
+                    if (kod == 2 && key != 'DESI') {
+                        DesignDat += LNs[i] + '\r\n';
+                    }
+                    if (kod == 3 && key != 'BACK') {
+                        MemoDat += LNs[i] + '\r\n';
+                    }
+
+                }
+
+            }
+            if (kod > 0) {
+                localStorage.setItem("InputDatFileText", SetupDat);
+                localStorage.setItem("DesignFileText", DesignDat);
+                localStorage.setItem("MemoDatText", MemoDat);
+                
+            }
+        }
+        //############################
+    </script>
+</body>
+</html >

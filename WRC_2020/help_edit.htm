@@ -1,0 +1,2093 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="author" content="Rousslan Goulouev">
+    <meta name="description" content="About WR-Connect, instructions and manuals">
+    <meta name="keywords" content="s-parameter, group delay, slope, s2p, Re/Im, freeware">
+    <title>WR-Connect: How to use Design Editor</title>
+    <link rel="stylesheet" href="navbars.css" />
+    <style>
+        .vertical-menu {
+            width: 15%;
+            height: 530px;
+            overflow-y: auto;
+            float: left;
+            color: navy;
+            background-color: white;
+            /* width: 50%;*/
+            /*padding: 10px;*/
+            /*height: 300px;*/ /* Should be removed. Only for demonstration */
+        }
+
+            .vertical-menu a {
+                background-color: #eee;
+                color: black;
+                display: block;
+                padding: 12px;
+                text-decoration: none;
+            }
+
+                .vertical-menu a:hover {
+                    background-color: #ccc;
+                }
+
+                .vertical-menu a.active {
+                    background-color: #624e4e;
+                    color: white;
+                }
+
+            .vertical-menu p {
+                font-size: 18px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: bold;
+                color: navy;
+                padding-left:15px;
+            }
+/*========================================*/
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column {
+            float: left;
+            width: 85%;
+            padding: 10px;
+            height: 530px;
+            overflow-y: auto;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /*======================================*/
+
+        td p {
+            margin-bottom: 0.25cm;
+            background: transparent;
+            line-height: 115%
+        }
+
+        h1 {
+            margin-bottom: 0.2cm;
+            background: transparent
+        }
+
+            h1.western {
+                font-family: "Liberation Sans", sans-serif;
+                font-size: 18pt
+            }
+
+            h1.cjk {
+                font-family: "Microsoft YaHei";
+                font-size: 18pt
+            }
+
+            h1.ctl {
+                font-family: "Mangal";
+                font-size: 18pt
+            }
+
+        p {
+            margin-bottom: 0.25cm;
+            background: transparent;
+            line-height: 115%
+        }
+
+        h2 {
+            margin-top: 0.36cm;
+            margin-bottom: 0.2cm;
+            background: transparent
+        }
+
+            h2.western {
+                font-family: "Liberation Sans", sans-serif;
+                font-size: 16pt
+            }
+
+            h2.cjk {
+                font-family: "Microsoft YaHei";
+                font-size: 16pt
+            }
+
+            h2.ctl {
+                font-family: "Mangal";
+                font-size: 16pt
+            }
+
+        h3 {
+            margin-top: 0.25cm;
+            margin-bottom: 0.2cm;
+            background: transparent
+        }
+
+            h3.western {
+                font-family: "Liberation Sans", sans-serif
+            }
+
+            h3.cjk {
+                font-family: "Microsoft YaHei"
+            }
+
+            h3.ctl {
+                font-family: "Mangal"
+            }
+    </style>
+</head>
+<body >
+    <div class="navbar">
+        <a href="index.htm">File</a>
+        <a href="setup.htm">Setup</a>
+        <a href="editor.htm">Edit</a>
+        <a href="editor.htm">Design</a>
+        <a href="editor.htm">Run</a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="javascript:void(0)">
+                Reports
+            </button>
+            <div class="dropdown-content">
+                <a href="graph.htm">Plot</a>
+                <a href="s_data.htm">Import/Export</a>
+            </div>
+        </div>
+        <a href="javascript:void(0)">Help</a>
+    </div>
+    <div class="row">
+        <div class="vertical-menu">
+            <p>WR-Connect</p>
+            <a href="help.htm">About Software</a>
+            <a href="menus.htm">Main Menus</a>
+            <a href="help_setup.htm">Initial Setup</a>
+            <a href="help_edit.htm" class="active">Design Editor</a>
+            <p>Tutorials</p>
+            <a href="help_app0.htm">Simple Filter Design</a>
+            <a href="help_app1.htm">Corrugated Filter #1</a>
+            <a href="help_app2.htm">Space Mapping</a>
+            <a href="#">--------------</a>
+            <p>Examples</p>
+            <a href="examps.htm">Conventional Designs</a>
+        </div>
+        <div class="column" style="background-color:white;">
+            <h1 class="western">Design Editor</h1>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h2 class="western">1.Controls and Forms</h2>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The Design Editor is
+                realized on Editor Page (see Figure 1) with local URL &ldquo;editor.htm&rdquo;.
+                It is a dynamic HTML webpage with multiple controls, forms and
+                drop-down menus.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <img src="img/help_edit_htm_c1c837686d4d722.gif" name="Image1" />
+                <br />
+
+            </p>
+            <p style="margin-top: 0.2cm; margin-bottom: 0.2cm; line-height: 100%">
+                <font size="3" style="font-size: 12pt">
+                    <i>
+                        Figure 1: Design Editor
+                        screenshot
+                    </i>
+                </font>
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                All those control
+                elements are associated with the design concept and its EM model
+                (elements, modal settings, filling) and geometric dimensions (length,
+                width, height and position of each element). There are the following
+                controls:
+            </p>
+            <ul>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <i>
+                            <b>
+                                Structure
+                                Profile
+                            </b>
+                        </i><span style="font-variant: normal">
+                            <span style="font-style: normal">
+                                <span style="font-weight: normal">
+                                    window
+                                    contains a plain text editor with the design profile, which
+                                    represents the design concept (EM model) in terms of junctions,
+                                    their sequential connections and dimensions measured in the units
+                                    set in Setup Page. See more information here below, tutorials and
+                                    design examples.
+                                </span>
+                            </span>
+                        </span>
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <i>
+                            <b>
+                                YZ
+                                Symmetry
+                            </b>
+                        </i> sets a type of vertical symmetry (none, H-plane,
+                        E-plane) applicable to whole structure
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <i>
+                            <b>
+                                XZ
+                                Symmetry
+                            </b>
+                        </i> sets a type of horizontal symmetry (none, H-plane,
+                        E-plane) applicable to whole structure
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <i>
+                            <b>
+                                XY
+                                Symmetry
+                            </b>
+                        </i> sets the longitudinal symmetry (if structure
+                        remains same if flipping input and output) with button &ldquo;Yes&rdquo;
+                        turned on. Otherwise, in case of no symmetry the button &ldquo;No&rdquo;
+                        is to be on.
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <i>
+                            <b>
+                                Incident
+                                Mode
+                            </b>
+                        </i> sets the incidental waveguide mode with three indexes
+                        (see more information below).
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <i>
+                            <b>
+                                Solutions
+                                Modes
+                            </b>
+                        </i> sets the basic set of waveguide modes counted in the
+                        solution (see more information below).
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <i>
+                            <b>
+                                Filling
+                                and Surface
+                            </b>
+                        </i> sets the internal filling (dielectric constant
+                        and loss tangent) and the conductivity of surface.
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <i>
+                            <b>
+                                Run
+                                Status
+                            </b>
+                        </i> is a control, which contains a process bar showing a
+                        completion state of simulations (simulation, performance
+                        optimization, space mapping optimization)
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <i>
+                            <b>
+                                Space
+                                Mapping
+                            </b>
+                        </i> controls perform iterations of aggressive space
+                        mapping (ASM) algorithm. It is an advanced feature with more
+                        information in tutorials.
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <b>
+                            Design
+                            Corrections
+                        </b> is a set of controls performing different ways of
+                        scaling and correction of structure dimensions. It is an advanced
+                        feature with more information in tutorials.
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <b>Replace</b>
+                        control is used to replace a textual content selected in the
+                        Structure Profile window with the content entered by user in the
+                        text bar. It is an advanced feature with more information in
+                        tutorials.
+                    </p>
+            </ul>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h2 class="western">2.Drop-Down Menus</h2>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The Design Editor is
+                also equipped with three drop-down menus from the Main Menu black bar
+                (located on the top of the WR-Connect pages).
+            </p>
+            <ul>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <i><b>Edit</b></i>
+                        menu contains several drop-dawn options, which are not functional
+                        yet. It will be populated soon (see updates info on the home page)
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <i><b>Design</b></i>
+                        menu also contains several drop-dawn option leading to appropriate
+                        design pages, which create initial design concept template. Only
+                        iris filter design page is currently available. See updates info
+                        about these options on the home page.
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <b>Run</b> menu
+                        contain several options, which execute the following tasks:
+                    </p>
+                    <ul>
+                        <li>
+                            <p style="margin-bottom: 0cm; line-height: 100%">
+                                <font color="#2a6099">
+                                    <b>
+                                        Run
+                                        Simulation
+                                    </b>
+                                </font> executes simulation of the structure entered
+                                in the <font color="#158466"><b>Structure</b></font><font color="#158466">
+                                </font><font color="#158466"><b>Profile</b></font> window over the
+                                frequency sweep set in <font color="#158466"><b>Initial Setup</b></font>.
+                            </p>
+                        <li>
+                            <p style="margin-bottom: 0cm; line-height: 100%">
+                                <font color="#2a6099">
+                                    <b>
+                                        Run
+                                        Synthesis
+                                    </b>
+                                </font> executes synthesis algorithm, which modifies
+                                the structure entered in the <font color="#158466">
+                                    <b>
+                                        Structure
+                                        Profile
+                                    </b>
+                                </font> window in accordance with the filter prototype
+                                set in the Initial Setup page.
+                            </p>
+                        <li>
+                            <p style="margin-bottom: 0cm; line-height: 100%">
+                                <font color="#2a6099">
+                                    <b>
+                                        Run
+                                        Optimization
+                                    </b>
+                                </font> executes performance optimization, which
+                                modifies the structure entered in the <font color="#158466">
+                                    <b>
+                                        Structure
+                                        Profile
+                                    </b>
+                                </font> window approaching the performance goals set in
+                                Initial Setup page as optimization parameters.
+                            </p>
+                        <li>
+                            <p style="margin-bottom: 0cm; line-height: 100%">
+                                <font color="#2a6099">
+                                    <b>
+                                        Run
+                                        ASM Step
+                                    </b>
+                                </font> executes aggressive space mapping (ASM)
+                                optimization, which modifies the structure entered in the <font color="#158466">
+                                    <b>
+                                        Structure
+                                        Profile
+                                    </b>
+                                </font> window approaching it to external s-parameters
+                                in accordance with the goals set in Initial Setup page as
+                                optimization parameters.
+                            </p>
+                    </ul>
+            </ul>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h2 class="western">3.Structure Profile</h2>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h3 class="western">A)Design Editor Methods</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                WR-Connect utilizes
+                a simple and unique way of representing a design concept in terms of
+                text lines. This approach differs from common design tools, which
+                represent a EM structure as a network of symbols (AWR, Mician,
+                FEST-3D) or 3D drawings (HFSS, CST). WR-Connect EM structure
+                representation is realized as a plain text file, which is closer to
+                old-fashioned software like Touchstone, but much simpler and more
+                efficient. Despite its visual inconvenience, this method has multiple
+                advantages in design operations (easy connecting, removing, inserting
+                and correcting the single elements and parts of structure) as simple
+                text edition operations (pasting, cutting, copying, replacing).
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h3 class="western">B)EM Structure Representation</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                WR-Connect is
+                applicable to EM structures composed from three types of junction
+                (waveguide component performing incident mode scattering). Each of
+                those junctions represent a solution of EM boundary problem of
+                waveguide scattering realized in variational mode-matching numerical
+                approximation. The solutions express 2x2 GSM versus frequency
+                (frequency domain) characteristics of the following types of
+                connections between two waveguides:
+            </p>
+            <ul>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <i>
+                            <b>
+                                Step
+                                Junction
+                            </b>
+                        </i> (index <i><b>0</b></i>) is an uniaxial junction of
+                        two waveguides.
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <i>
+                            <b>
+                                Cavity
+                                Junction
+                            </b>
+                        </i> (index <i><b>2</b></i>) is an uniaxial junction of
+                        three waveguides when the middle waveguide is greater in
+                        cross-section.
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <i>
+                            <b>
+                                Iris
+                                Junction
+                            </b>
+                        </i> (index <i><b>3</b></i>) is an uniaxial junction of
+                        three waveguides when the middle waveguide is smaller in
+                        cross-section.
+                    </p>
+            </ul>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                All three types are
+                defined below in more details. The EM solution is based on the
+                variational mode-matching solution (see [1] for details) counting a
+                single incident (accessible) mode and full set of localized modes
+                (set in <font color="#2a6099"><i><b>Solution Modes</b></i></font>
+                area). Each of the junctions have <b>0-length</b> interface. In the
+                other words, the EM solution for the s-parameters does not include
+                the electrical phase of the waveguides connected to the junction from
+                the both ends. For example, a step junction (index 0) of two
+                waveguides includes just the face of their connection and it does not
+                include the lengths of the waveguides (i.e. the junction has zero
+                length). The whole EM structure is composed from those types of
+                junctions, which put sequentially in a cascade and connected by
+                straight waveguide sections. Those waveguides, which are used to
+                connect junctions are called &ldquo;<b>nodes</b>&rdquo; here. Only
+                one type of node is used in this version of WR-Connect:
+            </p>
+            <ul>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <i><b>Node</b></i>
+                        (index <b>1</b>) is a straight waveguide section with only incident
+                        mode propagation
+                    </p>
+            </ul>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h3 class="western">C)Connections Circuitry (Schematic, Topology)</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                Thus, the structure
+                can be designed from those four elements described above if put in
+                cascade (see Figure 2) according to the connection rules.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <img src="img/help_edit_htm_bfacc3150da726c8.gif" name="Image12" />
+                <br />
+
+            </p>
+            <p style="margin-top: 0.2cm; margin-bottom: 0.2cm; line-height: 100%">
+                <font size="3" style="font-size: 12pt">
+                    <i>
+                        Figure 2: EM structure
+                        representation as sequential connection of junctions put between
+                        nodes
+                    </i>
+                </font>
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <b>Connection rules</b>
+                are:
+            </p>
+            <ul>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        Each
+                        junction/connector (indexes <b>0, 2, 3</b>) is put between nodes
+                        (index <b>1</b>)
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        Each node
+                        (index <b>1</b>) is put between junctions (indexes <b>0, 2, 3</b>)
+                        except interface (input/output) nodes.
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        The structure
+                        starts from a node (index <b>1</b>) and ends with a node (index <b>1</b>)
+                    </p>
+            </ul>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                Each of the elements
+                in the cascade (see Figure 2) is represented as a single text line in
+                the <font color="#158466"><b>Structure Profile</b></font> window,
+                which is written in a certain order and contain records about element
+                type (index), length, XY coordinates of left bottom and right top
+                points of the cross-section rectangle.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h3 class="western">D)Reference Coordinate System</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The structure
+                dimensions is referenced to a rectangular XYZ coordinate system (see
+                Figure 3) with the centre located at the beginning of the structure
+                (say input port) with the Z axis directed in the direction of the
+                waveguide channel forward to the opposite end (say output port) and
+                parallel to the walls of waveguides. The X and Y axis's lays in the
+                plane of the input face oriented in parallel to the top/bottom and
+                side walls edges respectively.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <img src="img/help_edit_htm_c3b245ad87b44b31.png" name="Image10" />
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-top: 0.2cm; margin-bottom: 0.2cm; line-height: 100%">
+                <font size="3" style="font-size: 12pt">
+                    <i>
+                        Figure 3: Reference
+                        coordinate system and structure orientation
+                    </i>
+                </font>
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The centre of the
+                coordinate centre is generally a matter of user&rsquo;s preference.
+                In case of vertical or/and horizontal symmetry, the coordinate centre
+                must lay on the appropriate symmetry planes. In other words, if our
+                structure is symmetric relatively to the central vertical plane, the
+                Y-axis must lay on the symmetry plane. If, for example, the structure
+                is symmetrical in respect to the central horizontal plane, the X-axis
+                must lay on it.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h3 class="western">E)Element Text Line</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                Each constituent
+                element of the waveguide structure is entered as a single text line
+                record into the Structure Profile text content. The element record
+                contains seven parameters (two keys and five dimensions). The
+                dimensions of the element are defined as shown on Figure 4.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                Table 1: Node keys
+                and parameters record order
+            </p>
+            <table width="426" cellpadding="4" cellspacing="0">
+                <tr valign="top">
+                    <td width="39" bgcolor="#afd095" style="background: #afd095;padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#800080"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>i</b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="45" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#800080"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>Index</b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="51" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>D</b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="44" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>X<sub>0</sub></b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="50" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>Y<sub>0</sub></b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="45" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>X<sub>1</sub></b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="45" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>Y<sub>1</sub></b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="45" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#ce181e"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>0.000</b></i></font></font></font>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The element
+                parameters record contains the following data:
+            </p>
+            <ul>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <font color="#800080"><i><b>i</b></i></font>
+                        is an integer variable mark, which points to <i><b>i</b></i>-th
+                        dimension variable (marked in black bold font in Table 1) counted
+                        from <i><b>D</b></i>. For example if <i><b>i</b></i><i>=3, </i>dimension
+                        <i><b>Y</b></i><sub><i><b>0</b></i></sub> is marked. The marked will
+                        be updated during automatic design operations (synthesis,
+                        optimization, scaling and automatic corrections). If the structure
+                        is defined as symmetric, the mirror dimension will be also updated.
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <font color="#800080"><i><b>Index</b></i></font>
+                        is a natural number, the element type identification index (its ID),
+                        which specified the EM solution associated with the element (see
+                        section 3B above).
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <i><b>D</b></i>
+                        is a decimal number, the length of the waveguide section (iris
+                        thickness, length of node or cavity). D has no meaning for a step
+                        junction, which does not have a length (zero).
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <font color="#000000"><span style="text-decoration: none"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>X</b></i></font></font></span></font><font color="#000000"><span style="text-decoration: none"><sub><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>0</b></i></font></font></sub></span></font>
+                        is a decimal number, the <i><b>x</b></i>-coordinate of the <b>left</b>
+                        wall of the waveguide cross-section rectangle
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <font color="#000000"><span style="text-decoration: none"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>Y</b></i></font></font></span></font><font color="#000000"><span style="text-decoration: none"><sub><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>0</b></i></font></font></sub></span></font>
+                        is a decimal number, the <i><b>y</b></i>-coordinate of the <b>bottom</b>
+                        wall of the waveguide cross-section rectangle
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <font color="#000000"><span style="text-decoration: none"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>X</b></i></font></font></span></font><font color="#000000"><span style="text-decoration: none"><sub><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>1</b></i></font></font></sub></span></font>
+                        is a decimal number, the <i><b>x</b></i>-coordinate of the <b>right</b>
+                        wall of the waveguide cross-section rectangle
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <font color="#000000"><span style="text-decoration: none"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>Y</b></i></font></font></span></font><font color="#000000"><span style="text-decoration: none"><sub><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>1</b></i></font></font></sub></span></font>
+                        is a decimal number, the <i><b>y</b></i>-coordinate of the <b>top</b>
+                        wall of the waveguide cross-section rectangle
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <font color="#ce181e"><span style="text-decoration: none"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>0.000</b></i></font></font></span></font>
+                        (last decimal number in line) does not have a definition and it is
+                        not utilized anywhere in computations. It is an optional mark, which
+                        distinguishes the junctions (connectors) from the nodes in order to
+                        visualize a compliance to the connection rules (Section 3C).
+                        WR-Connect does not require to put zero at the end of each junction
+                        specs, but it automatically adds it when the structure is updated.
+                    </p>
+            </ul>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h3 class="western">F)Node (Index 1)</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The <font color="#000000"><i><b>Node</b></i></font>
+                is a section of rectangular waveguide, which is defined with the
+                length <i><b>D</b></i> and cross-section rectangle given by the
+                coordinates of the left bottom corner (X<sub>0</sub>, Y<sub>0</sub>)
+                and right top corner (X<sub>1</sub>, Y<sub>1</sub>) if looking at the
+                input aperture (see Figure 4).
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <img src="img/help_edit_htm_6b6acd2fafab1200.png" name="Image3" />
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-top: 0.2cm; margin-bottom: 0.2cm; line-height: 100%">
+                <font size="3" style="font-size: 12pt">
+                    <i>
+                        Figure 4: A waveguide
+                        section (Node) with defined dimensions
+                    </i>
+                </font>
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The Node element is
+                represented as a single text line in the Structure Profile text
+                content. The text line contains a record of seven parameters and keys
+                in the order shown below in Table 2 below and definitions in section
+                3E above.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                Table 2: <i><b>Node</b></i>
+                keys and parameters record order
+            </p>
+            <table width="426" cellpadding="4" cellspacing="0">
+
+                <tr valign="top">
+                    <td width="46" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#800080"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>i</b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="52" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#800080"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>1</b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="59" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>D</b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="51" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>X<sub>0</sub></b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="58" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>Y<sub>0</sub></b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="52" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>X<sub>1</sub></b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="52" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>Y<sub>1</sub></b></i></font></font></font>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h3 class="western">G)Step Junction (Index 0)</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The <i>
+                    <b>
+                        Step
+                        Junction
+                    </b>
+                </i> (index 0) is a direct (inline uniaxial) connection
+                of two rectangular waveguides (see Figure 5). The both waveguides are
+                defined as Node (index 1). The Step Junction is specified only with
+                <i><b>index</b></i> key (index=0) and all other parameters are
+                ignored by the computational algorithm and set to zeros if been
+                updated (see Table 3).
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                Table 3: Node keys
+                and parameters record order
+            </p>
+            <table width="426" cellpadding="4" cellspacing="0">
+                <tr valign="top">
+                    <td width="39" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#800080"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>0</b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="45" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#800080"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>0</b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="51" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>0.000</b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="44" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>0.000</b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="50" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>0.000</b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="45" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>0.000</b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="45" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>0.000</b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="45" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#ce181e"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>0.000</b></i></font></font></font>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                Although the Step
+                Junction record does not contain any information it must be presented
+                in the Structure Profile if two waveguide nodes directly connected to
+                each other.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <img src="img/help_edit_htm_18cb1f0f2700cee0.png" name="Image2" />
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-top: 0.2cm; margin-bottom: 0.2cm; line-height: 100%">
+                <font size="3" style="font-size: 12pt">
+                    <i>
+                        Figure 5: Step junction of
+                        two rectangular waveguides. One of the waveguide cross-sections is
+                        within or coincide with the other one, but does not crosses its
+                        boundaries.
+                    </i>
+                </font>
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The Step Junction
+                connection is valid if the cross-section of one of the waveguides is
+                within the cross-section of the other waveguide as shown on Figure 5.
+                Some of the boundaries of the rectangles or even all of them,
+                however, may coincide but not intersect (see Figure 6 for example).
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <img src="img/help_edit_htm_340fdfe370069eac.png" name="Image5" />
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-top: 0.2cm; margin-bottom: 0.2cm; line-height: 100%">
+                <font size="3" style="font-size: 12pt"><i>Figure </i></font><font size="3" style="font-size: 12pt"><i>6</i></font><font size="3" style="font-size: 12pt">
+                    <i>
+                        :
+                        An example of wrong connection when the cross-section area of one
+                        waveguide intersects with the cross-section area of the other one
+                    </i>
+                </font>
+            </p>
+            <h3 class="western">H)Cavity Junction (index 2)</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The Cavity Junction
+                is formed as an uniaxial connection of three waveguides (two <b>Nodes</b>
+                (index 1) and Cavity (index 2) between them) as shown on Figure 5
+                below. Though the junction is formed by two Step Junctions (section
+                3G) connected to each other with tapered ends, the EM solution
+                differs and it is more accurate, because it counts all &ldquo;localized&rdquo;
+                [1] waveguide modes (set as <font color="#2a6099"><b>Solution Modes</b></font>
+                in the <font color="#158466"><b>Design Editor</b></font>). Therefore,
+                in case of same waveguide structures representable in different ways
+                (steps, irises, cavities), it is recommended to represent the
+                structure by Cavity Junctions.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <img src="img/help_edit_htm_8197631379ceb9e5.png" name="Image4" />
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-top: 0.2cm; margin-bottom: 0.2cm; line-height: 100%">
+                <font size="3" style="font-size: 12pt">
+                    <i>
+                        Figure 7: A Cavity Junction
+                        formed by a waveguide of greater cross-section.
+                    </i>
+                </font>
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The rules for the
+                positioning of the waveguides relatively to each other are same as in
+                case of the Step Junction from each side. In other words, each of the
+                input <b>Nodes</b> must have a cross-section included into the
+                cross-section area of the <b>Cavity</b> (the nodes boundaries may
+                coincide but do not intersect with boundaries of the cavity). The
+                Cavity Junction record order is shown below:
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                Table 4: Cavity
+                Junction keys and parameters record order
+            </p>
+            <table width="426" cellpadding="4" cellspacing="0">
+                <tr valign="top">
+                    <td width="39" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#800080"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>i</b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="45" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#800080"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>2</b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="51" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>D</b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="44" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>X<sub>0</sub></b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="50" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>Y<sub>0</sub></b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="45" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>X<sub>1</sub></b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="45" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>Y<sub>1</sub></b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="45" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#ce181e"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>0.000</b></i></font></font></font>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h3 class="western">I)Iris Junction</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The Iris Junction is
+                formed as an uniaxial connection of three waveguides (two <b>Nodes</b>
+                (index 1) and Iris (index 3) between them) as shown on Figure 6
+                below. In vice versa, the cross section area of the <b>Iris</b> must
+                be within the cross-section area of each connecting <b>Node</b> (the
+                boundaries of the Iris window may coincide but do not intersect with
+                boundaries of the Nodes).
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <img src="img/help_edit_htm_5015efa5298998da.png" name="Image6" />
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-top: 0.2cm; margin-bottom: 0.2cm; line-height: 100%">
+                <font size="3" style="font-size: 12pt">
+                    <i>
+                        Figure 8: Iris Junction
+                        formed by a waveguide of smaller cross-section.
+                    </i>
+                </font>
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The Iris Junction
+                record order is shown below:
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                Table 4: Cavity
+                Junction keys and parameters record order
+            </p>
+            <table width="426" cellpadding="4" cellspacing="0">
+
+                <tr valign="top">
+                    <td width="39" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#800080"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>i</b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="45" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#800080"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>3</b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="51" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>D</b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="44" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>X<sub>0</sub></b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="50" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>Y<sub>0</sub></b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="45" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>X<sub>1</sub></b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="45" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>Y<sub>1</sub></b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="45" bgcolor="#afd095" style="background: #afd095; padding: 0cm">
+                        <p align="left" style="text-decoration: none">
+                            <font color="#ce181e"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>0.000</b></i></font></font></font>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h3 class="western">J)Structure Profile Content</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                As it is already
+                mentioned above, a whole waveguide structure is represented as
+                sequence of connections (nodes and junctions). Each of the connection
+                elements is defined with keys and dimensions and identified by a
+                single text line in the Structure Profile (as shown below as example
+                below).
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                Table 5: An example
+                of Structure Profile text containing 9 lines representing nodes (red)
+                and junctions (blue).
+            </p>
+            <table width="600" cellpadding="4" cellspacing="0" border="1">
+
+                <tr>
+                    <td width="591" valign="top" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#ff0000">
+                                <font face="Lucida Console, monospace">
+                                    <font size="2" style="font-size: 10pt">
+                                        0
+                                        1 0.375000 -0.375000 -0.187500 0.375000 0.187500
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#55308d">
+                                <font face="Lucida Console, monospace">
+                                    <font size="2" style="font-size: 10pt">
+                                        5
+                                        2 0.350000 -0.375000 -0.271257 0.375000 0.271257
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#ff0000">
+                                <font face="Lucida Console, monospace">
+                                    <font size="2" style="font-size: 10pt">
+                                        1
+                                        1 0.192856 -0.375000 -0.100000 0.375000 0.100000
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#55308d">
+                                <font face="Lucida Console, monospace">
+                                    <font size="2" style="font-size: 10pt">
+                                        4
+                                        3 0.038000 -0.155398 -0.100000 0.155398 0.100000
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#ff0000">
+                                <font face="Lucida Console, monospace">
+                                    <font size="2" style="font-size: 10pt">
+                                        1
+                                        1 0.454410 -0.375000 -0.100000 0.375000 0.100000
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#55308d">
+                                <font face="Lucida Console, monospace">
+                                    <font size="2" style="font-size: 10pt">
+                                        4
+                                        3 0.038000 -0.208090 -0.100000 0.208090 0.100000
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#ff0000">
+                                <font face="Lucida Console, monospace">
+                                    <font size="2" style="font-size: 10pt">
+                                        1
+                                        1 0.375000 -0.375000 -0.100000 0.375000 0.100000
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#55308d">
+                                <font face="Lucida Console, monospace">
+                                    <font size="2" style="font-size: 10pt">
+                                        0
+                                        0 0.000000 0.000000 0.000000 0.000000 0.000000
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#ff0000">
+                                <font face="Lucida Console, monospace">
+                                    <font size="2" style="font-size: 10pt">
+                                        0
+                                        1 0.375000 -0.375000 -0.187500 0.375000 0.187500
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                Same structure is
+                drawn in 3D style looks like as shown on Figure with arrows pointing
+                to the elements from the list in Table 5.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <img src="img/help_edit_htm_66990d7e32fae904.png" name="Image7" />
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-top: 0.2cm; margin-bottom: 0.2cm; line-height: 100%">
+                <font size="3" style="font-size: 12pt">
+                    <i>
+                        Figure 9: 3D view of EM
+                        model corresponding to the textual representation in Table 5
+                    </i>
+                </font>
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h2 class="western">4.Solution Modes</h2>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h3 class="western">A)Definitions of EM Solution Modes</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                All (three) E-models
+                of scattering elements (junctions: step, cavity, iris) are based on
+                solutions of appropriate EM boundary problems. A multi-modal
+                variational method (VMM) [2] is applied to the problem of EM
+                scattering on uniaxial junction of three waveguide, with a larger
+                waveguide in the middle (cavity junction) in [1]. In terms of VMM the
+                modal sets included in the solution are divided into two sub-sets,
+                which are the <i><b>accessible</b></i> and <i><b>localized</b></i>
+                modes accordingly. The accessible modes are the incident waveguide
+                modes, which scatter on the junction from outside (they come from
+                infinity, pass through or reflected to infinity). The localized modes
+                are the sub-set of waveguide modes, which are counted in the solution
+                as orthogonal modal basis. In the other words, it is a modal set used
+                for the matching of EM fields (in mode-matching). It is generally a
+                much greater set of waveguide modes including evanescent modes. The
+                Cavity Junction EM problem is solved in [1] in a rigorous
+                formulation. The solution used in WR-Connect is, however,
+                approximated by a single accessible mode counted. The number of
+                localized modes can be much greater and not generally limited.
+                Nevertheless, it is not recommended to set more than 100-200 solution
+                modes, because it will significantly slow down the simulation with no
+                significant gain of accuracy. The incident mode (accessible mode) and
+                the set of the localized modes can be set manually by appropriate
+                controls in Designer Page (see Figure 10) by three numbers each.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <img src="img/help_edit_htm_6b98652e7b200397.png" name="Image8" />
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-top: 0.2cm; margin-bottom: 0.2cm; line-height: 100%">
+                <font size="3" style="font-size: 12pt">
+                    <i>
+                        Figure 10: Modal setting
+                        controls
+                    </i>
+                </font>
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The first numbers in
+                the both controls define the type of waveguide mode (<i><b>0</b></i>
+                for <i><b>TE-mode</b></i> and <i><b>1</b></i> for <i><b>TM- mode</b></i>).
+                The second number defines the first index (<i>N</i>) in <i><b>TE</b></i><sub><i><b>NM</b></i></sub><i><b>/TM</b></i><sub><i><b>NM</b></i></sub>
+                mode. The third number defines the second index (<i>M</i>) in
+                <i><b>TE</b></i><sub><i><b>NM</b></i></sub><i><b>/TM</b></i><sub><i><b>NM</b></i></sub>
+                mode, analogically. The both indexes <i>N</i> and <i>M</i> depend on
+                symmetry settings.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h3 class="western">B)Vertical Symmetry YZ</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The vertical
+                symmetry is set in <font color="#55308d"><i><b>YZ-Symmetry</b></i></font>
+                options box in the left top corner. It can be specified as
+                no-symmetry (<font color="#55308d"><i><b>None</b></i></font>),
+                <font color="#55308d"><i><b>H-plane</b></i></font> or <font color="#55308d"><i><b>E-plane</b></i></font>.
+                This symmetry key defines the first indexes of the dominant incident
+                mode and the modal set of the solution (localized modes). In a
+                general case of <b>TE</b><sub><b>NM</b></sub> or <b>TM</b><sub><b>NM</b></sub>
+                modes, the set of first indexes <i>N</i> are defined below.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                Table 6: The
+                sequence in the numbering of the first index of the waveguide modes
+            </p>
+            <table width="420" cellpadding="4" cellspacing="0">
+                <tr valign="top">
+                    <td width="105" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">YZ-Symmetry</font></font></font>
+                        </p>
+                    </td>
+                    <td width="297" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        Index
+                                        <i><b>N</b></i> in <b>TE</b><sub><b>NM</b></sub>/<b>TM</b><sub><b>NM</b></sub>
+                                        modes
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="105" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">None</font></font></font>
+                        </p>
+                    </td>
+                    <td width="297" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        <i>
+                                            N=
+                                            0, 1, 2, &hellip;.., n, &hellip;
+                                        </i>
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="105" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">H-plane</font></font></font>
+                        </p>
+                    </td>
+                    <td width="297" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        <i>
+                                            N=
+                                            1, 3, 5, &hellip;., 2n+1, &hellip;.
+                                        </i>
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="105" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">E-plane</font></font></font>
+                        </p>
+                    </td>
+                    <td width="297" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        <i>
+                                            N=
+                                            0, 2, 4, &hellip;., 2n, &hellip;.
+                                        </i>
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h3 class="western">C)Horizontal Symmetry XZ</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The vertical
+                symmetry is set in X<font color="#55308d"><i><b>Z-Symmetry</b></i></font>
+                options box in the left top corner. It can be specified as
+                no-symmetry (<font color="#55308d"><i><b>None</b></i></font>),
+                <font color="#55308d"><i><b>H-plane</b></i></font> or <font color="#55308d"><i><b>E-plane</b></i></font>.
+                This symmetry key defines the first indexes of the dominant incident
+                mode and the modal set of the solution (localized modes). In a
+                general case of <b>TE</b><sub><b>NM</b></sub> or <b>TM</b><sub><b>NM</b></sub>
+                modes, the set of second indexes <i>M</i> is defined in the Table
+                below.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                Table 7: The
+                sequence in the numbering of the second index of the waveguide modes
+            </p>
+            <table width="420" cellpadding="4" cellspacing="0">
+                <tr valign="top">
+                    <td width="105" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">YZ-Symmetry</font></font></font>
+                        </p>
+                    </td>
+                    <td width="297" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        Index
+                                        <i><b>M</b></i> in <b>TE</b><sub><b>NM</b></sub>/<b>TM</b><sub><b>NM</b></sub>
+                                        modes
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="105" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">None</font></font></font>
+                        </p>
+                    </td>
+                    <td width="297" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        <i>
+                                            M=
+                                            0, 1, 2, &hellip;.., m, &hellip;
+                                        </i>
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="105" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">H-plane</font></font></font>
+                        </p>
+                    </td>
+                    <td width="297" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        <i>
+                                            M=
+                                            1, 3, 5, &hellip;., 2m+1, &hellip;.
+                                        </i>
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="105" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">E-plane</font></font></font>
+                        </p>
+                    </td>
+                    <td width="297" style="background: transparent; padding: 0cm">
+                        <p align="left" style="font-weight: normal; text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        <i>
+                                            M=
+                                            0, 2, 4, &hellip;., 2m, &hellip;.
+                                        </i>
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h3 class="western">D)Incident TE<sub>10</sub>-mode Settings</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                TE<sub>10</sub>-mode
+                is the first mode in rectangular waveguide and most waveguide
+                components operate on TE<sub>10</sub>-mode transmission or
+                reflection. Only four of nine symmetry options set TE<sub>10</sub>-mode
+                (see Table below).
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                Table 8: The
+                dominant TE10-mode settings under different design symmetries
+            </p>
+            <table width="643" cellpadding="4" cellspacing="0">
+                <tr valign="top">
+                    <td width="153" style="background: transparent; padding: 0cm">
+                        <p align="center" style="text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        <i>
+                                            <b>
+                                                Symmetry
+                                                YZ
+                                            </b>
+                                        </i>
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                    <td width="118" style="background: transparent; padding: 0cm">
+                        <p align="center" style="text-decoration: none">
+                            <font color="#000000">
+                                <font face="Liberation Serif, serif">
+                                    <font size="3" style="font-size: 12pt">
+                                        <i>
+                                            <b>
+                                                Symmetry
+                                                XZ
+                                            </b>
+                                        </i>
+                                    </font>
+                                </font>
+                            </font>
+                        </p>
+                    </td>
+                    <td width="100" style="background: transparent; padding: 0cm">
+                        <p align="center" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>Type</b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="118" style="background: transparent; padding: 0cm">
+                        <p align="center" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>n</b></i></font></font></font>
+                        </p>
+                    </td>
+                    <td width="112" style="background: transparent; padding: 0cm">
+                        <p align="center" style="text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt"><i><b>m</b></i></font></font></font>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="153" style="background: transparent; padding: 0cm">
+                        <p align="center" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">None</font></font></font>
+                        </p>
+                    </td>
+                    <td width="118" style="background: transparent; padding: 0cm">
+                        <p align="center" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">None</font></font></font>
+                        </p>
+                    </td>
+                    <td width="100" style="background: transparent; padding: 0cm">
+                        <p align="center" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">0</font></font></font>
+                        </p>
+                    </td>
+                    <td width="118" style="background: transparent; padding: 0cm">
+                        <p align="center" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">1</font></font></font>
+                        </p>
+                    </td>
+                    <td width="112" style="background: transparent; padding: 0cm">
+                        <p align="center" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">0</font></font></font>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="153" style="background: transparent; padding: 0cm">
+                        <p align="center" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">None</font></font></font>
+                        </p>
+                    </td>
+                    <td width="118" style="background: transparent; padding: 0cm">
+                        <p align="center" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">E-plane</font></font></font>
+                        </p>
+                    </td>
+                    <td width="100" style="background: transparent; padding: 0cm">
+                        <p align="center" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">0</font></font></font>
+                        </p>
+                    </td>
+                    <td width="118" style="background: transparent; padding: 0cm">
+                        <p align="center" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">1</font></font></font>
+                        </p>
+                    </td>
+                    <td width="112" style="background: transparent; padding: 0cm">
+                        <p align="center" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">0</font></font></font>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="153" style="background: transparent; padding: 0cm">
+                        <p align="center" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">H-plane</font></font></font>
+                        </p>
+                    </td>
+                    <td width="118" style="background: transparent; padding: 0cm">
+                        <p align="center" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">None</font></font></font>
+                        </p>
+                    </td>
+                    <td width="100" style="background: transparent; padding: 0cm">
+                        <p align="center" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">0</font></font></font>
+                        </p>
+                    </td>
+                    <td width="118" style="background: transparent; padding: 0cm">
+                        <p align="center" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">0</font></font></font>
+                        </p>
+                    </td>
+                    <td width="112" style="background: transparent; padding: 0cm">
+                        <p align="center" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">0</font></font></font>
+                        </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td width="153" style="background: transparent; padding: 0cm">
+                        <p align="center" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">H-plane</font></font></font>
+                        </p>
+                    </td>
+                    <td width="118" style="background: transparent; padding: 0cm">
+                        <p align="center" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">E-plane</font></font></font>
+                        </p>
+                    </td>
+                    <td width="100" style="background: transparent; padding: 0cm">
+                        <p align="center" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">0</font></font></font>
+                        </p>
+                    </td>
+                    <td width="118" style="background: transparent; padding: 0cm">
+                        <p align="center" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">0</font></font></font>
+                        </p>
+                    </td>
+                    <td width="112" style="background: transparent; padding: 0cm">
+                        <p align="center" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
+                            <font color="#000000"><font face="Liberation Serif, serif"><font size="3" style="font-size: 12pt">0</font></font></font>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h3 class="western">E)Solution Modal Settings</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The set of solution
+                modes is defined by the last mode in the set, which, in turn, is also
+                defined by three indexes (type, n, m). In this case, the solution
+                will count all waveguide modes within the symmetry family and with
+                the indexes being not greater. For example, if the structure
+                possesses vertical H-plane and horizontal E-plane symmetries and the
+                solution modes are set as type=1, n=10, 10, it would define a modal
+                set of TE<sub>NM</sub> (type 0) and TM<sub>NM</sub> (type 1) with odd
+                first indexes (N=1, 3, 5,&hellip;,21) and even second indexes (M=0,
+                2, 4, &hellip;, 20) according to Tables 6-7 above.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h3 class="western">F)How to Check the Incident Mode Settings</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                Prior to performing
+                simulations, it is important to have proper modal setting. It can be
+                noted that all conventional waveguide components (excluding the
+                overmoded waveguide applications) operate on <i><b>TE</b></i><sub><i><b>10</b></i></sub>-mode
+                scattering. The common (in usual definition) name of the scattered
+                incident waveguide mode is normally displayed on the button (incident
+                mode indicator) located at the bottom of &ldquo;Incident Mode&rdquo;
+                entry field. The incident mode indicator, however, is not
+                automatically updated if the modal settings are changed by a user. If
+                the settings are manually changed, the new name of the dominant mode
+                can be found out by clicking the indicator button.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h3 class="western">G)Quick Modal Settings</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                In a general case, a
+                user can start from setting the Incident Mode as TE10-mode (see Table
+                8). The solution modes could be set as <i><b>type=1</b></i>, <i><b>n=10</b></i>
+                and <i><b>m=10</b></i>. The advanced users, however, can take
+                advantage of more efficient modal setting (see examples in
+                tutorials).
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h2 class="western">5.Run Status Controls</h2>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The controls are
+                used during simulation and optimization. In the both cases the red
+                status bar will be extending showing the completeness of the process.
+                In same time, the left button located under the status bar will show
+                some numbers related to the process. During an optimization process
+                (performance and space mapping optimizations), the numbers indicate a
+                measure of how the current state is close to the targets. The
+                simulations can be interrupted by the user in any time of the process
+                by clicking the button.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h2 class="western">6.Space Mapping Controls</h2>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The controls are
+                designed to perform aggressive space mapping (ASM) process step by
+                step. The steps include the following operation:
+            </p>
+            <ul>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        Importing a
+                        course model from the <font color="#2a6099"><i><b>Structure Profile</b></i></font>
+                        window into the <font color="#2a6099"><i><b>Design Collections</b></i></font>
+                        (internal memory cache containing design profiles). The operation is
+                        performed by clicking &ldquo;<i><b>Import&rdquo;</b></i> button. The
+                        design profile content will be saved under &ldquo;<i><b>Coarse&rdquo;</b></i>
+                        model number showed on the numbered list. The cache keeps up to five
+                        designs.
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        A selected
+                        coarse model from the list can be exported into <font color="#2a6099">
+                            <i>
+                                <b>
+                                    Structure
+                                    Profile
+                                </b>
+                            </i>
+                        </font> window from the <font color="#2a6099">
+                            <i>
+                                <b>
+                                    Design
+                                    Collections
+                                </b>
+                            </i>
+                        </font> by clicking &ldquo;<i><b>Export&rdquo;</b></i>
+                        button located on right from the &ldquo;Import&rdquo; button in the
+                        same &ldquo;<i><b>Coarse&rdquo;</b></i> models row of controls.
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        A fine model
+                        can be created from the course models (saved in <font color="#2a6099">
+                            <i>
+                                <b>
+                                    Design
+                                    Collections
+                                </b>
+                            </i>
+                        </font>) by clicking &ldquo;<i><b>Go Next&rdquo;</b></i>
+                        button. The <font color="#2a6099"><i><b>Profile Profile</b></i></font>
+                        window will be updated with the fine model.
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        The fine model
+                        can be exported to the user&rsquo;s computer by clicking the
+                        &ldquo;Export&rdquo; button, which is located in the row of &ldquo;<i><b>Fine&rdquo;</b></i>
+                        models controls.
+                    </p>
+            </ul>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                More information is
+                available about ASM in the tutorials.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h2 class="western">7.Design Corrections Controls</h2>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <font color="#ce181e">
+                    <font size="4" style="font-size: 15pt">
+                        <b>
+                            To
+                            be Continued Soon
+                        </b>
+                    </font>
+                </font>
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                [1] F. De Paolis, R.
+                Goulouev, J. Zheng, M. Yu, &ldquo;CAD Procedure for High-Performance
+                Composite Corrugated Filters&rdquo;, IEEE Trans. Microw. Theory
+                Tech., vol. MTT-61, No. 9, Sept. 2013
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                [2] J. W. Tao and H.
+                Baudrand, &ldquo;Multimodal variational analysis of uniaxial
+                waveguide discontinuity,&rdquo; IEEE Trans. Microw. Theory Tech.,
+                vol. 39, no. 3, pp. 506&ndash;516, Mar. 1991.
+            </p>
+        </div>
+    </div>
+</body>
+</html >

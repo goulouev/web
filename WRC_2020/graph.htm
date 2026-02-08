@@ -1,0 +1,690 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Rousslan Goulouev">
+    <meta name="description" content="Online plotting tool: RF characteristics from S-parameters">
+    <meta name="keywords" content="s-parameter, group delay, slope, s2p, Re/Im, freeware">
+    <title>WR-Connect: Plot s-parameters from data file</title>
+    <link rel="stylesheet" href="navbars.css" />
+    <link rel="stylesheet" href="ProgBar.css" />
+    <style>
+        textarea {
+            font-size: 12px;
+            font-family: 'Lucida Console';
+            width: 1070px;
+            height: 400px;
+        }
+
+        p {
+            font-size: 12px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            color: maroon
+        }
+
+        table.pan {
+            text-align: center;
+        }
+
+        td.pans {
+            border: dashed;
+            border-width: 1px;
+            border-radius: 10px;
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            color: maroon;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        div.kletk {
+            border: dashed;
+            border-width: 1px;
+            border-radius: 10px;
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            color: maroon;
+            font-size: 11px;
+            font-weight: bold;
+            width: 220px;
+            margin: 15px 0;
+        }
+
+        div.word0 {
+            width: 200px;
+        }
+    </style>
+</head>
+<body OnLoad="javascript:PageStart()">
+    <div class="navbar">
+        <a href="javascript:void(0)" onclick="window.location.href = 'index.htm';">File</a>
+        <a href="javascript:void(0)" onclick="window.location.href = 'setup.htm';">Setup</a>
+        <a href="javascript:void(0)" onclick="window.location.href = 'editor.htm';">Edit</a>
+        <a href="javascript:void(0)" onclick="window.location.href = 'editor.htm';">Design</a>
+        <a href="javascript:void(0)" onclick="window.location.href = 'editor.htm';">Run</a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="javascript:void(0)">
+                Reports
+            </button>
+            <div class="dropdown-content">
+                <a href="javascript:void(0)">Plot</a>
+                <a href="javascript:void(0)" onclick="window.location.href = 's_data.htm';">Import/Export</a>
+            </div>
+        </div>
+        <a href="help.htm">Help</a>
+    </div>
+    <div class="divdiv">
+        <table>
+            <tr>
+                <td>
+                    <div class="kletk" align="center">
+                        Data Source<br />
+                        <font class="fontos">
+                            <INPUT TYPE="CHECKBOX" NAME="sDatSource" VALUE="1" CHECKED="" />Simulation
+                            <INPUT TYPE="CHECKBOX" NAME="sDatSource" VALUE="2" CHECKED="" />External
+                        </font>
+                    </div>
+                    <div class="kletk" align="center">
+                        S-Parameters<br />
+                        <font class="fontos">
+                            <INPUT TYPE="CHECKBOX" NAME="Path" VALUE="1" CHECKED="" />S11
+                            <INPUT TYPE="CHECKBOX" NAME="Path" VALUE="2" CHECKED="" />S21
+                            <INPUT TYPE="CHECKBOX" NAME="Path" VALUE="3" />S12
+                            <INPUT TYPE="CHECKBOX" NAME="Path" VALUE="4" />S22
+                        </font>
+                    </div>
+                    <div class="kletk" align="center">
+                        Function<br />
+                        <font class="fontos">
+                            <table>
+                                <tr>
+                                    <td width="60px" align="left"><INPUT TYPE="RADIO" NAME="ReportFun" VALUE="1" CHECKED="" /></td>
+                                    <td>Magnitude (dB)</td>
+                                </tr>
+                                <tr>
+                                    <td width="60px" align="left"><INPUT TYPE="RADIO" NAME="ReportFun" VALUE="2" /></td>
+                                    <td>Mag. Slope (dB/MHz)</td>
+                                </tr>
+                                <tr>
+                                    <td width="60px" align="left"><INPUT TYPE="RADIO" NAME="ReportFun" VALUE="3" /></td>
+                                    <td>Phase (dg)</td>
+                                </tr>
+                                <tr>
+                                    <td width="60px" align="left"><INPUT TYPE="RADIO" NAME="ReportFun" VALUE="4" /></td>
+                                    <td>Delay (ns)</td>
+                                </tr>
+                                <tr>
+                                    <td width="60px" align="left"><INPUT TYPE="RADIO" NAME="ReportFun" VALUE="5" /></td>
+                                    <td>Delay Slope(ns/MHz)</td>
+                                </tr>
+                            </table>
+                        </font>
+                    </div>
+                    <div class="kletk" align="center">
+                        X Scale<br />
+                        <table class="fontos">
+                            <tr>
+                                <td align="center">Min</td>
+                                <td align="center">Max</td>
+                                <td align="center">Grid</td>
+                            </tr>
+                            <tr>
+                                <td><INPUT class="fontos" ID="Xscale0" TYPE="TEXT" SIZE="8" /></td>
+                                <td><INPUT class="fontos" ID="Xscale1" TYPE="TEXT" SIZE="8" /></td>
+                                <td><INPUT class="fontos" ID="Xscale2" TYPE="TEXT" SIZE="7" /></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="kletk" align="center">
+                        Y Scale<br />
+                        <table class="fontos">
+                            <tr>
+                                <td align="center">Min</td>
+                                <td align="center">Max</td>
+                                <td align="center">Grid</td>
+                            </tr>
+                            <tr>
+                                <td><INPUT class="fontos" ID="Yscale0" TYPE="TEXT" SIZE="8" /></td>
+                                <td><INPUT class="fontos" ID="Yscale1" TYPE="TEXT" SIZE="8" /></td>
+                                <td><INPUT class="fontos" ID="Yscale2" TYPE="TEXT" SIZE="7" /></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="kletk" align="center">
+                        Auto Scale<br />
+                        <table class="fontos">
+                            <tr>
+                                <td align="left" width="120px"><INPUT class="fontos" TYPE="CHECKBOX" ID="AutoScale" /> ON</td>
+                                <td align="left"><INPUT class="fontos" TYPE="BUTTON" NAME="GrApply" VALUE="Apply" OnClick="PageApply()" /></td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+                <td>
+                    <div id="myCanvas" style="position:relative;margin-top:0 ;height:500px;width:800px; background-color:white;"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <p style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:10px;font-style:italic;color:white;text-align:right;">&copy;2006 R. Goulouev, WR-Connect 2.0 Web (javascripted)</p>
+    <script type="text/javascript" src="wz_jsgraphics.js"></script>
+    <script type="text/javascript" src="wrc_Strings.js"></script>
+
+    <script language="javascript" type="text/javascript">
+        var DgRad = 180.0 / Math.PI
+        var GrColor = Array("#ff0000", "#0000ff", "#000000", "#00ff00", "#ffa500", "#ee82ee", "#404040", "#808000");
+        var xCanvasMax = 800;
+        var yCanvasMax = 500;
+        var xFrame0 = 50;
+        var xFrame1 = 750;
+        var yFrame0 = 20;
+        var yFrame1 = 470;
+        var jg = new jsGraphics("myCanvas");
+        function IsNothing(x) {
+            if (x === null) { return true; }
+            if (x == "") { return true; }
+            return false;
+        }
+        function PageStart() {
+            var Sdats = GetSdatsFromBufer();
+            var Scale = GetInitialScale(Sdats);
+            SetScale(Scale);
+            //SetScale(Scale);
+            MainFrame();
+            //var Scale = GetScale();
+            DrawPlots(Scale, Sdats);
+        }
+
+        function GetAutoScale(Sdats){
+            //var Sdats = GetSdatsFromBufer();
+            //if (Sdats[0] === null && Sdats[1] === null) { return null; }
+            if (IsNothing(Sdats[0]) && IsNothing(Sdats[1])) {return null;}
+            var RepFun = document.getElementsByName('ReportFun');
+            var Patho = document.getElementsByName('Path');
+            var DatFun = document.getElementsByName('sDatSource');
+            var i, iDat, iPath;
+            for (i = 0; i <= 4; i++) {
+                if (RepFun[i].checked) { iType = i + 1; }
+            }
+            var cv = [null, null];
+            var F0 = parseFloat(document.getElementById('Xscale0').value);
+            var F1 = parseFloat(document.getElementById('Xscale1').value);
+            var ii = -1;
+            for (iDat = 0; iDat <= 1; iDat++) {
+                if (Sdats[iDat] && DatFun[iDat].checked) {
+                    for (iPath = 0; iPath <= 3; iPath++) {
+                        if (Patho[iPath].checked) {
+                            ii = ii + 1;
+                            var cv = MiniMax(iType, iPath, F0, F1, Sdats[iDat]);
+                            if (ii === 0) {
+                                yMin = cv[0]; yMax = cv[1];
+                            } else {
+                                if (cv[0] < yMin) { yMin = cv[0]; }
+                                if (cv[1] > yMax) { yMax = cv[1]; }
+                            }
+                        }
+                    }
+
+                }
+            }
+            if (ii === -1) { return null;}
+            Sdats = null; RepFun = null; Patho = null;
+            return [iType, F0, F1, 10, yMin, yMax, 10];
+        }
+
+        function PageApply() {
+            var Auto = document.getElementById('AutoScale');
+            var Sdats = GetSdatsFromBufer();
+            var i, ii, iType = 1, Scale = null;
+            //if (Sdats[0] === null && Sdats[1] === null) {
+            //    Scale = GetInitialScale(Sdats);
+            //    MainFrame();
+            //    return;
+            //}
+            if (Auto.checked) {
+                var Scale = GetAutoScale(Sdats);
+                if(Scale === null){return;}
+                SetScale(Scale);
+                MainFrame();
+                DrawPlots(Scale, Sdats);
+            } else {
+                Scale = GetScale();
+                if (Scale === null) { return; }
+                MainFrame();
+                DrawPlots(Scale, Sdats);
+            }
+        }
+
+        function DrawPlots(Scale, Sdats) {
+            var DatFun = document.getElementsByName('sDatSource');
+            var Sdats = GetSdatsFromBufer();
+            if (Scale === null) { return; }
+            var RepFun = document.getElementsByName('ReportFun');
+            var Patho = document.getElementsByName('Path');
+            var i, iDat, iPath, iColor = -1;
+            for (i = 0; i <= 4; i++) {
+                if (RepFun[i].checked) { iType = i + 1; }
+            }
+            for (iDat = 0; iDat <= 1; iDat++) {
+                if (Sdats[iDat] && DatFun[iDat].checked) {
+                    for (iPath = 0; iPath <= 3; iPath++) {
+                        if (Patho[iPath].checked) {
+                            iColor = iColor + 1;
+                            DrawPlot(iType, iPath, iColor, Scale, Sdats[iDat]);
+                        }
+                    }
+
+                }
+            }
+            sDats = null; DatFun = null;
+        }
+
+
+//####################  NEW
+
+        function GetSdatLines(sText) {
+            var SLines;
+            var sDatOut = [];
+            if (sText === '' || sText === null) { return null; }
+            SLines = sText.split("\r\n");
+            if (Array.isArray(SLines)) {
+                Np = SLines.length - 1;
+                var i, ii = -1;
+
+                for (var i = 0; i <= Np; i++) {
+                    var xDat = GetFloats(9, SLines[i]);
+                    if (xDat) {
+                        ii = ii + 1;
+                        sDatOut[ii] = xDat;
+                    }
+                }
+                return sDatOut;
+            } else {
+                return null;
+            }
+        }
+
+        function GetSdatsFromBufer() {
+            var sSim = GetSdatLines(localStorage.getItem('sDatSim'));
+            var sDat = GetSdatLines(sessionStorage.getItem('sDatFile'));
+            var sDats = [null, null];
+            if (sSim != null) {
+                sDats[0] = sSim;
+            }
+            if (sDat != null) {
+                sDats[1] = sDat;
+            }
+            return sDats;
+        }
+
+        function GetInitialScale(Sdats){
+            var Np = [-1, -1];
+            var fmin0, fmin1, fmax0, fmax1, fmin, fmax;
+            //if (Sdats[0] !== null) {
+            if (!IsNothing(Sdats[0])) {
+                Np[0] = Sdats[0].length - 1;
+                fmin0 = Sdats[0][0][0];
+                fmax0 = Sdats[0][Np[0]][0];
+                fmin = fmin0; fmax = fmax0;
+            }
+            //if (Sdats[1] !== null) {
+            if (!IsNothing(Sdats[1])) {
+                Np[1] = Sdats[1].length - 1;
+                fmin1 = Sdats[1][0][0];
+                fmax1 = Sdats[1][Np[1]][0];
+                fmin = fmin1; fmax = fmax1;
+            }
+            if (Np[0] > -1 && Np[1] > -1) {
+                fmin = Math.max(fmin0, fmin1), fmax = Math.min(fmax0, fmax1);
+            }
+            //HUJ
+            if (Np[0] === -1 && Np[1] === -1) {
+                return [1, 10, 15, 5, -100, 0, 10];
+            } else {
+                return [1, fmin, fmax, 10, -100, 0, 10];
+            }
+        }
+
+        function GetScale() {
+            var RepFun = document.getElementsByName('ReportFun');
+            var i, iType = 1;
+            for (i = 0; i <= 4; i++) {
+                if (RepFun[i].checked) { iType = i + 1; }
+            }
+            RepFun = null;
+            var x0 = parseFloat(document.getElementById('Xscale0').value);
+            var x1 = parseFloat(document.getElementById('Xscale1').value);
+            var Nx = parseInt(document.getElementById('Xscale2').value);
+            var y0 = parseFloat(document.getElementById('Yscale0').value);
+            var y1 = parseFloat(document.getElementById('Yscale1').value);
+            var Ny = parseInt(document.getElementById('Yscale2').value);
+            return [iType, x0, x1, Nx, y0, y1, Ny];
+        }
+
+        function SetScale(Scale) {
+            if (Scale === null) { return; }
+            var RepFun = document.getElementsByName('ReportFun');
+            var Auto = document.getElementById('AutoScale');
+            var iType = Scale[0];
+            for (i = 0; i <= 4; i++) {
+                if (i + 1 === iType) {
+                    RepFun[i].checked = true;
+                } else {
+                    RepFun[i].checked = false;
+                }
+            }
+            document.getElementById('Xscale0').value = Scale[1];
+            document.getElementById('Xscale1').value = Scale[2];
+            document.getElementById('Xscale2').value = Scale[3];
+            document.getElementById('Yscale0').value = Scale[4];
+            document.getElementById('Yscale1').value = Scale[5];
+            document.getElementById('Yscale2').value = Scale[6];
+            Auto.checked = false;
+            Auto = null; RepFun = null;
+        }
+
+        function MiniMax(iType, iPath, F0, F1, Sdat) {
+            //var DatFun = document.getElementsByName('sDatSource');
+            //var RepFun = document.getElementsByName('ReportFun');
+            //var Patho = document.getElementsByName('Path');
+            var vMin = 1.e10, vMax = -1.e10;
+            var xv, iSample = 1;
+            var i;
+            var Np = Sdat.length - 1;
+            for (i = 0; i <= Np; i++) {
+                xv = ParamFromSdat(iType, iPath, iSample, i, Sdat);
+                //xv = vParam(iType, iPort, iSample, i, Np, SLines[ii]);
+                if ((xv[0] >= F0) && (xv[0] <= F1)) {
+                    if (xv[1] > vMax) { vMax = xv[1]; }
+                    if (xv[1] < vMin) { vMin = xv[1]; }
+                }
+            }
+            return Array(vMin, vMax);
+        }
+
+
+        function GoBack() {
+            window.location.href = 'editor.htm';
+        }
+
+
+        function MainFrame() {
+            var x0 = parseFloat(document.getElementById('Xscale0').value);
+            var x1 = parseFloat(document.getElementById('Xscale1').value);
+            var nxGrid = parseInt(document.getElementById('Xscale2').value);
+            var y0 = parseFloat(document.getElementById('Yscale1').value);
+            var y1 = parseFloat(document.getElementById('Yscale0').value);
+            var nyGrid = parseInt(document.getElementById('Yscale2').value);
+
+            if (nxGrid < 1) { nxGrid = 1; }
+            if (nyGrid < 1) { nyGrid = 1; }
+
+            GraphFrame(xFrame0, yFrame0, xFrame1, yFrame1);
+            GraphGrid(x0, y0, x1, y1, xFrame0, yFrame0, xFrame1, yFrame1, nxGrid, nyGrid);
+        }
+
+        function ExportImport() {
+            //document.navigate "table.htm"
+        }
+
+        // GRAPH SUPPORT FUNCTIONS  ################################################
+
+        // PLOT DRAW ===========================================
+
+        function DrawPlot(iType, iPath, iColor, Scale, Sdat) {
+            var x0 = Scale[1], x1 = Scale[2], y0 = Scale[5], y1 = Scale[4];
+            var iSample = 1;
+            //if (Sdat === null) { return; }
+            if (IsNothing(Sdat)) { return; }
+                    var Np = Sdat.length - 1;
+                            var Xp = new Array();
+                            var Yp = new Array();
+                            for (i = 0; i <= Np; i++) {
+                                xv = ParamFromSdat(iType, iPath, iSample, i, Sdat);
+                                Xp[i] = xFrame(xv[0], x0, x1, xFrame0, xFrame1);
+                                Yp[i] = yFrame(xv[1], y0, y1, yFrame0, yFrame1);
+                            }
+                            jg.setColor(GrColor[iColor]);
+                            jg.drawPolyline(Xp, Yp);
+                            jg.paint();
+         }
+
+        function ParamFromSdat(iType, iPort, iSample, iCount, Sdat) {
+            //if (Sdat === null) { return null; }
+            if (IsNothing(Sdat)) { return null; }
+            var Np = Sdat.length - 1;
+            var i = iCount;
+            if (iType > 1) {
+                if (iCount < 1) { i = 1; }
+                if (iCount > Np - 1) { i = Np - 1; }
+            }
+            var S = Sdat[i];
+            var F = S[0];
+            var V = Array(S[2 * iPort + 1], S[2 * iPort + 2]);
+            if ((iType == 2) || (iType == 4) || (iType == 5)) {
+                var S0 = Sdat[i - iSample];
+                var S1 = Sdat[i + iSample];
+                var F0 = S0[0];
+                var F1 = S1[0];
+                var V0 = Array(S0[2 * iPort + 1], S0[2 * iPort + 2]);
+                var V1 = Array(S1[2 * iPort + 1], S1[2 * iPort + 2]);
+                var dF = (F1 - F0) / 2.0;
+            }
+            if (iType == 2) {
+                var ILS = (dB(V1) - dB(V0)) / dF / 2000.0;
+                return Array(F, ILS);
+            }
+
+            if (iType == 3) {
+                return Array(F, DgRad * arg(V));
+            }
+
+            if (iType == 4) {
+                var dW = DeltaArg(V1, V0);
+                var dPdx = 0.5 * arg(dW) / dF;
+                var GD = -dPdx / 2.0 / Math.PI;
+                return Array(F, GD);
+            }
+
+            if (iType == 5) {
+                var W1 = DeltaArg(V1, V);
+                var W0 = DeltaArg(V, V0);
+                ddPdx2 = arg(DeltaArg(W1, W0));
+                var GDS = -0.001 * ddPdx2 / 2.0 / Math.PI;
+                return Array(F, GDS);
+            }
+            return Array(F, dB(V));
+
+        }
+
+
+//OLD
+
+
+
+        function vParam(iType, iPort, iSample, iCount, Np, SLines) {
+            var i = iCount
+            if (iType > 1) {
+                if (iCount < 1) { i = 1; }
+                if (iCount > Np - 1) { i = Np - 1; }
+            }
+            var S = SLines[i].split(" ");
+            var F = parseFloat(S[0]);
+            var V = Array(parseFloat(S[2 * iPort + 1]), parseFloat(S[2 * iPort + 2]));
+            if ((iType == 2) || (iType == 4) || (iType == 5)) {
+                var S0 = SLines[i - iSample].split(" ");
+                var S1 = SLines[i + iSample].split(" ");
+                var F0 = S0[0];
+                var F1 = S[0];
+                var V0 = Array(S0[2 * iPort + 1], S0[2 * iPort + 2]);
+                var V1 = Array(S1[2 * iPort + 1], S1[2 * iPort + 2]);
+                var dF = (F1 - F0) / 2.0;
+            }
+            if (iType == 2) {
+                var ILS = (dB(V1) - dB(V0)) / dF / 2000.0;
+                return Array(F, ILS);
+            }
+
+            if (iType == 3) {
+                return Array(F, DgRad * arg(V));
+            }
+
+            if (iType == 4) {
+                var dW = DeltaArg(V1, V0);
+                var dPdx = 0.5 * arg(dW) / dF;
+                var GD = -dPdx / 2.0 / Math.PI;
+                return Array(F, GD);
+            }
+
+            if (iType == 5) {
+                var W1 = DeltaArg(V1, V);
+                var W0 = DeltaArg(V, V0);
+                ddPdx2 = arg(DeltaArg(W1, W0));
+                var GDS = -0.001 * ddPdx2 / 2.0 / Math.PI;
+                return Array(F, GDS);
+            }
+            return Array(F, dB(V));
+        }
+
+
+//GRAPH FRAME==================================
+        function xFrame(xScale, xScale0, xScale1, xFrame0, xFrame1) {
+            var xFrame = xFrame0 + (xFrame1 - xFrame0) / (xScale1 - xScale0) * (xScale - xScale0);
+            if (xFrame < xFrame0) { xFrame = xFrame0 }
+            if (xFrame > xFrame1) { xFrame = xFrame1 }
+            return xFrame;
+        }
+
+        function yFrame(yScale, yScale0, yScale1, yFrame0, yFrame1) {
+            var yFrame = yFrame0 + (yFrame1 - yFrame0) / (yScale1 - yScale0) * (yScale - yScale0);
+            if (yFrame < yFrame0) { yFrame = yFrame0 }
+            if (yFrame > yFrame1) { yFrame = yFrame1 }
+            return yFrame;
+        }
+
+
+        function GraphFrame(xFrame0, yFrame0, xFrame1, yFrame1) {
+            jg.clear();
+            jg.setColor("#000000");
+            jg.drawRect(0, 0, xCanvasMax, yCanvasMax);
+            jg.paint();
+        }
+
+        function GraphGrid(xScale0, yScale0, xScale1, yScale1, xFrame0, yFrame0, xFrame1, yFrame1, nxGrid, nyGrid) {
+            jg.setColor("#0084A5");
+            jg.setFont("Arial Black", "10px", Font.PLAIN);
+            var x, xF, xT, y, yT, yF;
+            var nxx = Math.round(3.0 - Math.log(Math.max(Math.abs(xScale0), Math.abs(xScale1))) / Math.LN10);
+            var nyy = Math.round(3.0 - Math.log(Math.max(Math.abs(yScale0), Math.abs(yScale1))) / Math.LN10);
+
+            if (nxx < 0) { nxx = 0 }
+            if (nyy < 0) { nyy = 0 }
+            for (var i = 0; i <= nxGrid; i++) {
+                x = xScale0 + (xScale1 - xScale0) * i / nxGrid;
+                xT = x.toFixed(nxx);
+                xF = xFrame(x, xScale0, xScale1, xFrame0, xFrame1);
+                jg.drawLine(xF, yFrame0, xF, yFrame1); // co-ordinates related to "myCanvas"
+                jg.drawString(xT, xF - 10, yFrame1 + 10);
+            }
+            for (var i = 0; i <= nyGrid; i++) {
+                y = yScale0 + (yScale1 - yScale0) * i / nyGrid;
+                yT = y.toFixed(nyy)
+                yF = yFrame(y, yScale0, yScale1, yFrame0, yFrame1);
+                jg.drawLine(xFrame0, yF, xFrame1, yF); // co-ordinates related to "myCanvas"
+                jg.drawString(yT, xFrame0 - 45, yF - 7);
+            }
+            jg.paint();
+        }
+
+
+
+
+
+
+
+        //'=================== COMPLEX FUNCTION MATH
+
+        function cmplx(x, y) {
+            return Array(x, y);
+        }
+
+        function xpy(x, y) {
+            return Array(x[0] + y[0], x[1] + y[1]);
+        }
+
+        function xmy(x, y) {
+            return Array(x[0] - y[0], x[1] - y[1]);
+        }
+
+        function xoy(x, y) {
+            return Array(x[0] * y[0] - x[1] * y[1], x[0] * y[1] + x[1] * y[0]);
+        }
+
+        function xdy(x, y) {
+            var M = y[0] * y[0] + y[1] * y[1];
+            return Array((x[0] * y[0] + x[1] * y[1]) / M, (-x[0] * y[1] + x[1] * y[0]) / M);
+        }
+
+        function cexp(x) {
+            var a = Math.exp(x[0]);
+            return Array(a * Math.cos(x[1]), a * Math.sin(x[1]));
+        }
+
+        function ax(a, x) {
+            return Array(a * x[0], a * x[1]);
+        }
+
+        function cabs(x) {
+            return Math.sqrt(x[0] * x[0] + x[1] * x[1]);
+        }
+
+
+        function arg(x) {
+            var pi = 3.141592653589793238;
+            var pi2 = 1.570796326794896619;
+            var up = x[1] + x[0];
+            var um = x[1] - x[0];
+            if (up > 0 && um > 0) {
+                return pi2 - Math.atan(x[0] / x[1]);
+            }
+            if (up >= 0 && um <= 0) {
+                return Math.atan(x[1] / x[0]);
+            }
+            if (up < 0 && um < 0) {
+                return -pi2 - Math.atan(x[0] / x[1]);
+            }
+            if (up <= 0 && um >= 0) {
+                if (x[1] >= 0) {
+                    return pi + Math.atan(x[1] / x[0]);
+                }
+                else {
+                    return -pi + Math.atan(x[1] / x[0]);
+                }
+            }
+            return 0.0;
+        }
+
+        function dB(x) {
+            var R;
+            R = cabs(x);
+            if (R > 1E-20) {
+                return 20. * Math.log(R) / Math.LN10;
+            }
+            else {
+                return -400;
+            }
+        }
+
+        function DeltaArg(x, y)
+        //exp(i*(dPhase(x)-dPase(y)))
+        {
+            var M = cabs(x) * cabs(y);
+            dT = Array((x[0] * y[0] + x[1] * y[1]) / M, (x[1] * y[0] - x[0] * y[1]) / M);
+            return dT;
+        }
+    </script>
+</body>
+
+</HTML>
+</body>
+</html >

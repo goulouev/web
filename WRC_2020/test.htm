@@ -1,0 +1,266 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<!--marked-->
+<body onload="DesignLoad()">
+    <button onclick="test_start();">Xuj</button>
+    <script type="text/javascript" src="wrc_StrucLib.js"></script>
+    <script type="text/javascript" src="wrc_setups.js"></script>
+    <script type="text/javascript" src="wrc_Strings.js"></script>
+    <script type="text/javascript">
+        var MainSchema;
+        var InDat = new SetUpDat;
+        var VarMap = [];
+
+        function DesignLoad() {
+            MainSchema = new design;
+            SetProject(Model3());
+            //PrjFile0();
+            if (localStorage.getItem('DesignFileText') === null) {
+                //localStorage.setItem('DesignFileText', '');
+            } else {
+                var EditTxt = localStorage.getItem('DesignFileText');
+                if (!EditTxt) { return; }
+                PrjParts = SplitProjectParts(EditTxt);
+                //var MainSchema = new design();
+                if (!PrjParts[0]) { return; }
+                if (!PrjParts[1]) { return; }
+                MainSchema.ImportShapka(PrjParts[0]);
+                MainSchema.ImportSchema(PrjParts[1]);
+            }
+            VarMap = GetVarMap(MainSchema);
+        }
+
+
+        function test_start() {
+            var x = '-51';
+            var y = FormatStrByLen(x, true, 5);
+            alert('|'+y+'|');
+        }
+
+        function WriteVars(V) {
+            var i, iv, ii = -1;
+            var Nv = V.length - 1;
+            var iX = MainSchema.iSymX * MainSchema.iSymX;
+            var iY = MainSchema.iSymY * MainSchema.iSymY;
+            var iZ = MainSchema.iSymZ;
+            nVars = VarMap.length - 1;
+            for (iv = 0; iv <= nVars; iv++) {
+                i = VarMap[iv][0];
+                var iVar = VarMap[iv][1];
+                switch (iVar) {
+                    case -5:
+                        ii = ii + 1;
+                        MainSchema.juncs[i].v[3] = -V[ii];
+                        MainSchema.juncs[i].v[5] = V[ii];
+                        break;
+                    case -4:
+                        ii = ii + 1;
+                        MainSchema.juncs[i].v[2] = -V[ii];
+                        MainSchema.juncs[i].v[4] = V[ii];
+                        break;
+                    case -3:
+                        ii = ii + 1;
+                        MainSchema.juncs[i].v[3] = V[ii];
+                        MainSchema.juncs[i].v[5] = -V[ii];
+                        break;
+                    case -2:
+                        ii = ii + 1;
+                        MainSchema.juncs[i].v[2] = V[ii];
+                        MainSchema.juncs[i].v[4] = -V[ii];
+                        break;
+                    case 1:
+                        ii = ii + 1;
+                        MainSchema.juncs[i].v[1] = V[ii];
+                        break;
+                    case 2:
+                        ii = ii + 1;
+                        MainSchema.juncs[i].v[2] = V[ii];
+                        if (iX === 1) { MainSchema.juncs[i].v[4] = -V[ii];}
+                        break;
+                    case 3:
+                        ii = ii + 1;
+                        MainSchema.juncs[i].v[3] = V[ii];
+                        if (iY === 1) { MainSchema.juncs[i].v[5] = -V[ii]; }
+                        break;
+                    case 4:
+                        ii = ii + 1;
+                        MainSchema.juncs[i].v[4] = V[ii];
+                        if (iX === 1) { MainSchema.juncs[i].v[2] = -V[ii]; }
+                        break;
+                    case 5:
+                        ii = ii + 1;
+                        MainSchema.juncs[i].v[5] = V[ii];
+                        if (iY === 1) { MainSchema.juncs[i].v[3] = -V[ii]; }
+                        break;
+                }
+            }
+            if (iZ === 1 && MainSchema.IsSymZ) { MainSchema.FixSymZ();}
+            return V;
+        }
+
+        function ReadVars() {
+            var i, iv, iVar, iMark, ii = -1;
+            var V = [];
+            nVars = VarMap.length - 1;
+            for (iv = 0; iv <= nVars; iv++) {
+                i = VarMap[iv][0]; iMark = VarMap[iv][1]; iVar = Math.abs(iMark);
+                if (IsValidVar(iMark)) {
+                    ii = ii + 1;
+                    V[ii] = MainSchema.juncs[i].v[iVar];
+                }
+            }
+            return V;
+        }
+        function IsValidVar(iVar) {
+            iv = Math.abs(iVar);
+            if (iv === 2 || iv === 3 || iv === 4 || iv === 5) { return true; }
+            if (iv === 1) { return true; }
+            return false;
+        }
+        function GetVarMap(schema) {
+            var i, ii=-1, iVars=[];
+            for (i = 0; i <= schema.nJuncs; i++) {
+                if (schema.juncs[i].iType !== 0 && schema.juncs[i].iOpt !== 0) {
+                    var iv = GetNums(schema.juncs[i].iOpt);
+                    nvars = iv.length;
+                    if (nvars > 0) {
+                        if (IsValidVar(iv[0])) {
+                            ii = ii + 1;
+                            iVars[ii] = [i, iv[0]];
+                            if (nvars > 1) {
+                                if (IsValidVar(iv[1])) {
+                                    ii = ii + 1;
+                                    iVars[ii] = [i, iv[1]];
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return iVars;
+        }
+
+        function GetNums(N) {
+            var iZn, i0, i1;
+            if (N < 0) { NN = Math.abs(N); iZn = -1 } else { NN = N; iZn = 1 }
+            if (NN < 10) {
+                return [N];
+            } else {
+                var i0 = parseInt(NN / 10);
+                var i1 = NN - 10 * i0;
+                return [iZn * i0, i1];
+            }
+        }
+
+        function Model3() {
+            var rs = [];
+            rs[0] = 'SETUP_DAT';
+            rs[1] = '1 10 10';
+            rs[2] = '1 0.05 0 1 2 1 1.5 0';
+            rs[3] = '3.95 0.16';
+            rs[4] = '3 33 2000';
+            rs[5] = '1 50 0.02 0.05 0.05';
+            rs[6] = '1 1 3.5 4.4 25 30';
+            rs[7] = 'DESIGN_DAT';
+            rs[8] = '-1  0  0';
+            rs[9] = '0  0  0';
+            rs[10] = '1  7  10';
+            rs[11] = '1  1';
+            rs[12] = '1  0  6.1';
+            rs[13] = '0    1     1.051111    -1.145000    -0.572500     1.145000     0.572500';
+            rs[14] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[15] = '5    1     0.863651    -1.145000    -0.346398     1.145000     0.346398';
+            rs[16] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[17] = '5    1     0.863651    -1.145000    -0.131830     1.145000     0.131830';
+            rs[18] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[19] = '0    1     0.030000    -1.145000    -0.050000     1.145000     0.050000';
+            rs[20] = '-51   2     0.120369    -1.250000    -0.201092     1.250000     0.201092';
+            rs[21] = '0    1     0.030233    -1.249304    -0.050271     1.249304     0.050271';
+            rs[22] = '0    2     0.123305    -1.250000    -0.158003     1.250000     0.158003';
+            rs[23] = '0    1     0.031855    -1.244456    -0.052161     1.244456     0.052161';
+            rs[24] = '0    2     0.132714    -1.250000    -0.180793     1.250000     0.180793';
+            rs[25] = '0    1     0.036180    -1.231534    -0.057198     1.231534     0.057198';
+            rs[26] = '0    2     0.152358    -1.250000    -0.228368     1.250000     0.228368';
+            rs[27] = '0    1     0.044269    -1.207360    -0.066620     1.207360     0.066620';
+            rs[28] = '0    2     0.184750    -1.250000    -0.306819     1.250000     0.306819';
+            rs[29] = '0    1     0.056650    -1.170362    -0.081040     1.170362     0.081040';
+            rs[30] = '5    2     0.230066    -1.250000    -0.393273     1.250000     0.393273';
+            rs[31] = '0    1     0.072908    -1.121781    -0.099975     1.121781     0.099975';
+            rs[32] = '5    2     0.284687    -1.250000    -0.550728     1.250000     0.550728';
+            rs[33] = '0    1     0.091169    -1.067212    -0.121244     1.067212     0.121244';
+            rs[34] = '5    2     0.339374    -1.250000    -0.681309     1.250000     0.681309';
+            rs[35] = '0    1     0.107468    -1.018506    -0.140228     1.018506     0.140228';
+            rs[36] = '5    2     0.377082    -1.250000    -0.742256     1.250000     0.742256';
+            rs[37] = '0    1     0.115000    -0.996000    -0.149000     0.996000     0.149000';
+            rs[38] = '5    2     0.377082    -1.250000    -0.744738     1.250000     0.744738';
+            rs[39] = '0    1     0.107468    -1.018506    -0.140228     1.018506     0.140228';
+            rs[40] = '5    2     0.339374    -1.250000    -0.683480     1.250000     0.683480';
+            rs[41] = '0    1     0.091169    -1.067212    -0.121244     1.067212     0.121244';
+            rs[42] = '5    2     0.284687    -1.250000    -0.548861     1.250000     0.548861';
+            rs[43] = '0    1     0.072908    -1.121781    -0.099975     1.121781     0.099975';
+            rs[44] = '5    2     0.230066    -1.250000    -0.393211     1.250000     0.393211';
+            rs[45] = '0    1     0.056650    -1.170362    -0.081040     1.170362     0.081040';
+            rs[46] = '0    2     0.184750    -1.250000    -0.306819     1.250000     0.306819';
+            rs[47] = '0    1     0.044269    -1.207360    -0.066620     1.207360     0.066620';
+            rs[48] = '0    2     0.152358    -1.250000    -0.228368     1.250000     0.228368';
+            rs[49] = '0    1     0.036180    -1.231534    -0.057198     1.231534     0.057198';
+            rs[50] = '0    2     0.132714    -1.250000    -0.180793     1.250000     0.180793';
+            rs[51] = '0    1     0.031855    -1.244456    -0.052161     1.244456     0.052161';
+            rs[52] = '0    2     0.123305    -1.250000    -0.158003     1.250000     0.158003';
+            rs[53] = '0    1     0.030233    -1.249304    -0.050271     1.249304     0.050271';
+            rs[54] = '5    2     0.120369    -1.250000    -0.203436     1.250000     0.203436';
+            rs[55] = '0    1     0.030000    -1.145000    -0.050000     1.145000     0.050000';
+            rs[56] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[57] = '5    1     0.863651    -1.145000    -0.131830     1.145000     0.131830';
+            rs[58] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[59] = '5    1     0.863651    -1.145000    -0.346404     1.145000     0.346404';
+            rs[60] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[61] = '0    1     1.051111    -1.145000    -0.572500     1.145000     0.572500';
+            rs[62] = '';
+            return rs;
+        }
+
+        function SetProject(LNs) {
+            //document.getElementById('FileProjectOkno').value = localStorage.getItem('ProjectDat');
+            var i, key;
+            var SetupDat = '';
+            var DesignDat = '';
+            var MemoDat = '';
+            var kod = -1;
+            var n = LNs.length - 1;
+            if (n < 0) { return; }
+            for (i = 0; i <= n; i++) {
+                var LN = LNs[i].trim();
+                if (LN.length > 3) {
+                    key = LNs[i].substr(0, 4);
+                    //alert(key);
+                    if (key == 'SETU') { kod = 1; }
+                    if (key == 'DESI') { kod = 2; }
+                    if (key == 'BACK') { kod = 3; }
+                    if (kod == 1 && key != 'SETU') {
+                        SetupDat += LNs[i] + '\r\n';
+                    }
+                    if (kod == 2 && key != 'DESI') {
+                        DesignDat += LNs[i] + '\r\n';
+                    }
+                    if (kod == 3 && key != 'BACK') {
+                        MemoDat += LNs[i] + '\r\n';
+                    }
+
+                }
+
+            }
+            if (kod > 0) {
+                localStorage.setItem("InputDatFileText", SetupDat);
+                localStorage.setItem("DesignFileText", DesignDat);
+                localStorage.setItem("MemoDatText", MemoDat);
+            }
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,320 @@
+﻿
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="author" content="Rousslan Goulouev">
+    <meta name="description" content="import and export s-parameters data to plot">
+    <meta name="keywords" content="s-parameter, s2p, Re/Im, freeware">
+    <meta charset="utf-8" />
+    <title>S-parameters Data Import/Export</title>
+    <link rel="stylesheet" href="navbars.css" />
+    <style>
+        table {
+            width: 100%;
+            height: auto;
+        }
+
+        .cells {
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            font-size: 11px;
+            color: navy;
+            width: 200px;
+            background-color: #DDDDDD;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        textarea {
+            border: none;
+            font-size: 10px;
+            font-family: 'Lucida Console';
+            width: 99%;
+            height: 490px;
+            margin-top: 5px;
+            padding-top: 3px;
+        }
+
+        .mark {
+            color: darkred;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        .center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        p {
+            text-align: justify;
+        }
+
+        button.knopka {
+            margin: 0;
+            padding: 0;
+            outline: none;
+            border-radius: 5px;
+            width: 90px;
+            height: 25px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-weight: bold;
+            color: navy;
+        }
+    </style>
+</head>
+<body onload="sTabLoad()">
+    <div class="navbar">
+        <div class="dropdown">
+            <button class="dropbtn" onclick="javascript:void(0)">
+                File
+            </button>
+            <div class="dropdown-content">
+                <a href="javascript:void(0)" onclick="document.getElementById('fileToLoad').click();">Open Data File</a>
+                <a href="javascript:void(0)" onclick="saveDynamicDataToFile();">Save Data File</a>
+                <a href="javascript:void(0)" onclick="ExportSimData();">Export Simulation</a>
+            </div>
+        </div>
+        <a href="javascript:void(0)" onclick="window.location.href = 'setup.htm';">Setup</a>
+        <a href="javascript:void(0)" onclick="window.location.href = 'editor.htm';">Edit</a>
+        <a href="javascript:void(0)" onclick="window.location.href = 'editor.htm';">Design</a>
+        <a href="javascript:void(0)" onclick="window.location.href = 'editor.htm';">Run</a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="javascript:void(0)">
+                Reports
+            </button>
+            <div class="dropdown-content">
+                <a href="javascript:void(0)" onclick="Command1(); window.location.href = 'graph.htm';">Plot</a>
+                <a href="javascript:void(0)">Import/Export</a>
+            </div>
+        </div>
+        <a href="help.htm">Help</a>
+    </div>
+    <input type="file" id="fileToLoad" style="display:none" accept=".dat,.tab,.s2p" />
+
+
+    <TABLE>
+        <TR VALIGN=TOP>
+            <TD class="cells">
+
+                <FONT STYLE="font:8pt Arial Black; color:maroon">S-Data Format:</FONT>
+                <p>
+                    <INPUT TYPE="RADIO" NAME="DataType" VALUE="1" CHECKED>Re / Im<BR>
+                    <INPUT TYPE="RADIO" NAME="DataType" VALUE="2">Mag/Phase<BR>
+                    <INPUT TYPE="RADIO" NAME="DataType" VALUE="3">s2p
+                </p>
+
+                <FONT STYLE="font:8pt Arial Black; color:maroon">Delimiter</FONT>
+                <p>
+                    <INPUT TYPE="RADIO" NAME="DelimType" VALUE="1" CHECKED>Space<BR>
+                    <INPUT TYPE="RADIO" NAME="DelimType" VALUE="2">Tab
+                </p>
+                <FONT STYLE="font:8pt Arial Black; color:maroon">S-Data Import</FONT>
+                <p>
+                    <font class="mark">"FILE/Open"</font> menu: Try if it works with your
+                    browser.<br /><br />
+                    <font class="mark">"Copy/Paste":</font> Open s-parameter data file
+                    using a text editor (NotePad, WordPad, etc.),
+                    <b><i>Select All</i></b> content,
+                    <b><i>Copy</i></b>, <b><i>Paste</i></b> it into text window here.
+                </p>
+                <FONT STYLE="font:8pt Arial Black; color:maroon">S-Data Export</FONT>
+                <p>
+                    <font class="mark">"FILE/Save"</font> menu. Try if it works with your browser.                          line breaks with other browsers. Check it first.<BR><br />
+                    <font class="mark">"Copy/Paste"</font>: <b><i>Select All, Copy, Paste</i></b>
+                    into a text editor and <b><i>Save</i></b> in plain text format
+                </p>
+                <button class="knopka" onclick="Command1(); window.location.href = 'graph.htm';">Plot</button>
+                <button class="knopka" onclick="RemoveData();">Clear</button>
+            </TD>
+            <TD style="background-color: white;">
+                <TEXTAREA ID="Okno" spellcheck="false"></TEXTAREA>
+            </TD>
+        </TR>
+    </TABLE>
+    <input type="hidden" id="hider" />
+    <p style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:10px;font-style:italic;color:white;text-align:right;">&copy;2006 R. Goulouev, WR-Connect 2.0 Web (javascripted)</p>
+    <script type="text/javascript">
+        function ExportSimData() {
+            var sSim = localStorage.getItem('sDatSim');
+            if (sSim) {
+                document.getElementById('Okno').value = localStorage.getItem('sDatSim');
+            }
+        }
+
+        function sTabLoad() {
+            if (sessionStorage.getItem('sDatFile') === null) {
+                return;
+            } else {
+                document.getElementById('Okno').value = sessionStorage.getItem('sDatFile');
+            }
+        }
+// STARYJ XUJ
+        function ExportSdata() {
+            var textContent = document.getElementById('Okno').value;
+            if (trim(textContent)) {
+                var content = '<pre>';
+                content += textContent;
+                content += '</pre>';
+                document.getElementById('hider').innerHTML = content;
+                downloado(document.getElementById('hider').innerText, 's.dat', 'text/plain');
+            }
+        }
+
+        function downloado(data, filename, type) {
+            var file = new Blob([data], { type: type });
+            if (window.navigator.msSaveOrOpenBlob) // IE10+
+                window.navigator.msSaveOrOpenBlob(file, filename);
+            else { // Others
+                var a = document.createElement("a"),
+                    url = URL.createObjectURL(file);
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(function () {
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                }, 0);
+            }
+        }
+
+// END STARYJ XUJ
+        function RemoveData() {
+            document.getElementById('Okno').value = '';
+            sessionStorage.removeItem('sDatFile'); 
+        }
+
+        function Command1() {
+            var LN, SLines, SLine, LM;
+            var LN = document.getElementById('Okno').value;
+            if (trim(LN) === "") { return; }
+            var DataType = document.getElementsByName('DataType');
+            var LN = Okno.value;
+            var LM = "";
+            if (DataType[0].checked) { sKey = ["#", "GHz", "S", "RI", "R", "50"]; }
+            if (DataType[1].checked) { sKey = ["#", "GHz", "S", "dB", "R", "50"]; }
+            var SLines = LN.match(/[^\r\n]+/g);
+            //SLines=split(LN,vbCrLf)
+            var i, Np = SLines.length - 1;
+            if (Np < 5) { alert('Insufficient data to plot.'); return; }
+            for (i = 0; i <= Np; i++) {
+                var SLine = WordsToArray(SLines[i]);
+                //SLine=split(Trim(SLines(iCount))," ")
+                var Nsp = SLine.length;
+                if (Nsp >= 4) {
+                    if (SLine[0].substr(1, 1) !== "!") {
+                        if (trim(SLine[0]) === "#") { sKey = SLine; }
+                        if (NumericCheck(SLine)) {
+                            var dLM = TouchFileKey(sKey, SLine);
+                            if (dLM === "") { return; }
+                            LM = LM + dLM + '\r\n';
+                        }
+                    }
+                }
+            }
+            sessionStorage.setItem('sDatFile', LM);
+        }
+
+        function TouchFileKey(sKey, sLine) {
+            //Determines type of sKey- s2p # line
+            var dgRad = 0.017453292519943295769236907684886;
+            var rs = "", cF = 1, i;
+            var sw = trim(sKey[1].toUpperCase());
+            switch (sw) {
+                case "GHZ":
+                    cF = 1.0;
+                    break;
+                case "MHZ":
+                    cF = 1.0e-3;
+                    break;
+                case "KHZ":
+                    cF = 1.0e-6;
+                    break;
+                case "HZ":
+                    cF = 1.0e-9;
+                    break;
+                default:
+                    return rs;
+            }
+            sw = trim(sKey[2].toUpperCase());
+            if (sw != "S") { return rs; }
+            var LN = cF * parseFloat(sLine[0]);
+            var w, ph, xRe, R, xIm;
+            sw = trim(sKey[3].toUpperCase());
+            switch (sw) {
+                case "DB":
+                    for (i = 0; i <= 3; i++) {
+                        w = parseFloat(sLine[2 * i + 1]) / 20.0; R = Math.pow(10.0, w); ph = dgRad * parseFloat(sLine[2 * i + 2]);
+                        xRe = R * Math.cos(ph); xIm = R * Math.sin(ph);
+                        LN = LN + " " + xRe + " " + xIm;
+                    }
+                    break;
+                case "MA":
+                    for (i = 0; i <= 3; i++) {
+                        R = CDbl(sLine(2 * i + 1)); ph = dgRad * parseFloat(sLine[2 * i + 2]);
+                        xRe = R * Math.cos(ph); xIm = R * Math.sin(ph);
+                        LN = LN + " " + xRe + " " + xIm;
+                    }
+                    break;
+                case "RI":
+                    for (i = 0; i <= 3; i++) {
+                        xRe = parseFloat(sLine[2 * i + 1]); xIm = parseFloat(sLine[2 * i + 2]);
+                        LN = LN + " " + xRe + " " + xIm;
+                    }
+                    break;
+                default:
+                    return rs;
+            }
+            return LN;
+        }
+
+
+        document.getElementById('fileToLoad').onchange = function (event) {
+            var fileToLoad = event.target.files[0];
+            if (fileToLoad) {
+                var reader = new FileReader();
+                reader.onload = function (fileLoadedEvent) {
+                    var textFromFileLoaded = fileLoadedEvent.target.result;
+                    document.getElementById('Okno').value = textFromFileLoaded;
+                };
+                reader.readAsText(fileToLoad, 'UTF-8');
+            }
+        };
+
+        function NumericCheck(V) {
+            var i, N = V.length - 1;
+            for (i = 0; i <= N; i++) {
+                if (isNaN(parseFloat(V[i]))) {
+                    return false;
+                }
+            }
+            //var X;
+            //for (X of V) {
+            //     if (isNaN(parseFloat(X))) {
+            //         return false;
+            //     }
+            //  }
+            return true;
+        }
+
+        function saveDynamicDataToFile() {
+
+            var InText = document.getElementById("Okno").value;
+            if (InText) {
+                var DatLines = InText.match(/[^\r\n]+/g);
+                var nLines = DatLines.length - 1;
+                if (nLines >= 1) {
+                    var blob = new Blob([InText], { type: "text/plain;charset=utf-8" });
+                    saveAs(blob, "s_data.dat");
+                    return;
+                }
+            }
+            alert("NO DATA IS FOUND IN WINDOW! \n\n Import s-parameters table into text window.")
+        }
+
+    </script>
+    <script type="text/javascript" src="wrc_Strings.js"></script>
+    <script src="FileSaver.js"></script>
+</body>
+</html>

@@ -1,0 +1,567 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="author" content="Rousslan Goulouev">
+    <meta name="description" content="About WR-Connect, space mapping, design tutorial">
+    <meta name="keywords" content="waveguide, filter, design, low-pass, band-pass, ASM, agressive space mapping, free, software">
+    <title>WR-Connect: Using Space Mapping</title>
+    <link rel="stylesheet" href="navbars.css" />
+    <style>
+        .vertical-menu {
+            width: 15%;
+            height: 530px;
+            overflow-y: auto;
+            float: left;
+            color: navy;
+            background-color: white;
+            /* width: 50%;*/
+            /*padding: 10px;*/
+            /*height: 300px;*/ /* Should be removed. Only for demonstration */
+        }
+
+            .vertical-menu a {
+                background-color: #eee;
+                color: black;
+                display: block;
+                padding: 12px;
+                text-decoration: none;
+            }
+
+                .vertical-menu a:hover {
+                    background-color: #ccc;
+                }
+
+                .vertical-menu a.active {
+                    background-color: #624e4e;
+                    color: white;
+                }
+
+            .vertical-menu p {
+                font-size: 18px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: bold;
+                color: navy;
+                padding-left:15px;
+            }
+/*========================================*/
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column {
+            float: left;
+            width: 85%;
+            padding: 10px;
+            height: 530px;
+            overflow-y: auto;
+            page-break-after: always;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /*======================================*/
+
+        h1 {
+            margin-bottom: 0.2cm;
+            background: transparent;
+            font-family: "Liberation Sans", sans-serif;
+            font-size: 18pt
+        }
+        h2 {
+            margin-bottom: 0.4cm;
+            background: transparent;
+            font-family: "Liberation Sans", sans-serif;
+            font-size: 16pt;
+            font-style:italic;
+        }
+
+        p {
+            margin-bottom: 0.25cm;
+            background: transparent
+        }
+
+        .knob {
+            font-family:'Times New Roman', Times, serif;
+            font-weight:bold;
+            font-size: 12pt;
+            color:navy;
+        }
+        td {
+            font-family: 'Times New Roman', Times, serif;
+            color: navy;
+        }
+    </style>
+</head>
+<body >
+    <div class="navbar">
+        <a href="index.htm">File</a>
+        <a href="setup.htm">Setup</a>
+        <a href="editor.htm">Edit</a>
+        <a href="editor.htm">Design</a>
+        <a href="editor.htm">Run</a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="javascript:void(0)">
+                Reports
+            </button>
+            <div class="dropdown-content">
+                <a href="graph.htm">Plot</a>
+                <a href="s_data.htm">Import/Export</a>
+            </div>
+        </div>
+        <a href="javascript:void(0)">Help</a>
+    </div>
+    <div class="row">
+        <div class="vertical-menu">
+            <p>WR-Connect</p>
+            <a href="help.htm">About Software</a>
+            <a href="menus.htm">Main Menus</a>
+            <a href="help_setup.htm">Initial Setup</a>
+            <a href="help_edit.htm">Design Editor</a>
+            <p>Tutorials</p>
+            <a href="help_app0.htm">Simple Filter Design</a>
+            <a href="help_app1.htm">Corrugated Filter #1</a>
+            <a href="help_app2.htm" class="active">Space Mapping</a>
+            <a href="#">--------------</a>
+            <p>Examples</p>
+            <a href="examps.htm">Conventional Designs</a>
+        </div>
+        <div id="MainOkno" class="column" style="background-color:white;">
+            <P align="center" style="line-height: 100%; margin-top: 0.43cm; margin-bottom: 0.2cm; page-break-after: avoid;">
+                <FONT face="Liberation Sans, sans-serif">
+                    <FONT size="6"
+                          style="font-size: 24pt;"><B>Space Mapping Using WR-Connect</B></FONT>
+                </FONT><br /><br />
+            </P>
+            <font style="font-family: 'Times New Roman', Times, serif; font-style:italic; font-size: 10pt; color: navy;">R. Goulouev, 01/05/2021</font>
+            <p>
+                <a href="javascript:void(0)" onclick="NewWin('MainOkno');">Open this article in separate window to print</a>
+            </p>
+            <H1>Introduction</H1>
+            <P>
+                Currently, in the world of high-speed computers, there are many FEM solvers
+                of EM problems
+                that allow almost exact solution of Maxwell's equations in arbitrary shaped and
+                inhomogeneously filled 3D objects. Almost any complex EM structure
+                can be "drawn" and "simulated". Nevertheless, in most cases, such a complex
+                structure cannot be directly synthesized based on RF performance targets.
+                Direct application of optimization techniques to 3D solvers is also usually
+                inefficient and time consuming.
+                On the other hand, common synthesis
+                methods are generally applicable to only simple electrical
+                circuits consisting of lumped, distributed elements or coupling matrices
+                that are not directly associated with a practical design concept.
+
+                On the contrary, software built on the basis of such "coarse" models is very
+                fast and easily implements synthesis and optimization methods. Therefore, design
+                engineers often perform coarse modelling when developing a preliminary design
+                concept and evaluating its expected performance.
+
+                Problems arise when reproducing the technologically realistic
+                (fine) model from the unrealistic coarse model.
+
+                Microwave filter designers often follow empirical techniques to set identical
+                couplings and resonant frequencies values when specific element sizes
+                of the fine model are associated with corresponding lumped or distributed
+                elements in the coarse model. In this case, these qualities
+                (coupling or resonant frequency) are derived from full-wave
+                simulations of some joints or nodes extracted from an fine model.
+                Overall, this design procedure remains very cumbersome, time consuming,
+                imprecise, and may not converge at all.
+
+                The space mapping (SM) methods are developed to make a smooth and fast transition
+                to the fine model from its coarse prototype.
+
+                Due to the wide interest, there are currently many publications on methods
+                of space mapping. But in general, these are iterative algorithms whose
+                convergence depends on how accurate the coarse model simulates the reality.
+                Generally, the convergence depends on the validity of the coarse model, its
+                completeness and accuracy.
+
+                If the coarse model is inaccurate or incomplete, then the SM process
+                may require many iterations and not converge to any acceptable result.
+
+                In our case, if we use the filter model from
+                WR-Connect as a coarse model and use Ansys HFSS for fine
+                modelling, then convergence is expected to be fast due to
+                geometrical and electrical closeness of the both models.
+
+                WR-Connect is provided with an "aggressive space mapping" (ASM) algorithm [1]
+                that allows transfering and finalizing the WR-Connect design into
+                another EM software, which is more accurate or more technologically
+                detailed (for example includes draft angles, milling radii, tuning screws, etc.).
+
+                This tutorial is about how to do this using a simple waveguide filter as an example.
+            </P>
+            <H1>1. Design Steps</H1>
+            <p>
+                The theoretical foundations of the aggressive space mapping method
+                and the iterative algorithm itself are detailed in 15th
+                chapter of this monograph [1]. Only the sequence of actions using WR-Connect
+                is briefly described here. These actions can be described as follows:
+                <ul>
+                    <li>
+                        Using WR-Connect create a compliant
+                        conceptual design concept. This design should be exemplary
+                        good and meet the near-band selectivity requirements (in-band return loss
+                        and near-band rejection).
+                    </li>
+                    <li>
+                        Indicate the key filter dimensions (X<sub>i</sub>, i=1,2...N).
+                        These dimensions should include only a part of all design
+                        dimensions, but the full set of dimensions that determine
+                        the natural frequencies of the resonators and the coupling
+                        between them. In simple words, this is a sufficient set of
+                        sizes, by adjusting which one could tune the filter.
+                        As a common rule, these are the dimensions that are used
+                        in synthesis or optimization.
+                        In addition
+                        to these dimensions, you also need to add the lengths
+                        of the end nodes. Unlike usual optimization procedure,
+                        the ASM optimization algorithm is sensitive to the phases
+                        of the s-parameters.
+                    </li>
+                    <li>
+                        Create fine model in HFSS based on WR-Connect design concept but with the
+                        possibility of easy way of transfering those key dimensions
+                        (X<sub>i</sub>, i=1,2...N) from WR-Connect to HFSS.
+                        There are three ways of design
+                        transfer, which could be considered:
+                        <ol>
+                            <li>
+                                Creating a "parametric" HFSS model based on WR-Connect
+                                design concept with those key dimensions
+                                (X<sub>i</sub>, i=1,2...N) set as design parameters.
+                            </li>
+                            <li>
+                                Using VBS script <a href="ansys.htm">from</a> and
+                                following the instruction. The script will automatically
+                                transfer all design dimensions into HFSS Modeller
+                                and create HFSS project. Additional modifications
+                                might be required such as putting milling radii, tuning
+                                screws, etc.
+                            </li>
+                            <li>
+                                VBS or Python self-programming for advance HFSS users based
+                                on Ansys scripting interface.
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        Run HFSS and extract the simulation results in complex s-parameters
+                        versus frequency format (f, Re(S11), Im(S11), Re(S21), Im(S21),
+                        Re(S12), Im(S12), Re(S22), Im(S22)) format or s2p. 
+                        <b>
+                            Do not normalize to
+                            50 ohm.
+                        </b>
+                    </li>
+                    <li>
+                        Import the HFSS simulation results into WR-Connect as external data.
+                    </li>
+                    <li>
+                        Minimize the difference between WR-Connect and HFSS simulation results
+                        using automatic corrections and ASM optimization over the key dimensions
+                        only. At the end, both responses (internal and external)
+                        should be as close to each other as possible (almost coincide).
+                    </li>
+                    <li>
+                        Go to the next design iteration with updated key dimensions based
+                        on the results of ASM optimization.
+                    </li>
+                </ul>
+            </p>
+            <img src="img1/help_app_2_2.jpg" />
+            <p><i>Figure 1: Simplified block diagram of the ASM process.</i></p>
+            <h1>2. Example</h1>
+            <h2>2.1. Coarse Model Design Concept</h2>
+            <p>
+                To begin with, we need to have an idealistic design concept that suits us
+                from a technological point of view and meets our requirements.
+                In our case, as an example, we will take some design from
+                the previous tutorials, for example <a href="help_app0.htm">this one</a>.
+                There we have designed
+                a simple waveguide iris filter (see Figure 2)
+                using WR-Connect directly. It has been assumed that filter would be made
+                in the simplest handicraft way by just soldering the irises to a
+                waveguide tube.
+            </p>
+            <img src="img1/help_app_2_3.jpg" />
+            <p><i>Figure 2: WR-75 iris filter 3D model (left) and its "handicraft" implementation (right).</i></p>
+            <p>
+                Now we are returning to the idea to make that filter in a more
+                technological way by using milling.
+                In this case, we imagine that the filter will consist of two parts (body and cover).
+                Both of these parts can be machined from aluminum blanks on a milling machine
+                (see Figure 3).
+                In this case, both the body and the cover will have holes for the fastening screws.
+                Most waveguide filters and many other components are manufactured this way.
+            </p>
+            <img src="img1/help_app_2_0.png" />
+            <p><i>Figure 3: Housing and cover design proposed for milling.</i></p>
+            <p>
+                At the same time, technologists always ask designers the same question,
+                how much is permissible rounding of right angles in a particular design.
+                The radius of such curvatures is usually associated with the diameter of
+                the standard cutter that will be installed on the machine. In doing so,
+                they usually say such things that the thicker the cutter, the faster
+                the manufacturing process and the less likely the cutter to break
+                in this process. Based on usual considerations, the minimum cutter
+                diameter is selected based on considerations of one third of the depth
+                of the milling cavity. Then, in our case, the minimum cutter diameter
+                will be D<sub>cut</sub>=0.75''/3 = 0.25''. If so, in our fine model
+                (see Figure 4), we have
+                to accept the fillets radii to be at least not lesser than R = 0.130''.
+            </p>
+            <img src="img1/help_app_2_1.jpg" />
+            <p><i>Figure 4: Fine model design concept in drawn in HFSS.</i></p>
+            <p>
+                As a teaching purpose, we will also suggest using tuning screws
+                (they may not be needed if the parts are accurately fabricated).
+                So, in the HFSS model (see Figure 4), we round every corner between the iris and
+                the exterior side wall and draw cylinders simulating the tuning screws.
+                We will position these cylinders on the upper wall in the center
+                of each cavity and iris window.
+            </p>
+            <h2>2.2. Coarse Model Settings</h2>
+            <p>
+                Setting the coarse model parameters for the ASM process is the same
+                as in the case of regular (near-band performance) optimization with
+                a few exceptions. First, the end nodes lengths must be included
+                in the ASM optimization parameters (see Figure 5).
+                In the case of simple waveguide filters, when the filter consists
+                of N resonators and N + 1 couplings between them, the optimization
+                variables should include N resonator sizes, N + 1 coupling sizes,
+                and two end node sizes (2N + 3 variables in total).
+                Secondly, optimization should
+                take place over the entire 2x2 scattering matrix members
+                (S11, S21 (S21=S12) and S22). Wherin, in most cases, the ASM optimization
+                settings (Figure 6) could include just the targets for S11 and S22
+                magnitudes over the near-bands (entire passband with the nearest roll-off).
+            </p>
+            <img src="img1/help_app_2_4.jpg" />
+            <p>
+                <i>
+                    Figure 5: Lengths of end nodes (marked red)marked as optimization variables
+                    in dimensions list.
+                </i>
+            </p>
+            <img src="img1/help_app_2_5.jpg" />
+            <p>
+                <i>
+                    Figure 6: ASM optimization targets including both S11 and S22 magnitudes
+                    over near-band (10 to 14 GHz).
+                </i>
+            </p>
+            <h2>2.3. Fine Model Settings</h2>
+            <p>
+                The fine model must be built in geometrical accordance with the coarse model
+                and have the same forming dimensions (the dimensions of the resonators
+                and coupling elements), but at the same time it may include different
+                "perturbations" of the coarse model surface. With this filter
+                as an example (see Figure 4), we intentionally added rounded corners (cutter radius)
+                and small cylinders (tuning screws).
+
+                The remaining dimensions of the structure (the size of the outer case,
+                the length of the resonators, the thickness and width of the irises, etc.)
+                are left unchanged.
+            </p>
+
+            <h2>2.4. First ASM Iteration</h2>
+            <p>
+                In the WR Connect interface, each ASM iteration starts by importing
+                the key dimensions (Xc<sub>i</sub>, i=1,2..N) of the coarse model into the algorithm.
+                This could be done by clicking "Import" (see Figure 7) button located on top row in the
+                "Space Mapping" panel (at bottom-left corner of Schematic Editor page).
+                When this button is pressed, the algorithm loads the dimensions of the
+                coarse model from the schematic window.
+            </p>
+            <img src="img1/help_app_2_7.jpg" />
+            <p>
+                <i>
+                    Figure 7: First iteration steps
+                </i>
+            </p>
+            <p>
+                Further, when the "Go Next" button is clicked, the algorithm calculates
+                the key dimensions of the fine model and automatically displays them
+                in the schematic editor. In this case, each iteration is stored in the buffer
+                and is indicated by the corresponding "Coarse" and "Fine" indices.
+                As a result, each set of coarse model dimensions Xc<sup>(n)</sup><sub>i</sub>
+                corresponds to a set of fine model dimensions Xf<sup>(n+1)</sup><sub>i</sub>.
+                However, in the case of the first iteration, the dimensions of the coarse
+                and fine models are equal [1] (Xf<sup>(1)</sup><sub>i</sub>=Xc<sup>(0)</sup><sub>i</sub>).
+            </p>
+            <h2>2.5. Import Fine Model Simulation Data</h2>
+            <p>
+                Each time, after obtaining the dimensions of the fine model (step #2 in Figure 7),
+                the structure with these dimensions is simulated using the same software that is chosen
+                as the fine model simulator (in our example, we use Ansys HFSS).
+                At the same time, data transfer from WR-Connect Design Editor (Figure 5) to the "fine"
+                software is carried
+                out by the user himself (see three options in section 1 above).
+                After the simulation is completed, its results must be saved as either an s2p file
+                or a text file listing the scattering matrix elements in order
+                (frequency [GHz], Re(S11), Im(S11), Re(S21), Im(S21), Re(S12), Im(S12), Re(S22), Im(S22))
+                delimited by spaces or tabs.
+            </p>
+            <img src="img1/help_app_2_8.jpg" />
+            <p>
+                <i>
+                    Figure 8: How to import external data file with s-parameters.
+                </i>
+            </p>
+            <p>
+                The next step is to import these s-parameters into WR-Connect (see Figure 8). To do so,
+                we go to the External
+                Data page (click the "Import/Export" option in the "Plot" menu)
+                and follow instructions on Figure 8.
+                The results of both simulations are displayed in Figure 9.
+            </p>
+            <h2>2.6. Data Review and Adjustments</h2>
+            <p>
+                From the plots, it can be seen that the response of the fine model
+                has lower return loss and is slightly lower in frequency.
+                In this case,
+                before ASM optimization, it is recommended to adjust the response
+                of the coarse model so that it is more or less close to the response
+                of the fine model (this will significantly reduce the optimization time).
+            </p>
+            <img src="img1/help_app_2_6.jpg" />
+            <p>
+                <i>
+                    Figure 9: Reflection and transmission magnitudes (dB) versus frequency
+                    plots corresponding to coarse (WR-Connect) and fine (HFSS) models.
+                </i>
+            </p>
+            <p>
+                In order to shift the coarse model response down in frequency,
+                one can simply increase length (variable #1 "L") of each filter
+                resonator proportionally (cavity element #2).
+                This can be done using the scaling method as shown in the steps
+                shown on Figure 10.
+            </p>
+            <img src="img1/help_app_2_9.jpg" />
+            <p>
+                <i>
+                    Figure 10: Steps how to increase each cavity length by 3% using
+                    "Scale" method in "Design Corrections"
+                    controls.
+                </i>
+            </p>
+            <p>
+                Consequently, after lengthening each node 2 by 3% and subsequent simulation,
+                we have a more or less close arrangement of the two responses (Figure 11).
+            </p>
+            <img src="img1/help_app_2_10.jpg" />
+            <p>
+                <i>
+                    Figure 11:
+                    Reflection and transmission magnitudes (dB) versus frequency (GHz)
+                    plots corresponding to coarse (WR-Connect) and fine (HFSS) models
+                    after length of each cavity in coarse model increased 1.03 times.
+                </i>
+            </p>
+            <h2>2.7. ASM Optimization</h2>
+            <p>
+                The key step of the ASM iteration is to approach the response
+                of the coarse model to that of the fine model. Ideally, all key dimensions
+                of the coarse model should be corrected so that both responses to become
+                the same in magnitude and phase. In practice, this does not work out due
+                to the fact that the models themselves and the methods of their simulations
+                are different. Nevertheless, the difference in s-parameters can be minimized
+                using optimization techniques to a certain degree of suitability.
+                WR-Connect is equipped with such an optimizer, which can be launched
+                by selecting the "Run ASM Step" option from the "Run" menu. The optimizer
+                type settings, goals, parameters and optimization criteria are almost the same
+                as in the case of normal response optimization (refer to help and previous
+                tutorials).
+                Futhermore, using the optimizer settings (Figure 6) and the already corrected
+                coarse model (Figure 10),
+                we can run this function several times until both characteristics match completely
+                or are very close (like shown on Figure 12).
+            </p>
+            <img src="img1/help_app_2_11.jpg" />
+            <p>
+                <i>
+                    Figure 12:
+                    Reflection and transmission magnitudes (dB) versus frequency (GHz)
+                    plots corresponding to coarse (WR-Connect) and fine (HFSS) models
+                    after ASM optimization.
+                </i>
+            </p>
+            <p>
+                Once we have made sure that both responses almost coinside,
+                we can return to the design editor and move on to the next iteration
+                of the fine model, as we did in the case of the first iteration (see Figure 13).
+                But in this case, the indeces of both models will increase
+                by one (1 for the coarse and 2 for the fine model).
+            </p>
+            <img src="img1/help_app_2_12.jpg" />
+            <p>
+                <i>
+                    Figure 13: Screenshot of the Design Editor showing the dimensions Xc<sup>(1)</sup>
+                    corresponding to the coarse model when its responses match those of the fine model
+                    with dimensions Xf<sup>(1)</sup> and instructions on how to proceed to the second
+                    iteration.
+                </i>
+            </p>
+            <p>
+                After pressing the "Go Next" button (Figure 13), the algorithm will process the dimensions of the coarse
+                model Xc<sup>(1)</sup><sub>i</sub> and output the dimensions of the fine model
+                of the next iteration Xf<sup>(2)</sup><sub>i</sub> (Figure 14).
+            </p>
+            <img src="img1/help_app_2_13.jpg" />
+            <p>
+                <i>
+                    Figure 14: Screenshot of the Design Editor showing the dimensions Xf<sup>(2)</sup>
+                    corresponding to the next iteration of the fine model, which
+                    appeared after completing the steps shown above (Figure 13).
+                </i>
+            </p>
+            <p>
+                Now the ASM cycle repeats again.
+                We again need to transfer these dimensions to the fine model
+                simulator (HFSS used here) and obtain the .
+                We again need to transfer these dimensions to the fine model simulator
+                (HFSS is used here), run it and extract the updated s-parameters file.
+            </p>
+            <h2>2.8. Final Results</h2>
+            <p>
+                This procedure can be repeated until the response of the fine model
+                (Xf<sup>(n)</sup>)
+                approaches the initial response of the coarse model (Xc<sup>(0)</sup>)
+                good enough to be acceptable. In our case, already the second iteration
+                leeds to an almost complete coincidence of the simulation of the fine model
+                with the simulation of the initial coarse model, which is chosen as a
+                target performance (see Figure 15).
+            </p>
+            <img src="img1/help_app_2_14.jpg" />
+            <p>
+                <i>
+                    Figure 15: Reflection and transmission magnitudes (dB)
+                    versus frequency plots corresponding to the target coarse
+                    model (Xc<sup>(0)</sup> simulated using WR-Connect)
+                    and the second iteration fine model
+                    (Xf<sup>(2)</sup> simulated using HFSS).
+                </i>
+            </p>
+            <h1>References</h1>
+            <p>
+                [1] R. Cameron, C. M. Kudsia, R. R. Mansour, Microwave Filters
+                for Communication Systems, Wiley, 2007
+            </p>
+        </div>
+    </div>
+    <script type="text/javascript">
+    </script>
+</body>
+</html >

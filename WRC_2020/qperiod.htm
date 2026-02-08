@@ -1,0 +1,1092 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Rousslan Goulouev">
+    <meta name="description" content="Online Corrugated Waveguide Low-Pass Filter Design Tool">
+    <meta name="keywords" content="waveguide, LPF, low-pass, harmonics, corrugated, filter, online, calculator, design, freeware">
+    <title>E-plane corrugated waveguide low-pass filter design tool</title>
+    <link rel="stylesheet" href="navbars.css" />
+    <style>
+        textarea {
+            font-size: 12px;
+            font-family: 'Lucida Console';
+            width: 1060px;
+            height: 400px;
+        }
+
+        p {
+            font-size: 12px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: navy;
+            text-align: justify;
+        }
+
+        h1 {
+            font-size: 16px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            color: darkgreen;
+        }
+
+        h2 {
+            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            color: maroon;
+        }
+
+        h3 {
+            font-size: 12px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-style:italic;
+            color: saddlebrown;
+        }
+
+        table.pan {
+            text-align: center;
+        }
+
+        td.pans {
+            border: dashed;
+            border-width: 1px;
+            border-radius: 10px;
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            color: maroon;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        div.kletk {
+            border: dashed;
+            border-width: 1px;
+            border-radius: 10px;
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            color: maroon;
+            font-size: 11px;
+            font-weight: bold;
+            width: 220px;
+            margin: 15px 0;
+            padding-bottom: 2px;
+        }
+
+        div.edits {
+            border: dashed;
+            border-width: 1px;
+            border-radius: 10px;
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            color: maroon;
+            font-size: 11px;
+            font-weight: bold;
+            width: 220px;
+            padding-bottom: 2px;
+            float: left;
+        }
+
+        td.panel {
+            border: dashed;
+            border-width: 1px;
+            border-radius: 10px;
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            color: maroon;
+            font-size: 11px;
+            font-weight: bold;
+            margin: 15px 0;
+            padding-bottom: 2px;
+            text-align: center;
+        }
+
+        .knob {
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            font-size: 11px;
+            color: navy;
+            margin: 5px;
+            padding: 5px;
+            outline: none;
+            border-radius: 5px;
+        }
+        .corros {
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            font-size: 11px;
+            color: navy;
+            outline: none;
+            width:190px;
+        }
+    </style>
+</head>
+<body onload="DesignLoad();">
+    <div class="navbar">
+        <a href="javascript:void(0)" onclick="DesignUnLoad();window.location.href = 'index.htm';">File</a>
+        <a href="javascript:void(0)" onclick="DesignUnLoad();window.location.href = 'setup.htm';">Setup</a>
+        <a href="javascript:void(0)" onclick="DesignUnLoad();window.location.href = 'editor.htm';">Edit</a>
+        <a href="javascript:void(0)" onclick="DesignUnLoad();window.location.href = 'editor.htm';">Design</a>
+        <a href="javascript:void(0)" onclick="DesignUnLoad();window.location.href = 'editor.htm';">Run</a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="javascript:void(0)">
+                Reports
+            </button>
+            <div class="dropdown-content">
+                <a href="javascript:void(0)" onclick="DesignUnLoad();window.location.href = 'graph.htm';">Plot</a>
+                <a href="javascript:void(0)" onclick="DesignUnLoad();window.location.href = 's_data.htm';">Import/Export</a>
+            </div>
+        </div>
+        <a href="help.htm">Help</a>
+    </div>
+    <div class="divdiv">
+
+        <table>
+            <tr>
+                <td width="400px">
+                    <label id="FilterName" style="font:bold 20px arial;">Corrugated Waveguide Low-Pass Filter</label>
+                    <br /><br />
+                    <table border="1">
+                        <tr>
+                            <td>
+                                <label class="fontos">External Interface Type: </label>
+                            </td>
+                            <td>
+                                <select id="WGList" class="knob"></select>
+                                <button class="knob" style="width:90px;" onclick="UpDateWG();">Set Initial</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="fontos">Center Frequency: </label>
+                            </td>
+                            <td>
+                                <input id="fCenter" type="text" class="corros" />
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label class="fontos">Input  Waveguide (A,B,L) </label><br />
+                                <label class="fontos">Output Waveguide (A,B,L)</label><br />
+                            </td>
+                            <td>
+                                <input type="text" class="corros" id="InWG" /><br />
+                                <input type="text" class="corros" id="OutWG" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="fontos">Corrugations: Iris </label><br />
+                                <label class="fontos">Input  (A,B,L) </label><br />
+                                <label class="fontos">Middle (A,B,T) </label><br />
+                                <label class="fontos">Output (A,B,T) </label>
+                            </td>
+                            <td>
+                                <label class="fontos">Width, Height, Length </label><br />
+                                <input type="text" class="corros" id="InIris" /><br />
+                                <input type="text" class="corros" id="MidIris" /><br />
+                                <input type="text" class="corros" id="OutIris" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="fontos">Corrugations: Cavity</label><br />
+                                <label class="fontos">Input  (A,B,L) </label><br />
+                                <label class="fontos">Middle (A,B,L) </label><br />
+                                <label class="fontos">Output (A,B,L) </label>
+                            </td>
+                            <td>
+                                <label class="fontos">Width, Height, Length </label><br />
+                                <input type="text" class="corros" id="InCav" /><br />
+                                <input type="text" class="corros" id="MidCav" /><br />
+                                <input type="text" class="corros" id="OutCav" />
+                            </td>
+                        </tr>
+
+
+
+                        <tr>
+                            <td width="200px">
+                                <label class="fontos">Corrugations: Number </label>
+                            </td>
+                            <td>
+                                <select id="nPoles" class="knob">
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                    <option>13</option>
+                                    <option>14</option>
+                                    <option>15</option>
+                                    <option>16</option>
+                                    <option>17</option>
+                                    <option selected>18</option>
+                                    <option>19</option>
+                                    <option>20</option>
+                                    <option>21</option>
+                                    <option>22</option>
+                                    <option>23</option>
+                                    <option>24</option>
+                                    <option>25</option>
+                                    <option>26</option>
+                                    <option>27</option>
+                                    <option>28</option>
+                                    <option>29</option>
+                                    <option>30</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="fontos">Corrugations: Profile Factor</label><br />
+                            </td>
+                            <td>
+                                <input type="text" class="corros" id="alfa" />
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2">
+                                <button onclick="GoToSetup();" class="knob">Setup Project</button>
+                                <button onclick="GoToDesign();" class="knob">Design Filter</button>
+                                <button onclick="GoToTemplate();" class="knob">Export Template</button>
+                            </td>
+                        </tr>
+                    </table><br />
+                    <br />
+                    <input type="radio" ID="SetMM" class="fontos" name="Units" /><Label class="fontos">mm</Label>
+                    <input type="radio" ID="SetIn" class="fontos" name="Units" Checked="checked" /><Label class="fontos">in</Label>
+                    <input type="radio" ID="SetGHz" class="fontos" Enabled="false" Checked="checked" /><Label class="fontos">GHz</Label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label class="fontos" id="WGFreq"></label>
+                </td>
+                <td width="410px">
+                    <div id="huj" style="height:420px; overflow: scroll;">
+                        <img id="imager" src="img/corro_0.png">
+                    </div>
+                </td>
+                <td>
+                    <div id="paper" style="height:420px; overflow: scroll;">
+                        <h1>
+                            Corrugated Waveguide Low-Pass Filter<br />
+                            <font style="font-size:8pt;">(quasi-periodic structure design method)</font>
+                        </h1>
+                        <font style="font-size:10px;color:darkgreen;">By R. Goulouev, Sept. 2020</font>
+                        <h2>Contents</h2>
+                        <p>
+                            <b>
+                                <a href="#about">About this Tool</a><br />
+                                <a href="#regular">Regular Corrugated Filters</a><br />
+                                <a href="#iregular">Iregular Corrugated Filters</a><br />
+                                <a href="#composite">Composite Corrugated Filters</a><br />
+                                <a href="#design">Design Method</a><br />
+                                <a href="#getting">Getting Started</a><br /> 
+                                <a href="#related">Related Information Sources</a> <br />
+
+                            </b>
+                        </p>
+                        <a id="about"></a>
+                        <h2>About this Tool</h2>
+
+                        <p>
+                            This tool is designed to synthesize a preliminary (a "good starting point")
+                            design concept of a low-pass filter based on an E-plane corrugated and generally inhomogeneous
+                            [1] waveguide.
+                            Corrugated low-pass filters are in great demand in modern microwave technology and
+                            many engineering papers, reports and patents have been recently published 
+                            (see selected references [1-13]).
+                            For a beginner designer, for a start, it is advised to look through some of these
+                            works to find out about ​​the theoretical and practical foundations.
+                            All corrugated waveguide filters researched in referenced papers are divided here
+                            in three categories (listed in next paragraphs). This design tool can be applied 
+                            (directly or indirectly) to all three types of waveguide structures, but the
+                            design method used here, however, may differ from
+                            the original sources.
+                        </p>
+
+                        <a id="regular"></a>
+                        <h2>Regular Corrugated Filters</h2>
+
+                        <p>
+                            These are the filters with a constant width of the waveguide channel [2,3,6,8-12].
+                            Such filters suffer from the presence of spurious pass-bands (responses) [1]
+                            corresponding to propagation of higher order waveguide modes of
+                            <b><i>TE<sub>N0</sub></i></b>
+                            origin (where <b><i>N>1</i></b>).
+                            Nevertheless, the regular corrugated filters can be very efficiently used
+                            as harmonic (up to 17 harmonics claimed in [10])
+                            reject filters. In other words, these filters can be preferably used to reject
+                            a sparse frequency-scattered spurious interference (for example,
+                            harmonics of a transmitter or amplifier). The obvious their advantages
+                            are the simplicity, reliability and accuracy. Before you start designing
+                            with this tool,
+                            try the <a href="../oncorr/index.htm">"Corrugated Low-pass Filter Design Workshop"</a>,
+                            which was designed to create a simple "cost-effective" harmonic-reject filter
+                            of this type. 
+                            Plus, all design steps (spurious layouts, initial synthesis, simulation,
+                            optimization, and sensitivity analysis) perform much faster there.
+                            On the contrary, it is advised to use this tool only for more complex designs,
+                            which require more flexibility in profiling the corrugations.
+                        </p>
+
+                        <a id="iregular"></a>
+                        <h2>Iregular Corrugated Filters</h2>
+                        <p>
+                            These are the filters with the width of the waveguide channel not being constant,
+                            but smoothly changing (tapered way) along its length. Such filters are called 
+                            here as "irregular" ("inhomogeneous" in [1]). The reason for tapering the channel width
+                            is that it significantly narrows the spurious responses.
+                            Here, the designer is advised to smoothly expand the channel width from a minimal
+                            dimension (<b>A <sub>min</sub></b>) at one end to a maximal dimension
+                            (<b>A <sub>max</sub></b>) at the other end. The dimension (<b>A <sub>min</sub></b>)
+                            should be slightly greater than the half the wavelength corresponding to the lower
+                            frequency bound of the targetted pass-band and the dimension (<b>A <sub>max</sub></b>) should be
+                            slightly less than the full wavelength corresponding to the upper bound
+                            of the targetted pass-band. This channel width range ensures that the pass-band
+                            is above the dominant mode (TE<sub>10</sub>) cut-off and below the first spurious mode
+                            (TE <sub>20</sub>) cut-off.
+
+                        </p>
+
+                        <a id="composite"></a>
+                        <h2>Composite Corrugated Filters</h2>
+
+                        <p>
+                            These filters are composed from sections (sub-filters),
+                            which are based on regular corrugated channels [4,5,7].
+                            Those sub-filters cover the same pass-band for the dominant mode TE<sub>10</sub>-mode
+                            and have different layouts of pass-bands corresponding to spurious TE<sub>N0</sub>-modes (N>1).
+                            Such filters, as claimed in [4,5]), can be designed to completely stop all spurious transmission
+                            and perform better than waffle-iron filters. But in this case, the designer actually needs to design
+                            two filters (not necessarily finalized) and connect them to each other (after removing the
+                            extra sections of transformers).
+                        </p>
+                        <a id="design"></a>
+                        <h2>Design Method</h2>
+                        <p>
+                            The proposed method for designing a waveguide corrugated filter is based on matching
+                            a "slightly" aperiodic corrugated structure of the waveguide channel with the input
+                            and output interfaces at a single frequency point (center frequency) [4].
+                            In this case, the corrugated waveguide is represented as an ideal transmission line,
+                            but with impedance smoothly varying along the length. Then, such a line is matched
+                            to the input and output interface with appropriate  quarter-wave transformers at the
+                            specified center frequency. Thus, matching with good return loss typically only occurs in
+                            a narrow bandwidth and degrades away from the center frequency. Nevertheless, such
+                            synthesis method usually leads to a good starting filter concept and can be further
+                            easily optimized to meet users preferences. However, prior to optimization, the user
+                            is advised to perform a full modal analysis to ensure that the preliminary design
+                            concept does not suffer from spurious responses and meets the specified rejection
+                            goals with adequate margins.
+                        </p>
+                        <a id="getting"></a>
+                        <h2>Getting Started</h2>
+
+                        <p>
+                            This tool can be directly used (in a straight forward way) to design the first two types
+                            of corrugated waveguide filter (regular and iregular). It is also can be used to design a
+                            composite corrugated waveguide filter, consisting from parts such as filters of two first types.
+                            In that case, however, the user is expected to do some additional work on composing the filter
+                            from the parts (using structure editor) and matching them with each other and I/O interface
+                            (more optimization would be required). Anyway, in all cases, the starting procedure is as follows:
+                            <ol>
+                                <li>
+                                    Select the I/O waveguide (EIA standard) interface in the top row of table
+                                    and click "Set Initials" button. This will derive some initials for the
+                                    internal corrugated waveguide channel and its profile. Those initial
+                                    settings are based on a common sense guess and can be changed later.
+                                    The user can also set those parameters manually.
+                                </li>
+                                <li>
+                                    Correct or set the centrer frequency in the second row.
+                                </li>
+                                <li>
+                                    Correct or set the proper ("non-spurious") width of corrugations in case
+                                    of a regular corrugated filter or their range of tapering in case of
+                                    iregular corrugated filter. Those A-dimensions (first numbers in the input fields
+                                    located in 4<sup>th</sup> and 5<sup>th</sup> table rows) effect the layout of
+                                    the spurious.
+                                </li>
+                                <li>
+                                    In a similar manner, set the vertical profile of the corrugated channel, i.e.
+                                    the B-dimensions for the irises and cavities forming aperiodic and tapered
+                                    corrugated waveguide on E-plane. It is suggested, that the larger corrugations
+                                    work for the lower frequencies and, vice versa, the smaller corrugations
+                                    are more efficient at higher frequencies. In a rough interpretation,
+                                    we need spread their efficiency bands across the entire cutoff range
+                                    with no gaps left.
+                                </li>
+                                <li>
+                                    The third number (iris thickness or cavity length) in each text field (in
+                                    4<sup>th</sup> and 5<sup>th</sup> table rows) can be left same or also be
+                                    variable. It is generally recommended to keep the iris thickness as thin as
+                                    technologically acceptable. The cavity length, however, should be reasonably
+                                    great to achieve a good loaded Q.
+                                </li>
+                                <li>Set the number of corrugations or keep the default value.</li>
+                                <li>
+                                    Set the "Profile Factor" or keep the default value. This factor defines
+                                    how the appropriate dimensions of corrugations are distributed over the
+                                    waveguide channel. For example, a harmonic filter designed to reject
+                                    2<sup>nd</sup> and 3<sup>rd</sup>
+                                    harmonics should have more smaller corrugations than the one intended to
+                                    reject just the 2<sup>nd</sup> harmonics (appropriate guessed
+                                    values of this parameter can be 1-1.5 and 1.5-2.5).
+                                </li>
+                                <li>
+                                    Click "Setup Project" button (in case if the project has not been set yet).
+                                    This action will automatically set initial project settings with a frequency
+                                    sweep as the interface waveguide operational frequency range
+                                    (as EIA standard). It is required at least once to set the frequency plans,
+                                    but it can be changed or modified on the "Setup Page". If the project is already
+                                    set, clicking "Setup Project" could not be required as it would overwrite the
+                                    settings.
+                                </li>
+                                <li>
+                                    Click "Design Filter" button. The action will generate the filter connectivity
+                                    schematic, initial dimensions and navigate to the Editor Page with design
+                                    and simulation tools.
+                                </li>
+                                <li>
+                                    Finalize the design in the "Editor Page":
+                                    <br />
+                                    1) Verify if the initially
+                                    generated structure has a right frequency layout. I.e. the targetted pass-band
+                                    is located where the return loss is most higher and the roll-off is giving
+                                    adequate rejection in upper near-band (if required).<br />
+                                    2) Run some other waveguide modes also. Make sure that spurious pass-bands
+                                    are out of targetted stop-band specs.<br />
+                                    3) Make necessary adjustments to fit the pass-band, stop-band and spurious
+                                    if needed. To do so, try different corrugations dimensions at the ends and
+                                    the middle (4<sup>th</sup> and 5<sup>th</sup> rows of table).<br />
+                                    4) Optimize (when finalizing) the in-band performance using optimization tool. Optimization
+                                    targets must be set (Setup page) prior to optimization.
+                                </li>
+                            </ol>
+                        </p>
+                        <a id="related"></a>
+                        <h2>Related Information Sources</h2>
+                        <p>
+                            [1] R. Levy, "Inhomogeneous stepped-impedance corrugated waveguide
+                            low-pass filters," in IEEE MTT-S Int. Microw. Symp. Dig., Jun. 2005,
+                            pp. 123–126.<br /><br />
+
+                            [2] S.B. Conh "A theoretical and experimental study of a waveguide filter structure",
+                            Office Naval Res., Cruft Lab., Harvard Univ., Cambridge, Mass., Rep. 39,
+                            Apr. 25, 1948.<br /><br />
+
+                            [3] R. Levy, “Tapered corrugated waveguide low-pass filter,” IEEE Trans .
+                            Microwave Theory Tech., vol. MTT-21, pp. 526–532, August 1973.<br /><br />
+
+                            [4] R. Goulouev, "New Type of Spruriosless Waveguide Harmonic Filter,"
+                            manuscript, 2004.
+                            <a href="../notes/R_Goulouev_RD_report_2004.pdf">Available here</a><br /><br />
+
+                            [5] F. De Paolis, R. Goulouev, J. Zheng, and M. Yu, "CAD procedure
+                            for high-performance composite corrugated filters," IEEE Trans.
+                            Microw. Theory. Techn., vol. 61, no. 9, pp. 3216–3224,
+                            Sept. 2013. <br /><br />
+
+                            [6] W. Hauth, R. Keller, and U. Rosenberg, “CAD of waveguide low-pass
+                            filters for satellite applications,” in Proc. 17th Eur. Microw. Conf.,
+                            Rome, Italy, 1987, pp. 151–156.<br /><br />
+
+                            [7] W. Hauth, R. Keller, U. Rosenberg, "The Corrugated-Waveguide Band-Pass Filter
+                            - A New Type of Waveguide Filter", 18th EUMC Proc., Stockholm, 1988, pp.
+                            945-949.<br /><br />
+
+                            [8] O. Ishida, H. Maruf, "Expansion of a Continuous Stop Band of
+                            a Corrugated Waveguide by Attenuation Pole Control," Proceedings
+                            of APMC 2012, Kaohsiung, Taiwan, Dec. 4-7, 2012. <br /><br />
+
+                            [9] R. Goulouev, “Corrugated Waveguide Filter Having Coupled Resonator Cavities”,
+                            US Patent 6,169,466, Jan. 2001.
+                            <a href="https://patentimages.storage.googleapis.com/8d/fd/73/549490c3265c8e/US6169466.pdf">
+                                Available here
+                            </a><br /><br />
+
+                            [10] R. Goulouev, D. Garcia, Q. Shi, C. McLaren, "Powerful Multiple Harmonics
+                            Reject Filter Design, Testing and Acceptance Considering Ultra Overmoded
+                            Waveguide Conditions," 5th Workshop on Advanced RF Sensors and Remote
+                            Sensing Instruments, ESA/ESTEC, ARSI’17, vol. 1, Noordwijk, Netherlands, 2017.
+                            <a href="https://www.researchgate.net/publication/260333276_CAD_Procedure_for_High-Performance_Composite_Corrugated_Filters">Available here</a>
+                            <br /><br />
+
+                            [11] O. Monerris, P. Soto, S. Cogollos, V. E. Boria, J. Gil, C. Vicente, and B.
+                            Gimeno, "Accurate circuit synthesis of low-pass corrugated waveguide filters,"
+                            in Microwave Conference (EuMC), 2010 European, 2010, pp. 1237-1240.<br /><br />
+
+                            [12] I. Arregui, I. Arnedo, A. Lujambio, M. Chudzik, D. Benito, R.
+                            Jost, F. -1. Gortz, T. Lopetegi, and M. A. G. Laso, "A compact
+                            design of high-power spurious-free low-pass waveguide fiters,"
+                            IEEE Microw. Wireless Compon.Lett., vol. 20, no. 11, pp. 595-
+                            597, Nov. 2010.<br /><br />
+
+                            [13] F. Teberio, I. Arregui, A. Gomez-Torrent, I. Arnedo,
+                            M. Chudzik, M. Zedler, F.-J. Gortz, R. Jost,
+                            T. Lopetegi, and M. A. G. Laso,
+                            "Chirping Techniques to Maximize the Power-Handling Capability
+                            of Harmonic Waveguide Low-Pass Filters," IEEE MTT, v. 64, No. 9, Sept. 2016, pp.
+                            2814-2823.<br /><br />
+                        </p>
+                    </div>
+                </td>
+            </tr>
+        </table><hr />
+    </div>
+    <p style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:10px;font-style:italic;color:white;text-align:right;">&copy;2006 R. Goulouev, WR-Connect 2.0 Web (javascripted)</p>
+    <script type="text/javascript" src="wrc_setups.js"></script>
+    <script type="text/javascript" src="wrc_StrucLib.js"></script>
+    <script type="text/javascript">
+        var IndUnit;
+        var MainSchema;
+        InDat = new SetUpDat();
+        MainSchema = new design();
+
+        function UpDateWG() {
+            NewWGSelect();
+        }
+
+        function DesignUnLoad() {
+            var txt = ExportFormsToDat();
+            sessionStorage.setItem('corro_Memo_Template', txt);
+        }
+
+        function DesignLoad() {
+            var WG;
+            WG = WaveguideData();
+            var WGList = document.getElementById('WGList');
+            WGList.options.length = 0;
+            var nWG = WG.length - 1;
+            for (i = 0; i <= nWG; i++) {
+                var option = document.createElement("option");
+                option.text = WG[i][0];
+                WGList.add(option);
+            }
+            if (sessionStorage.getItem('corro_Memo_Template')) {
+                var txt = sessionStorage.getItem('corro_Memo_Template');
+                ImportDatToForms(txt);
+            } else {
+                WGInfoLoad();
+            }
+
+        }
+        function GoToTemplate() {
+            //webmaster only
+            var txt;
+            if (sessionStorage.getItem('corro_Memo_Template')) {
+                var txt = sessionStorage.getItem('corro_Memo_Template');
+                var okno = document.getElementById('paper').innerHTML = txt;
+            }
+
+        }
+
+        function ExportFormsToDat() {
+            var rs = "";
+            var unit = document.getElementsByName("Units");
+            if (unit[0].checked) { IndUnit = 0; } else { IndUnit = 1; }
+            rs = rs + IndUnit + ",";
+            rs = rs + document.getElementById("InWG").value + IndUnit + ",";
+            rs = rs + document.getElementById("OutWG").value + IndUnit + ",";
+            rs = rs + document.getElementById("InIris").value + ",";
+            rs = rs + document.getElementById("MidIris").value + ",";
+            rs = rs + document.getElementById("OutIris").value + ",";
+            rs = rs + document.getElementById("InCav").value + ",";
+            rs = rs + document.getElementById("MidCav").value + ",";
+            rs = rs + document.getElementById("OutCav").value + ",";
+            rs = rs + document.getElementById("alfa").value + ",";
+            rs = rs + document.getElementById("fCenter").value + ",";
+            rs = rs + document.getElementById('nPoles').selectedIndex + ",";
+            rs = rs + document.getElementById('WGList').selectedIndex;
+            return rs;
+        }
+
+        function ImportDatToForms(txt) {
+            var dat = txt.split(",");
+            IndUnit = parseInt(dat[0]);
+            SetUnit();
+            document.getElementById("InWG").value = dat[1].trim();
+            document.getElementById("OutWG").value = dat[2].trim();
+            document.getElementById("InIris").value = dat[3].trim();
+            document.getElementById("MidIris").value = dat[4].trim();
+            document.getElementById("OutIris").value = dat[5].trim();
+            document.getElementById("InCav").value = dat[6].trim();
+            document.getElementById("MidCav").value = dat[7].trim();
+            document.getElementById("OutCav").value = dat[8].trim();
+            document.getElementById("alfa").value = dat[9].trim();
+            document.getElementById("fCenter").value = dat[10].trim();
+            document.getElementById('nPoles').selectedIndex = dat[11];
+            document.getElementById('WGList').selectedIndex = dat[12];
+        }
+
+        function FormStructure() {
+            var txt = ExportFormsToDat();
+            sessionStorage.setItem('corro_Memo_Template', txt);
+            var dat = txt.split(",");
+            IndUnit = parseInt(dat[0]);
+            var v = WordsToArray(dat[1]);
+            var Ao0 = parseFloat(v[0]), Bo0 = parseFloat(v[1]), Lo0 = parseFloat(v[2]);
+            var v = WordsToArray(dat[2]);
+            var Ao1 = parseFloat(v[0]), Bo1 = parseFloat(v[1]), Lo1 = parseFloat(v[2]);
+            var v = WordsToArray(dat[3]);
+            var A0 = parseFloat(v[0]), B0 = parseFloat(v[1]), L0 = parseFloat(v[2]);
+            var v = WordsToArray(dat[4]);
+            var A = parseFloat(v[0]), B = parseFloat(v[1]), L = parseFloat(v[2]);
+            var v = WordsToArray(dat[5]);
+            var A1 = parseFloat(v[0]), B1 = parseFloat(v[1]), L1 = parseFloat(v[2]);
+            var v = WordsToArray(dat[6]);
+            var Ac0 = parseFloat(v[0]), Bc0 = parseFloat(v[1]), Lc0 = parseFloat(v[2]);
+            var v = WordsToArray(dat[7]);
+            var Ac = parseFloat(v[0]), Bc = parseFloat(v[1]), Lc = parseFloat(v[2]);
+            var v = WordsToArray(dat[8]);
+            var Ac1 = parseFloat(v[0]), Bc1 = parseFloat(v[1]), Lc1 = parseFloat(v[2]);
+            var alfa = parseFloat(dat[9]);
+            var fc = parseFloat(dat[10]);
+            var Nc = parseInt(dat[11]) + 3;
+            var fc = parseFloat(document.getElementById('fCenter').value);
+            var Amin = Math.min(Ao0, Ao1, Ac0, Ac, Ac1, A0, A, A1);
+            var k = [kf(IndUnit, fc), 0];
+            if (k[0] <= Math.PI / Amin) {
+                alert("Specified center frequency [fc]\n is under waveguide channel cut-off.");
+                return null;
+            }
+            var Aex0 = Ao0, Aex1 = Ao1;
+            if (Ac0 > Ao0) {Ao0 = Ac0;}
+            if (Ac1 > Ao1) { Ao1 = Ac1; }
+            var trans0 = TransRoot(k, Ao0, Bo0, A0, B0, L0, Ac0, Bc0, Lc0);
+            var trans1 = TransRoot(k, Ao1, Bo1, A1, B1, L1, Ac1, Bc1, Lc1);
+            var rs = "";
+            var i = -1;
+            i = i + 1; MainSchema.juncs[i] = new node();
+            MainSchema.juncs[i].iType = 1; MainSchema.juncs[i].v = [0, Lo0, -Ao0 / 2, -Bo0 / 2, Ao0 / 2, Bo0 / 2];
+            i = i + 1; MainSchema.juncs[i] = new node();
+            MainSchema.juncs[i].iType = 0; MainSchema.juncs[i].v = [0, 0, 0, 0, 0, 0];
+
+            var At = trans0[0], Bt = trans0[1], Xt = trans0[2];
+            i = i + 1; MainSchema.juncs[i] = new node();
+            MainSchema.juncs[i].iType = 1; MainSchema.juncs[i].v = [0, Xt, -At / 2, -Bt / 2, At / 2, Bt / 2];
+
+            i = i + 1; MainSchema.juncs[i] = new node();
+            MainSchema.juncs[i].iType = 0; MainSchema.juncs[i].v = [0, 0, 0, 0, 0, 0];
+
+            var ii, Ln, An, Bn, LL0, LL1, AA0, AA1, BB0, BB1;
+            var Ln = [], An = [], Bn = [], LL = [], AA = [], BB = [];
+            for (ii = 0; ii <= Nc; ii++) {
+                var x = (2 * ii - Nc) / Nc;
+                Ln[ii] = yProfile(x, alfa, L0, L, L1);
+                An[ii] = yProfile(x, alfa, A0, A, A1);
+                Bn[ii] = yProfile(x, alfa, B0, B, B1);
+                LL[ii] = yProfile(x, alfa, Lc0, Lc, Lc1);
+                AA[ii] = yProfile(x, alfa, Ac0, Ac, Ac1);
+                BB[ii] = yProfile(x, alfa, Bc0, Bc, Bc1);
+            }
+            for (ii = 0; ii <= Nc; ii++) {
+                i = i + 1; MainSchema.juncs[i] = new node();
+                MainSchema.juncs[i].iType = 1; MainSchema.juncs[i].v = [0, Ln[ii], -An[ii] / 2, -Bn[ii] / 2, An[ii] / 2, Bn[ii] / 2];
+                if (ii < Nc) {
+                    var Ls = (LL[ii] + LL[ii + 1]) / 2, As = (AA[ii] + AA[ii + 1]) / 2, Bs = (BB[ii] + BB[ii + 1]) / 2;
+                    i = i + 1; MainSchema.juncs[i] = new node();
+                    MainSchema.juncs[i].iType = 2; MainSchema.juncs[i].v = [0, Ls, -As / 2, -Bs / 2, As / 2, Bs / 2];
+                }
+            }
+
+            i = i + 1; MainSchema.juncs[i] = new node();
+            MainSchema.juncs[i].iType = 0; MainSchema.juncs[i].v = [0, 0, 0, 0, 0, 0];
+            var At = trans1[0], Bt = trans1[1], Xt = trans1[2];
+            i = i + 1; MainSchema.juncs[i] = new node();
+            MainSchema.juncs[i].iType = 1; MainSchema.juncs[i].v = [0, Xt, -At / 2, -Bt / 2, At / 2, Bt / 2];
+            i = i + 1; MainSchema.juncs[i] = new node();
+            MainSchema.juncs[i].iType = 0; MainSchema.juncs[i].v = [0, 0, 0, 0, 0, 0];
+            i = i + 1; MainSchema.juncs[i] = new node();
+            MainSchema.juncs[i].iType = 1; MainSchema.juncs[i].v = [0, Lo1, -Ao1 / 2, -Bo1 / 2, Ao1 / 2, Bo1 / 2];
+            MainSchema.nJuncs = i;
+            MainSchema.iSymX = -1;
+            MainSchema.iSymY = 1;
+            MainSchema.iSymZ = 0;
+            MainSchema.km = 0;
+            MainSchema.kx = 0;
+            MainSchema.ky = 0;
+            MainSchema.md = 1;
+            MainSchema.nx = 7;
+            MainSchema.ny = 10;
+            MainSchema.e = 1;
+            MainSchema.tge = 0;
+            MainSchema.sig = 6.1;
+            //   iSpace=[iSymX,iSymY,iSymZ,modDom,nDom,mDom,modMax,nMax,mMax]
+            if (Ac0 > Aex0) {
+                MainSchema.juncs[0].v[2] = -Aex0 / 2; MainSchema.juncs[0].v[4] = Aex0 / 2;
+                MainSchema.juncs[2].v[2] = -Aex0 / 2;  MainSchema.juncs[2].v[4] = Aex0 / 2;
+                MainSchema.juncs[4].v[2] = -Aex0 / 2; MainSchema.juncs[4].v[4] = Aex0 / 2;
+            }
+            if (Ac1 > Aex1) {
+                var nj = MainSchema.nJuncs;
+                MainSchema.juncs[nj].v[2] = -Aex1 / 2; MainSchema.juncs[nj].v[4] = Aex1 / 2;
+                MainSchema.juncs[nj - 2].v[2] = -Aex1 / 2; MainSchema.juncs[nj - 2].v[4] = Aex1 / 2;
+                MainSchema.juncs[nj - 4].v[2] = -Aex1 / 2; MainSchema.juncs[nj - 4].v[4] = Aex1 / 2;
+            }
+            MainSchema.FixJuncDims();
+            Ln = null, An = null, Bn = null, LL = null, AA = null, BB = null;
+            return 1;
+        }
+
+        function NewWGSelect() {
+            var WG;
+            WG = WaveguideData();
+            var WGList = document.getElementById('WGList');
+            var iWG = WGList.selectedIndex;
+            SetDims(iWG, WG);
+        }
+
+        function WGInfoLoad() {
+            var fc = 12.5;
+            var WG;
+            WG = WaveguideData();
+            if (localStorage.getItem('InputDatFileText')) {
+                InDat.ImportFromText(localStorage.getItem('InputDatFileText'));
+                IndUnit = InDat.iUnit;
+                fc = InDat.Fc;
+            } else {
+                IndUnit = 1;
+            }
+            SetUnit();
+            var WGList = document.getElementById('WGList');
+            var iGuide = FindWaveguideByFreq(fc);
+            WGList.selectedIndex = iGuide;
+            SetDims(iGuide, WG);
+            RefreshImage();
+        }
+
+        function RefreshImage() {
+            document.getElementById("huj").innerHTML = "<IMG SRC='img/corro_0.png'>"
+        }
+
+        function SetDims(iWG, WG) {
+            var nFix = 3;
+            var ao, bo, Ls;
+            var a, b, t
+            var ac, sc;
+            var Bmin, Bmax;
+            var unit = document.getElementsByName("Units");
+            if (unit[0].checked) { IndUnit = 0; } else { IndUnit = 1; }
+            if (IndUnit === 0) {
+                nFix = 2;
+                ao = 25.4 * parseFloat(WG[iWG][8]);
+                bo = 25.4 * parseFloat(WG[iWG][9]);
+                Lo = ao / 3 + bo / 4;
+                document.getElementById("InWG").value = ao.toFixed(2) + "  " + bo.toFixed(2) + "  " + Lo.toFixed(1);
+                document.getElementById("OutWG").value = ao.toFixed(2) + "  " + bo.toFixed(2) + "  " + Lo.toFixed(1);
+            } else {
+                ao = parseFloat(WG[iWG][8]);
+                bo = parseFloat(WG[iWG][9]);
+                Lo = ao / 3 + bo / 4;
+                document.getElementById("InWG").value = WG[iWG][8] + "  " + WG[iWG][9] + "  " + Lo.toFixed(2);
+                document.getElementById("OutWG").value = WG[iWG][8] + "  " + WG[iWG][9] + "  " + Lo.toFixed(2);
+            }
+            a = 0.87 * ao; b = 0.13 * ao; t = 0.05 * ao;
+            ac = a; sc = 0.17 * ao;
+            Bmin = 0.4 * ao; Bmax = 0.7 * ao;
+            document.getElementById("InIris").value = a.toFixed(nFix) + "  " + b.toFixed(nFix) + "  " + t.toFixed(nFix);
+            document.getElementById("MidIris").value = a.toFixed(nFix) + "  " + b.toFixed(nFix) + "  " + t.toFixed(nFix);
+            document.getElementById("OutIris").value = a.toFixed(nFix) + "  " + b.toFixed(nFix) + "  " + t.toFixed(nFix);
+
+            document.getElementById("InCav").value = ac.toFixed(nFix) + "  " + Bmin.toFixed(nFix) + "  " + sc.toFixed(nFix);
+            document.getElementById("MidCav").value = a.toFixed(nFix) + "  " + Bmax.toFixed(nFix) + "  " + sc.toFixed(nFix);
+            document.getElementById("OutCav").value = a.toFixed(nFix) + "  " + Bmin.toFixed(nFix) + "  " + sc.toFixed(nFix);
+            document.getElementById("alfa").value = "1.5";
+
+            document.getElementById("WGFreq").innerHTML = "Range,GHz: " + WG[iWG][4] + "-" + WG[iWG][5];
+            var fc = 0.5 * (parseFloat(WG[iWG][4]) + parseFloat(WG[iWG][5]));
+            document.getElementById("fCenter").value = fc;
+            //SetLength();
+        }
+
+
+        function GoToSetup() {
+            var WG;
+            WG = WaveguideData();
+            var WGList = document.getElementById('WGList');
+            var iWG = WGList.selectedIndex;
+            var Fc = parseFloat(document.getElementById("fCenter").value);
+            var f0, f1, Fc, dF, Np;
+            var InDat = new SetUpDat;
+            InDat.iUnit = IndUnit;
+            f0 = parseFloat(WG[iWG][4]);
+            f1 = parseFloat(WG[iWG][5]);
+            dF = 0.1 * (f1 - f0); Np = 500;
+            InDat.f0 = f0; InDat.f1 = f1; InDat.Np = Np; InDat.Fc = Fc; InDat.dF = dF;
+            localStorage.setItem('InputDatFileText', InDat.ExportToText());
+            InDat = null;
+        }
+
+
+
+        function GoToDesign() {
+            if (FormStructure()) {
+                if (!localStorage.getItem('InputDatFileText')) {
+                    GoToSetup();
+                }
+                var texto = JoinPrjParts(MainSchema.ExportShapka(), MainSchema.ExportSchema());
+                localStorage.setItem('DesignFileText', texto);
+                window.location.href = "editor.htm";
+            }
+        }
+
+
+        function WaveguideData() {
+            var WG = new Array(27);
+            WG[0] = new Array(10);
+            WG[0][0] = "WR650"; WG[0][1] = "WG6"; WG[0][2] = "R14"; WG[0][3] = "L"; WG[0][4] = "1.15"; WG[0][5] = "1.72"; WG[0][6] = "0.908"; WG[0][7] = "1.816"; WG[0][8] = "6.500"; WG[0][9] = "3.250";
+            WG[1] = new Array(10);
+            WG[1][0] = "WR510"; WG[1][1] = "WG7"; WG[1][2] = "R18"; WG[1][3] = "L"; WG[1][4] = "1.45"; WG[1][5] = "2.20"; WG[1][6] = "1.157"; WG[1][7] = "2.314"; WG[1][8] = "5.100"; WG[1][9] = "2.550";
+            WG[2] = new Array(10);
+            WG[2][0] = "WR430"; WG[2][1] = "WG8"; WG[2][2] = "R22"; WG[2][3] = "L/S"; WG[2][4] = "1.72"; WG[2][5] = "2.60"; WG[2][6] = "1.372"; WG[2][7] = "2.745"; WG[2][8] = "4.300"; WG[2][9] = "2.150";
+            WG[3] = new Array(10);
+            WG[3][0] = "WR340"; WG[3][1] = "WG9A"; WG[3][2] = "R26"; WG[3][3] = "S"; WG[3][4] = "2.20"; WG[3][5] = "3.30"; WG[3][6] = "1.736"; WG[3][7] = "3.471"; WG[3][8] = "3.400"; WG[3][9] = "1.700";
+            WG[4] = new Array(10);
+            WG[4][0] = "WR284"; WG[4][1] = "WG10"; WG[4][2] = "R32"; WG[4][3] = "S"; WG[4][4] = "2.60"; WG[4][5] = "3.95"; WG[4][6] = "2.078"; WG[4][7] = "4.156"; WG[4][8] = "2.840"; WG[4][9] = "1.340";
+            WG[5] = new Array(10);
+            WG[5][0] = "WR229"; WG[5][1] = "WG11A"; WG[5][2] = "R40"; WG[5][3] = "S/C"; WG[5][4] = "3.30"; WG[5][5] = "4.90"; WG[5][6] = "2.577"; WG[5][7] = "5.154"; WG[5][8] = "2.290"; WG[5][9] = "1.145";
+            WG[6] = new Array(10);
+            WG[6][0] = "WR187"; WG[6][1] = "WG12"; WG[6][2] = "R48"; WG[6][3] = "C"; WG[6][4] = "3.95"; WG[6][5] = "5.85"; WG[6][6] = "3.153"; WG[6][7] = "6.305"; WG[6][8] = "1.872"; WG[6][9] = "0.872";
+            WG[7] = new Array(10);
+            WG[7][0] = "WR159"; WG[7][1] = "WG13"; WG[7][2] = "R58"; WG[7][3] = "C"; WG[7][4] = "4.90"; WG[7][5] = "7.05"; WG[7][6] = "3.712"; WG[7][7] = "7.423"; WG[7][8] = "1.590"; WG[7][9] = "0.795";
+            WG[8] = new Array(10);
+            WG[8][0] = "WR137"; WG[8][1] = "WG14"; WG[8][2] = "R70"; WG[8][3] = "C"; WG[8][4] = "5.85"; WG[8][5] = "8.20"; WG[8][6] = "4.301"; WG[8][7] = "8.603"; WG[8][8] = "1.372"; WG[8][9] = "0.622";
+            WG[9] = new Array(10);
+            WG[9][0] = "WR112"; WG[9][1] = "WG15"; WG[9][2] = "R84"; WG[9][3] = "C/X"; WG[9][4] = "7.05"; WG[9][5] = "10.00"; WG[9][6] = "5.260"; WG[9][7] = "10.520"; WG[9][8] = "1.122"; WG[9][9] = "0.497";
+            WG[10] = new Array(10);
+            WG[10][0] = "WR90"; WG[10][1] = "WG16"; WG[10][2] = "R100"; WG[10][3] = "X"; WG[10][4] = "8.20"; WG[10][5] = "12.40"; WG[10][6] = "6.557"; WG[10][7] = "13.114"; WG[10][8] = "0.900"; WG[10][9] = "0.400";
+            WG[11] = new Array(10);
+            WG[11][0] = "WR75"; WG[11][1] = "WG17"; WG[11][2] = "R120"; WG[11][3] = "X/Ku"; WG[11][4] = "10.00"; WG[11][5] = "15.00"; WG[11][6] = "7.869"; WG[11][7] = "15.737"; WG[11][8] = "0.750"; WG[11][9] = "0.375";
+            WG[12] = new Array(10);
+            WG[12][0] = "WR62"; WG[12][1] = "WG18"; WG[12][2] = "R140"; WG[12][3] = "Ku"; WG[12][4] = "12.40"; WG[12][5] = "18.00"; WG[12][6] = "9.488"; WG[12][7] = "18.976"; WG[12][8] = "0.622"; WG[12][9] = "0.311";
+            WG[13] = new Array(10);
+            WG[13][0] = "WR51"; WG[13][1] = "WG19"; WG[13][2] = "R180"; WG[13][3] = "Ku/K"; WG[13][4] = "15.00"; WG[13][5] = "22.00"; WG[13][6] = "11.572"; WG[13][7] = "23.143"; WG[13][8] = "0.510"; WG[13][9] = "0.255";
+            WG[14] = new Array(10);
+            WG[14][0] = "WR42"; WG[14][1] = "WG20"; WG[14][2] = "R220"; WG[14][3] = "K"; WG[14][4] = "18.00"; WG[14][5] = "26.50"; WG[14][6] = "14.051"; WG[14][7] = "28.102"; WG[14][8] = "0.420"; WG[14][9] = "0.170";
+            WG[15] = new Array(10);
+            WG[15][0] = "WR34"; WG[15][1] = "WG21"; WG[15][2] = "R260"; WG[15][3] = "K/Ka"; WG[15][4] = "22.00"; WG[15][5] = "33.00"; WG[15][6] = "17.357"; WG[15][7] = "34.715"; WG[15][8] = "0.340"; WG[15][9] = "0.170";
+            WG[16] = new Array(10);
+            WG[16][0] = "WR28"; WG[16][1] = "WG22"; WG[16][2] = "R320"; WG[16][3] = "Ka"; WG[16][4] = "26.50"; WG[16][5] = "40.00"; WG[16][6] = "21.077"; WG[16][7] = "42.154"; WG[16][8] = "0.280"; WG[16][9] = "0.140";
+            WG[17] = new Array(10);
+            WG[17][0] = "WR22"; WG[17][1] = "WG23"; WG[17][2] = "R400"; WG[17][3] = "Q"; WG[17][4] = "33.00"; WG[17][5] = "50.00"; WG[17][6] = "26.346"; WG[17][7] = "52.692"; WG[17][8] = "0.224"; WG[17][9] = "0.112";
+            WG[18] = new Array(10);
+            WG[18][0] = "WR19"; WG[18][1] = "WG24"; WG[18][2] = "R500"; WG[18][3] = "U"; WG[18][4] = "40.00"; WG[18][5] = "60.00"; WG[18][6] = "31.391"; WG[18][7] = "62.782"; WG[18][8] = "0.188"; WG[18][9] = "0.094";
+            WG[19] = new Array(10);
+            WG[19][0] = "WR15"; WG[19][1] = "WG25"; WG[19][2] = "R620"; WG[19][3] = "V"; WG[19][4] = "50.00"; WG[19][5] = "75.00"; WG[19][6] = "39.875"; WG[19][7] = "79.750"; WG[19][8] = "0.148"; WG[19][9] = "0.074";
+            WG[20] = new Array(10);
+            WG[20][0] = "WR12"; WG[20][1] = "WG26"; WG[20][2] = "R740"; WG[20][3] = "E"; WG[20][4] = "60.00"; WG[20][5] = "90.00"; WG[20][6] = "48.373"; WG[20][7] = "96.746"; WG[20][8] = "0.122"; WG[20][9] = "0.061";
+            WG[21] = new Array(10);
+            WG[21][0] = "WR10"; WG[21][1] = "WG27"; WG[21][2] = "R900"; WG[21][3] = "W"; WG[21][4] = "75.00"; WG[21][5] = "110.00"; WG[21][6] = "59.015"; WG[21][7] = "118.030"; WG[21][8] = "0.100"; WG[21][9] = "0.050";
+            WG[22] = new Array(10);
+            WG[22][0] = "WR8"; WG[22][1] = "WG28"; WG[22][2] = "R1200"; WG[22][3] = "F"; WG[22][4] = "90.00"; WG[22][5] = "140.00"; WG[22][6] = "73.768"; WG[22][7] = "147.536"; WG[22][8] = "0.080"; WG[22][9] = "0.040";
+            WG[23] = new Array(10);
+            WG[23][0] = "WR7"; WG[23][1] = "WG29"; WG[23][2] = "R1400"; WG[23][3] = "D"; WG[23][4] = "112.00"; WG[23][5] = "172.00"; WG[23][6] = "90.791"; WG[23][7] = "181.583"; WG[23][8] = "0.0650"; WG[23][9] = "0.0325";
+            WG[24] = new Array(10);
+            WG[24][0] = "WR5"; WG[24][1] = "WG30"; WG[24][2] = "R1800"; WG[24][3] = "-"; WG[24][4] = "140.00"; WG[24][5] = "220.00"; WG[24][6] = "115.714"; WG[24][7] = "231.429"; WG[24][8] = "0.0510"; WG[24][9] = "0.0255";
+            WG[25] = new Array(10);
+            WG[25][0] = "WR4"; WG[25][1] = "WG31"; WG[25][2] = "R2200"; WG[25][3] = "-"; WG[25][4] = "172.00"; WG[25][5] = "260.00"; WG[25][6] = "137.243"; WG[25][7] = "274.485"; WG[25][8] = "0.0430"; WG[25][9] = "0.0215";
+            WG[26] = new Array(10);
+            WG[26][0] = "WR3"; WG[26][1] = "WG32"; WG[26][2] = "R2600"; WG[26][3] = "-"; WG[26][4] = "220.00"; WG[26][5] = "330.00"; WG[26][6] = "173.571"; WG[26][7] = "347.143"; WG[26][8] = "0.0340"; WG[26][9] = "0.0170";
+
+            return WG;
+        }
+
+        function FindWaveguideByFreq(f) {
+            FindWaveguideByFreq = "WR75";
+            var i, WG = WaveguideData();
+            var nWG = WG.length - 1;
+            var BWmin = 1000000; iMin = -1;
+            if (f >= parseFloat(WG[nWG][7])) { FindWaveguideByFreq = WG[nWG][0]; return }
+            if (f <= parseFloat(WG[0][6])) { FindWaveguideByFreq = WG[0][0]; return }
+            for (i = 0; i <= nWG; i++) {
+                var f0 = parseFloat(WG[i][6]);
+                var f1 = parseFloat(WG[i][7]);
+                var BW = Math.sqrt((f - f0) * (f - f0) + (f - f1) * (f - f1));
+                if (BW < BWmin) { BWmin = BW; iMin = i; }
+            }
+            return iMin;
+        }
+
+
+        function SetUnit() {
+            if (IndUnit === 0) {
+                document.getElementById('SetMM').checked = true;
+                document.getElementById('SetIn').checked = false;
+            } else {
+                document.getElementById('SetMM').checked = false;
+                document.getElementById('SetIn').checked = true;
+            }
+        }
+
+        function kf(iUnit, f) {
+            if (iUnit === 0) {
+                return 0.0209579 * f
+            } else {
+                return 0.5323312 * f
+            }
+        }
+
+        function xProfile(x, ALFA) {
+            var teta = iZnak(x);
+            var w = 1. - Math.abs(x);
+            if (w <= 0) {
+                wALFA = 0;
+            } else {
+                wALFA = Math.pow(w, ALFA);
+            }
+            return teta * (1. - wALFA);
+        }
+
+        function yProfile(x, ALFA, B0, B, B1) {
+            var Bm = (B0 + B1) / 2;
+            var dBm = (B1 - B0) / 2;
+            var Bc = B - Bm;
+            var t = xProfile(x, ALFA);
+            return Bm + dBm * t + Bc * (1. - t * t);
+        }
+
+        function iZnak(x) {
+            if (x < 0) {
+                return -1;
+            } else {
+                if (x > 0) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        }
+        //################  TRANS   ##############################
+
+        function test() {
+            var pi = 3.141592653589793236;
+            var eps = 1., tg = 0., rm = 0.;
+            var ao = 0.75, bo = 0.375;
+            var a = 0.65, b = 0.1, d = 0.02;//d = 0.01;
+            var ac = a, bc = 0.2, sc = 0.13, dc = 0.02;
+            //var at = (ao + a) / 2., bt = (bo + b) / 2;
+            var x = pi / a;
+            var k = [1.5 * x, 0];
+            var diff = TransRoot(k, ao, bo, a, b, d, ac, bc, sc);
+            alert(diff);
+        }
+
+        function TransRoot(k, ao, bo, a, b, d, ac, bc, sc) {
+            var pi = 3.141592653589793236;
+            var Np = 500;
+            var i, S0 = [0, 0], S1 = [0, 0];
+            var R1, B1, R0, B0, I0;
+            var at = (ao + a) / 2;
+            var xs = pi / at;
+            for (i = 0; i <= Np; i++) {
+                var bt = b + (bo - b) * i * 1 / Np;
+                S0 = STF(k, ao, bo, at, bt);
+                S1 = SF(k, at, bt, a, b, d, ac, bc, sc);
+                R1 = cabs(S0) - cabs(S1);
+                B1 = bt;
+                if (R1 > 0) { I1 = 1; } else { I1 = -1; }
+                if (i != 0) {
+                    if (I0 != I1) { break; }
+                }
+                R0 = R1;
+                B0 = B1;
+                I0 = I1;
+            }
+            var gt, F0, F1;
+            gt = Math.sqrt(k[0] * k[0] - xs * xs);
+            F0 = arg(S0);
+            F1 = arg(S1);
+            Fs = 0.5 * (F0 + F1)
+            if (Fs < 0) { Fs = Fs + pi; }
+            if (Fs >= pi) { Fs = Fs - pi; }
+            dt = Fs / gt;
+            return [at, bt, dt];
+        }
+
+        function SF(k, at, bt, a, b, d, ac, bc, sc) {
+            var wK = beta(k, Math.PI / a);
+            var Y = yw(0, k, wK);
+            var S = JuncInfinite(k, a, b, d, ac, bc, sc);
+            var St = sEH(k, at, bt, a, b);
+            var Ex = cexp([wK[1] * d, -wK[0] * d]); //HUJ d=dc/2
+            var SEx = xoy([S[0], S[1]], Ex);
+            var vrx = xoy(xin2([St[2], St[3]]), SEx);
+            var niz = xmy([1, 0], xoy([St[6], St[7]], SEx));
+            var SS = xpy([St[0], St[1]], xdy(vrx, niz));
+            return SS;
+        }
+
+        function sEH(k, ao, bo, a, b) {
+            var x0 = (ao - a) / 2, x1 = (ao + a) / 2, y0 = (bo - b) / 2, y1 = (bo + b) / 2;
+            iSpace = [-1, 1, 0, 0, 0, 0, 1, 7, 10];
+            var wK = beta(k, Math.PI / a);
+            var y = yw(0, k, wK);
+            var WW = CalcNodes(ao, bo);
+            var AA = CalcApers(x0, y0, x1, y1, ao, bo);
+            var Ys = RecStep(k, WW, AA);
+            var jB = [Ys[0], Ys[1]], Y = [Ys[2], Ys[3]];
+            var So = Shunt(Y, jB, y);
+            return So;
+        }
+
+        function STF(k, ao, bo, at, bt) {
+            //var So = EH(k, Ao, Bo, At, Bt);
+            var So = sEH(k, ao, bo, at, bt);
+            return [So[6], So[7]];
+        }
+
+        function JuncInfinite(k, a, b, d, ac, bc, sc) {
+            //function JuncInfinite(wK, b, d, s, h0, h1)
+            iSpace = [-1, 1, 0, 0, 0, 0, 1, 0, 10];
+            var E = [1, 0], j = [0, 1], cs, sn, ex;
+            var Yo = [0, 0, 0, 0, 0, 0];
+            var wK = beta(k, Math.PI / ac);
+            var wave = cexp([wK[1] * d, -wK[0] * d]);
+            var Y = yw(0, k, wK);
+            //var wK = beta(k, Math.PI / a);
+            var x0 = (ac - a) / 2, x1 = (ac + a) / 2, y0 = (bc - b) / 2, y1 = (bc + b) / 2;
+            //So = hu007(wK, b, s, h0, h1);
+            var WW = CalcNodes(ac, bc);
+            var AA = CalcApers(x0, y0, x1, y1, ac, bc);
+            Yo = RecCav(k, ac, bc, sc, AA, WW, AA);
+            var So = SY2(Y, Yo, Y);
+            var S00 = xoy(wave, [So[0], So[1]]);
+            var S01 = xoy(wave, [So[2], So[3]]);
+            var cs = xdy(xpy(E, xmy(xin2(S01), xin2(S00))), aox(2, S01));
+            var sn = csqrt(xmy(E, xin2(cs)));
+            var ex = xpy(cs, xoy(j, sn));
+            So = xdy(xmy(E, xoy(S01, ex)), S00);
+            return So;
+        }
+
+        function TransDif(k, Ao, Bo, At, Bt, Ac, Bc) {
+            var S0 = sEH(k, Ao, Bo, At, Bt);
+            var S1 = sEH(k, At, Bt, Ac, Bc);
+            R00 = S0[6]; R01 = S0[7]; R0 = Math.sqrt(R00 * R00 + R01 * R01);
+            R10 = S1[0]; R11 = S1[1]; R1 = Math.sqrt(R10 * R10 + R11 * R11);
+            return 2 * R0 / (1 - R0 * R0) - 2 * R1 / (1 - R1 * R1);
+        }
+
+        function TransDis(k, Ao, Bo, At, Bt, Ac, Bc) {
+            var wK = beta(k, Math.PI / At);
+            var S0 = sEH(k, Ao, Bo, At, Bt);
+            var S1 = sEH(k, At, Bt, Ac, Bc);
+            var R0 = [S0[6], S0[7]];
+            var R1 = [S1[0], S1[1]];
+            var Rx = [S1[6], S1[7]];
+            TransPh = pi + 0.5 * (arg(R0) + arg(R1));
+            if (TransPh > pi) { TransPh = TransPh - pi; }
+            //TransDis = TransPh / wK[0]; Xc = arg(Rx) / wK[0];
+            return [TransPh / wK[0], arg(Rx) / wK[0]];
+        }
+
+    </script>
+    <script type="text/javascript" src="complx.js"></script>
+    <script type="text/javascript" src="wrc_Strings.js"></script>
+    <script type="text/javascript" src="wrc_waves.js"></script>
+    <script type="text/javascript" src="wrc_RecLib.js"></script>
+
+</body>
+</html >

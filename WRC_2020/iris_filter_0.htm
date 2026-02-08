@@ -1,0 +1,760 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Rousslan Goulouev">
+    <meta name="description" content="Online Waveguide Resonator Calculator and Iris Filter Design Tool">
+    <meta name="keywords" content="waveguide, BPF, band-pass, filter, Q-factor, iris, online, calculator, design, freeware">
+    <title>H-plane iris filter design, rectangular resonator modes and Q-factor</title>
+    <link rel="stylesheet" href="navbars.css" />
+    <link rel="stylesheet" href="ProgBar.css" />
+    <style>
+        textarea {
+            font-size: 12px;
+            font-family: 'Lucida Console';
+            width: 1060px;
+            height: 400px;
+        }
+
+        p {
+            font-size: 12px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: navy;
+            text-align: justify;
+        }
+
+        h1 {
+            font-size: 16px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            color: darkgreen;
+        }
+
+        h2 {
+            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            color: maroon;
+        }
+
+        table.pan {
+            text-align: center;
+        }
+
+        td.pans {
+            border: dashed;
+            border-width: 1px;
+            border-radius: 10px;
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            color: maroon;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        div.kletk {
+            border: dashed;
+            border-width: 1px;
+            border-radius: 10px;
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            color: maroon;
+            font-size: 11px;
+            font-weight: bold;
+            width: 220px;
+            margin: 15px 0;
+            padding-bottom: 2px;
+        }
+
+        div.edits {
+            border: dashed;
+            border-width: 1px;
+            border-radius: 10px;
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            color: maroon;
+            font-size: 11px;
+            font-weight: bold;
+            width: 220px;
+            padding-bottom: 2px;
+            float: left;
+        }
+
+        td.panel {
+            border: dashed;
+            border-width: 1px;
+            border-radius: 10px;
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            color: maroon;
+            font-size: 11px;
+            font-weight: bold;
+            margin: 15px 0;
+            padding-bottom: 2px;
+            text-align: center;
+        }
+
+        .knob {
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            font-size: 11px;
+            color: navy;
+            margin: 5px;
+            padding: 5px;
+            outline: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body onload="WGInfoLoad();">
+    <div class="navbar">
+        <a href="javascript:void(0)" onclick="DesignUnLoad();window.location.href = 'index.htm';">File</a>
+        <a href="javascript:void(0)" onclick="DesignUnLoad();window.location.href = 'setup.htm';">Setup</a>
+        <a href="javascript:void(0)" onclick="DesignUnLoad();window.location.href = 'editor.htm';">Edit</a>
+        <a href="javascript:void(0)" onclick="DesignUnLoad();window.location.href = 'editor.htm';">Design</a>
+        <a href="javascript:void(0)" onclick="DesignUnLoad();window.location.href = 'editor.htm';">Run</a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="javascript:void(0)">
+                Reports
+            </button>
+            <div class="dropdown-content">
+                <a href="javascript:void(0)" onclick="DesignUnLoad();window.location.href = 'graph.htm';">Plot</a>
+                <a href="javascript:void(0)" onclick="DesignUnLoad();window.location.href = 's_data.htm';">Import/Export</a>
+            </div>
+        </div>
+        <a href="help.htm">Help</a>
+    </div>
+    <div class="divdiv">
+
+        <table>
+            <tr>
+                <td width="400px">
+                    <label id="FilterName" style="font:bold 20px arial;"></label>
+                    <br /><br />
+                    <table border="1">
+                        <tr>
+                            <td>
+                                <label class="fontos">Select Waveguide: </label>
+                            </td>
+                            <td>
+                                <select id="WGList" class="knob" onchange="NewWGSelect();"></select>
+                                <button class="knob" style="width:60px;" onclick="SetLength();"> Update </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="200px">
+                                <label class="fontos">Filter Order: </label>
+                            </td>
+                            <td>
+                                <select id="nPoles" class="knob">
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option selected>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                    <option>13</option>
+                                    <option>14</option>
+                                    <option>15</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="fontos">Center Frequency: </label>
+                            </td>
+                            <td>
+                                <input id="fCenter" type="text" class="knob" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="fontos">Waveguide Width: </label>
+                            </td>
+                            <td>
+                                <input id="aSize" type="text" class="knob" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="fontos">Waveguide Height: </label>
+                            </td>
+                            <td>
+                                <input id="bSize" type="text" class="knob" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="fontos">Waveguide Length: </label>
+                            </td>
+                            <td>
+                                <input id="zSize" type="text" class="knob" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="fontos">Iris Thickness: </label>
+                            </td>
+                            <td>
+                                <input id="tSize" type="text" class="knob" />
+                            </td>
+                        </tr>
+                        <tr>
+                        <tr>
+                            <td>
+                                <label class="fontos">Symmetry: </label>
+                            </td>
+                            <td>
+                                <label class="fontos"> Yes </label>
+                                <input id="SymFilter" type="radio" name="SymSym" class="knob" onclick="SymSwitch(1);" />
+                                <label class="fontos"> No </label>
+                                <input id="NoSymFilter" type="radio" name="SymSym" class="knob" onclick="SymSwitch(0);" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <button onclick="GoToSetup();" class="knob">Setup Project</button>
+                                <button onclick="GoToDesign();" class="knob">Design Filter</button>
+                                <button onclick="GoToInfo();" class="knob">Resonances and Q </button>
+                            </td>
+                        </tr>
+                    </table><br />
+                    <br />
+                    <input type="radio" ID="SetMM" class="fontos" name="Units" onclick="OnSetMM()" /><Label class="fontos">mm</Label>
+                    <input type="radio" ID="SetIn" class="fontos" name="Units" onclick="OnSetIn()" Checked="checked" /><Label class="fontos">in</Label>
+                    <input type="radio" ID="SetGHz" class="fontos" Enabled="false" Checked="checked" /><Label class="fontos">GHz</Label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label class="fontos" id="WGFreq"></label>
+                </td>
+                <td width="410px">
+                    <div id="huj" style="height:420px; overflow: scroll;">
+                        <img id="imager" src="img/iris_filter_0.png">
+                    </div>
+                </td>
+                <td>
+                    <div style="height:420px; overflow: scroll;">
+                        <h1>
+                            Irregular Corrugated Waveguide Iris Filter Designer Page:
+                        </h1>
+                        <font style="font-size:10px;color:darkgreen;">By R. Goulouev, 2020</font>
+                        <h2>About this Tool</h2>
+                        <p>
+                            This page is an integral part of the <b>WR-Connect</b> online simulator (click Help on top menu bar to find out more)
+                            and its main purpose is to design a waveguide filter on inductive diaphragms (irises).
+                            Nevertheless, this tool can be used independently as a calculator of resonance
+                            frequencies and Q-factor values of the eigen modes of an unloaded rectangular resonator.
+                        </p>
+                        <h2>
+                            Waveguide Iris Band-Pass Filter Design
+                        </h2>
+                        <p>
+                            1. Select the appropriate waveguide size. This can be done both from the list
+                            of standard waveguides and by directly entering the dimensions of the cross-section
+                            (width and height), followed by pressing the <b>"Update"</b> button.
+                            In the first case, the cavity length is set automatically as
+                            corresponding to the middle of the waveguide operating range.
+                            In the second case, it is recalculated as corresponding to the frequency entered
+                            manually.<br />
+                            2. Set symmetry by checking appropriate button in the <b>"Symmetry"</b> field.
+                            If <b>"yes"</b> is selected, all diaphragms will be symmetric with centralized opening.
+                            If <b>"no"</b> is selected, the diaphragms will be asymmetric and intruding from one side
+                            of waveguide.<br />
+                            3. Click the <b>"Setup Project"</b> button. In this case, the initial project setup
+                            will be created automatically. If the setup already exist, it will be rewritten.<br />
+                            4. Click the <b>"Design Filter"</b> button. In this case, the project page opens with
+                            the preparation of the filter structure.<br />
+                            5. Next, follow the design procedure, as described in more detail in
+                            the corresponding pages. See corresponding instructions and tutorials
+                            in "Help" pages (click <b>"Help"</b> on top menu bar).
+                        </p>
+                        <h2>Rectangular Cavity Resonances and Quality Factor Values Calculation</h2>
+                        <p>
+                            This tool is designed to calculate a set of first resonant modes and
+                            their quality factor values. It is also a part of <b>WR-Connect</b> online simulator,
+                            but it can be used autonomously as well. If a user calls the page from outside
+                            of WR-Connect setups, the calculations are performed based on default settings.
+                            The default settings are:<br />
+                            1. The metal surfaces of the resonator are assumed to be silver finished.<br />
+                            2. The symmetry is set as non symmetric or H-plane symmetric (switchable)
+                            in relation to the vertical central plane (YZ) and E-plane in the relation
+                            to the horizontal central (XZ) plane.  Nevertheless, the calculations are
+                            performed over all resonant modes. The modes having the "right" symmetry
+                            will be, however, marked red.<br />
+                            The default settings can be overwritten from the WR-Connect <b>Setup Page</b>
+                            (see <b>Help</b>).
+                        </p>
+                        <h2>How to Use the Resonant Modes calculator</h2>
+                        <p>
+                            A user can set the rectangular cavity dimensions by selecting appropriate
+                            waveguide standard (WR-code) or set them manually in corresponding text fields.
+                            The table of the resonant modes can be displayed by clicking the button named
+                            <b>"Resonances and Q"</b>. The first column (<b>"Resonance"</b>) of the table contains the
+                            indexes of the resonances in the common indexation for a rectangular cavity.
+                            The second two columns (<b>"Re[Freq]"</b> and <b>"Im[Freq]"</b>)
+                            contain appropriate real
+                            and imaginary values of the complex resonant frequency. The equivalent loss tangent
+                            and quality factor values are derived from the complex frequency and displayed
+                            in the fourth (<b>"tan<font style="font-family:Symbol">e</font>"</b>) and fifth
+                            (<b>"Q-factor"</b>) columns of data.
+                            </p>
+                            <h2>Practical Corrections To Be Applied to Q-factor</h2>
+                            <p>
+                                The equivalent loss tangent and Q-factor values calculated here correspond
+                                to the ideal and unloaded rectangular resonator and are in a very good match
+                                with the corresponding values from the known formulas or obtained from full-wave
+                                RF simulators (Ansys HFSS). Nevertheless, the reality differs as the idealistic
+                                calculations do not take into account the loading factors of the resonator in
+                                operation (all resonators used in band-pass filters are loaded), surface roughness,
+                                finish quality and layers. Therefore, experienced filter designers often make
+                                "practical corrections" to the obtained idealistic values. It is advised here,
+                                the obtained values to be degraded to about 60% (0.6 times Q and 1.67 times 
+                                tan<font style="font-family:Symbol">e</font>) for further simulations
+                                of a waveguide band-pass filter based on inductive irises.
+                            </p>
+                    </div>
+                </td>
+            </tr>
+        </table><hr />
+    </div>
+    <p style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:10px;font-style:italic;color:white;text-align:right;">&copy;2006 R. Goulouev, WR-Connect 2.0 Web (javascripted)</p>
+    <script type="text/javascript" src="wrc_setups.js"></script>
+    <script type="text/javascript" src="wrc_StrucLib.js"></script>
+    <script type="text/javascript">
+        var InDat, IndUnit, iSymmetryX = 0, iSymmetryY = 1, sigma = 0;
+        var MainSchema;
+        InDat = new SetUpDat();
+        MainSchema = new design();
+        MainSchema.iSymX = iSymmetryX; MainSchema.iSymY = iSymmetryY;
+        function NewWGSelect() {
+            var WG;
+            WG = WaveguideData();
+            var WGList = document.getElementById('WGList');
+            var iWG = WGList.selectedIndex;
+            SetDims(iWG, WG);
+        }
+
+        function SymSwitch(iTurn) {
+            if (iTurn === 1) {
+                iSymmetryX = -1;
+            } else {
+                iSymmetryX = 0;
+            }
+            RefreshImage();
+        }
+
+        function TurnSym() {
+            if (iSymmetryX === 1 || iSymmetryX === -1) {
+                    document.getElementById('SymFilter').checked = true;
+            } else {
+                    document.getElementById('NoSymFilter').checked = true;
+            }
+        }
+        function WGInfoLoad() {
+            if (localStorage.getItem('InputDatFileText') === null) {
+                //localStorage.setItem('InputDatFileText', '');
+                IndUnit = 1;
+            } else {
+                InDat.ImportFromText(localStorage.getItem('InputDatFileText'));
+                IndUnit = InDat.iUnit;
+                SetUnit();
+            }
+            if (localStorage.getItem('DesignFileText') === null) {
+                //localStorage.setItem('DesignFileText', '');
+            } else {
+                var EditTxt = localStorage.getItem('DesignFileText');
+                if (EditTxt) {
+                    PrjParts = SplitProjectParts(EditTxt);
+                    //var schema = new design();
+                    if (!PrjParts[0]) { return; }
+                    if (!PrjParts[1]) { return; }
+                    MainSchema.ImportShapka(PrjParts[0]);
+                    MainSchema.ImportSchema(PrjParts[1]);
+                    iSymmetryX = MainSchema.iSymX; iSymmetryY = MainSchema.iSymY;
+                    if (Math.abs(MainSchema.sig) > 1E-6) { sigma = MainSchema.sig; } else { sigma = 0;}
+                }
+            }
+            var WG;
+            WG = WaveguideData();
+            var WGList = document.getElementById('WGList');
+            WGList.options.length = 0;
+            var nWG = WG.length - 1;
+            for (i = 0; i <= nWG; i++) {
+                var option = document.createElement("option");
+                option.text = WG[i][0];
+                WGList.add(option);
+            }
+            var fc = InDat.Fc;
+            if (fc) {
+                var iGuide = FindWaveguideByFreq(fc);
+                WGList.selectedIndex = iGuide;
+                SetDims(iGuide, WG);
+            }
+            TurnSym();
+            RefreshImage();
+        }
+
+        function RefreshImage() {
+            if (iSymmetryX === 0) {
+                document.getElementById("FilterName").innerHTML = "Waveguide Iris Filter (Asymmetric)";
+                document.getElementById("huj").innerHTML = "<IMG SRC='img/iris_filter_0.png'>"
+             } else {
+                document.getElementById("FilterName").innerHTML = "Waveguide Iris Filter (Symmetric)";
+                document.getElementById("huj").innerHTML = "<IMG SRC='img/iris_filter_1.png'>"
+             }
+        }
+
+        function SetDims(iWG, WG) {
+            var a, b, t, Ls;
+            if (IndUnit === 0) {
+                a = 25.4 * parseFloat(WG[iWG][8]);
+                b = 25.4 * parseFloat(WG[iWG][9]);
+                t = 0.05 * a;
+                document.getElementById("aSize").value = a.toFixed(2);
+                document.getElementById("bSize").value = b.toFixed(2);
+                document.getElementById("tSize").value = t.toFixed(2);
+            } else {
+                a = parseFloat(WG[iWG][8]);
+                t = 0.05 * a;
+                document.getElementById("aSize").value = WG[iWG][8];
+                document.getElementById("bSize").value = WG[iWG][9];
+                document.getElementById("tSize").value = t.toFixed(3);
+            }
+            document.getElementById("WGFreq").innerHTML = "Range,GHz: " + WG[iWG][4] + "-" + WG[iWG][5];
+            var fc = 0.5 * (parseFloat(WG[iWG][4]) + parseFloat(WG[iWG][5]));
+            document.getElementById("fCenter").value = fc;
+            SetLength();
+        }
+
+        function SetLength() {
+            var fc = document.getElementById("fCenter").value;
+            var k = kf(IndUnit, fc);
+            a = parseFloat(document.getElementById("aSize").value);
+            b = parseFloat(document.getElementById("bSize").value);
+            var xs = Math.PI / a;
+            var bet2 = k * k - xs * xs;
+            if (bet2 > 0) {
+                Ls = Math.PI / Math.sqrt(bet2);
+                document.getElementById("zSize").value = Ls.toFixed(2 + IndUnit);
+            } else {
+                Ls = a / 2;
+                document.getElementById("zSize").value = Ls.toFixed(2 + IndUnit);
+
+            }
+        }
+
+        function GoToSetup() {
+            var WG;
+            WG = WaveguideData();
+            var WGList = document.getElementById('WGList');
+            var iWG = WGList.selectedIndex;
+            var Fc = parseFloat(document.getElementById("fCenter").value);
+            var f0, f1, Fc, dF, Np;
+            var InDat = new SetUpDat;
+            InDat.iUnit = IndUnit;
+            f0 = parseFloat(WG[iWG][4]);
+            f1 = parseFloat(WG[iWG][5]);
+            dF = 0.1 * (f1 - f0); Np = 500;
+            InDat.f0 = f0; InDat.f1 = f1; InDat.Np = Np; InDat.Fc = Fc; InDat.dF = dF;
+            localStorage.setItem('InputDatFileText', InDat.ExportToText());
+            InDat = null;
+        }
+
+
+
+        function GoToDesign() {
+            var a, b, t, Ls;
+            if (document.getElementById("aSize").value) {
+                a = parseFloat(document.getElementById("aSize").value)
+            } else {
+                return;
+            }
+            if (document.getElementById("bSize").value) {
+                b = parseFloat(document.getElementById("bSize").value)
+            } else {
+                return;
+            }
+            if (document.getElementById("tSize").value) {
+                t = parseFloat(document.getElementById("tSize").value)
+            } else {
+                return;
+            }
+            if (document.getElementById("zSize").value) {
+                Ls = parseFloat(document.getElementById("zSize").value)
+            } else {
+                Ls = a / 2;
+            }
+            var indx = document.getElementById("nPoles").selectedIndex;
+            var nOrder = parseInt(indx) + 3;
+            MainSchema.nJuncs = 2 * (nOrder + 1);
+            N = nOrder;
+            var ii = 0;
+            var dims0, dims1;
+            MainSchema.iSymX = iSymmetryX;
+            MainSchema.iSymY = 1;
+            MainSchema.km = 0;
+            MainSchema.ky = 0;
+            MainSchema.md = 0;
+            MainSchema.nx = 10;
+            MainSchema.ny = 0;
+
+            if (MainSchema.iSymX === 0) {
+                MainSchema.kx = 1;
+                dims0 = [0, Ls, 0, -b / 2, a, b / 2];
+                dims1 = [0, t, 0, -b / 2, a, b / 2];
+            } else {
+                MainSchema.kx = 0;
+                dims0 = [0, Ls, -a / 2, -b / 2, a / 2, b / 2];
+                dims1 = [0, t, -a / 2, -b / 2, a / 2, b / 2];
+            }
+            MainSchema.juncs[ii] = new node;
+            MainSchema.juncs[ii].iOpt = 0; MainSchema.juncs[ii].iType = 1;
+            MainSchema.juncs[ii].v = dims0;
+            for (i = 0; i <= N; i++) {
+                ii = ii + 1;
+                MainSchema.juncs[ii] = new node;
+                MainSchema.juncs[ii].iOpt = 4; MainSchema.juncs[ii].iType = 3;
+                MainSchema.juncs[ii].v = dims1;
+                ii = ii + 1;
+                MainSchema.juncs[ii] = new node;
+                if (i === N) { MainSchema.juncs[ii].iOpt = 0; } else { MainSchema.juncs[ii].iOpt = 1; }
+                MainSchema.juncs[ii].iType = 1;
+                MainSchema.juncs[ii].v = dims0;
+            }
+            var texto = JoinPrjParts(MainSchema.ExportShapka(), MainSchema.ExportSchema());
+            localStorage.setItem('DesignFileText', texto);
+            window.location.href = "editor.htm";
+        }
+
+        function GoToInfo() {
+            function TabCell(markus, value) {
+                if (markus) {
+                    return '<TD><FONT style="color:red;">' + value + '</FONT></TD>';
+                } else {
+                    return '<TD><FONT style="color:navy;">' + value + '</FONT></TD>';
+                }
+            }
+            var surf = new metal();
+            surf.iUnit = IndUnit;
+            surf.sigma = sigma;
+            var a, b, t, Ls;
+
+            if (document.getElementById("aSize").value) {
+                a = parseFloat(document.getElementById("aSize").value)
+            } else {
+                return;
+            }
+            if (document.getElementById("bSize").value) {
+                b = parseFloat(document.getElementById("bSize").value)
+            } else {
+                return;
+            }
+            if (document.getElementById("zSize").value) {
+                Ls = parseFloat(document.getElementById("zSize").value)
+            } else {
+                return;
+            }
+            //var kComplex = surf.kReso(0, 1, 0, 1, a, b, Ls);
+            //alert(kComplex[0] / kf(IndUnit, 1) + ' ' + kComplex[1] / kf(IndUnit, 1));
+            var im, nx, ny, nz, i, ii = -1;
+            var R = Math.sqrt(a * a + b * b + Ls * Ls);
+            var Nx = parseInt(10 * (a / R)) + 1;
+            var Ny = parseInt(10 * (b / R)) + 1;
+            var Nz = parseInt(10 * (Ls / R)) + 1;
+            var kResos = [], md = [];
+            for (im = 0; im <= 1; im++) {
+                for (nx = 0; nx <= Nx; nx++) {
+                    for (ny = 0; ny <= Ny; ny++) {
+                        for (nz = 0; nz <= Nz; nz++) {
+                            if (im === 0 && (nx + ny) !== 0 && nz !== 0) {
+                                ii = ii + 1;
+                                kResos[ii] = surf.kReso(im, nx, ny, nz, a, b, Ls);
+                                md[ii] = [0, nx, ny, nz];
+                            }
+                            if (im === 1 && nx * ny != 0) {
+                                ii = ii + 1;
+                                kResos[ii] = surf.kReso(im, nx, ny, nz, a, b, Ls);
+                                md[ii] = [1, nx, ny, nz];
+                            }
+                        }
+                    }
+                }
+            }
+            var iii, Np = ii, kMin = [], mdMin;
+            var txt = '';
+            for (i = 0; i <= Np; i++) {
+                for (ii = i; ii <= Np; ii++) {
+                    if (kResos[ii][0] < kResos[i][0]) {
+                        kMin = kResos[ii]; mdMin = md[ii];
+                        kResos[ii] = kResos[i];
+                        md[ii] = md[i];
+                        kResos[i] = kMin;
+                        md[i] = mdMin;
+                    }
+                }
+            }
+            var kfo = kf(IndUnit, 1), fRe, fIm, Q, tanE;
+            txt = txt + '<B>Rectangular Resonator: Modes & Quality</B><BR><BR>';
+            txt = txt + '<TABLE BORDER=1>';
+            txt = txt + '<TR>';
+            txt = txt + '<TD><B> Resonance </B></TD>';
+            txt = txt + '<TD><B> Re[Freq] </B></TD>';
+            txt = txt + '<TD><B> Im[Freq] </B></TD>';
+            txt = txt + '<TD><B>tan<FONT style="font-family: Symbol;">e</FONT> </B></TD>';
+            txt = txt + '<TD><B> Q-factor </B></TD>';
+            txt = txt + '</TR>';
+            var ModeName, mark;
+            for (i = 0; i <= Np; i++) {
+                var iX = 1 + 2 * (2 * parseInt(md[i][1] / 2) - md[i][1]);
+                var iY = 1 + 2 * (2 * parseInt(md[i][2] / 2) - md[i][2]);
+                mark = IsMarked(iX, iY)
+                if (md[i][0] === 0) {
+                    ModeName = 'TE ' + md[i][1] + ' ' + md[i][2] + ' ' + md[i][3];
+                } else {
+                    ModeName = 'TM ' + md[i][1] + ' ' + md[i][2] + ' ' + md[i][3];
+                }
+                fRe = kResos[i][0] / kfo; fIm = kResos[i][1] / kfo;
+                tanE = 2 * fIm / fRe;
+                txt = txt + '<TR>';
+                txt = txt + TabCell(mark, ModeName);
+                txt = txt + TabCell(mark, fRe.toFixed(4));
+                txt = txt + TabCell(mark, fIm.toFixed(7));
+                txt = txt + TabCell(mark, tanE.toFixed(10));
+                if (Math.abs(tanE) < 1E-12) {
+                    txt = txt + TabCell(mark, 'infinity');
+                } else {
+                    txt = txt + TabCell(mark, (1 / tanE).toFixed(1));
+                }
+                txt = txt + '</TR>';
+            }
+            txt = txt + '</TABLE>';
+            document.getElementById('huj').innerHTML = txt;
+
+            return;
+            var txt = '';
+        }
+
+        function IsMarked(iSymX, iSymY) {
+            var markX = false, markY = false;
+            if (iSymmetryX === 0) { markX = true }
+            if (iSymmetryY === 0) { markY = true }
+            if (iSymmetryX === iSymX) { markX = true }
+            if (iSymmetryY === iSymY) { markY = true }
+            if (markX && markY) { return true; } else { return false; }
+        }
+
+
+        function DesignUnLoad() {
+
+        }
+
+        function WaveguideData() {
+            var WG = new Array(27);
+            WG[0] = new Array(10);
+            WG[0][0] = "WR650"; WG[0][1] = "WG6"; WG[0][2] = "R14"; WG[0][3] = "L"; WG[0][4] = "1.15"; WG[0][5] = "1.72"; WG[0][6] = "0.908"; WG[0][7] = "1.816"; WG[0][8] = "6.500"; WG[0][9] = "3.250";
+            WG[1] = new Array(10);
+            WG[1][0] = "WR510"; WG[1][1] = "WG7"; WG[1][2] = "R18"; WG[1][3] = "L"; WG[1][4] = "1.45"; WG[1][5] = "2.20"; WG[1][6] = "1.157"; WG[1][7] = "2.314"; WG[1][8] = "5.100"; WG[1][9] = "2.550";
+            WG[2] = new Array(10);
+            WG[2][0] = "WR430"; WG[2][1] = "WG8"; WG[2][2] = "R22"; WG[2][3] = "L/S"; WG[2][4] = "1.72"; WG[2][5] = "2.60"; WG[2][6] = "1.372"; WG[2][7] = "2.745"; WG[2][8] = "4.300"; WG[2][9] = "2.150";
+            WG[3] = new Array(10);
+            WG[3][0] = "WR340"; WG[3][1] = "WG9A"; WG[3][2] = "R26"; WG[3][3] = "S"; WG[3][4] = "2.20"; WG[3][5] = "3.30"; WG[3][6] = "1.736"; WG[3][7] = "3.471"; WG[3][8] = "3.400"; WG[3][9] = "1.700";
+            WG[4] = new Array(10);
+            WG[4][0] = "WR284"; WG[4][1] = "WG10"; WG[4][2] = "R32"; WG[4][3] = "S"; WG[4][4] = "2.60"; WG[4][5] = "3.95"; WG[4][6] = "2.078"; WG[4][7] = "4.156"; WG[4][8] = "2.840"; WG[4][9] = "1.340";
+            WG[5] = new Array(10);
+            WG[5][0] = "WR229"; WG[5][1] = "WG11A"; WG[5][2] = "R40"; WG[5][3] = "S/C"; WG[5][4] = "3.30"; WG[5][5] = "4.90"; WG[5][6] = "2.577"; WG[5][7] = "5.154"; WG[5][8] = "2.290"; WG[5][9] = "1.145";
+            WG[6] = new Array(10);
+            WG[6][0] = "WR187"; WG[6][1] = "WG12"; WG[6][2] = "R48"; WG[6][3] = "C"; WG[6][4] = "3.95"; WG[6][5] = "5.85"; WG[6][6] = "3.153"; WG[6][7] = "6.305"; WG[6][8] = "1.872"; WG[6][9] = "0.872";
+            WG[7] = new Array(10);
+            WG[7][0] = "WR159"; WG[7][1] = "WG13"; WG[7][2] = "R58"; WG[7][3] = "C"; WG[7][4] = "4.90"; WG[7][5] = "7.05"; WG[7][6] = "3.712"; WG[7][7] = "7.423"; WG[7][8] = "1.590"; WG[7][9] = "0.795";
+            WG[8] = new Array(10);
+            WG[8][0] = "WR137"; WG[8][1] = "WG14"; WG[8][2] = "R70"; WG[8][3] = "C"; WG[8][4] = "5.85"; WG[8][5] = "8.20"; WG[8][6] = "4.301"; WG[8][7] = "8.603"; WG[8][8] = "1.372"; WG[8][9] = "0.622";
+            WG[9] = new Array(10);
+            WG[9][0] = "WR112"; WG[9][1] = "WG15"; WG[9][2] = "R84"; WG[9][3] = "C/X"; WG[9][4] = "7.05"; WG[9][5] = "10.00"; WG[9][6] = "5.260"; WG[9][7] = "10.520"; WG[9][8] = "1.122"; WG[9][9] = "0.497";
+            WG[10] = new Array(10);
+            WG[10][0] = "WR90"; WG[10][1] = "WG16"; WG[10][2] = "R100"; WG[10][3] = "X"; WG[10][4] = "8.20"; WG[10][5] = "12.40"; WG[10][6] = "6.557"; WG[10][7] = "13.114"; WG[10][8] = "0.900"; WG[10][9] = "0.400";
+            WG[11] = new Array(10);
+            WG[11][0] = "WR75"; WG[11][1] = "WG17"; WG[11][2] = "R120"; WG[11][3] = "X/Ku"; WG[11][4] = "10.00"; WG[11][5] = "15.00"; WG[11][6] = "7.869"; WG[11][7] = "15.737"; WG[11][8] = "0.750"; WG[11][9] = "0.375";
+            WG[12] = new Array(10);
+            WG[12][0] = "WR62"; WG[12][1] = "WG18"; WG[12][2] = "R140"; WG[12][3] = "Ku"; WG[12][4] = "12.40"; WG[12][5] = "18.00"; WG[12][6] = "9.488"; WG[12][7] = "18.976"; WG[12][8] = "0.622"; WG[12][9] = "0.311";
+            WG[13] = new Array(10);
+            WG[13][0] = "WR51"; WG[13][1] = "WG19"; WG[13][2] = "R180"; WG[13][3] = "Ku/K"; WG[13][4] = "15.00"; WG[13][5] = "22.00"; WG[13][6] = "11.572"; WG[13][7] = "23.143"; WG[13][8] = "0.510"; WG[13][9] = "0.255";
+            WG[14] = new Array(10);
+            WG[14][0] = "WR42"; WG[14][1] = "WG20"; WG[14][2] = "R220"; WG[14][3] = "K"; WG[14][4] = "18.00"; WG[14][5] = "26.50"; WG[14][6] = "14.051"; WG[14][7] = "28.102"; WG[14][8] = "0.420"; WG[14][9] = "0.170";
+            WG[15] = new Array(10);
+            WG[15][0] = "WR34"; WG[15][1] = "WG21"; WG[15][2] = "R260"; WG[15][3] = "K/Ka"; WG[15][4] = "22.00"; WG[15][5] = "33.00"; WG[15][6] = "17.357"; WG[15][7] = "34.715"; WG[15][8] = "0.340"; WG[15][9] = "0.170";
+            WG[16] = new Array(10);
+            WG[16][0] = "WR28"; WG[16][1] = "WG22"; WG[16][2] = "R320"; WG[16][3] = "Ka"; WG[16][4] = "26.50"; WG[16][5] = "40.00"; WG[16][6] = "21.077"; WG[16][7] = "42.154"; WG[16][8] = "0.280"; WG[16][9] = "0.140";
+            WG[17] = new Array(10);
+            WG[17][0] = "WR22"; WG[17][1] = "WG23"; WG[17][2] = "R400"; WG[17][3] = "Q"; WG[17][4] = "33.00"; WG[17][5] = "50.00"; WG[17][6] = "26.346"; WG[17][7] = "52.692"; WG[17][8] = "0.224"; WG[17][9] = "0.112";
+            WG[18] = new Array(10);
+            WG[18][0] = "WR19"; WG[18][1] = "WG24"; WG[18][2] = "R500"; WG[18][3] = "U"; WG[18][4] = "40.00"; WG[18][5] = "60.00"; WG[18][6] = "31.391"; WG[18][7] = "62.782"; WG[18][8] = "0.188"; WG[18][9] = "0.094";
+            WG[19] = new Array(10);
+            WG[19][0] = "WR15"; WG[19][1] = "WG25"; WG[19][2] = "R620"; WG[19][3] = "V"; WG[19][4] = "50.00"; WG[19][5] = "75.00"; WG[19][6] = "39.875"; WG[19][7] = "79.750"; WG[19][8] = "0.148"; WG[19][9] = "0.074";
+            WG[20] = new Array(10);
+            WG[20][0] = "WR12"; WG[20][1] = "WG26"; WG[20][2] = "R740"; WG[20][3] = "E"; WG[20][4] = "60.00"; WG[20][5] = "90.00"; WG[20][6] = "48.373"; WG[20][7] = "96.746"; WG[20][8] = "0.122"; WG[20][9] = "0.061";
+            WG[21] = new Array(10);
+            WG[21][0] = "WR10"; WG[21][1] = "WG27"; WG[21][2] = "R900"; WG[21][3] = "W"; WG[21][4] = "75.00"; WG[21][5] = "110.00"; WG[21][6] = "59.015"; WG[21][7] = "118.030"; WG[21][8] = "0.100"; WG[21][9] = "0.050";
+            WG[22] = new Array(10);
+            WG[22][0] = "WR8"; WG[22][1] = "WG28"; WG[22][2] = "R1200"; WG[22][3] = "F"; WG[22][4] = "90.00"; WG[22][5] = "140.00"; WG[22][6] = "73.768"; WG[22][7] = "147.536"; WG[22][8] = "0.080"; WG[22][9] = "0.040";
+            WG[23] = new Array(10);
+            WG[23][0] = "WR7"; WG[23][1] = "WG29"; WG[23][2] = "R1400"; WG[23][3] = "D"; WG[23][4] = "112.00"; WG[23][5] = "172.00"; WG[23][6] = "90.791"; WG[23][7] = "181.583"; WG[23][8] = "0.0650"; WG[23][9] = "0.0325";
+            WG[24] = new Array(10);
+            WG[24][0] = "WR5"; WG[24][1] = "WG30"; WG[24][2] = "R1800"; WG[24][3] = "-"; WG[24][4] = "140.00"; WG[24][5] = "220.00"; WG[24][6] = "115.714"; WG[24][7] = "231.429"; WG[24][8] = "0.0510"; WG[24][9] = "0.0255";
+            WG[25] = new Array(10);
+            WG[25][0] = "WR4"; WG[25][1] = "WG31"; WG[25][2] = "R2200"; WG[25][3] = "-"; WG[25][4] = "172.00"; WG[25][5] = "260.00"; WG[25][6] = "137.243"; WG[25][7] = "274.485"; WG[25][8] = "0.0430"; WG[25][9] = "0.0215";
+            WG[26] = new Array(10);
+            WG[26][0] = "WR3"; WG[26][1] = "WG32"; WG[26][2] = "R2600"; WG[26][3] = "-"; WG[26][4] = "220.00"; WG[26][5] = "330.00"; WG[26][6] = "173.571"; WG[26][7] = "347.143"; WG[26][8] = "0.0340"; WG[26][9] = "0.0170";
+
+            return WG;
+        }
+
+        function FindWaveguideByFreq(f) {
+            FindWaveguideByFreq = "WR75";
+            var i, WG = WaveguideData();
+            var nWG = WG.length - 1;
+            var BWmin = 1000000; iMin = -1;
+            if (f >= parseFloat(WG[nWG][7])) { FindWaveguideByFreq = WG[nWG][0]; return }
+            if (f <= parseFloat(WG[0][6])) { FindWaveguideByFreq = WG[0][0]; return }
+            for (i = 0; i <= nWG; i++) {
+                var f0 = parseFloat(WG[i][6]);
+                var f1 = parseFloat(WG[i][7]);
+                var BW = Math.sqrt((f - f0) * (f - f0) + (f - f1) * (f - f1));
+                if (BW < BWmin) { BWmin = BW; iMin = i; }
+            }
+            return iMin;
+        }
+
+        function OnSetMM() {
+            IndUnit = 0;
+            NewWGSelect();
+        }
+
+        function OnSetIn() {
+            IndUnit = 1;
+            NewWGSelect();
+        }
+
+        function SetUnit() {
+            if (IndUnit === 0) {
+                document.getElementById('SetMM').checked = true;
+                document.getElementById('SetIn').checked = false;
+            } else {
+                document.getElementById('SetMM').checked = false;
+                document.getElementById('SetIn').checked = true;
+            }
+        }
+
+        function kf(iUnit, f) {
+            if (iUnit === 0) {
+                return 0.0209579 * f
+            } else {
+                return 0.5323312 * f
+            }
+        }
+
+
+    </script>
+    <script type="text/javascript" src="wrc_Strings.js"></script>
+    <script type="text/javascript" src="wrc_metals.js"></script>
+
+</body>
+</html >

@@ -1,0 +1,162 @@
+<HTML>
+<HEAD>
+<STYLE>
+html, body, canvas {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+    .fontos {
+        font-family: Courier New, Courier, monospace,'Lucida Console';
+        font-size: 12px;
+        color: navy;
+        font-weight:bold;
+    }
+
+    .menu {
+        margin: 0;
+        padding: 0;
+        background-color:black;
+        color:white;
+        font-family:Arial, Helvetica, sans-serif;
+        font-weight:bold;
+        font-size:12px;
+    }
+</STYLE>
+</HEAD>
+<!--marked-->
+<BODY onload="Starter();">
+    <div class="menu" ;>
+        <button class="fontos" onclick="window.location.href = 'editor.htm';">Return</button>
+        Angles (dg):&nbsp;&nbsp;&nbsp; <font style="font-family:Symbol;">q</font> = <input id="ThetaInput" type="text" style="width:100px;" value="-45" />
+        &nbsp;<font style="font-family:Symbol;">f</font> = <input id="PhiInput" type="text" style="width:100px;" value="45" />
+        &nbsp;
+        View Axis:
+        <select id="ViewSelect" class="fontos" onchange="ReDrawStruc();">
+            <option>X</option>
+            <option selected>Y</option>
+            <option>Z</option>
+        </select>
+        &nbsp;
+        <button class="fontos" onclick="ReDrawStruc()">ReDraw</button>&nbsp;&nbsp;
+        <label class="black_label" id="sizer"></label>
+    </div>
+    <div>
+        <canvas id="cnv" width="800" height="600"></canvas>
+    </div>
+    <script>
+        var juncos = [];
+        var cAngle = Math.PI / 180;
+        function Starter() {
+            var schema = new design();
+            if (localStorage.getItem('DesignFileText') === null) {
+                //localStorage.setItem('DesignFileText', '');
+            } else {
+                var EditTxt = localStorage.getItem('DesignFileText');
+                if (EditTxt) {
+                    PrjParts = SplitProjectParts(EditTxt);
+                    //var schema = new design();
+                    if (!PrjParts[0]) { return; }
+                    if (!PrjParts[1]) { return; }
+                    schema.ImportShapka(PrjParts[0]);
+                    schema.ImportSchema(PrjParts[1]);
+                    juncos = schema.juncs;
+                    
+                    var teta = cAngle * parseFloat(document.getElementById('ThetaInput').value);
+                    var fi = cAngle * parseFloat(document.getElementById('PhiInput').value);
+                    var iView = document.getElementById("ViewSelect").selectedIndex; 
+                    StrucSizer();
+                    DrawStruc(iView, teta, fi);
+                }
+            }
+
+        }
+
+
+        function ReDrawStruc() {
+            var teta = cAngle * parseFloat(document.getElementById('ThetaInput').value);
+            var fi = cAngle * parseFloat(document.getElementById('PhiInput').value);
+            var iView = document.getElementById("ViewSelect").selectedIndex; 
+            DrawStruc(iView, teta, fi);
+        }
+
+        function StrucSizer() {
+            var N = juncos.length - 1;
+            if (N < 0) { return; }
+            var i, L = 0, xMax = -1E6, yMax = -1E6, x, y;
+            for (i = 0; i <= N; i++) {
+                if (juncos[i].iType > 0) {
+                    L = L + juncos[i].v[1];
+                    x = Math.abs(juncos[i].v[4] - juncos[i].v[2]);
+                    y = Math.abs(juncos[i].v[5] - juncos[i].v[3]);
+                    if (x > xMax) { xMax = x;}
+                    if (y > yMax) { yMax = y; }
+                }
+            }
+            var txt = " Envelope Size: " + xMax.toFixed(3) + " x " + yMax.toFixed(3) + " x " + L.toFixed(3);
+            document.getElementById("sizer").innerHTML = txt;
+        }
+
+        function DrawStruc(iView, theta, phi) {
+            // Fix the canvas width and height
+            var canvas = document.getElementById('cnv');
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+            var dx = canvas.width / 2;
+            var dy = canvas.height / 2;
+            // Objects style
+            var ctx = canvas.getContext('2d');
+            ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
+            ctx.fillStyle = 'rgba(0, 150, 255, 0.3)';
+            var N = juncos.length - 1;
+            if (N < 0) { return;}
+            var i, L = 0, xMax, yMax;
+            for (i = 0; i <= N; i++) {
+                if (juncos[i].iType > 0) {
+                    L = L + juncos[i].v[1];
+                }
+            }
+            var zc = 0*dy;
+            cube_center = new Vertex(0, 0, zc)
+            var cx = 2 * dy / L;
+            L = -L / 2;
+            var ix, ii = -1;
+            var objects = [];
+            var r0, r1;
+            for (i = 0; i <= N; i++) {
+                if (juncos[i].iType > 0) {
+                    var x0 = cx * juncos[i].v[2], y0 = cx * juncos[i].v[3], z0 = cx * L + zc;
+                    var x1 = cx * juncos[i].v[4], y1 = cx * juncos[i].v[5], z1 = cx * (L + juncos[i].v[1]) + zc;
+                    switch (iView) {
+                        case 0:
+                            r0 = new Vertex(z0, x0, y0); var r1 = new Vertex(z1, x1, y1);
+                            break;
+                        case 2:
+                            r0 = new Vertex(y0, z0, x0); var r1 = new Vertex(y1, z1, x1);
+                            break;
+                        case 1:
+                            r0 = new Vertex(x0, y0, z0); var r1 = new Vertex(x1, y1, z1);
+                            break;
+                        default:
+                            return;
+                    } 
+                    var cube = new Box(r0, r1);
+                    for (var ix = 0; ix < 8; ++ix) {
+                        rotate(cube.vertices[ix], cube_center, theta, phi);
+                    }
+                    L = L + juncos[i].v[1];
+                    ii = ii + 1;
+                    objects[ii] = cube;
+                }
+            }
+            // First render
+            render(objects, ctx, dx, dy);
+            //autorotate();
+        }
+
+    </script>
+    <script src="wrc_d3.js"></script>
+    <script src="wrc_StrucLib.js"></script>
+    <script src="wrc_Strings.js"></script>
+</BODY>
+</HTML>

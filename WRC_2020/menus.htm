@@ -1,0 +1,386 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="author" content="Rousslan Goulouev">
+    <meta name="description" content="About WR-Connect, instructions and manuals">
+    <meta name="keywords" content="s-parameter, group delay, slope, s2p, Re/Im, freeware">
+    <title>WR-Connect: Software help, instructions, tutorials and application notes</title>
+    <link rel="stylesheet" href="navbars.css" />
+    <style>
+        .vertical-menu {
+            width: 15%;
+            height: 530px;
+            overflow-y: auto;
+            float: left;
+            color: navy;
+            background-color: white;
+            /* width: 50%;*/
+            /*padding: 10px;*/
+            /*height: 300px;*/ /* Should be removed. Only for demonstration */
+        }
+
+            .vertical-menu a {
+                background-color: #eee;
+                color: black;
+                display: block;
+                padding: 12px;
+                text-decoration: none;
+            }
+
+                .vertical-menu a:hover {
+                    background-color: #ccc;
+                }
+
+                .vertical-menu a.active {
+                    background-color: #624e4e;
+                    color: white;
+                }
+
+            .vertical-menu p {
+                font-size: 18px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: bold;
+                color: navy;
+                padding-left:15px;
+            }
+/*========================================*/
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column {
+            float: left;
+            width: 85%;
+            padding: 10px;
+            height: 530px;
+            overflow-y: auto;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /*======================================*/
+
+        p {
+            margin-bottom: 0.25cm;
+            background: transparent
+        }
+
+        h1 {
+            margin-bottom: 0.2cm;
+            background: transparent
+        }
+
+            h1.western {
+                font-family: "Liberation Sans", sans-serif;
+                font-size: 18pt
+            }
+
+            h1.cjk {
+                font-family: "Microsoft YaHei";
+                font-size: 18pt
+            }
+
+            h1.ctl {
+                font-family: "Mangal";
+                font-size: 18pt
+            }
+
+        h2 {
+            margin-top: 0.36cm;
+            margin-bottom: 0.2cm;
+            background: transparent
+        }
+
+            h2.western {
+                font-family: "Liberation Sans", sans-serif;
+                font-size: 16pt
+            }
+
+            h2.cjk {
+                font-family: "Microsoft YaHei";
+                font-size: 16pt
+            }
+
+            h2.ctl {
+                font-family: "Mangal";
+                font-size: 16pt
+            }
+
+        h3 {
+            margin-top: 0.25cm;
+            margin-bottom: 0.2cm;
+            background: transparent
+        }
+
+            h3.western {
+                font-family: "Liberation Sans", sans-serif
+            }
+
+            h3.cjk {
+                font-family: "Microsoft YaHei"
+            }
+
+            h3.ctl {
+                font-family: "Mangal"
+            }
+    </style>
+</head>
+<body >
+    <div class="navbar">
+        <a href="index.htm">File</a>
+        <a href="setup.htm">Setup</a>
+        <a href="editor.htm">Edit</a>
+        <a href="editor.htm">Design</a>
+        <a href="editor.htm">Run</a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="javascript:void(0)">
+                Reports
+            </button>
+            <div class="dropdown-content">
+                <a href="graph.htm">Plot</a>
+                <a href="s_data.htm">Import/Export</a>
+            </div>
+        </div>
+        <a href="javascript:void(0)">Help</a>
+    </div>
+    <div class="row">
+        <div class="vertical-menu">
+            <p>WR-Connect</p>
+            <a href="help.htm">About Software</a>
+            <a href="menus.htm" class="active">Main Menus</a>
+            <a href="help_setup.htm">Initial Setup</a>
+            <a href="help_edit.htm">Design Editor</a>
+            <p>Tutorials</p>
+            <a href="help_app0.htm">Simple Filter Design</a>
+            <a href="help_app1.htm">Corrugated Filter #1</a>
+            <a href="help_app2.htm">Space Mapping</a>
+            <a href="#">--------------</a>
+            <p>Examples</p>
+            <a href="examps.htm">Conventional Designs</a>
+        </div>
+        <div class="column" style="background-color:white;">
+            <h1 class="western">Main Menus</h1>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h2 class="western">Main Menu Options</h2>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The main menu is on
+                a black bar at the top of each page of WR-Connect design environment.
+                Each menu button navigates to appropriate design tool. The <b>
+                    Main
+                    Menu
+                </b> options are:
+            </p>
+            <ul>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <b>File</b>
+                        leads to <font color="#2a6099"><b>File Page</b></font> with local
+                        URL &ldquo;index.htm&rdquo;.
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <b>Setup</b>
+                        leads to <font color="#2a6099"><b>Setup Page</b></font> with local
+                        URL &ldquo;index.htm&rdquo;.
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <b>Edit</b> is
+                        part of <font color="#2a6099"><b>Editor</b></font><font color="#2a6099">
+                        </font><font color="#2a6099"><b>Page</b></font> with local URL
+                        &ldquo;editor.htm&rdquo;.
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <b>Design</b>
+                        is part of <font color="#2a6099"><b>Editor</b></font><font color="#2a6099">
+                        </font><font color="#2a6099"><b>Page</b></font> with local URL
+                        &ldquo;editor.htm&rdquo;.
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <b>Run</b> is
+                        part of <font color="#2a6099"><b>Editor Page</b></font> with local
+                        URL &ldquo;editor.htm&rdquo;.
+                    </p>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <b>Reports</b>
+                        contain:
+                    </p>
+                    <ul>
+                        <li>
+                            <p style="margin-bottom: 0cm; line-height: 100%">
+                                <b>Plot</b>
+                                sub-menu leading to <font color="#2a6099"><b>Plot Page</b></font>
+                                with URL &ldquo;graph.htm&rdquo;
+                            </p>
+                        <li>
+                            <p style="margin-bottom: 0cm; line-height: 100%">
+                                <b>Import/Export</b>
+                                options leading to <font color="#2a6099"><b>S-Data</b></font><font color="#2a6099">
+                                </font><font color="#2a6099"><b>Page</b></font> with URL
+                                &ldquo;s_data.htm&rdquo;.
+                            </p>
+                    </ul>
+                <li>
+                    <p style="margin-bottom: 0cm; line-height: 100%">
+                        <b>Help</b>
+                        links to numerous other pages with manuals, tutorials, examples and
+                        application notes
+                    </p>
+            </ul>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h2 class="western">Main Menu Navigation Rules</h2>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                WR-Connect consists
+                from multiple simulation tools and controls, which utilize mutual
+                computational data and design parameters. Those data and parameters
+                are stored the browser&rsquo;s memory and can be transferred from one
+                page to another to perform different design steps (synthesis,
+                simulation, plotting results, etc.). Cross-navigation between the
+                internal WR-Connect pages is designed to be performed using the Main
+                Menu navigation bar. The original navigational controls of browser
+                could work also, but they are not recommended to use during the
+                design process.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h2 class="western">WR-Connect Environment Pages</h2>
+            <h3 class="western">File</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                This is the home
+                page of WR-Connect. It is used to import and export design project
+                file. In other words a user can open and save a design project using
+                this control. The feature has been tested on several browsers
+                (Internet Explorer, Google Chrome and Mozilla Firefox) in PC versions
+                (Windows 7-10 and Ubuntu 18.04). If using any of those browsers, a
+                user could be able to open a project (by clicking File / Import
+                Project menu item) from his/her computer in a usual way (using Open
+                File control). The export of a project file, however, might not work
+                in some browsers or under some security restrictions. Nevertheless, a
+                user can export his/her design using computer clipboard, if copying
+                or the appropriate text content from the text window (Select All &gt;
+                Copy) and then pasting it into a text editor (Notepad) and saving it
+                in a usual way. Next time, the project data can be imported in the
+                usual way. The project file content can be also imported from a text
+                editor through computer clipboard (Select All &gt; Copy &gt; Paste)
+                into the text window on &ldquo;File&rdquo; Page without using Open
+                File dialogue.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h3 class="western">Setup</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                This page contains
+                general design parameters associated with software settings,
+                dimensions of measure, frequency plans, synthesis and optimization
+                specs. Those parameters must to be set prior to performing
+                simulations.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h3 class="western">Editor</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                The Editor Page is
+                the main page of the WR-Connect, which performs all simulations
+                (synthesis, simulation, optimization and space mapping) and design
+                operations (manual and automatic design corrections). It is navigated
+                from any of &ldquo;Edit&rdquo;, &ldquo;Design&rdquo;, &ldquo;Run&rdquo;
+                menu options from other pages. If it is active, the &ldquo;Edit&rdquo;,
+                &ldquo;Design&rdquo; and &ldquo;Run&rdquo; menus contain
+                corresponding executable drop-down items.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h3 class="western">Reports &gt; Plot</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                This page contains
+                rectangular frequency domain plot window with controls selecting
+                s-matrix paths, types of characteristics, grid and zoom options. The
+                Plot Page can plot characteristics obtained from internal simulation
+                results, external s-parameters data or the both simultaneously.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <h3 class="western">Reports &gt; Import/Export</h3>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                This page is to
+                export the simulation results and import external data in common
+                s-parameters formats.
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+            <p style="margin-bottom: 0cm; line-height: 100%">
+                <br />
+
+            </p>
+        </div>
+
+
+
+
+
+
+    </div>
+</body>
+</html >

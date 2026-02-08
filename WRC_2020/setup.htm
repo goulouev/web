@@ -1,0 +1,408 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="WR-Connect, online free waveguide simulation tool">
+    <meta name="keywords" content="frequency, simulation, chebyshev, filter, design, LPF, BPF, freeware">
+    <meta name="author" content="Rousslan Goulouev">
+    <title>Project Setup</title>
+    <link rel="stylesheet" href="navbars.css" />
+    <style>
+        table.pan {
+            text-align: center;
+        }
+
+        td.pans {
+            border: dashed;
+            border-width: 1px;
+            border-radius: 10px;
+            font-family: Courier New, Courier, monospace,'Lucida Console';
+            color: maroon;
+            font-size: 11px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body style="background:#333;margin:0 0 0 0;" onload="SetUpLoad()">
+    <div class="navbar">
+        <a href="javascript:void(0)" onclick="SetUpUnload();window.location.href = 'index.htm';">File</a>
+        <a href="javascript:void(0)">Setup</a>
+        <a href="javascript:void(0)" onclick="SetUpUnload();window.location.href = 'editor.htm';">Edit</a>
+        <a href="javascript:void(0)" onclick="SetUpUnload();window.location.href = 'editor.htm';">Design</a>
+        <a href="javascript:void(0)" onclick="SetUpUnload();window.location.href = 'editor.htm';">Run</a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="javascript:void(0)">
+                Reports
+            </button>
+            <div class="dropdown-content">
+                <a href="javascript:void(0)" onclick="window.location.href = 'graph.htm';">Plot</a>
+                <a href="javascript:void(0)" onclick="window.location.href = 's_data.htm';">Import/Export</a>
+            </div>
+        </div>
+        <a href="help.htm">Help</a>
+    </div>
+    <input type="file" id="fileToLoad" style="display:none" accept=".txt,.dat" />
+
+    <form id="form1">
+        <div class="divdiv">
+            <table class="pans">
+                <tr>
+                    <td class="pans" style="width:180px">
+                        Units<br /><br />
+                        <input type="radio" ID="SetMM" class="fontos" name="Units" /><Label class="fontos">mm</Label>
+                        <input type="radio" ID="SetIn" class="fontos" name="Units" Checked="checked" /><Label class="fontos">in</Label>
+                        <input type="radio" ID="SetGHz" class="fontos" Enabled="false" Checked="checked" /><Label class="fontos">GHz</Label>
+                    </td>
+                    <td class="pans" style="width:750px">
+                        Simulation<br /><br />
+                        <Label class="fontos">Fmin, GHz</Label>
+                        <input type="text" ID="SetFmin" class="fontos" />
+                        <Label class="fontos">Fmax, GHz</Label>
+                        <input type="text" ID="SetFmax" class="fontos" />
+                        <Label class="fontos">Steps (Np)</Label>
+                        <input type="text" ID="SetNp" class="fontos" />
+                    </td>
+                </tr>
+            </table><br /><br />
+            <table class="pan">
+                <tr>
+                    <td class="pans" style="width:935px">
+                        Synthesis<br /><br />
+                        <input type="radio" ID="SetButter" class="fontos" name="Protos" /><Label class="fontos">Butterworth&nbsp;</Label>
+                        <input type="radio" ID="SetCheb" class="fontos" name="Protos" Checked="checked" /><Label class="fontos" style="margin-left:5px ">Chebychev&nbsp;&nbsp;</Label>
+                        <Label class="fontos" Width="70px">Fc, GHz</Label>
+                        <input type="text" ID="SetFc" class="fontos" />
+                        <Label class="fontos">BW, GHz</Label>
+                        <input type="text" ID="SetBW" class="fontos" />
+                        <Label class="fontos">Ripple, dB</Label>
+                        <input type="text" ID="SetAtt" class="fontos" /><br /><br />
+
+                        <input type="radio" ID="SetTaper" class="fontos" name="Protos" /><Label class="fontos">Tapered&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B0</Label>
+
+                        <input type="text" ID="SetB0" class="fontos" />
+                        <Label class="fontos">Bc</Label>
+                        <input type="text" ID="SetBc" class="fontos" />
+                        <Label class="fontos">B1</Label>
+                        <input type="text" ID="SetB1" class="fontos" />
+                        <Label ID="hujAdjust0" class="fontos" Width="18px"></Label>
+                        <Label class="fontos">Alpha</Label>
+                        <input type="text" ID="SetAlfa" class="fontos" /><br /><br />
+                        Length of Nodes (Resonators)<br />
+                        <input type="radio" ID="SetResoSynth" class="fontos" name="Resos" Checked="checked" /><Label class="fontos">Synthesize&nbsp;&nbsp;</Label>
+                        <input type="radio" ID="SetResoCnst" class="fontos" name="Resos" /><Label class="fontos">Do not Change&nbsp;&nbsp;</Label>
+                        <input type="radio" ID="SetResoByVal" class="fontos" name="Resos" /><Label class="fontos">Set by Number&nbsp;&nbsp;</Label>
+                        <input type="text" ID="SetResoNum" class="fontos" />
+                    </td>
+                </tr>
+            </table><br /><br />
+            <table class="pan">
+                <tr style="height:100px">
+                    <td class="pans" style="width:935px">
+                        Optimization<br /><br />
+                        <table class="pan">
+                            <tr>
+                                <td class="pans" style="width:130px">
+                                    Method<br /><br /><br />
+                                    <input type="radio" ID="SetOptPtrn" class="fontos" name="OptMetod" Checked="checked" /><Label class="fontos">Pattern Search</Label><br /><br />
+                                    <input type="radio" ID="RadOptGrad" class="fontos" name="OptMetod" disabled="disabled" /><Label class="fontos">Gradient&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Label>
+                                </td>
+                                <td class="pans" style="width:100px">
+                                    Function<br /><br /><br />
+                                    <input type="radio" ID="SetL2" class="fontos" name="OptFuncs" checked="checked" /><Label class="fontos">L2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Label><br /><br />
+                                    <input type="radio" ID="SetMini" class="fontos" name="OptFuncs" /><Label class="fontos">MiniMax</Label>
+                                </td>
+                                <td class="pans" style="width:250px">
+                                    Settings<br />
+                                    <Label class="fontos" Width="50px">Steps</Label>
+                                    <input type="text" ID="SetOptSteps" class="fontos" /><br />
+                                    <Label class="fontos" Width="50px">Dmin&nbsp;</Label>
+                                    <input type="text" ID="SetOptDmin" class="fontos" /><br />
+                                    <Label class="fontos" Width="50px">Cmin&nbsp;</Label>
+                                    <input type="text" ID="SetOptCmin" class="fontos" /><br />
+                                    <Label class="fontos" Width="50px">dX&nbsp;&nbsp;&nbsp;</Label>
+                                    <input type="text" ID="SetOptDx" class="fontos" />
+                                </td>
+                                <td class="pans" style="width:430px">
+                                    Targets<br />
+                                    <textarea ID="SetOptSpecs" class="fontos" rows="5" cols="50" TextMode="MultiLine"></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table><br />
+            <table class="pan">
+                <tr>
+                    <td class="pans" style="width:935px">
+                        Project Status and Errors<br />
+                        <Label class="fontos" Width="900px" style="background-color:darkgray" id="ErrLabel"></Label><br />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+
+    <p style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:10px;font-style:italic;color:white;text-align:right;">&copy;2006 R. Goulouev, WR-Connect 2.0 Web (javascripted)</p>
+    <script type="text/javascript">
+        var ErrStatus = 0;
+
+        function SetUpUpdate() {
+            GetFromDataForms();
+        }
+
+        function SetUpLoad() {
+            //if (localStorage.getItem('ProjectDat') === null) {
+                //localStorage.setItem('ProjectDat', '');
+            //}
+            if (localStorage.getItem('InputDatFileText') === null) {
+                //localStorage.setItem('InputDatFileText', '');
+            } else {
+                WriteForms();
+            }
+            //if (localStorage.getItem('DesignFileText') === null) {
+            //    localStorage.setItem('DesignFileText', '');
+            //}
+        }
+
+        function SetUpUnload() {
+            ReadForms();
+        }
+
+        function ReadForms() {
+            var InDat = new SetUpDat();
+            ErrStatus = 0;
+            var texto = "";
+            if (document.getElementById('SetMM').checked) {
+                InDat.iUnit = 0;
+            } else {
+                InDat.iUnit = 1;
+            }
+            if (document.getElementById('SetFmin').value) { InDat.f0 = DoubleVal('SetFmin'); }
+            if (document.getElementById('SetFmax').value) { InDat.f1 = DoubleVal('SetFmax'); }
+            if (document.getElementById('SetNp').value) { InDat.Np = IntVal('SetNp'); }
+            //Synthesis
+            if (document.getElementById('SetFc').value) { InDat.Fc = DoubleVal('SetFc'); }
+            if (document.getElementById('SetBW').value) { InDat.dF = DoubleVal('SetBW'); }
+            if (document.getElementById('SetAtt').value) { InDat.Att = DoubleVal('SetAtt'); }
+            if (document.getElementById('SetButter').checked) { InDat.IndFilter = 0; }
+            if (document.getElementById('SetCheb').checked) { InDat.IndFilter = 1; }
+            if (document.getElementById('SetTaper').checked) { InDat.IndFilter = 2; }
+            if (document.getElementById('SetB0').value) { InDat.Bstrt = DoubleVal('SetB0'); }
+            if (document.getElementById('SetBc').value) { InDat.Bcntr = DoubleVal('SetBc'); }
+            if (document.getElementById('SetB1').value) { InDat.Bend = DoubleVal('SetB1'); }
+            if (document.getElementById('SetAlfa').value) { InDat.alfa = DoubleVal('SetAlfa'); }
+            //DoubleVal('SetAlfa');
+            //InDat.alfa = document.getElementById('SetAlfa').value;
+            if (document.getElementById('SetResoCnst').checked) { InDat.CnstNode = 1; } else { InDat.CnstNode = 0;}
+            if (document.getElementById('SetResoNum').value) { InDat.ResoNum = DoubleVal('SetResoNum'); }
+            if (document.getElementById('SetMini').checked) { InDat.OptType = 0; }
+            if (document.getElementById('SetL2').checked) { InDat.OptType = 1; }
+            if (document.getElementById('SetOptSteps').value) { InDat.Nopt = IntVal('SetOptSteps'); }
+            if (document.getElementById('SetOptDmin').value) { InDat.Wmin = DoubleVal('SetOptDmin'); }
+            if (document.getElementById('SetOptCmin').value) { InDat.Cmin = DoubleVal('SetOptCmin'); }
+            if (document.getElementById('SetOptDx').value) { InDat.dX = DoubleVal('SetOptDx'); }
+            var InText = document.getElementById('SetOptSpecs').value;
+            if (!InText) {
+                InDat.Nspec = -1;
+                localStorage.setItem('InputDatFileText', InDat.ExportToText());
+                return;
+            }
+            var InDatLines = InText.match(/[^\r\n]+/g);
+            var OptErr = Array.isArray(InDatLines);
+            if (ErrStatus === 2) { return; }
+            var n = InDatLines.length - 1;
+            var i;
+            var iii = -1;
+
+            for (i = 0; i <= n; i++) {
+                var ShrtLine = InDatLines[i].trim();
+                if (ShrtLine) {
+                    iii = iii + 1;
+                    var vs = WordsToArray(ShrtLine);
+
+                    var i0 = parseInt(vs[0]);
+                    var i1 = parseInt(vs[1]);
+                    var f0 = parseFloat(vs[2]);
+                    var f1 = parseFloat(vs[3]);
+                    var Tr = parseFloat(vs[4]);
+                    var Np = parseInt(vs[5]);
+                    InDat.OptSpecs[iii] = [i0, i1, f0, f1, Tr, Np];
+                    InDat.Nspec = iii;
+                    //InDat.OptSpecs[iii] = vs;
+                    //InDat.Nspec = iii;
+                }
+            }
+            ErrStatus = 0;
+            localStorage.setItem('InputDatFileText', InDat.ExportToText());
+            return;
+        }
+
+        function WriteForms() {
+            var InDatText = localStorage.getItem('InputDatFileText');
+            if (!InDatText) { return; }
+            if (InDatText.trim) {
+                var InDat = new SetUpDat();
+                InDat.ImportFromText(InDatText);
+                if (InDat.iUnit === 0) {
+                    document.getElementById('SetMM').checked = true;
+                    document.getElementById('SetIn').checked = false;
+                } else {
+                    document.getElementById('SetMM').checked = false;
+                    document.getElementById('SetIn').checked = true;
+                }
+                //Simulation
+                document.getElementById('SetFmin').value = InDat.f0;
+                document.getElementById('SetFmax').value = InDat.f1;
+                document.getElementById('SetNp').value = InDat.Np;
+                //Synthesis
+                document.getElementById('SetFc').value = InDat.Fc;
+                document.getElementById('SetBW').value = InDat.dF;
+                document.getElementById('SetAtt').value = InDat.Att;
+                var iFilter = parseInt(InDat.IndFilter, 10);
+                switch (iFilter) {
+                    case 0:
+                        document.getElementById('SetButter').checked = true;
+                        document.getElementById('SetCheb').checked = false;
+                        document.getElementById('SetTaper').checked = false;
+                        break;
+                    case 1:
+                        document.getElementById('SetButter').checked = false;
+                        document.getElementById('SetCheb').checked = true;
+                        document.getElementById('SetTaper').checked = false;
+                        break;
+                    case 2:
+                        document.getElementById('SetButter').checked = false;
+                        document.getElementById('SetCheb').checked = false;
+                        document.getElementById('SetTaper').checked = true;
+                        break;
+                    default:
+                        document.getElementById('SetButter').checked = false;
+                        document.getElementById('SetCheb').checked = true;
+                        document.getElementById('SetTaper').checked = false;
+                }
+                if (InDat.CnstNode === 1) {
+                    document.getElementById('SetResoCnst').checked = true;
+                } else {
+                    document.getElementById('SetResoSynth').checked = true;
+                }
+
+                document.getElementById('SetB0').value = InDat.Bstrt;
+                document.getElementById('SetBc').value = InDat.Bcntr;
+                document.getElementById('SetB1').value = InDat.Bend;
+                document.getElementById('SetAlfa').value = InDat.alfa;
+                document.getElementById('SetResoNum').value = InDat.ResoNum;
+                // Optimization < br /> <br />
+                var iOpter = parseInt(InDat.OptType, 10);
+                if (iOpter === 0) {
+                    document.getElementById('SetMini').checked = true;
+                    document.getElementById('SetL2').checked = false;
+                } else {
+                    document.getElementById('SetMini').checked = false;
+                    document.getElementById('SetL2').checked = true;
+                }
+                document.getElementById('SetOptSteps').value = InDat.Nopt;
+                document.getElementById('SetOptDmin').value = InDat.Wmin;
+                document.getElementById('SetOptCmin').value = InDat.Cmin;
+                document.getElementById('SetOptDx').value = InDat.dX;
+                var texto = "";
+                for (i = 0; i <= InDat.Nspec; i++) {
+                    texto = texto + InDat.OptSpecs[i].join(" ") + "\r\n";
+                    //texto = texto + InDat.OptSpecs[i].join(" ") + "<br/>";
+                }
+                //document.getElementById('SetOptSpecs').value = texto;
+                document.getElementById('SetOptSpecs').value = texto;
+            }
+
+        }
+
+        function SetInDataForms(InDatText) {
+            if (InDatText.trim) {
+                var InDat = new SetUpDat();
+                InDat.ImportFromText(InDatText);
+                if (InDat.iUnit === "0") {
+                    document.getElementById('SetMM').checked = true;
+                    document.getElementById('SetIn').checked = false;
+                } else {
+                    document.getElementById('SetMM').checked = false;
+                    document.getElementById('SetIn').checked = true;
+                }
+                //Simulation
+                document.getElementById('SetFmin').value = InDat.f0;
+                document.getElementById('SetFmax').value = InDat.f1;
+                document.getElementById('SetNp').value = InDat.Np;
+                //Synthesis
+                document.getElementById('SetFc').value = InDat.Fc;
+                document.getElementById('SetBW').value = InDat.dF;
+                document.getElementById('SetAtt').value = InDat.Att;
+                var iFilter = parseInt(InDat.IndFilter, 10);
+                switch (iFilter) {
+                    case 0:
+                        document.getElementById('SetButter').checked = true;
+                        document.getElementById('SetCheb').checked = false;
+                        document.getElementById('SetTaper').checked = false;
+                        break;
+                    case 1:
+                        document.getElementById('SetButter').checked = false;
+                        document.getElementById('SetCheb').checked = true;
+                        document.getElementById('SetTaper').checked = false;
+                        break;
+                    case 2:
+                        document.getElementById('SetButter').checked = false;
+                        document.getElementById('SetCheb').checked = false;
+                        document.getElementById('SetTaper').checked = true;
+                        break;
+                    default:
+                        document.getElementById('SetButter').checked = false;
+                        document.getElementById('SetCheb').checked = true;
+                        document.getElementById('SetTaper').checked = false;
+                }
+
+                document.getElementById('SetB0').value = InDat.Bstrt;
+                document.getElementById('SetBc').value = InDat.Bcntr;
+                document.getElementById('SetB1').value = InDat.Bend;
+                document.getElementById('SetAlfa').value = InDat.alfa;
+                document.getElementById('SetResoNum').value = InDat.ResoNum;
+                // Optimization < br /> <br />
+                var iOpter = parseInt(InDat.OptType, 10);
+                if (iOpter === 0) {
+                    document.getElementById('SetMini').checked = true;
+                    document.getElementById('SetL2').checked = false;
+                } else {
+                    document.getElementById('SetMini').checked = false;
+                    document.getElementById('SetL2').checked = true;
+                }
+                document.getElementById('SetOptSteps').value = InDat.Nopt;
+                document.getElementById('SetOptDmin').value = InDat.Wmin;
+                document.getElementById('SetOptCmin').value = InDat.Cmin;
+                document.getElementById('SetOptDx').value = InDat.dX;
+                var texto = "";
+                for (i = 0; i <= InDat.Nspec; i++) {
+                    texto = texto + InDat.OptSpecs[i].join(" ") + "\r\n";
+                    //texto = texto + InDat.OptSpecs[i].join(" ") + "<br/>";
+                }
+                //document.getElementById('SetOptSpecs').value = texto;
+                document.getElementById('SetOptSpecs').value = texto;
+            }
+        }
+
+        //######################  FILE OPEN #######################################################
+        function loadFileAsText() {
+            var fileToLoad = document.getElementById("fileToLoad").files[0];
+
+            var fileReader = new FileReader();
+            fileReader.onload = function (fileLoadedEvent) {
+                var textFromFileLoaded = fileLoadedEvent.target.result;
+                document.getElementById("FileProjectOkno").value = textFromFileLoaded;
+            };
+            fileReader.readAsText(fileToLoad, "UTF-8");
+        }
+
+    </script>
+    <script type="text/javascript" src="wrc_setups.js"></script>
+    <script type="text/javascript" src="wrc_Strings.js"></script>
+
+</body>
+</html>

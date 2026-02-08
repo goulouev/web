@@ -1,0 +1,2007 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="author" content="Rousslan Goulouev">
+    <meta name="description" content="About WR-Connect, corrugated waveguide filters, design tutorial">
+    <meta name="keywords" content="waveguide, filter, design, low-pass, band-pass, corrugated, spurious, free, software">
+    <title>WR-Connect: Broadwall Inhomogeneous Corrugated Waveguide LPF</title>
+    <link rel="stylesheet" href="navbars.css" />
+    <style>
+        .vertical-menu {
+            width: 15%;
+            height: 530px;
+            overflow-y: auto;
+            float: left;
+            color: navy;
+            background-color: white;
+            /* width: 50%;*/
+            /*padding: 10px;*/
+            /*height: 300px;*/ /* Should be removed. Only for demonstration */
+        }
+
+            .vertical-menu a {
+                background-color: #eee;
+                color: black;
+                display: block;
+                padding: 12px;
+                text-decoration: none;
+            }
+
+                .vertical-menu a:hover {
+                    background-color: #ccc;
+                }
+
+                .vertical-menu a.active {
+                    background-color: #624e4e;
+                    color: white;
+                }
+
+            .vertical-menu p {
+                font-size: 18px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: bold;
+                color: navy;
+                padding-left:15px;
+            }
+/*========================================*/
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column {
+            float: left;
+            width: 85%;
+            padding: 10px;
+            height: 530px;
+            overflow-y: auto;
+            page-break-after: always;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /*======================================*/
+
+        h1 {
+            margin-bottom: 0.2cm;
+            background: transparent;
+            font-family: "Liberation Sans", sans-serif;
+            font-size: 18pt
+        }
+        h2 {
+            margin-bottom: 0.4cm;
+            background: transparent;
+            font-family: "Liberation Sans", sans-serif;
+            font-size: 16pt;
+            font-style:italic;
+        }
+
+        p {
+            margin-bottom: 0.25cm;
+            background: transparent
+        }
+
+        .knob {
+            font-family:'Times New Roman', Times, serif;
+            font-weight:bold;
+            font-size: 12pt;
+            color:navy;
+        }
+        td {
+            font-family: 'Times New Roman', Times, serif;
+            color: navy;
+        }
+    </style>
+</head>
+<body >
+    <div class="navbar">
+        <a href="index.htm">File</a>
+        <a href="setup.htm">Setup</a>
+        <a href="editor.htm">Edit</a>
+        <a href="editor.htm">Design</a>
+        <a href="editor.htm">Run</a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="javascript:void(0)">
+                Reports
+            </button>
+            <div class="dropdown-content">
+                <a href="graph.htm">Plot</a>
+                <a href="s_data.htm">Import/Export</a>
+            </div>
+        </div>
+        <a href="javascript:void(0)">Help</a>
+    </div>
+    <div class="row">
+        <div class="vertical-menu">
+            <p>WR-Connect</p>
+            <a href="help.htm">About Software</a>
+            <a href="menus.htm">Main Menus</a>
+            <a href="help_setup.htm">Initial Setup</a>
+            <a href="help_edit.htm">Design Editor</a>
+            <p>Tutorials</p>
+            <a href="help_app0.htm">Simple Filter Design</a>
+            <a href="help_app1.htm" class="active">Corrugated Filter #1</a>
+            <a href="help_app2.htm">Space Mapping</a>
+            <a href="#">--------------</a>
+            <p>Examples</p>
+            <a href="examps.htm">Conventional Designs</a>
+        </div>
+        <div id="MainOkno" class="column" style="background-color:white;">
+            <P align="center" style="line-height: 100%; margin-top: 0.43cm; margin-bottom: 0.2cm; page-break-after: avoid;">
+                <FONT face="Liberation Sans, sans-serif">
+                    <FONT size="6"
+                          style="font-size: 24pt;"><B>Iregular Corrugated Waveguide Filter Design</B></FONT>
+                </FONT><br /><br />
+            </P>
+            <font style="font-family: 'Times New Roman', Times, serif; font-style:italic; font-size: 10pt; color: navy;">R. Goulouev, 01/05/2021</font>
+            <p>
+                <a href="javascript:void(0)" onclick="NewWin('MainOkno');">Open this article in separate window to print</a>
+            </p>
+            <H1>1. Introduction</H1>
+            <P>
+                In modern microwave communication technologies, there is great interest in waveguide
+                low pass filters. To be noticed, there are currently many conceptual solutions for
+                a waveguide LPF. These include conventional corrugated waveguide filters,
+                ridged waveguide evanescent-mode filters, waffle iron filters and, finally, the so-called
+                "inhomogeneous stepped-impedance corrugated waveguide low-pass filters" [1]. The last ones,
+                by the way, became popular
+                among waveguide filter designers, which is reflected in many recent
+                publications.
+                Nevertheless, in spite of so many theoretical view points on these filters,
+                from a practical point of view, it is not very clear how to design them.
+                In view of this interest, we present here <a href="qperiod.htm">simple design tools</a>
+                [A1, A2] that can be used
+                to design a filter of this kind and detailed guidelines based on a simple
+                "hit-and-miss" approach.
+                As an example of the application of these tools and instructions, we will design
+                a C-band interference reject waveguide filter.
+            </P>
+
+            <H1>2. Problem Description</H1>
+
+            <P>
+                For example, we need a waveguide low-pass filter to an existing C-band receiver.
+                This receiver has always worked well before a "super-duper" 9G cellular base
+                station was installed somewhere nearby. This 9G immediately littered everything
+                around with spurious interference in the range from 14 to 32 GHz. As we found, the
+                original LPF is intended to clean interference only up to 12 GHz. In other words,
+                we need an additional LPF that we could put in cascade with the existing one.
+                So we would like to have a simple,
+                reliable and inexpensive WR-229 low-pass filter with a bandwidth from 3.7 to 4.2 GHz
+                and a stopband extending from 14 to 32 GHz. But there are no such filters on sale
+                anywhere around.
+                So we are going to design it here from scratch.
+            </P>
+
+            <P>
+                <IMG name="Image5" width="623"
+                     height="543" align="left" src="img/pic_11.gif"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 1: Schematic representation of
+                        satellite C-band downlink reception affected by unwanted
+                        interference
+                    </I>
+                </FONT>
+            </P>
+
+            <H1>3. Specification</H1>
+
+            <P>
+                In terms of design goals, we
+                would need a waveguide low-pass filter with
+                sufficiently good characteristics, such that it would not impair the quality of
+                the receiving signal to any noticeable degree. Let us target the following
+                parameters:
+            </P>
+
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Table 1: A specification with list of
+                        important parameters and their targetted values.
+                    </I>
+                </FONT>
+            </P>
+            <TABLE border="1">
+                <TR>
+                    <TD width="150px"><b>Parameter</b></TD>
+                    <TD width="150px"><b>Value</b></TD>
+                    <TD> <b>Notes</b> </TD>
+                </TR>
+                <TR>
+                    <TD> Pass-Band,GHz </TD>
+                    <TD> 3.7 - 4.2 </TD>
+                    <TD> Reception signals frequency range </TD>
+                </TR>
+                <TR>
+                    <TD> Insertion Loss, dB </TD>
+                    <TD> &lt; 0.1 </TD>
+                    <TD> It is a C-band waveguide LPF, we expect it to be low.</TD>
+                </TR>
+                <TR>
+                    <TD> Return Loss, dB </TD>
+                    <TD> &gt; 23 </TD>
+                    <TD>
+                        This filter is to be connected to an existing LPF, so we don't want
+                        the total return loss to degrade much
+                    </TD>
+                </TR>
+                <TR>
+                    <TD> Stop-Band, GHz </TD>
+                    <TD>
+                        14 - 32
+                    </TD>
+                    <TD>
+                        Unwanted
+                        interference signals
+                    </TD>
+                </TR>
+                <TR>
+                    <TD>
+                        Rejection,
+                        dB<br />
+                        14 - 20 GHz<br />20 - 32 GHz
+                    </TD>
+                    <TD>
+                        <br />&gt; 20<br />&gt; 40
+                    </TD>
+                    <TD>
+                        <br /> The
+                        attenuation needed to remove the
+                        interference
+                    </TD>
+                </TR>
+                <TR>
+                    <TD>
+                        Length, inch
+                    </TD>
+                    <TD>
+                        &lt;
+                        12.0
+                    </TD>
+                    <TD>
+                        We
+                        have no more space for the
+                        filter
+                    </TD>
+                </TR>
+            </TABLE>
+            Our specification looks very simple as it contains only six requirements
+            (some specifications can be written on many pages and contain hundreds of requirements).
+            This is just an impression, but in fact, it looks insane. The point is that up to 122 waveguide modes
+            can propagate in the WR-229 waveguide at a frequency of 32 GHz.
+            Simple calculations can show that 122 modes can pass through in 122 x 122 = 14884 invisible paths
+            (including both transmission and conversion).
+            Any of these paths can be a failure. How can we simulate, detect and stop all those modes? How can we
+            review 14884 plots? How do we practically measure them? Nevertheless, it is doable task
+            in respect to the new design
+            concepts, design methods and design tools further discussed.
+
+            <H1>4. Design Concept Selection</H1>
+
+            <P>
+                As noted, there are already many different concepts for low pass filters (LPF),
+                but they can all be different and not all will be suitable for solving our problem.
+                In order to define the best (for us) concept, let us see what is special about
+                our way of application.
+                Here we can see the following:<br />
+                <ol>
+                    <li>
+                        We need a filter with a passband in lower C-band (3.7-4.2 GHz) and based on
+                        a conventional waveguide (WR-229).
+                    </li>
+                    <li>
+                        And we need to stop high frequency (Ku, K, Ka bands) spurious interference.
+                        We have already counted 122 different waveguide modes in
+                        waves can propagate
+                        a WR-229th waveguide at 32 GHz. Most of the waveguide
+                        low-pass filter
+                        concepts are apparently not designed to function in such an overmoded condition.
+                    </li>
+                    <li>
+                        Well, we also want a compactl filter, with a small insertion loss,
+                        well matched and relatively simple in respect to modern machining technologies.
+                    </li>
+                </ol>
+            </P>
+            <P>
+                Here we can say that of those well-known waveguide LPF designs that were mentioned above,
+                only the waffle iron and "inhomogeneous" corrugated ones are claimed to be "spurious-less".
+                The waffle iron filter design are often
+                <a href="../notes/waffle.htm">considered</a> [A3]
+                to be very complex
+                in terms of handling the spurious modes that can cause unwanted responses in both the passband
+                and stopband. The concept of the inhomogeneous filter [1] looks theoretically simpler and
+                more modern
+                (both visually and technologically). It seems to be what we need in terms of filtering.
+                In addition, we have a proper design tool such as WR-Connect [A2].
+            </P>
+
+            <H1>5. Design and Theory Basics</H1>
+
+            <P>
+                As stated in the help article in
+                <a href="qperiod.htm">"Corrugated Waveguide Low-Pass Filter"</a> page, there have been
+                published many papers on these types of filters and our way of designing is somewhat different.
+                Therefore, it makes sense to explain the basics of structural concept and design approach used
+                here. The filter is represented as a section of corrugated (mainly in E-plane) waveguide
+                with basic dimensions and period of corrugations smoothly changing along longitudinal
+                direction (see Figure 2 below).
+            </P>
+            <img src="img/prof_0.png" />
+            <p><i>Figure 2: Schematic and structural representation of a conventional irregular corrugated filter.</i></p>
+            <br />
+            <p>
+                This part of corrugated filter is called "channel"
+                here and it is considered to be fundamental part in forming the filter's stopband.
+                In most known cases, the channel is tapered from ends to center, from
+                center to ends or from one end to the other end. The primary design tool presented here can
+                be used in all these cases of profile shaping. Here the channel shaping profile is
+                set by the dimensions of corrugations at three points (start, middle and end).
+                These three points, in turn, are defined by the width, height and length of the smaller
+                and larger waveguide nodes, which form the composite element of the corrugated structure
+                period. Further, between these points, the profile of the waveguide channel along its inner
+                and outer generatrix of the corrugations is set by the following distribution function (1).
+            </p>
+            <table>
+                <tr>
+                    <td>
+                        <img src="img/prof_1.png" />,
+                    </td>
+                    <td>
+                        (1)
+                    </td>
+                </tr>
+            </table>
+            <p>
+                where this function is applied to each iris dimensions
+                <i>(w<sub>i</sub>,h<sub>i</sub>,l<sub>i</sub>, i=0,1,..N)</i>
+                and each cavity dimensions
+                <i>(W<sub>i</sub>,H<sub>i</sub>,L<sub>i</sub>, i=0,1,..N-1)</i>.
+                It should be noted here that the number of irises, therefore, <i>N-1</i>
+                is accordingly counted for irises in (1).
+
+                In work [2], an EM model of such a corrugation element (cavity junction) is
+                considered, which exhibits a transmission zero under certain conditions.
+                In these terms, a single corrugation can be already considered as
+                an elementary band-rejection filter. There it is also proposed
+                to distribute the dimensions of the corrugation in such a way that their
+                elementary stopbands cover the entire targetted stopband. In simple terms,
+                this parameter <i><font style="font-family:Symbol">a</font></i> (alpha) adjusts
+                the balance between large corrugations
+                that operate at low frequencies and small corrugations that operate at high
+                frequencies.
+
+                It is widely known that for regular corrugated filters the transmission versus frequency response
+                of the dominant TE10 mode
+                directly affects the transmission responses of the TE<sub>N0</sub>-modes [2], which are,
+                in fact, its distorted images. In case of irregular corrugated (when a-dimension of channel is
+                not constant) filter [1], however, there is no a simple design rule
+                except just changing the channel width from narrow to wide, from ends to center or from one end
+                to the other end, or vice versa.
+
+                However, in both cases (regular and irregular), the high-order
+                TE<sub>N0</sub>-modes responses are somehow related to the
+                original TE<sub>10</sub>-mode response. Therefore, it is very important to design the filter in such
+                a way that the TE<sub>10</sub> stopband to be as wide as possible and continuously free from
+                spurious responses.
+
+                Therefore, initially, the filter channel must be configured in such a way as
+                to obtain a good quality TE<sub>10</sub> stopband.
+
+                Further, this waveguide channel is to be matched to the I/O
+                interface by means of a transformer (if needed). If using this design tool, this
+                step is automatically performed. Nevertheless, since matching occurs at a single
+                frequency point (center frequency), the resulting well matched bandwidth may not be
+                enough to cover the entire passband as targetted and additional optimization would be
+                required.
+            </p>
+
+            <H1>6. Design Process</H1>
+
+            <P>
+                So we have chosen a filter concept that seems to suit us in terms of technological
+                implementation and design method. We also have design and analysis tools for this type
+                of structure. Now we need to decide, in fact, how we will do it step by step.
+                To do this, we need to know some basics on how such a filter is built and how
+                it operates. Therefore, before embarking
+                on the design, a beginner designer is highly recommended to familiarize with
+                the original knowledge source in [1].
+                Notwithstanding, very briefly, how such a filter works can be explained in a few sentences:
+                <ol>
+                    <li>
+                        The selectivity of such a filter should be both in frequency spectrum and in
+                        waveguide modes
+                        (in the common theory of filters, selectivity is defined on frequency domain only).
+                    </li>
+                    <li>
+                        With respect to the dominant waveguide mode (
+                        <b>TE<sub>10</sub></b>),
+                        this filter should exhibit
+                        the typical characteristics of a low pass filter. Namely, there must be a passband
+                        for the useful signals, a roll-off and a broadband stopband in which this mode
+                        is attenuated.
+                    </li>
+                    <li>
+                        Only one waveguide mode (
+                        <b>TE<sub>10</sub></b>)
+                        must propagate in the passband.
+                    </li>
+                    <li>
+                        The stopband must attenuate all waveguide modes (all
+                        <b>TE<sub>NM</sub></b>
+                        and
+                        <b>TM<sub>NM</sub></b> modes).
+                    </li>
+                    <li>
+                        The positions and shapes of spurious modes responses over the frequency domain,
+                        however, are somehow related to the fundamental mode response.
+                    </li>
+                </ol>
+                Now, based on the above theses, we can describe a reasonable procedure for designing
+                such a filter and based on our toolkit. As noted, the design foundations are based
+                on the creation
+                of a "<b>TE<sub>10</sub></b>-mode clean" filter. Well, this can be achieved
+                by choosing a right basic dimensions and shape of the internal waveguide channel formed by
+                corrugations.<br />
+                <a id="rules"></a>
+                <ul>
+                    <li>
+                        The channel width must be wide enough for the fundamental waveguide mode to
+                        pass. Thus, the width of the waveguide channel must be definitely greater
+                        than 1.6 inches in any cross section (one can use this <a href="../oncorr/oncorr0.htm">
+                            simple tool
+                        </a> for such estimations). From a practical point of view,
+                        the minimum channel width should be at least 15-20% wider for a good matching.
+                    </li>
+                    <li>
+                        It must be narrow enough for the higher order <b>TE<sub>N0</sub></b>-modes
+                        not to pass. I.e., the maximum width of the waveguide channel, in a rough
+                        approximation, should be narrower than 2.8 inches (TE<sub>20</sub> cut-off).
+                        Although, in practice,
+                        it is possible to increase it by 10-15 percent, since the resonance frequencies
+                        of the TE<sub>20</sub>-mode are usually slightly higher than its cut-off frequency.
+                    </li>
+                    <li>
+                        The height of this channel
+                        should only allow vertically polarized waveguide modes to pass through.
+                        Thus, of all 122 spurious modes, we will single out only
+                        <b>TE<sub>N0</sub></b>-modes,
+                        of which there are only 12 (all the same, less). Thus, the waveguide channel,
+                        if roughly, should have a width in the range of 1.8-3.0 inch and a height
+                        of no more than 0.17
+                        inch.
+                    </li>
+                    <li>
+                        On the other hand, as suggested in [3], the corrugation
+                        cavity height should not be extruded  from the iris aperture for more than
+                        quarter of waveguide wavelength defined at the highest frequency bound of
+                        the targetted stop-band. Thus, the exterior height of the waveguide channel
+                        should be no more than 0.34 inch, roughly.
+                    </li>
+                    <li>
+                        Next, we would need to establish a proper shape function (profile) of the
+                        corrugated surface along waveguide channel.
+                        There is probably no a "golden rule" that applies to any filter case and always gives
+                        good results.
+                        Based on simple considerations in [2], however, it can be said that
+                        large corrugations works better
+                        at low frequencies, and small ones - at high frequencies.
+                        Therefore, we can smoothly change
+                        the shape of the interior and exterior bounds of corrugations from small ones
+                        to large ones (suggested above),
+                        tapering them to the center or from the center, or only in one direction.
+                        The purpose is to achieve
+                        the required response for the fundamental waveguide mode (<b>TE<sub>10</sub></b>).
+                    </li>
+                    <li>
+                        At the same time, we will need to establish a proper shaping of the waveguide
+                        channel in H-plane along the length of the channel within
+                        previously agreed limits. This, according to [1], would control the
+                        spurious <b>TE<sub>N0</sub></b>
+                        (<b>N>1</b>). In such a way, we can play with the channel shaping and keep running
+                        simulations untill we obtain something acceptable.
+                    </li>
+                </ul>
+                All the points described above are some basic theoretical basis on which such a filter can
+                be designed, useful for general understanding, but are not a specific design procedure.
+                Here, the "specific design procedure" means a universal set of actions that could lead
+                to a fine design concept, which is compliant to given requirements.
+                As is often understood in the industry, the ideal design procedure is to be written for
+                a "unskilled", "lazy" and "replaceable" designer who can just follow simple instructions
+                ("open window", "click button", and so on) without being overly burdened with
+                theoretical sophistications. It is actually does not always work that way, but we
+                will try so as a set of quick but ill-considered actions (similar to a computer game).
+                <ol>
+                    <li>
+                        Open the "<a href="qperiod.htm">Corrugated Waveguide Low-Pass Filter</a>"
+                        page with appropriate design tool.
+                    </li>
+                    <li>
+                        Select WR-229 waveguide as I/O interface and try default settings
+                        (click <b>"Set Initial"</b> button).
+                    </li>
+                    <li>
+                        Set the project by clicking  <b>"Setup Project"</b> button. This is
+                        one time action, which originate the default project data.
+                    </li>
+                    <li>
+                        Transfer the starting design concept to the simulatior by clicking
+                        <b>"Design Filter"</b> button and run all required simulations there.
+                    </li>
+                    <li>
+                        Based on the analysis results, make the necessary adjustments.
+                        This can be done both in edit mode in the simulator and on the original tool.
+                        Those adjastments should help to establish right bandwidth, roll-off,
+                        <b>TE<sub>10</sub></b>-stopband and <b>TE<sub>N0</sub></b> spurious responses.
+                    </li>
+                    <li>
+                        Finally, if the basic frequency domain characteristics
+                        of the filter in terms
+                        of passband, stopband and spurious modes are satisfactory
+                        in a rough approximation, then use the optimizer for finalization.
+                    </li>
+                </ol>
+            </P>
+
+
+            <H1>7. Step by Step Example</H1>
+
+            <h2>7.1. Initial Project Setup and Design Concept</h2>
+            <P>
+                As we can see, the instructions above look simple except for the last two steps.
+                Therefore, for the sake of clarity,
+                we will describe in detail each step using our filter as an example.
+
+                Following our instructions written above, we open the
+                "<a href="qperiod.htm">Corrugated Waveguide Low-Pass Filter</a>" page, select <b>WR-229</b>
+                waveguide interface, click <b>"Set Initial"</b> button and then click
+                <b>"Set Project"</b> button. The first click leads to setting the default value for center
+                frequency, I/O interface and internal corrugated waveguide channel with dimensions of all
+                corrugations. These initial data and dimensions are just a guess, so they can be changed
+                by directly entering alternative numbers into the appropriate fields.
+                The "Set Project" button also sets the project setup data
+                (frequency plans, prototypes, units, etc.) as a "good" guess for just only in order
+                to facilitate the user to directly enter data in the <a href="setup.htm">Project Setup Page</a>.
+                It is advisable to do this only once and then make the necessary adjustments on that page.
+                So, this simple sequence of actions is shown in the picture below.
+            </P>
+
+            <P>
+                <IMG name="Image5" align="left" src="img/help_app1_0.png"><BR clear="left"><BR>
+            </P>
+
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 3: Steps to set the default design concept and project data.
+                    </I>
+                </FONT>
+            </P>
+            <button class="knob" onclick="step0();">Go to This Design Step</button>
+
+            <h2>7.2. Structure Topology, Dimensions and Simulations</h2>
+            <P>
+                The initial settings are fine with us as a starting point except maybe the center
+                frequency, which we set as the midpoint of our specified passband (f<sub>c</sub>
+                =(3.7+4.2)/2 = 3.95).
+                Now we just click <b>"Design Filter"</b> button
+                (Figure 3) and see what we are getting. After we click the button,
+                we will be navigated to the "design editor" (designer) page (see Figure 4).
+                This page is the main entry point to most of the other functional pages
+                of WR-Connect CAD environment. There are three main control areas we are
+                going to use now:
+                <ul>
+                    <li>
+                        Top black bar with different menu options. This menu is linked
+                        to different methods of structure model restruct functions related to corrections,
+                        simulations and input and output of results. The picture below shows how
+                        to run the simulation (Figure 4).
+                    </li>
+                    <li>
+                        The left side is polpulated by different buttons and entry fields with symmetries and
+                        modal settings. The initial settings for the incident wave and the number of localized
+                        waveguide modes (used in the solution) depend on the type of symmetry of the EM model.
+                        Our corrugated filter model is symmetrical in planes (horizontal XZ and vertical YZ).
+                        In common rectangular waveguide terminology, these planes are called central H-plane
+                        and E-plane accordingly. Nevertheless, we can also change the boundary conditions
+                        on the symmetry planes (refer to
+                        <a href="help_edit.htm">Design Editor</a> help page for more information).
+                    </li>
+                    <li>
+                        The central and right part of the page is occupied by a text box,
+                        in which the connections topology and all dimensions of the model
+                        are presented plain text lines (refer to
+                        <a href="help_edit.htm">Design Editor</a> help page for more information).
+                        Such a representation of the design model is very convenient, as it allows simple
+                        and quick methods of correction, modification and reconfiguration.
+                        Since this is not visually representative,
+                        one can see how the model looks in a parallel 3D perspective (Figure 5)
+                        by clicking "Go To 3D View" button (Figure 4).
+                    </li>
+                </ul>
+            </P>
+
+
+            <P>
+                <IMG name="Image5" width="620" height="450" align="left" src="img/help_app1_1.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 4: Next steps to see 3D view and run simulation.
+                    </I>
+                </FONT>
+            </P>
+            <button class="knob" onclick="step1();">Go to This Design Step</button>
+
+            <P>
+                <IMG name="Image5" width="620" align="left" src="img/help_app1_2.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 5: 3D view plot.
+                    </I>
+                </FONT>
+            </P>
+            <h2>7.3. Running Simulations</h2>
+            <P>
+                As noted in the above paragraphs, here we are using simple trial and error,
+                while not really thinking about what we are doing.
+                The main purpose of this tutorial is to learn how to use our toolkit
+                and acquire the basic skills to design a corrugated waveguide low-pass filter.
+                Therefore, we will run simulations a lot and chaotically, review the obtained results
+                and, according to the results, make certain adjustments to the design model.
+                Thus, we will start with the original model and launch simulation from the menu
+                (see Figure 4),
+                wait until the red status bar (located in left panel with controls) runs to the end,
+                and then review our results (click "Plot" button under status bar).
+                The first simulation result will look like shown on Figure 6 below.
+                As a result, we have already got quite good return loss, which is at least 16 dB in
+                our entire band. In some cases,
+                we could even say that this is already enough, slightly optimize the return loss
+                to say 20 dB, stop simulations, fabricate, and send it to operation. But let us not
+                rush and see how our filter actually works as a low-pass filter, namely how it cuts off
+                the specified spurious in far frequency ranges.
+            </P>
+
+            <P>
+                <IMG name="Image5" width="620" align="left" src="img/help_app1_3.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 6: The default design reflection and transmission magnitudes (dB)
+                        versus frequency (GHz) responses.
+                    </I>
+                </FONT>
+            </P>
+
+            <P>
+                It should be noted that the simulation frequency bandwidth only covers
+                the near-band frequencies, which fit WR-229 operational bandwidth only.
+                This comes with the default settings.
+                In order to expand the simulation frequency range, we have to go to
+                the <a href="setup.htm">"Setup Page"</a> and fix it there as shown on see Figure 7.
+            </P>
+
+            <P>
+                <IMG name="Image5" width="620" align="left" src="img/help_app1_4.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 7: The frequency sweep is reset from 3 to 33 GHz with 2000 intervals (2001 points).
+                    </I>
+                </FONT>
+            </P>
+            <button class="knob" onclick="step2();">Go to This Design Step</button>
+
+            <P>
+                After correcting the frequency range, we will return to the Desig Editor (click
+                the "Design"on top black bar), where we will again run simulation and review results
+                in same manner (see Figure 8 with resulting performance plots).
+            </P>
+
+            <P>
+                <IMG name="Image5" width="620" align="left" src="img/help_app1_5.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 8: The reflection and transmission magnitudes (dB) over extended frequency sweep.
+                    </I>
+                </FONT>
+            </P>
+
+            <P>
+                Those These are the basic steps for quickly running simulations.
+            </P>
+            <h2>7.4. Basic Analysis Methods.</h2>
+            <p>
+                From the plot on Figure 8, it is visible that the dominant waveguide mode (TE<sub>10</sub>),
+                pass-band only extends roughly from 5 to 11.5 GHz, although we need much wider stopband.
+                As it is already noted, in addition to the TE <sub>10</sub>mode, 121 other
+                waveguide modes exist and possibly propagate in a WR-229 size waveguide at high frequency
+                bound.
+                Since it is a failure design, keeping simulating all of possible waveguide
+                modes makes no sense at all. Nevertheless, out of curiosity, it still makes sense
+                to run the first two low order spurious modes having different polarizations
+                (TE<sub>20</sub> and TE<sub>01</sub>).
+                The basic principle on how the incident and solution modes are set and indexed is explained in
+                the <a href="help_edit.htm">Design Editor</a> help page.
+                <table border="1">
+                    <tr>
+                        <td> Mode </td>
+                        <td> YZ-Symmetry</td>
+                        <td> XZ-Symmetry</td>
+                        <td> Incident Mode </td>
+                        <td> Solution Modes </td>
+                        <td>Go to This Design Step</td>
+                    </tr>
+                    <tr>
+                        <td> TE<sub>20</sub> </td>
+                        <td> E </td>
+                        <td> E </td>
+                        <td> 0 1 0 </td>
+                        <td> 1 7 10 </td>
+                        <td><button class="knob" onclick="step_te20();">Set TE<sub>20</sub>-mode</button></td>
+                    </tr>
+                    <tr>
+                        <td> TE<sub>01</sub> </td>
+                        <td> E </td>
+                        <td> H </td>
+                        <td> 0 0 0 </td>
+                        <td> 1 7 10 </td>
+                        <td><button class="knob" onclick="step_te01();">Set TE<sub>01</sub>-mode</button></td>
+                    </tr>
+                </table>
+            </p>
+            <P>
+                <IMG name="Image5" width="620" align="left" src="img/help_app1_0_te_20.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 8: The TE<sub>20</sub>-mode transmission magnitude (dB) over extended frequency sweep.
+                    </I>
+                </FONT>
+            </P>
+
+            <P>
+                <IMG name="Image5" width="620" align="left" src="img/help_app1_0_te_01.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 9: The TE<sub>01</sub>-mode transmission magnitude (dB) over extended frequency sweep.
+                    </I>
+                </FONT>
+            </P>
+            <p>
+                The conclusion we can make is that our "draft" filter does not work for these waveguide
+                modes either. And it would be very unlikely if it worked in other waveguide modes as well.
+                According to the generally accepted design rules for such filters
+                (we have also written the instructions above), we need to narrow the waveguide channel
+                to such a size that it would not propagate waveguide modes with horizontal E-field component.
+                In other words, we need to make it so narrow that would push the spurious responses of those modes
+                (similar to the one in the Figure 9) out of our targetted stopband (above 32 GHz).
+                Thus, if we do so, only the TE<sub>N0</sub> type waveguide modes would remain.
+                <br /><br /><br />
+            </p>
+
+            <h2>7.5. Adjustments of Filter Channel Profile </h2>
+            <p>
+                So, following the instructions in the previous paragraphs (7.1 to 7.5), we just learned how to use
+                the basic functions of the interface. First, we almost designed a waveguide filter based
+                on an E-plane corrugated structure. Secondly, we ran several simulations and got interesting graphs
+                with characteristics. But, unfortunately, we have not completed our task. The filter designed
+                by us, although at the very least passes our useful signals (3.7 - 4.2 GHz) through,
+                it does not
+                stops the transmission of the spurious interference (14.0 - 32.0 GHz) at all.
+            </p>
+            <p>
+                Let us see what the internal structure of our filter looks like in the corrugated plane.
+                To do this, we go to the 3D view option and set it the angles as 90 and 90. Now we can
+                visually
+                suggest that our filter clearly lacks small corrugations (Figure 10), which are supposed
+                to work at high frequencies [3].
+            </p>
+            <P>
+                <IMG name="Image6" width="620" align="left" src="img/help_app1_7.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 10: Corrugated filter profile corresponding to the default settings.
+                    </I>
+                </FONT>
+            </P>
+            <button class="knob" onclick="step3();">Go to This Design Step</button>
+            <p>
+                Let us then take a brief look at the TE<sub>10</sub> characteristics (Figure 8) showing the
+                end of stopband starting from somewhere around 12 GHz. But we need it to extend at least
+                three times longer. This can give us an idea to reduce each dimension of the small corrugations
+                about three times. Let us try. To do so, we need to return back to the
+                "Corrugated Filter designer" page (see section 7.1) and fix the filter's ends there. 
+                The suggested changes are shown on Figure 11 below.
+
+                Here the changes have been made to two groups of structure dimensions corresponding to irises and cavities
+                at the ends of the corrugated channel. In addition, the "profile factor" has also been changed and set to 3.
+                Such a twofold increase in this parameter would increase the relative number of small corrugations
+                in respect to big ones.
+            </p>
+            <P>
+                <IMG name="Image7" width="620" align="left" src="img/help_app1_8.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 11: Recommended settings for the filter channel profile. The marked red parameters
+                        are reduced about three times relatively to the default settings (section 7.1).
+                    </I>
+                </FONT>
+            </P>
+            <button class="knob" onclick="step5();">Go to This Design Step</button>
+
+            <p>
+                Now, if we click the button "Design Filter" and further take a look to the profile of updated
+                filter profile, it will look like as shown on Figure 12 below.
+            </p>
+
+            <P>
+                <IMG name="Image9" width="620" align="left" src="img/help_app1_9.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 12: Updated profile of corrugated waveguide channel with fine corrugations
+                        at the ends.
+                    </I>
+                </FONT>
+            </P>
+            <p>
+                If we now run the simulation in the fundamental TE<sub>10</sub>-mode, we get the following
+                characteristics of the forward and return losses over a wide frequency sweep.
+            </p>
+            <P>
+                <IMG name="Image9" width="620" align="left" src="img/help_app1_10.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 13: Broadband reflection and transmission magnitudes (dB) versus frequency (GHz)
+                        characteristics corresponding to the non-optimized corrugated filter with fine
+                        corrugations (see Figures 11 and 12).
+                    </I>
+                </FONT>
+            </P>
+            <p>
+                Same s-parameters data is also plotted over the nearbands on Figure 14.
+            </p>
+            <P>
+                <IMG name="Image9" width="620" align="left" src="img/help_app1_11.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 13: Nearband reflection and transmission magnitudes (dB) versus frequency (GHz)
+                        characteristics corresponding to the non-optimized corrugated filter with fine
+                        corrugations (see Figures 11 and 12).
+                    </I>
+                </FONT>
+            </P>
+            <p>
+                Now we can discuss the new results. A good news is we have obtained an almost good rejection
+                of the high stopband except of a minor thin spurious spike (we just ignore it for now). But the
+                bad news is the nearband appearance. In addition to this nuisance, our expectations for
+                a good rejection of the higher order waveguide modes are also low. We can,
+                of course, run TE<sub>N0</sub> simulations and see the rejection characteristics
+                (as we did it before), but this will only
+                be a waste of time. This is because the filter channel is still homogeneous in H-plane, but
+                it must be inhomogeneous [1].
+            </p>
+
+            <p>
+                It is very easy to introduce a certain longitudinal inhomogeneity of the channel width in
+                the Designer page fields. Let us widen the channel at one end (we make it 2.5''), leave
+                the other end's width same (1.992''), and roughly their average in the middle (2.2'').
+            </p>
+            <P>
+                <IMG name="Image7" width="620" align="left" src="img/help_app1_12.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 14: Making the filter channel width smoothly taped from one end
+                        to the other end.
+                    </I>
+                </FONT>
+            </P>
+            <button class="knob" onclick="step6();">Go to This Design Step</button>
+
+            <p>
+                Now, if we click the "Design" button, we will be taken to the "Designer" page,
+                from where we can start the simulation as we did before. Then we get the
+                characteristics of reflection and transmission of the fundamental mode
+                over a wide frequency sweep (see Figure 15 left). Here we can see that
+                the new broadwall-inhomogeneous profile has not considerably changed
+                the appearance of the broadband response, although it has made the passband
+                and roll-off narrower (now it is too narrow for wideband matching) as shown on Figure
+                15 right.
+            </p>
+            <P>
+                <IMG name="Image7" align="left" src="img/help_app1_15.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 15: Reflection and transmission (dB) versus frequency (GHz) plots
+                        characteristics of broadwall-inhomogeneous tapered corrugated filter
+                        with new profile settings (Figure 14).
+                    </I>
+                </FONT>
+            </P>
+            <p>
+                We can easily fix this if we go
+                back and decrease the height of the middle corrugations (say by 0.1''
+                correcting the number 1.603 in Figure 14 to 1.503) and do the same.
+
+            </p>
+            <button class="knob" onclick="step7();">Go to This Design Step</button>
+            <P>
+                <IMG name="Image7" align="left" src="img/help_app1_16.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 16: Reflection and transmission (dB) versus frequency (GHz) plots
+                        characteristics of the updated broadwall-inhomogeneous tapered corrugated filter
+                        with middle cavities heght reduced by 0.1''.
+                    </I>
+                </FONT>
+            </P>
+            <p>
+                According to a usual logic, now we should run the higher order modes in order to see
+                their transmission over the range from 14 to 32 GHz, but we will try to improve the
+                quality of the pass-band (the return loss is too low) instead.
+                The main reason we have such a low return loss is that the corrugated channel of our
+                filter is very narrow in height at the ends in comparison with the input/output interface
+                waveguide.
+                Using a common but inappropriate (for waveguides)
+                formulation from RF engineering books, we could say that the end channel impedances
+                are too low in comparison with the standard waveguide impedance.
+            </p>
+            <h2>7.6. Interface Matching</h2>
+            <p>
+
+                In such cases,
+                multi-step quarter-wave transformers are commonly used. Therefore, according
+                to the history of corrugated waveguide filters [A5] the first ones utilized
+                several transforming steps (see Figure 1 in [A1]).
+                However, the experienced designers do not really like
+                transformers as they add a lot in size and weight [2] and they try
+                to replace the transforming steps with smooth transitions of the corrugatios
+                from the ends to the center (see Figure 2 in [A5]). Practically, however,
+                it is complex and does not always work in terms of better rejection performance.
+                As beginners we are not going to challenge this way this time.
+                In fact we are not launching our filter into the space where size and mass
+                become very critical. On the contrary, we have plenty of
+                room to lengthen our design with additional transformer step and thus make
+                our design process easier. Technically, in terms of WR-Connect tools, it is very
+                easy to do in the Design Editor page.
+                There we can simply select, copy and paste an additional step
+                (each transformer step is represented by step junction {0-index} and
+                waveguide node {1-index}) at each end.
+                Next, we empirically adjust the height of the steps by making the outer ones 0.1''
+                higher and the inner ones 0.1'' narrower (we do this at the both ends and
+                in those positions as shown on Figure 17).
+            </p>
+
+            <P>
+                <IMG name="Image7" width="620" align="left" src="img/help_app1_17.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 17: Making an additional transforming step between the input
+                        waveguide node (first row) and the first corrugation.
+                        The same has to be done on the other end of the filter.
+                    </I>
+                </FONT>
+            </P>
+
+            <button class="knob" onclick="step8();">Go to This Design Step</button>
+            <p>
+                If we look to the 3D view (click "Go To 3D View" button ) again, we will see the additional
+                steps added between the corrugations and the end (interface) waveguides (Figure 18).
+            </p>
+            <P>
+                <IMG name="Image7" width="620" align="left" src="img/help_app1_18.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 18: Side and top views of the filter structure updated with additional
+                        transformer steps.
+                    </I>
+                </FONT>
+            </P>
+            <p>
+                We can run the simulations again in a same manner as we did it before over the entire
+                bandwidth (Figure 19 left) and zoom it in over the near-band (Figure 19 right) to see
+                the pass-band ripples and roll-off.
+            </p>
+            <P>
+                <IMG name="Image7" width="620" align="left" src="img/help_app1_19.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 19: Broadband (left) and near-band (right) plots of TE<sub>10</sub>-mode reflection and
+                        transmission magnitudes (dB) versus frequency (GHz).
+                    </I>
+                </FONT>
+            </P>
+            <h2>7.7. Optimization</h2>
+            <p>
+                Here we can notice that even such a rough way of putting additional transforming
+                steps at the ends of the filter have significantly increased the return loss making
+                it a good starting point to apply optimization techniques. When some RF filter gurus
+                are asked how they design such good filters, they
+                answer "I just got some dimensions and optimized". Their colleagues or managers
+                would think "this guy is either snobish, selfish or just not a team worker"
+                because "just optimization" cannot be a certain design procedure transferable
+                to others. However, according to
+                the modern state of RF engineering and cumputer technology, optimization methods
+                can be used as a base design guideline without preliminary filter synthesis
+                methods applied [3]. On the contrary, according to [3], the direct use of
+                optimization methods allows efficient designing of more complex and composite
+                filter structures that finally demonstrate
+                better RF performance in respect to specific practical requirements.
+                Therefore, the ability to apply optimization methods to RF engineering
+                problems is a very demanded skill, which we are going to learn here as well.
+                In general, apparently, there are no
+                general rules on how to use optimization in relation to filter structures.
+                Much depends on the type of optimizer (for example, gradient, pattern search),
+                optimization function (L2, minimax, etc.), initial performance, and so on.
+                This often comes with experience. Therefore, to begin with, we will proceed
+                from simple (but perhaps not the most effective rules). Let us try.
+                First of all, we return to the plot (see Figure 20) over a narrower bandwidth
+                showing
+                the reflection ripples and the roll-off.
+            </p>
+            <P>
+                <IMG name="Image7" width="620" align="left" src="img/help_app1_20.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 18: Optimization parameters and targets marked on near-band response plot.              transmission magnitudes (dB) versus frequency (GHz).
+                    </I>
+                </FONT>
+            </P>
+            <p>
+                We will only limit ourselves to
+                optimizing the input return loss (S<sub>11</sub>) in a wider bandwidth including
+                our specified pass-band (3.7 - 4.2 GHz) with some extra margins
+                (so we target 3.4 - 4.6 GHz). We also target a good return loss, say 25 dB (we might
+                not be able to achieve it but nothing is wrong in trying).
+                Here we also need to enter the number of frequency points in this range,
+                which should be at least five points per a ripple (30 is more than enough).
+                We need to enter all those parameters in appropriate filelds on the Setup page.
+            </p>
+
+            <P>
+                <IMG name="Image7" width="620" align="left" src="img/help_app1_21.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 21: Optimization targets entered in "Optimization" field of
+                        Setup Page.
+                    </I>
+                </FONT>
+            </P>
+            <button class="knob" onclick="step9(0);">Go to This Design Step</button>
+            <p>
+                Another important trick is a selection of right "optimizable" dimensions,
+                which are efficiently tuning the targeted pass-band during optimization
+                process while not degrading the far stop-band performance.
+                Based on these
+                considerations, we will optimize the steps of the transformer
+                sections both in length and in height.
+                We will, however, avoid touching the small corrugations
+                responsible for high frequencies except the first and last ones, which are
+                found being efficient for interface matching. The rest, the larger "low-frequency"
+                elements of the structure (such as the transforming sections and large corrugations)
+                will be marked for optimization (see Figure 22).
+            </p>
+            <P>
+                <IMG name="Image7" width="620" align="left" src="img/help_app1_22.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 22: Vertical and horizontal dimensions of transformer sections
+                        and cavities
+                        selected to be tuned during optimization.
+                    </I>
+                </FONT>
+            </P>
+
+            <p>
+                For simplicity, we will also limit ourselves
+                to only the vertical dimensions of these elements, which correspond to the
+                third or fifth decimal value in each row in the topology list (text window
+                on the Design Editor page). Since our
+                filter is vertically symmetrical (Y<sub>0</sub> = -Y<sub>1</sub>), we just can
+                select either the bottom
+                (Y<sub>0</sub> variable #3)
+                or the top (Y<sub>1</sub> variable #5) position of each element.
+            </p>
+            <P>
+                <IMG name="Image7" width="620" align="left" src="img/help_app1_23.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 23: Setting the "optimizable" dimensions.
+                        The first integer in each row indicates the serial number of the dimension
+                        (among decimal numbers) to be tuned during optimization.
+                        If this number is zero no dimensions change. If the number is two-digit,
+                        then two dimensions will be tuned (corresponding to each digit) simultaneously.
+                        If the structure is symmetrical (as we have), then the corresponding mirror
+                        dimensions will also be synchronized. Given vertical symmetry, the optimizer
+                        will adjust size # 5
+                        (Y<sub>1</sub>) and its mirrored size #3 (Y<sub>0</sub> = -Y<sub>1</sub>)
+                        at the same time.
+                    </I>
+                </FONT>
+            </P>
+
+            <button class="knob" onclick="step9(1);">Go to This Design Step</button>
+            <p>
+                After we have done with setting the optimization parameters (Figure 22) and the dimensions
+                to be optimized (Figure 23), we can start
+                the optimization process from the "Run" menu (see Figure 4) and wait a little until
+                the status bar stops and the Design Editor window updates.
+            </p>
+            <p>
+                Then we run the simulation
+                with the "Run Simulation" button as we have done it many times before and see the plot
+                (Figure 24). This plot can be further rescaled to review in-band performance (Figure 25).
+            </p>
+            <P>
+                <IMG name="Image7" align="left" src="img/help_app1_24.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 24: Reflection and transmission (dB) versus frequency (GHz) plots
+                        characteristics of the optimized filter.
+                    </I>
+                </FONT>
+            </P>
+            <button class="knob" onclick="step10();">Go to This Design Step</button>
+            <p>
+                Now it is much better! However, this is just a response from the main mod,
+                but we have them over hundred in the WR-229 waveguide at 32 GHz. But not all
+                of these modes, however, can squeeze into the vertically narrow
+                corrugated channel.
+            </p>
+            <P>
+                <IMG name="Image7" align="left" src="img/help_app1_25.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 25: Near-band frequency response (left) and in-band insertion (right)
+                        loss plots.
+                    </I>
+                </FONT>
+            </P>
+            <p>
+                We start with the horizontally polarized TE<sub>01</sub> mode.
+                Here the logic is simple, if this mode attenuates, then all other TE<sub>nm</sub>
+                and TM<sub>nm</sub>with indices m>1 do not transmit either. TE<sub>01</sub>-mode
+                simulation shows more than 100 dB rejection over the whole frequency sweep.
+                Therefore, we can limit our modal transmission analysis to just TE<sub>N0</sub>
+                -modes and plot the first nine (see Figure 26).
+            </p>
+            <P>
+                <IMG name="Image7" align="left" src="img/help_app1_26.png"><BR clear="left"><BR>
+            </P>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Figure 26: Transmission magnitudes (dB) versus frequency (GHz) plots
+                        for first several TE<sub>N0</sub>-modes (N=2,3,..9).
+                    </I>
+                </FONT>
+            </P>
+
+            <h1>8. Results and Discussions</h1>
+            <h2>8.1. Performance Summary</h2>
+            <p>
+                A quick look at all the characteristics shows that we have completed our task.
+                Let us now finally compare our achievements with our goals
+                in an old fashioned way using a table (see Table 2).
+            </p>
+            <P>
+                <FONT size="3" style="font-size: 12pt;">
+                    <I>
+                        Table 2: Expected (simulated) performance versus specification table
+                    </I>
+                </FONT>
+            </P>
+
+            <TABLE border="1">
+                <TR>
+                    <TD width="150px"><b>Parameter</b></TD>
+                    <TD width="150px"><b>Target</b></TD>
+                    <TD><b>Simulation</b></TD>
+                    <TD><b>Notes</b></TD>
+                </TR>
+                <TR>
+                    <TD>Pass-Band,GHz</TD>
+                    <TD>3.7 - 4.2</TD>
+                    <TD>3.7 - 4.2</TD>
+                    <TD>Reception signals frequency range</TD>
+                </TR>
+                <TR>
+                    <TD>Insertion Loss, dB</TD>
+                    <TD>&lt; 0.1</TD>
+                    <TD>&lt; 0.07</TD>
+                    <TD>We need to add some practical factors</TD>
+                </TR>
+                <TR>
+                    <TD>Return Loss, dB</TD>
+                    <TD>&gt; 23</TD>
+                    <TD>&gt; 24</TD>
+                    <TD>
+                        By simulation
+                    </TD>
+                </TR>
+                <TR>
+                    <TD>Stop-Band, GHz</TD>
+                    <TD>
+                        14 - 32
+                    </TD>
+                    <TD>
+                        14 - 32
+                    </TD>
+                    <TD></TD>
+                </TR>
+                <TR>
+                    <TD>
+                        Rejection,
+                        dB<br />
+                        14 - 20 GHz<br />20 - 32 GHz
+                    </TD>
+                    <TD>
+                        <br />&gt; 20<br />&gt; 40
+                    </TD>
+                    <TD>
+                        <br />&gt; 40<br />&gt; 60
+                    </TD>
+                    <TD>
+                        See the discussion below
+                    </TD>
+                </TR>
+                <TR>
+                    <TD>
+                        Length, inch
+                    </TD>
+                    <TD>
+                        &lt;
+                        12.0
+                    </TD>
+                    <TD>
+                        11.0
+                    </TD>
+                    <TD>
+                        Good enough
+                    </TD>
+                </TR>
+            </TABLE>
+            <p>
+                Usually, the preliminary performance summary is the result of a successful design concept
+                and contains both
+                the worst and the nominal parameters of real hardware.
+            </p>
+            <h2>8.2. Simulation versus Reality</h2>
+            <p>
+                Considering many factors
+                that are beyond simulations (software accuracy, fabrication tolerances, measurement
+                accuracy, materials specificity, environmental factors, and so on), the practical
+                expectation is usually quite different from simulation.
+                Therefore, experienced engineers
+                very conservatively bias the simulation data towards worse expectations by
+                adding some degradation factors (margins).
+                In assessing these factors, they commonly rely on both sensitivity analysis
+                and personal experience (even intuition).
+                Since our tutorial is only aimed at learning how to design waveguide filters
+                using WR-Connect tool (we do not plan to actually make this filter and
+                put it on duty),
+                we will limit ourselves here only to the results of our simulations, and also
+                take into account some expected practical factors based on common sense only.
+            </p>
+            <h2>8.3. Fabrication Errors</h2>
+            <p>
+                We can imagine that our filter will be made of aluminum in two parts
+                (this is how such filters are usually made), which will then be coated
+                with silver and fastened to each other with screws. Each of these parts
+                will be milled to an accuracy of 0.001''. Here, a simple analysis may
+                show that 0.001'' tolerance will very slightly degrade our performance, but
+                the milling cutter radius (can be greater than 0.1'') can significantly impact
+                our performance in the near-bands (see Figure 25).
+                On the other hand, we could use more precise
+                machining technologies (for example EDM).
+                But the more accurate is the technology, the more more expensive it is.
+                We, therefore,
+                will not get into this discussion in our tutorial.
+            </p>
+            <h2>8.4. Design Process Errors</h2>
+            <p>
+                The same applies to WR-Connect
+                also.
+                We also do not know and we have not investigated how accurate our design process is.
+                It should be
+                noted here that all existing solvers of Maxwell's equations on arbitrary
+                boundaries are imprecise. Therefore, when using certain design tools, responsible
+                engineers proceed from the results of correlations between simulations and practical
+                achievements. At the same time, from experience, they can know which correction
+                factors need to be applied. But we have not done all this and we do not have such
+                an experience. Therefore, for the purposes of our mission, we will assume that our
+                design and manufacturing tools are accurate enough.
+            </p>
+            <h2>8.5. Measurement Errors</h2>
+
+            <p>
+                Further, regarding the higher order
+                waveguide modes, there is generally a lot of incomprehensible things.
+                First, how do we detect them? How do we measure them?
+                What does rejection mean in this case?
+                What are the acceptance criteria? Most of industrial electrical engineers deal with
+                the dominant TE<sub>10</sub>-mode only. They cannot actually answer those questions.
+                The usual VNA based setups also cannot measure those modes due to imposibility of
+                calibration and spurious interference between DUT and setup components.
+                Therefore, in the ordinary world of microwave engineering,
+                people try to avoid these discussions and rely on subjective methods
+                of interpreting both modal simulation results and test results.
+                In the world of simulations, the researchers usually operate with multi-modal
+                GSM (generalized scattering matrix) data. When judging the rejection of a filter
+                they usually review only the diagonal matrix elements corresponding to transmission
+                paths. And in the measurement world, the test experts measure only the fundamental mode
+                transmission using
+                smooth waveguide transitions. Nevertheless, even for the dominant mode transmission,
+                the both approaches do not reflect the reality
+                and do not well correlate with each other.
+                In many cases, however, if the filter designer demonstrates
+                a good correlation between simulated results for
+                the dominant mode transmission and measured with tapers, then the results
+                of high mode simulations are usually believed to be true as well (they cannot be measured
+                anyway). We do not have such correlations either.
+                Therefore, we will proceed from considerations of rationality. Namely, we will assume
+                that we can accurately measure the fundamental mode transmission and
+                our simulation is also
+                accurate. Regarding the "exotic" modes (TE<sub>N0</sub>, N=2,3...), we believe that
+                they will be present in smaller
+                quantities (the higher the order of the mode, the less its presence). Then we can say
+                that our simulation of these modes is too conservative (it is based on 100% power
+                converted into the mode) and therefore we will add 15-20 dB to our simulation results
+                (which is practically reasonable).
+
+            </p>
+
+            <h1>9. Conclusions</h1>
+            <p>
+                The goal of this tutorial is to acquire the basic skills of designing waveguide
+                low-pass filters, learn the theory basics of building them on E-pane
+                corrugated structures,
+                and master some tricks that help us quickly and efficiently cope with this task
+                using the design tools we have.
+                Here we have mastered a simple design method based on creating certain corrugated
+                structure profile with subsequent optimization. So, firstly, we have mastered how
+                we can build a conventional (homogeneous) tapered corrugated
+                waveguide low-pass filter [2]. Although we have moved far from the complex
+                theoretical foundations of the corrugated structure synthesis by Levy, replacing
+                it with simply empirical selection of initial sizes and replacing the synthesis itself
+                with an optimization.
+                Second, we have practically studied the nature of TE<sub>N0</sub> spurious modes
+                of quite high orders (N=1,2...9). Namely, we have been
+                able to predict their existence and simulate their transmission.
+                Thirdly, we have learned how to get rid of these spurious modes by changing the profile
+                of the structure in the H-plane [1]. As a result, we selected such a type of broadwall
+                inhomogeneity
+                that eliminated the transmission of these modes at least in our given bandwidth. Fourthly,
+                we have learned how to control the profile of the corrugated channel and match it with
+                the external interface with transforming steps. Fifth, we have learned how
+                to optimize a targeted bandwidth. As a result, we have been able to design
+                a quite sophisticated
+                "spurious-killer" WR-229 low-pass filter from a scratch in maybe 30 minutes.
+            </p>
+
+            <H1>10. Internal Links</H1>
+
+            <p>
+                [A1] R. Goulouev, "WR-Connect(v.2.0)/Corrugated Waveguide Low-Pass Filter", online design tool.
+                Accessible at <a href="http://www.goulouev.com/WRC_2020/qperiod.htm">www.goulouev.com/WRC_2020/qperiod.htm</a>.
+                <br /><br />
+                [A2] R. Goulouev, "WR-Connect(v.2.0)/Online Rectangular Waveguide Structure Simulator",
+                online rectangular waveguide structure simulator.
+                Accessible at <a href="http://www.goulouev.com/WRC_2020/editor.htm">www.goulouev.com/WRC_2020/editor.htm</a>.<br /><br />
+                [A3] R. Goulouev, "Waffle-Iron Harmonic (Low-Pass) Filters - Where the spurious comes from", technical note,
+                since 2001.
+                Accessible at <a href="http://www.goulouev.com/notes/waffle.htm">http://www.goulouev.com/notes/waffle.htm</a><br /><br />
+                [A4] R. Goulouev, "Spurious Pass-Bands of a Corrugated Filter", online calculator.
+                Accessible at <a href="http://www.goulouev.com/oncorr/oncorr0.htm">http://www.goulouev.com/oncorr/oncorr0.htm</a><br /><br />
+                [A5] R. Goulouev, "Brief History of Corrugated Filters", 2002.
+                Accessible at <a href="http://www.goulouev.com/oncorr/summary.htm">http://www.goulouev.com/oncorr/summary.htm</a>
+            </p>
+            <H1>11. References</H1>
+
+            <p>
+                [1] R. Levy, "Inhomogeneous stepped-impedance corrugated waveguide
+                low-pass filters," in IEEE MTT-S Int. Microw. Symp. Dig., Jun. 2005,
+                pp. 123–126.<br /><br />
+
+                [2] R. Levy, “Tapered corrugated waveguide low-pass filter,” IEEE Trans .
+                Microwave Theory Tech., vol. MTT-21, pp. 526–532, August 1973.<br /><br />
+
+                [3] F. De Paolis, R. Goulouev, J. Zheng, and M. Yu, "CAD procedure
+                for high-performance composite corrugated filters," IEEE Trans.
+                Microw. Theory. Techn., vol. 61, no. 9, pp. 3216–3224,
+                Sept. 2013. <br /><br />
+
+            </p>
+        </div>
+    </div>
+    <script type="text/javascript">
+        //############################
+        //INSERT TEXT FROM WINDOW AND SetProject(LNs)
+        function Model0() {
+            var rs = [];
+            rs[0] = 'SETUP_DAT';
+            rs[1] = '1 10 10';
+            rs[2] = '1 0.05 0 1 2 1 1.5 0';
+            rs[3] = '3.95 0.16';
+            rs[4] = '3.3 4.9 500';
+            rs[5] = '1 20 0.02 0.05 0.05';
+            rs[6] = 'DESIGN_DAT';
+            rs[7] = '-1  1  0';
+            rs[8] = '0  0  0';
+            rs[9] = '1  7  10';
+            rs[10] = '1  1';
+            rs[11] = '1  0  6.1';
+            rs[12] = '0    1     1.051100    -1.145000    -0.572500     1.145000     0.572500';
+            rs[13] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[14] = '0    1     1.264388    -1.070500    -0.383619     1.070500     0.383619';
+            rs[15] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[16] = '0    1     0.115000    -0.996000    -0.149000     0.996000     0.149000';
+            rs[17] = '0    2     0.389000    -0.996000    -0.470487     0.996000     0.470487';
+            rs[18] = '0    1     0.115000    -0.996000    -0.149000     0.996000     0.149000';
+            rs[19] = '0    2     0.389000    -0.996000    -0.504586     0.996000     0.504586';
+            rs[20] = '0    1     0.115000    -0.996000    -0.149000     0.996000     0.149000';
+            rs[21] = '0    2     0.389000    -0.996000    -0.551845     0.996000     0.551845';
+            rs[22] = '0    1     0.115000    -0.996000    -0.149000     0.996000     0.149000';
+            rs[23] = '0    2     0.389000    -0.996000    -0.604445     0.996000     0.604445';
+            rs[24] = '0    1     0.115000    -0.996000    -0.149000     0.996000     0.149000';
+            rs[25] = '0    2     0.389000    -0.996000    -0.657489     0.996000     0.657489';
+            rs[26] = '0    1     0.115000    -0.996000    -0.149000     0.996000     0.149000';
+            rs[27] = '0    2     0.389000    -0.996000    -0.706878     0.996000     0.706878';
+            rs[28] = '0    1     0.115000    -0.996000    -0.149000     0.996000     0.149000';
+            rs[29] = '0    2     0.389000    -0.996000    -0.748898     0.996000     0.748898';
+            rs[30] = '0    1     0.115000    -0.996000    -0.149000     0.996000     0.149000';
+            rs[31] = '0    2     0.389000    -0.996000    -0.780055     0.996000     0.780055';
+            rs[32] = '0    1     0.115000    -0.996000    -0.149000     0.996000     0.149000';
+            rs[33] = '0    2     0.389000    -0.996000    -0.796996     0.996000     0.796996';
+            rs[34] = '0    1     0.115000    -0.996000    -0.149000     0.996000     0.149000';
+            rs[35] = '0    2     0.389000    -0.996000    -0.796996     0.996000     0.796996';
+            rs[36] = '0    1     0.115000    -0.996000    -0.149000     0.996000     0.149000';
+            rs[37] = '0    2     0.389000    -0.996000    -0.780055     0.996000     0.780055';
+            rs[38] = '0    1     0.115000    -0.996000    -0.149000     0.996000     0.149000';
+            rs[39] = '0    2     0.389000    -0.996000    -0.748898     0.996000     0.748898';
+            rs[40] = '0    1     0.115000    -0.996000    -0.149000     0.996000     0.149000';
+            rs[41] = '0    2     0.389000    -0.996000    -0.706878     0.996000     0.706878';
+            rs[42] = '0    1     0.115000    -0.996000    -0.149000     0.996000     0.149000';
+            rs[43] = '0    2     0.389000    -0.996000    -0.657489     0.996000     0.657489';
+            rs[44] = '0    1     0.115000    -0.996000    -0.149000     0.996000     0.149000';
+            rs[45] = '0    2     0.389000    -0.996000    -0.604445     0.996000     0.604445';
+            rs[46] = '0    1     0.115000    -0.996000    -0.149000     0.996000     0.149000';
+            rs[47] = '0    2     0.389000    -0.996000    -0.551845     0.996000     0.551845';
+            rs[48] = '0    1     0.115000    -0.996000    -0.149000     0.996000     0.149000';
+            rs[49] = '0    2     0.389000    -0.996000    -0.504586     0.996000     0.504586';
+            rs[50] = '0    1     0.115000    -0.996000    -0.149000     0.996000     0.149000';
+            rs[51] = '0    2     0.389000    -0.996000    -0.470487     0.996000     0.470487';
+            rs[52] = '0    1     0.115000    -0.996000    -0.149000     0.996000     0.149000';
+            rs[53] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[54] = '0    1     1.264388    -1.070500    -0.383619     1.070500     0.383619';
+            rs[55] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[56] = '0    1     1.051100    -1.145000    -0.572500     1.145000     0.572500';
+            rs[57] = '';
+            return rs;
+        }
+
+        function step0() {
+            var txt = "1,2.290 1.145 1.051,2.290 1.145 1.051,1.992 0.298 0.115,1.992 0.298 0.115,1.992 0.298 0.115,1.992 0.916 0.389,1.992 1.603 0.389,1.992 0.916 0.389,1.5,3.95,15,5";
+            sessionStorage.setItem('corro_Memo_Template', txt);
+            window.location.href = "qperiod.htm";
+        }
+
+        function step1() {
+            var txt = "1,2.290 1.145 1.051,2.290 1.145 1.051,1.992 0.298 0.115,1.992 0.298 0.115,1.992 0.298 0.115,1.992 0.916 0.389,1.992 1.603 0.389,1.992 0.916 0.389,1.5,3.95,15,5";
+            var rs = Model0();
+            SetProject(rs);
+            rs = null;
+            sessionStorage.setItem('corro_Memo_Template', txt);
+            window.location.href = "editor.htm";
+        }
+
+        function step2() {
+            var txt = "1,2.290 1.145 1.051,2.290 1.145 1.051,1.992 0.298 0.115,1.992 0.298 0.115,1.992 0.298 0.115,1.992 0.916 0.389,1.992 1.603 0.389,1.992 0.916 0.389,1.5,3.95,15,5";
+            var rs = Model0();
+            rs[4] = '3.0 33.0 2000';
+            SetProject(rs);
+            rs = null;
+            sessionStorage.setItem('corro_Memo_Template', txt);
+            window.location.href = "setup.htm";
+        }
+
+        function step_te20() {
+            var txt = "1,2.290 1.145 1.051,2.290 1.145 1.051,1.992 0.298 0.115,1.992 0.298 0.115,1.992 0.298 0.115,1.992 0.916 0.389,1.992 1.603 0.389,1.992 0.916 0.389,1.5,3.95,15,5";
+            var rs = Model0();
+            rs[4] = '3.0 33.0 2000';
+            rs[7] = '1  1  0';
+            rs[8] = '0  1  0';
+            SetProject(rs);
+            rs = null;
+            sessionStorage.setItem('corro_Memo_Template', txt);
+            window.location.href = "editor.htm";
+        }
+
+        function step_te01() {
+            var txt = "1,2.290 1.145 1.051,2.290 1.145 1.051,1.992 0.298 0.115,1.992 0.298 0.115,1.992 0.298 0.115,1.992 0.916 0.389,1.992 1.603 0.389,1.992 0.916 0.389,1.5,3.95,15,5";
+            var rs = Model0();
+            rs[4] = '3.0 33.0 2000';
+            rs[7] = '1  -1  0';
+            rs[8] = '0  0  0';
+            SetProject(rs);
+            rs = null;
+            sessionStorage.setItem('corro_Memo_Template', txt);
+            window.location.href = "editor.htm";
+        }
+
+        function step3() {
+            var txt = "1,2.290 1.145 1.051,2.290 1.145 1.051,1.992 0.298 0.115,1.992 0.100 0.030,1.992 0.298 0.115,1.992 0.916 0.389,1.992 0.340 0.150,1.992 0.916 0.389,1.5,3.95,15,5";
+            var rs = Model0();
+            rs[4] = '3.0 33.0 2000';
+            rs[7] = '1  -1  0';
+            rs[8] = '0  0  0';
+            SetProject(rs);
+            rs = null;
+            sessionStorage.setItem('corro_Memo_Template', txt);
+            window.location.href = "qperiod.htm";
+        }
+
+        function step4() {
+            var txt = "1,2.290 1.145 1.051,2.290 1.145 1.051,1.992 0.298 0.115,1.992 0.100 0.030,1.992 0.298 0.115,1.992 0.916 0.389,1.992 0.340 0.150,1.992 0.916 0.389,1.5,3.95,15,5";
+            var rs = Model0();
+            rs[4] = '3.0 33.0 2000';
+            rs[7] = '-1  1  0';
+            rs[8] = '0  3  0';
+            SetProject(rs);
+            rs = null;
+            sessionStorage.setItem('corro_Memo_Template', txt);
+            window.location.href = "editor.htm";
+        }
+
+        function step5() {
+            var txt ="1,2.290 1.145 1.05,2.290 1.145 1.05,1.992 0.100 0.030,1.992 0.298 0.115,1.992 0.100 0.030,1.992 0.300 0.120,1.992 1.603 0.389,1.992 0.300 0.120,3,3.95,15,5"
+            var rs = Model0();
+            rs[4] = '3.0 33.0 2000';
+            rs[7] = '-1  1  0';
+            rs[8] = '0  0  0';
+            SetProject(rs);
+            rs = null;
+            sessionStorage.setItem('corro_Memo_Template', txt);
+            window.location.href = "qperiod.htm";
+        }
+
+        function step6() {
+            var txt = "1,2.290 1.145 1.051,2.290 1.145 1.051,2.500 0.100 0.030,2.200 0.298 0.115,1.992 0.100 0.030,2.500 0.300 0.120,2.200 1.603 0.389,1.992 0.300 0.120,3,3.95,15,5"
+            var rs = Model0();
+            rs[4] = '3.0 33.0 2000';
+            rs[7] = '-1  1  0';
+            rs[8] = '0  0  0';
+            SetProject(rs);
+            rs = null;
+            sessionStorage.setItem('corro_Memo_Template', txt);
+            window.location.href = "qperiod.htm";
+        }
+        function step7() {
+            var txt = "1,2.290 1.145 1.0511,2.290 1.145 1.0511,2.500 0.100 0.030,2.200 0.298 0.115,1.992 0.100 0.030,2.500 0.300 0.120,2.200 1.503 0.389,1.992 0.300 0.120,3,3.95,15,5"
+            var rs = Model1();
+            SetProject(rs);
+            rs = null;
+            sessionStorage.setItem('corro_Memo_Template', txt);
+            window.location.href = "editor.htm";
+        }
+
+        function step8() {
+            var txt = "1,2.290 1.145 1.0511,2.290 1.145 1.0511,2.500 0.100 0.030,2.200 0.298 0.115,1.992 0.100 0.030,2.500 0.300 0.120,2.200 1.503 0.389,1.992 0.300 0.120,3,3.95,15,5"
+            var rs = Model2();
+            SetProject(rs);
+            rs = null;
+            sessionStorage.setItem('corro_Memo_Template', txt);
+            window.location.href = "editor.htm";
+        }
+
+        function step9(iOption) {
+           //PRE OPT
+            var txt = "1,2.290 1.145 1.0511,2.290 1.145 1.0511,2.500 0.100 0.030,2.200 0.298 0.115,1.992 0.100 0.030,2.500 0.300 0.120,2.200 1.503 0.389,1.992 0.300 0.120,3,3.95,15,5"
+            var rs = Model4();
+            SetProject(rs);
+            rs = null;
+            sessionStorage.setItem('corro_Memo_Template', txt);
+            if (iOption === 0) { window.location.href = "setup.htm"; }
+            if (iOption === 1) { window.location.href = "editor.htm"; }
+        }
+
+        function step10() {
+            //POST OPT
+            var txt = "1,2.290 1.145 1.0511,2.290 1.145 1.0511,2.500 0.100 0.030,2.200 0.298 0.115,1.992 0.100 0.030,2.500 0.300 0.120,2.200 1.503 0.389,1.992 0.300 0.120,3,3.95,15,5"
+            var rs = Model4();
+            SetProject(rs);
+            rs = null;
+            sessionStorage.setItem('corro_Memo_Template', txt);
+            window.location.href = "editor.htm";
+        }
+
+        function Model1() {
+            //INITIAL
+            var rs = [];
+            rs[0] = 'SETUP_DAT';
+            rs[1] = '1 10 10';
+            rs[2] = '1 0.05 0 1 2 1 1.5 0';
+            rs[3] = '3.95 0.16';
+            rs[4] = '3.0 33.0 2000';
+            rs[5] = '1 20 0.02 0.05 0.05';
+            rs[6] = 'DESIGN_DAT';
+            rs[7] = '-1  1  0';
+            rs[8] = '0  0  0';
+            rs[9] = '1  7  10';
+            rs[10] = '1  1';
+            rs[11] = '1  0  6.1';
+            rs[12] = '0    1     1.051110    -1.145000    -0.572500     1.145000     0.572500';
+            rs[13] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[14] = '0    1     0.863651    -1.145000    -0.231830     1.145000     0.231830';
+            rs[15] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[16] = '0    1     0.030000    -1.145000    -0.050000     1.145000     0.050000';
+            rs[17] = '0    2     0.120369    -1.249881    -0.150825     1.249881     0.150825';
+            rs[18] = '0    1     0.030233    -1.249763    -0.050271     1.249763     0.050271';
+            rs[19] = '0    2     0.123305    -1.249763    -0.157389     1.249763     0.157389';
+            rs[20] = '0    1     0.031855    -1.248104    -0.052161     1.248104     0.052161';
+            rs[21] = '0    2     0.132714    -1.248104    -0.178430     1.248104     0.178430';
+            rs[22] = '0    1     0.036180    -1.243624    -0.057198     1.243624     0.057198';
+            rs[23] = '0    2     0.152358    -1.243624    -0.222354     1.243624     0.222354';
+            rs[24] = '0    1     0.044269    -1.234989    -0.066620     1.234989     0.066620';
+            rs[25] = '0    2     0.184750    -1.234989    -0.294784     1.234989     0.294784';
+            rs[26] = '0    1     0.056650    -1.221012    -0.081040     1.221012     0.081040';
+            rs[27] = '0    2     0.230066    -1.221012    -0.396114     1.221012     0.396114';
+            rs[28] = '0    1     0.072908    -1.200760    -0.099975     1.200760     0.099975';
+            rs[29] = '0    2     0.284687    -1.200760    -0.518250     1.200760     0.518250';
+            rs[30] = '0    1     0.091169    -1.173694    -0.121244     1.173694     0.121244';
+            rs[31] = '0    2     0.339374    -1.173694    -0.640533     1.173694     0.640533';
+            rs[32] = '0    1     0.107468    -1.139842    -0.140228     1.139842     0.140228';
+            rs[33] = '0    2     0.377082    -1.139842    -0.724852     1.139842     0.724852';
+            rs[34] = '0    1     0.115000    -1.100000    -0.149000     1.100000     0.149000';
+            rs[35] = '0    2     0.377082    -1.100000    -0.724852     1.100000     0.724852';
+            rs[36] = '0    1     0.107468    -1.064234    -0.140228     1.064234     0.140228';
+            rs[37] = '0    2     0.339374    -1.064234    -0.640533     1.064234     0.640533';
+            rs[38] = '0    1     0.091169    -1.039203    -0.121244     1.039203     0.121244';
+            rs[39] = '0    2     0.284687    -1.039203    -0.518250     1.039203     0.518250';
+            rs[40] = '0    1     0.072908    -1.022019    -0.099975     1.022019     0.099975';
+            rs[41] = '0    2     0.230066    -1.022019    -0.396114     1.022019     0.396114';
+            rs[42] = '0    1     0.056650    -1.010565    -0.081040     1.010565     0.081040';
+            rs[43] = '0    2     0.184750    -1.010565    -0.294784     1.010565     0.294784';
+            rs[44] = '0    1     0.044269    -1.003288    -0.066620     1.003288     0.066620';
+            rs[45] = '0    2     0.152358    -1.003288    -0.222354     1.003288     0.222354';
+            rs[46] = '0    1     0.036180    -0.999032    -0.057198     0.999032     0.057198';
+            rs[47] = '0    2     0.132714    -0.999032    -0.178430     0.999032     0.178430';
+            rs[48] = '0    1     0.031855    -0.996892    -0.052161     0.996892     0.052161';
+            rs[49] = '0    2     0.123305    -0.996892    -0.157389     0.996892     0.157389';
+            rs[50] = '0    1     0.030233    -0.996111    -0.050271     0.996111     0.050271';
+            rs[51] = '0    2     0.120369    -0.996111    -0.150825     0.996111     0.150825';
+            rs[52] = '0    1     0.030000    -0.996000    -0.050000     0.996000     0.050000';
+            rs[53] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[54] = '0    1     0.970328    -1.070500    -0.234965     1.070500     0.234965';
+            rs[55] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[56] = '0    1     1.051110    -1.145000    -0.572500     1.145000     0.572500';
+            rs[57] = '';
+            return rs;
+        }
+
+        function Model2() {
+            //TRANSFORMERS ADDED
+            var rs = [];
+            rs[0] = 'SETUP_DAT';
+            rs[1] = '1 10 10';
+            rs[2] = '1 0.05 0 1 2 1 1.5 0';
+            rs[3] = '3.95 0.16';
+            rs[4] = '3 33 2000';
+            rs[5] = '1 20 0.02 0.05 0.05';
+            rs[6] = 'DESIGN_DAT';
+            rs[7] = '-1  1  0';
+            rs[8] = '0  0  0';
+            rs[9] = '1  7  10';
+            rs[10] = '1  1';
+            rs[11] = '1  0  6.1';
+            rs[12] = '0    1     1.051110    -1.145000    -0.572500     1.145000     0.572500';
+            rs[13] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[14] = '0    1     0.863651    -1.145000    -0.331830     1.145000     0.331830';
+            rs[15] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[16] = '0    1     0.863651    -1.145000    -0.131830     1.145000     0.131830';
+            rs[17] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[18] = '0    1     0.030000    -1.145000    -0.050000     1.145000     0.050000';
+            rs[19] = '0    2     0.120369    -1.249881    -0.150825     1.249881     0.150825';
+            rs[20] = '0    1     0.030233    -1.249763    -0.050271     1.249763     0.050271';
+            rs[21] = '0    2     0.123305    -1.249763    -0.157389     1.249763     0.157389';
+            rs[22] = '0    1     0.031855    -1.248104    -0.052161     1.248104     0.052161';
+            rs[23] = '0    2     0.132714    -1.248104    -0.178430     1.248104     0.178430';
+            rs[24] = '0    1     0.036180    -1.243624    -0.057198     1.243624     0.057198';
+            rs[25] = '0    2     0.152358    -1.243624    -0.222354     1.243624     0.222354';
+            rs[26] = '0    1     0.044269    -1.234989    -0.066620     1.234989     0.066620';
+            rs[27] = '0    2     0.184750    -1.234989    -0.294784     1.234989     0.294784';
+            rs[28] = '0    1     0.056650    -1.221012    -0.081040     1.221012     0.081040';
+            rs[29] = '0    2     0.230066    -1.221012    -0.396114     1.221012     0.396114';
+            rs[30] = '0    1     0.072908    -1.200760    -0.099975     1.200760     0.099975';
+            rs[31] = '0    2     0.284687    -1.200760    -0.518250     1.200760     0.518250';
+            rs[32] = '0    1     0.091169    -1.173694    -0.121244     1.173694     0.121244';
+            rs[33] = '0    2     0.339374    -1.173694    -0.640533     1.173694     0.640533';
+            rs[34] = '0    1     0.107468    -1.139842    -0.140228     1.139842     0.140228';
+            rs[35] = '0    2     0.377082    -1.139842    -0.724852     1.139842     0.724852';
+            rs[36] = '0    1     0.115000    -1.100000    -0.149000     1.100000     0.149000';
+            rs[37] = '0    2     0.377082    -1.100000    -0.724852     1.100000     0.724852';
+            rs[38] = '0    1     0.107468    -1.064234    -0.140228     1.064234     0.140228';
+            rs[39] = '0    2     0.339374    -1.064234    -0.640533     1.064234     0.640533';
+            rs[40] = '0    1     0.091169    -1.039203    -0.121244     1.039203     0.121244';
+            rs[41] = '0    2     0.284687    -1.039203    -0.518250     1.039203     0.518250';
+            rs[42] = '0    1     0.072908    -1.022019    -0.099975     1.022019     0.099975';
+            rs[43] = '0    2     0.230066    -1.022019    -0.396114     1.022019     0.396114';
+            rs[44] = '0    1     0.056650    -1.010565    -0.081040     1.010565     0.081040';
+            rs[45] = '0    2     0.184750    -1.010565    -0.294784     1.010565     0.294784';
+            rs[46] = '0    1     0.044269    -1.003288    -0.066620     1.003288     0.066620';
+            rs[47] = '0    2     0.152358    -1.003288    -0.222354     1.003288     0.222354';
+            rs[48] = '0    1     0.036180    -0.999032    -0.057198     0.999032     0.057198';
+            rs[49] = '0    2     0.132714    -0.999032    -0.178430     0.999032     0.178430';
+            rs[50] = '0    1     0.031855    -0.996892    -0.052161     0.996892     0.052161';
+            rs[51] = '0    2     0.123305    -0.996892    -0.157389     0.996892     0.157389';
+            rs[52] = '0    1     0.030233    -0.996111    -0.050271     0.996111     0.050271';
+            rs[53] = '0    2     0.120369    -0.996111    -0.150825     0.996111     0.150825';
+            rs[54] = '0    1     0.030000    -0.996000    -0.050000     0.996000     0.050000';
+            rs[55] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[56] = '0    1     0.970328    -1.070500    -0.134965     1.070500     0.134965';
+            rs[57] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[58] = '0    1     0.970328    -1.070500    -0.334965     1.070500     0.334965';
+            rs[59] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[60] = '0    1     1.051110    -1.145000    -0.572500     1.145000     0.572500';
+            rs[61] = '';
+            return rs;
+        }
+
+        function Model3() {
+            //PRE OPT
+            var rs = [];
+            rs[0] = 'SETUP_DAT';
+            rs[1] = '1 10 10';
+            rs[2] = '1 0.05 0 1 2 1 1.5 0';
+            rs[3] = '3.95 0.16';
+            rs[4] = '3 33 2000';
+            rs[5] = '1 50 0.02 0.05 0.05';
+            rs[6] = '1 1 3.4 4.6 25 30';
+            rs[7] = 'DESIGN_DAT';
+            rs[8] = '-1  1  0';
+            rs[9] = '0  0  0';
+            rs[10] = '1  7  10';
+            rs[11] = '1  1';
+            rs[12] = '1  0  6.1';
+            rs[13] = '0    1     1.051110    -1.145000    -0.572500     1.145000     0.572500';
+            rs[14] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[15] = '51    1     0.863651    -1.145000    -0.331830     1.145000     0.331830';
+            rs[16] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[17] = '51    1     0.863651    -1.145000    -0.131830     1.145000     0.131830';
+            rs[18] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[19] = '0    1     0.030000    -1.145000    -0.050000     1.145000     0.050000';
+            rs[20] = '5    2     0.120369    -1.249881    -0.150825     1.249881     0.150825';
+            rs[21] = '0    1     0.030233    -1.249763    -0.050271     1.249763     0.050271';
+            rs[22] = '0    2     0.123305    -1.249763    -0.157389     1.249763     0.157389';
+            rs[23] = '0    1     0.031855    -1.248104    -0.052161     1.248104     0.052161';
+            rs[24] = '0    2     0.132714    -1.248104    -0.178430     1.248104     0.178430';
+            rs[25] = '0    1     0.036180    -1.243624    -0.057198     1.243624     0.057198';
+            rs[26] = '0    2     0.152358    -1.243624    -0.222354     1.243624     0.222354';
+            rs[27] = '0    1     0.044269    -1.234989    -0.066620     1.234989     0.066620';
+            rs[28] = '0    2     0.184750    -1.234989    -0.294784     1.234989     0.294784';
+            rs[29] = '0    1     0.056650    -1.221012    -0.081040     1.221012     0.081040';
+            rs[30] = '5    2     0.230066    -1.221012    -0.396114     1.221012     0.396114';
+            rs[31] = '0    1     0.072908    -1.200760    -0.099975     1.200760     0.099975';
+            rs[32] = '5    2     0.284687    -1.200760    -0.518250     1.200760     0.518250';
+            rs[33] = '0    1     0.091169    -1.173694    -0.121244     1.173694     0.121244';
+            rs[34] = '5    2     0.339374    -1.173694    -0.640533     1.173694     0.640533';
+            rs[35] = '0    1     0.107468    -1.139842    -0.140228     1.139842     0.140228';
+            rs[36] = '5    2     0.377082    -1.139842    -0.724852     1.139842     0.724852';
+            rs[37] = '0    1     0.115000    -1.100000    -0.149000     1.100000     0.149000';
+            rs[38] = '5    2     0.377082    -1.100000    -0.724852     1.100000     0.724852';
+            rs[39] = '0    1     0.107468    -1.064234    -0.140228     1.064234     0.140228';
+            rs[40] = '5    2     0.339374    -1.064234    -0.640533     1.064234     0.640533';
+            rs[41] = '0    1     0.091169    -1.039203    -0.121244     1.039203     0.121244';
+            rs[42] = '5    2     0.284687    -1.039203    -0.518250     1.039203     0.518250';
+            rs[43] = '0    1     0.072908    -1.022019    -0.099975     1.022019     0.099975';
+            rs[44] = '5    2     0.230066    -1.022019    -0.396114     1.022019     0.396114';
+            rs[45] = '0    1     0.056650    -1.010565    -0.081040     1.010565     0.081040';
+            rs[46] = '0    2     0.184750    -1.010565    -0.294784     1.010565     0.294784';
+            rs[47] = '0    1     0.044269    -1.003288    -0.066620     1.003288     0.066620';
+            rs[48] = '0    2     0.152358    -1.003288    -0.222354     1.003288     0.222354';
+            rs[49] = '0    1     0.036180    -0.999032    -0.057198     0.999032     0.057198';
+            rs[50] = '0    2     0.132714    -0.999032    -0.178430     0.999032     0.178430';
+            rs[51] = '0    1     0.031855    -0.996892    -0.052161     0.996892     0.052161';
+            rs[52] = '0    2     0.123305    -0.996892    -0.157389     0.996892     0.157389';
+            rs[53] = '0    1     0.030233    -0.996111    -0.050271     0.996111     0.050271';
+            rs[54] = '5    2     0.120369    -0.996111    -0.150825     0.996111     0.150825';
+            rs[55] = '0    1     0.030000    -0.996000    -0.050000     0.996000     0.050000';
+            rs[56] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[57] = '51    1     0.970328    -1.070500    -0.134965     1.070500     0.134965';
+            rs[58] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[59] = '51    1     0.970328    -1.070500    -0.334965     1.070500     0.334965';
+            rs[60] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[61] = '0    1     1.051110    -1.145000    -0.572500     1.145000     0.572500';
+            rs[62] = '';
+            return rs;
+        }
+        function Model4() {
+            //PRE OPT
+            var rs = [];
+            rs[0] = 'SETUP_DAT';
+            rs[1] = '1 10 10';
+            rs[2] = '1 0.05 0 1 2 1 1.5 0';
+            rs[3] = '3.95 0.16';
+            rs[4] = '3 33 2000';
+            rs[5] = '1 50 0.02 0.05 0.05';
+            rs[6] = '1 1 3.4 4.6 25 30';
+            rs[7] = 'DESIGN_DAT';
+            rs[8] = '-1  1  0';
+            rs[9] = '0  0  0';
+            rs[10] = '1  7  10';
+            rs[11] = '1  1';
+            rs[12] = '1  0  6.1';
+            rs[13] = '0    1     1.051110    -1.145000    -0.572500     1.145000     0.572500';
+            rs[14] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[15] = '51   1     0.869432    -1.145000    -0.348921     1.145000     0.348921';
+            rs[16] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[17] = '51   1     0.968004    -1.145000    -0.132434     1.145000     0.132434';
+            rs[18] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[19] = '0    1     0.030000    -1.145000    -0.050000     1.145000     0.050000';
+            rs[20] = '5    2     0.120369    -1.249881    -0.133703     1.249881     0.133703';
+            rs[21] = '0    1     0.030233    -1.249763    -0.050271     1.249763     0.050271';
+            rs[22] = '0    2     0.123305    -1.249763    -0.157389     1.249763     0.157389';
+            rs[23] = '0    1     0.031855    -1.248104    -0.052161     1.248104     0.052161';
+            rs[24] = '0    2     0.132714    -1.248104    -0.178430     1.248104     0.178430';
+            rs[25] = '0    1     0.036180    -1.243624    -0.057198     1.243624     0.057198';
+            rs[26] = '0    2     0.152358    -1.243624    -0.222354     1.243624     0.222354';
+            rs[27] = '0    1     0.044269    -1.234989    -0.066620     1.234989     0.066620';
+            rs[28] = '0    2     0.184750    -1.234989    -0.294784     1.234989     0.294784';
+            rs[29] = '0    1     0.056650    -1.221012    -0.081040     1.221012     0.081040';
+            rs[30] = '5    2     0.230066    -1.221012    -0.366464     1.221012     0.366464';
+            rs[31] = '0    1     0.072908    -1.200760    -0.099975     1.200760     0.099975';
+            rs[32] = '5    2     0.284687    -1.200760    -0.547211     1.200760     0.547211';
+            rs[33] = '0    1     0.091169    -1.173694    -0.121244     1.173694     0.121244';
+            rs[34] = '5    2     0.339374    -1.173694    -0.640533     1.173694     0.640533';
+            rs[35] = '0    1     0.107468    -1.139842    -0.140228     1.139842     0.140228';
+            rs[36] = '5    2     0.377082    -1.139842    -0.685593     1.139842     0.685593';
+            rs[37] = '0    1     0.115000    -1.100000    -0.149000     1.100000     0.149000';
+            rs[38] = '5    2     0.377082    -1.100000    -0.705188     1.100000     0.705188';
+            rs[39] = '0    1     0.107468    -1.064234    -0.140228     1.064234     0.140228';
+            rs[40] = '5    2     0.339374    -1.064234    -0.657137     1.064234     0.657137';
+            rs[41] = '0    1     0.091169    -1.039203    -0.121244     1.039203     0.121244';
+            rs[42] = '5    2     0.284687    -1.039203    -0.489258     1.039203     0.489258';
+            rs[43] = '0    1     0.072908    -1.022019    -0.099975     1.022019     0.099975';
+            rs[44] = '5    2     0.230066    -1.022019    -0.294243     1.022019     0.294243';
+            rs[45] = '0    1     0.056650    -1.010565    -0.081040     1.010565     0.081040';
+            rs[46] = '0    2     0.184750    -1.010565    -0.294784     1.010565     0.294784';
+            rs[47] = '0    1     0.044269    -1.003288    -0.066620     1.003288     0.066620';
+            rs[48] = '0    2     0.152358    -1.003288    -0.222354     1.003288     0.222354';
+            rs[49] = '0    1     0.036180    -0.999032    -0.057198     0.999032     0.057198';
+            rs[50] = '0    2     0.132714    -0.999032    -0.178430     0.999032     0.178430';
+            rs[51] = '0    1     0.031855    -0.996892    -0.052161     0.996892     0.052161';
+            rs[52] = '0    2     0.123305    -0.996892    -0.157389     0.996892     0.157389';
+            rs[53] = '0    1     0.030233    -0.996111    -0.050271     0.996111     0.050271';
+            rs[54] = '5    2     0.120369    -0.996111    -0.139092     0.996111     0.139092';
+            rs[55] = '0    1     0.030000    -0.996000    -0.050000     0.996000     0.050000';
+            rs[56] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[57] = '51   1     1.132772    -1.070500    -0.142406     1.070500     0.142406';
+            rs[58] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[59] = '51   1     0.957107    -1.070500    -0.339938     1.070500     0.339938';
+            rs[60] = '0    0     0.000000     0.000000     0.000000     0.000000     0.000000';
+            rs[61] = '0    1     1.051110    -1.145000    -0.572500     1.145000     0.572500';
+            rs[62] = '';
+            return rs;
+        }
+
+        function SetProject(LNs) {
+            //document.getElementById('FileProjectOkno').value = localStorage.getItem('ProjectDat');
+            var i, key;
+            var SetupDat = '';
+            var DesignDat = '';
+            var MemoDat = '';
+            var kod = -1;
+            var n = LNs.length - 1;
+            if (n < 0) { return; }
+            for (i = 0; i <= n; i++) {
+                var LN = LNs[i].trim();
+                if (LN.length > 3) {
+                    key = LNs[i].substr(0, 4);
+                    //alert(key);
+                    if (key == 'SETU') { kod = 1; }
+                    if (key == 'DESI') { kod = 2; }
+                    if (key == 'BACK') { kod = 3; }
+                    if (kod == 1 && key != 'SETU') {
+                        SetupDat += LNs[i] + '\r\n';
+                    }
+                    if (kod == 2 && key != 'DESI') {
+                        DesignDat += LNs[i] + '\r\n';
+                    }
+                    if (kod == 3 && key != 'BACK') {
+                        MemoDat += LNs[i] + '\r\n';
+                    }
+
+                }
+
+            }
+            if (kod > 0) {
+                localStorage.setItem("InputDatFileText", SetupDat);
+                localStorage.setItem("DesignFileText", DesignDat);
+                localStorage.setItem("MemoDatText", MemoDat);
+            }
+        }
+        //############################
+        function PrintElem(elem) {
+            var mywindow = window.open('', 'PRINT', 'height=800,width=1000');
+
+            mywindow.document.write('<html><head><title>' + document.title + '</title>');
+            mywindow.document.write('</head><body >');
+            mywindow.document.write('<h1>' + document.title + '</h1>');
+            mywindow.document.write(document.getElementById(elem).innerHTML);
+            mywindow.document.write('</body></html>');
+
+            mywindow.document.close(); // necessary for IE >= 10
+            mywindow.focus(); // necessary for IE >= 10*/
+
+            mywindow.print();
+            mywindow.close();
+
+            return true;
+        }
+        function NewWin(elem) {
+            var mywindow = window.open("", "", "");
+            mywindow.document.write('<html><head><title>' + document.title + '</title>');
+            mywindow.document.write('</head><body >');
+            mywindow.document.write(document.getElementById(elem).innerHTML);
+            mywindow.document.write('</body></html>');
+            mywindow.document.close();
+        }
+    </script>
+</body>
+</html >

@@ -1,0 +1,175 @@
+﻿
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="author" content="Rousslan Goulouev">
+    <meta name="description" content="Part of WR-Connect online CAD software on waveguide filters">
+    <meta name="keywords" content="waveguide, filter, freeware">
+    <meta charset="utf-8" />
+    <title>Import Project / Export Project</title>
+    <link rel="stylesheet" href="navbars.css" />
+</head>
+<body onload="ProjectLoad()">
+    <div class="navbar">
+        <div class="dropdown">
+            <button class="dropbtn" onclick="javascript:void(0)">
+                File
+            </button>
+            <div class="dropdown-content">
+                <a href="javascript:void(0)" onclick="document.getElementById('fileToLoad').click();">Import Project</a>
+                <a href="javascript:void(0)" onclick="saveDynamicDataToFile();">Export Project</a>
+                <a href="javascript:void(0)" onclick="CloseData();">Close Solutions</a>
+            </div>
+        </div>
+        <a href="javascript:void(0)" onclick="ProjectUnload();window.location.href = 'setup.htm';">Setup</a>
+        <a href="javascript:void(0)" onclick="ProjectUnload();window.location.href = 'editor.htm';">Edit</a>
+        <a href="javascript:void(0)" onclick="ProjectUnload();window.location.href = 'editor.htm';">Design</a>
+        <a href="javascript:void(0)" onclick="ProjectUnload();window.location.href = 'editor.htm';">Run</a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="javascript:void(0)">
+                Reports
+            </button>
+            <div class="dropdown-content">
+                <a href="javascript:void(0)" onclick="window.location.href = 'graph.htm';">Plot</a>
+                <a href="javascript:void(0)" onclick="window.location.href = 's_data.htm';">Import/Export</a>
+            </div>
+        </div>
+        <a href="help.htm">Help</a>
+    </div>
+    <input type="file" id="fileToLoad" style="display:none" accept=".txt,.dat" />
+
+    <form id="form1">
+        <div class="divdiv">
+            <textarea id="FileProjectOkno" class="fontos" style="width:800px;height :500px"></textarea>
+        </div>
+    </form>
+    <p style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:10px;font-style:italic;color:white;text-align:right;">&copy;2006 R. Goulouev, WR-Connect 2.0 Web (javascripted)</p>
+
+    <script type="text/javascript">
+        function CloseData() {
+            var txt = "All solution data including: \n 1)Design Profile";
+            txt=txt+"\n 2) Simulation Data \n 3) External S - Parameters \n";
+            txt = txt + "will be deleted.";
+            var r = confirm(txt);
+            if (r == false) {
+                return;
+            } 
+            if (localStorage.getItem('InputDatFileText')) {
+                localStorage.setItem('InputDatFileText', null);
+            }
+            if (localStorage.getItem('DesignFileText')) {
+                localStorage.setItem('DesignFileText', null);
+            }
+            if (localStorage.getItem('MemoDatText')) {
+                localStorage.setItem('MemoDatText', null)
+            }
+            if (sessionStorage.getItem('sDatFile')) {
+                sessionStorage.setItem('sDatFile', null)
+            }
+            if (localStorage.getItem('sDatSim')) {
+                localStorage.setItem('sDatSim', null)
+            }
+            document.getElementById('FileProjectOkno').value = "";
+        }
+
+        function ProjectLoad() {
+            var kod = 0;
+            if (localStorage.getItem('InputDatFileText') === null) {
+                //localStorage.setItem('InputDatFileText', '');
+            } else { kod = 1; }
+            if (localStorage.getItem('DesignFileText') === null) {
+                //localStorage.setItem('DesignFileText', '');
+            } else { kod = 1; }
+            //if (localStorage.getItem('MemoDatText') === null) {
+                //localStorage.setItem('MemoDatText', '')
+            //}
+            if (kod === 1) {
+                document.getElementById('FileProjectOkno').value = JoinProject();
+            }
+        }
+
+        function JoinProject() {
+            var Txt = '';
+            if (localStorage.getItem('InputDatFileText')) {
+                Txt = Txt + 'SETUP_DAT' + '\r\n' + localStorage.getItem('InputDatFileText');
+            }
+            if (localStorage.getItem('DesignFileText')) {
+                Txt = Txt + 'DESIGN_DAT' + '\r\n' + localStorage.getItem('DesignFileText');
+            }
+            if (localStorage.getItem('MemoDatText')) {
+                Txt = Txt + 'BACKUP_DAT' + '\r\n' + localStorage.getItem('MemoDatText');
+            }
+            return Txt;
+        }
+
+        function ProjectUnload() {
+            SplitProject();
+        }
+
+        function SplitProject() {
+            //document.getElementById('FileProjectOkno').value = localStorage.getItem('ProjectDat');
+            var txt = document.getElementById('FileProjectOkno').value;
+            if (!txt) { return; }
+            var i, key;
+            var SetupDat = '';
+            var DesignDat = '';
+            var MemoDat = '';
+            var kod = -1;
+            if (txt != '') {
+                var LNs = txt.match(/[^\r\n]+/g);
+                var n = LNs.length - 1;
+                for (i = 0; i <= n; i++) {
+                    var LN = LNs[i].trim();
+                    if (LN.length >= 3) {
+                        key = LNs[i].substr(0, 4);
+                        //alert(key);
+                        if (key == 'SETU') { kod = 1; }
+                        if (key == 'DESI') { kod = 2; }
+                        if (key == 'BACK') { kod = 3; }
+                        if (kod == 1 && key != 'SETU') {
+                            SetupDat += LNs[i] + '\r\n';
+                        }
+                        if (kod == 2 && key != 'DESI') {
+                            DesignDat += LNs[i] + '\r\n';
+                        }
+                        if (kod == 3 && key != 'BACK') {
+                            MemoDat += LNs[i] + '\r\n';
+                        }
+
+                    }
+
+                }
+            }
+            if (kod > 0) {
+                localStorage.setItem("InputDatFileText", SetupDat)
+                localStorage.setItem("DesignFileText", DesignDat)
+                localStorage.setItem("MemoDatText", MemoDat)
+            }
+        }
+
+        document.getElementById('fileToLoad').onchange = function (event) {
+            var fileToLoad = event.target.files[0];
+            if (fileToLoad) {
+                var reader = new FileReader();
+                reader.onload = function (fileLoadedEvent) {
+                    var textFromFileLoaded = fileLoadedEvent.target.result;
+                    //document.getElementById('FileProjectOkno').value = textFromFileLoaded;
+                    document.getElementById('FileProjectOkno').value = textFromFileLoaded;
+                };
+                reader.readAsText(fileToLoad, 'UTF-8');
+            }
+        };
+
+        function saveDynamicDataToFile() {
+
+            var userInput = document.getElementById("FileProjectOkno").value;
+
+            var blob = new Blob([userInput], { type: "text/plain;charset=utf-8" });
+            saveAs(blob, "design.txt");
+        }
+
+    </script>
+    <script src="FileSaver.js"></script>
+</body>
+</html>
